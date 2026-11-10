@@ -29,6 +29,24 @@ void main() {
     expect(find.text('Salvo'), findsOneWidget);
   });
 
+  testWidgets('an action that shows another snackbar keeps it visible', (
+    tester,
+  ) async {
+    final ctx = await _host(tester);
+    AppSnackbar.info(
+      ctx,
+      'Arquivado',
+      actionLabel: 'Desfazer',
+      onAction: () => AppSnackbar.success(ctx, 'Desfeito'),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Desfazer'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('Desfeito'), findsOneWidget);
+    expect(find.text('Arquivado'), findsNothing);
+  });
+
   testWidgets('a new snackbar replaces the current one', (tester) async {
     final ctx = await _host(tester, dark: true);
     AppSnackbar.success(ctx, 'Salvo');

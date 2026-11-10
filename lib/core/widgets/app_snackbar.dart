@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../constants/strings/common_strings.dart';
@@ -104,7 +106,12 @@ abstract final class AppSnackbar {
             : SnackBarAction(
                 label: actionLabel,
                 textColor: fg,
-                onPressed: onAction ?? messenger.hideCurrentSnackBar,
+                // SnackBarAction hides the current snackbar right after
+                // onPressed returns; deferring the callback keeps a snackbar
+                // it shows (e.g. "Ação desfeita") from being hidden instead.
+                onPressed: onAction == null
+                    ? messenger.hideCurrentSnackBar
+                    : () => scheduleMicrotask(onAction),
               ),
       ),
     );
