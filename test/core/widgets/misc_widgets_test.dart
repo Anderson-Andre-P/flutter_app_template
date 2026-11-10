@@ -109,6 +109,35 @@ void main() {
     expect(tapped, 1);
   });
 
+  testBothThemes('bottom nav has rounded top corners and square bottom', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      AppBottomNav(
+        items: const [
+          AppBottomNavItem(icon: Icons.home_outlined, label: 'Início'),
+          AppBottomNavItem(icon: Icons.settings_outlined, label: 'Ajustes'),
+        ],
+        currentIndex: 0,
+        onTap: (_) {},
+      ),
+      dark: dark,
+    );
+    final material = tester.widget<Material>(
+      find
+          .descendant(
+            of: find.byType(AppBottomNav),
+            matching: find.byType(Material),
+          )
+          .first,
+    );
+    final shape = material.shape! as RoundedRectangleBorder;
+    expect(shape.borderRadius, AppRadius.topXl);
+    expect(material.clipBehavior, Clip.antiAlias);
+  });
+
   group('bottom nav height', () {
     Future<double> heightWithInset(WidgetTester tester, double inset) async {
       tester.view.padding = FakeViewPadding(bottom: inset * 3);

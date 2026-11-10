@@ -33,6 +33,12 @@ abstract final class AppRadius {
   static const BorderRadius brLg = BorderRadius.all(Radius.circular(lg));
   static const BorderRadius brXl = BorderRadius.all(Radius.circular(xl));
   static const BorderRadius brFull = BorderRadius.all(Radius.circular(full));
+
+  /// Top corners only — surfaces anchored to the bottom edge (bottom bar,
+  /// bottom sheet).
+  static const BorderRadius topXl = BorderRadius.vertical(
+    top: Radius.circular(xl),
+  );
 }
 
 /// Fixed component sizes from the design system.

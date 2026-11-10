@@ -13,7 +13,7 @@ class AppBottomNavItem {
   final String label;
 }
 
-/// Bottom bar: 64px, shared with the system inset below it (see
+/// Bottom bar with rounded top corners: 64px, shared with the system inset below it (see
 /// [AppSizes.bottomNavContent]); the active tab is primary.
 class AppBottomNav extends StatelessWidget {
   const AppBottomNav({
@@ -37,20 +37,20 @@ class AppBottomNav extends StatelessWidget {
     final tabsHeight = total - inset;
     return Material(
       color: c.card,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: c.border)),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(bottom: inset),
-          child: SizedBox(
-            height: tabsHeight,
-            child: Row(
-              children: [
-                for (var i = 0; i < items.length; i++)
-                  Expanded(child: _tab(c.primary, c.textMuted, i)),
-              ],
-            ),
+      shape: RoundedRectangleBorder(
+        borderRadius: AppRadius.topXl,
+        side: BorderSide(color: c.border),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: inset),
+        child: SizedBox(
+          height: tabsHeight,
+          child: Row(
+            children: [
+              for (var i = 0; i < items.length; i++)
+                Expanded(child: _tab(c.primary, c.textMuted, i)),
+            ],
           ),
         ),
       ),
