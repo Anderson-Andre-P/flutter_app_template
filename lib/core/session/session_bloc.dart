@@ -36,8 +36,15 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     );
   }
 
+  /// The user asked to leave: the app always signs out locally, even if
+  /// ending the session in the port fails.
   Future<void> _onEnded(SessionEnded event, Emitter<SessionState> emit) async {
-    await _port.end();
-    emit(const SessionState.unauthenticated());
+    try {
+      await _port.end();
+    } catch (_) {
+      // The port is responsible for best-effort cleanup and logging.
+    } finally {
+      emit(const SessionState.unauthenticated());
+    }
   }
 }

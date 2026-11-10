@@ -56,4 +56,13 @@ void main() {
     expect: () => [const SessionState.unauthenticated()],
     verify: (_) => verify(() => port.end()).called(1),
   );
+
+  blocTest<SessionBloc, SessionState>(
+    'Ended still signs out locally when the port throws',
+    setUp: () => when(() => port.end()).thenThrow(StateError('storage')),
+    build: () => SessionBloc(port),
+    seed: () => const SessionState.authenticated(_user),
+    act: (b) => b.add(const SessionEnded()),
+    expect: () => [const SessionState.unauthenticated()],
+  );
 }
