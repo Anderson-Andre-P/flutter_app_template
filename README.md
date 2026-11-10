@@ -178,6 +178,12 @@ As skills ficam em `.claude/skills/` e os valores do projeto em
 O `CLAUDE.md` traz as regras de ouro e o passo a passo, e o `AGENTS.md` é um
 resumo para outras ferramentas.
 
+## Próximos componentes
+
+O que o design system ainda tem e não virou widget fica em
+[`docs/design-system-backlog.md`](docs/design-system-backlog.md), com a
+prioridade de cada item.
+
 ## Licenças
 
 A fonte Inter está sob a SIL Open Font License (`assets/fonts/OFL.txt`).
