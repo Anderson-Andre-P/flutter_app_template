@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
+import 'package:flutter_app_template/core/theme/app_tokens.dart';
 import 'package:flutter_app_template/core/widgets/app_avatar.dart';
 import 'package:flutter_app_template/core/widgets/app_badge.dart';
 import 'package:flutter_app_template/core/widgets/app_bottom_nav.dart';
@@ -53,6 +54,25 @@ void main() {
     expect(selected, isTrue);
   });
 
+  testWidgets('chips hug their label and sit side by side', (tester) async {
+    await pumpApp(
+      tester,
+      Wrap(
+        spacing: AppSpacing.sm,
+        children: [
+          AppChip(label: 'Sistema', onSelected: (_) {}),
+          AppChip(label: 'Claro', onSelected: (_) {}),
+        ],
+      ),
+    );
+    final a = tester.getRect(find.widgetWithText(AppChip, 'Sistema'));
+    final b = tester.getRect(find.widgetWithText(AppChip, 'Claro'));
+    expect(a.width, lessThan(200));
+    expect(a.height, AppSizes.chip);
+    expect(b.top, a.top);
+    expect(b.left - a.right, AppSpacing.sm);
+  });
+
   testBothThemes('avatar shows initials', (tester, dark) async {
     await pumpApp(tester, const AppAvatar(initials: 'AE'), dark: dark);
     expect(find.text('AE'), findsOneWidget);
@@ -87,6 +107,34 @@ void main() {
     );
     await tester.tap(find.text('Perfil'));
     expect(tapped, 1);
+  });
+
+  testWidgets('bottom nav content is the nav height plus the safe area', (
+    tester,
+  ) async {
+    tester.view.padding = const FakeViewPadding(bottom: 34 * 3);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light(),
+        home: Scaffold(
+          bottomNavigationBar: AppBottomNav(
+            items: const [
+              AppBottomNavItem(icon: Icons.home_outlined, label: 'Início'),
+              AppBottomNavItem(icon: Icons.person_outline, label: 'Perfil'),
+            ],
+            currentIndex: 0,
+            onTap: (_) {},
+          ),
+        ),
+      ),
+    );
+    expect(
+      tester.getSize(find.byType(AppBottomNav)).height,
+      AppSizes.bottomNav + 34,
+    );
+    expect(AppSizes.bottomNav, 56);
   });
 
   testWidgets('top bar shows its title', (tester) async {

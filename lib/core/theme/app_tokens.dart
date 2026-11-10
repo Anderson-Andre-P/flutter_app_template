@@ -37,12 +37,13 @@ abstract final class AppRadius {
 
 /// Fixed component sizes from the design system.
 abstract final class AppSizes {
-  static const double buttonLg = 52;
+  static const double buttonLg = 48;
   static const double buttonMd = 44;
   static const double buttonSm = 38;
   static const double minTouchTarget = 44;
   static const double field = 48;
-  static const double bottomNav = 64;
+  static const double bottomNav = 56;
+  static const double chip = 32;
   static const double pill = 26;
   static const double listTileMin = 56;
   static const double modalMaxWidth = 340;
@@ -58,6 +59,7 @@ abstract final class AppSizes {
   static const double iconChip = 15;
   static const double iconField = 17;
   static const double iconTopBar = 20;
+  static const double iconNav = 20;
   static const double icon = 22;
 }
 

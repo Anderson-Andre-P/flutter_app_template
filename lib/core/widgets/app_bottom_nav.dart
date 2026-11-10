@@ -11,7 +11,7 @@ class AppBottomNavItem {
   final String label;
 }
 
-/// 64px bottom bar; the active tab is primary.
+/// 56px bottom bar (plus the bottom safe area); the active tab is primary.
 class AppBottomNav extends StatelessWidget {
   const AppBottomNav({
     super.key,
@@ -60,7 +60,7 @@ class AppBottomNav extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(items[i].icon, size: AppSizes.icon, color: color),
+            Icon(items[i].icon, size: AppSizes.iconNav, color: color),
             const SizedBox(height: AppSpacing.xs),
             Text(
               items[i].label,

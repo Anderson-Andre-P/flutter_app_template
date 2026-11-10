@@ -59,8 +59,9 @@ void main() {
     expect(AppSpacing.x4l, 40);
     expect(AppRadius.md, 12);
     expect(AppRadius.xl, 22);
-    expect(AppSizes.buttonLg, 52);
-    expect(AppSizes.bottomNav, 64);
+    expect(AppSizes.buttonLg, 48);
+    expect(AppSizes.bottomNav, 56);
+    expect(AppSizes.chip, 32);
   });
 
   testWidgets('context.colors reads the active palette', (tester) async {

@@ -42,13 +42,17 @@ class AppChip extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: enabled ? () => onSelected!(!selected) : null,
-          child: Container(
-            height: AppSizes.buttonSm,
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            alignment: Alignment.center,
-            child: Text(
-              label,
-              style: AppTypography.labelMedium.copyWith(color: fg),
+          child: SizedBox(
+            height: AppSizes.chip,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              child: Center(
+                widthFactor: 1,
+                child: Text(
+                  label,
+                  style: AppTypography.labelMedium.copyWith(color: fg),
+                ),
+              ),
             ),
           ),
         ),
