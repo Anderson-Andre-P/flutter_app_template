@@ -11,8 +11,10 @@ pronta, para que o time só precise programar as telas do produto.
 - **Design system:** tokens de cor, espaçamento, raio, tipografia e
   elevação, com tema **claro e escuro**, widgets base, dialogs e snackbars.
 - **Telas de exemplo:** splash, entrar, criar conta, início em grade com
-  6 telas de demonstração (painel, extrato, detalhe, formulário, sucesso e
-  feedback) e perfil com troca de tema e saída. A autenticação e os dados
+  12 demonstrações. São 6 telas (painel, extrato, detalhe, formulário,
+  sucesso e estados) e 6 catálogos de componentes (widgets, barra inferior,
+  modais, bottom sheets, toasts e gráficos). Há também a aba Configurações,
+  com troca de tema e saída. A autenticação e os dados
   são **falsos e locais**, sem backend.
 - **Skills de IA:** `.claude/` com skills, rules, hooks e permissões, mais o
   `CLAUDE.md` e o `AGENTS.md`.
@@ -74,7 +76,7 @@ lib/
     auth/            splash, entrar, criar conta (FakeAuthRepository)
     examples/        telas de demonstração com dados falsos (descartável)
     home/            shell com navegação inferior e grade de demonstrações
-    settings/        perfil, troca de tema e saída
+    settings/        configurações: conta, tema, versão e saída
 assets/              images/  vectors/  audios/  fonts/ (Inter, OFL)
 scripts/             run.sh  build.sh  test.sh  analyze.sh
 tool/                resumo de testes e validação das skills
@@ -121,7 +123,7 @@ BorderRadius r = AppRadius.brMd;                // xs 6 … xl 22, full
 - As cores ficam em `lib/core/theme/app_colors.dart`, em `AppColors.light` e
   `AppColors.dark`, com os mesmos nomes de papel nos dois modos. Para trocar a
   marca, basta trocar os valores.
-- O modo segue o sistema por padrão. Em Perfil dá para forçar claro ou escuro,
+- O modo segue o sistema por padrão. Em Configurações dá para forçar claro ou escuro,
   e a escolha fica salva.
 - Nunca use cores, medidas, textos ou caminhos de asset literais nos widgets:
   use os tokens, os `*_strings.dart` e as classes em `core/constants/assets/`.
