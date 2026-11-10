@@ -15,7 +15,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../helpers/memory_secure_storage.dart';
+import '../../helpers/memory_secure_storage.dart';
 
 Future<void> _startSignedIn(WidgetTester tester) async {
   SharedPreferences.setMockInitialValues({});
