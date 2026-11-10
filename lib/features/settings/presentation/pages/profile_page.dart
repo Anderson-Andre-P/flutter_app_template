@@ -12,12 +12,15 @@ import '../../../../core/widgets/app_avatar.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_chip.dart';
-import '../../../../core/widgets/app_top_bar.dart';
+import '../../../../core/widgets/app_icon_box.dart';
+import '../../../../core/widgets/app_list_tile.dart';
+import '../../../../core/widgets/app_snackbar.dart';
 import '../../../../core/widgets/dialogs/app_dialog.dart';
 import '../../../../core/widgets/section_overline.dart';
 import '../settings_strings.dart';
 
-/// Profile and app settings: who is signed in, theme mode, version, sign out.
+/// Profile and app settings: who is signed in, account menu (placeholders),
+/// theme mode, version and sign out.
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
@@ -27,6 +30,25 @@ class ProfilePage extends StatelessWidget {
     (ThemeMode.dark, SettingsStrings.themeDark),
   ];
 
+  static const _menu = [
+    (
+      Icons.person_outline,
+      SettingsStrings.personalData,
+      SettingsStrings.personalDataHint,
+    ),
+    (
+      Icons.lock_outline,
+      SettingsStrings.security,
+      SettingsStrings.securityHint,
+    ),
+    (
+      Icons.notifications_none,
+      SettingsStrings.notifications,
+      SettingsStrings.notificationsHint,
+    ),
+    (Icons.help_outline, SettingsStrings.help, SettingsStrings.helpHint),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
@@ -34,17 +56,22 @@ class ProfilePage extends StatelessWidget {
     final mode = context.select<ThemeModeBloc, ThemeMode>((b) => b.state.mode);
 
     return Scaffold(
-      appBar: const AppTopBar(title: SettingsStrings.title),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          AppSpacing.xl,
-          AppSpacing.xl,
-          AppSpacing.xl,
-          AppSpacing.x4l,
-        ),
-        children: [
-          AppCard(
-            child: Row(
+      body: SafeArea(
+        bottom: false,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.xl,
+            AppSpacing.x2l,
+            AppSpacing.xl,
+            AppSpacing.x4l,
+          ),
+          children: [
+            Text(
+              SettingsStrings.title,
+              style: AppTypography.display.copyWith(color: c.textPrimary),
+            ),
+            const SizedBox(height: AppSpacing.x2l),
+            Row(
               children: [
                 AppAvatar(
                   initials: initialsOf(user?.name ?? ''),
@@ -57,7 +84,7 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Text(
                         user?.name ?? '',
-                        style: AppTypography.section.copyWith(
+                        style: AppTypography.heading.copyWith(
                           color: c.textPrimary,
                         ),
                       ),
@@ -73,56 +100,72 @@ class ProfilePage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: AppSpacing.x3l),
-          const SectionOverline(SettingsStrings.appearance),
-          const SizedBox(height: AppSpacing.md),
-          Wrap(
-            spacing: AppSpacing.sm,
-            children: [
-              for (final (value, label) in _modes)
-                AppChip(
-                  label: label,
-                  selected: mode == value,
-                  onSelected: (_) => context.read<ThemeModeBloc>().add(
-                    ThemeModeChanged(value),
-                  ),
+            const SizedBox(height: AppSpacing.x2l),
+            for (final (icon, title, hint) in _menu) ...[
+              AppCard(
+                padding: EdgeInsets.zero,
+                onTap: () =>
+                    AppSnackbar.info(context, SettingsStrings.comingSoon),
+                child: AppListTile(
+                  title: title,
+                  subtitle: hint,
+                  leading: AppIconBox(icon: icon),
+                  trailing: Icon(Icons.chevron_right, color: c.textMuted),
                 ),
+              ),
+              const SizedBox(height: AppSpacing.md),
             ],
-          ),
-          const SizedBox(height: AppSpacing.x3l),
-          const SectionOverline(SettingsStrings.about),
-          const SizedBox(height: AppSpacing.md),
-          FutureBuilder<PackageInfo>(
-            future: PackageInfo.fromPlatform(),
-            builder: (context, snapshot) {
-              final info = snapshot.data;
-              return Text(
-                info == null
-                    ? ''
-                    : SettingsStrings.version(info.version, info.buildNumber),
-                style: AppTypography.body.copyWith(color: c.textSecondary),
-              );
-            },
-          ),
-          const SizedBox(height: AppSpacing.x3l),
-          AppButton(
-            label: SettingsStrings.signOut,
-            variant: AppButtonVariant.destructive,
-            icon: Icons.logout,
-            onPressed: () async {
-              final session = context.read<SessionBloc>();
-              final confirmed = await AppDialog.confirm(
-                context,
-                title: SettingsStrings.signOutTitle,
-                message: SettingsStrings.signOutMessage,
-                confirmLabel: SettingsStrings.signOutConfirm,
-                destructive: true,
-              );
-              if (confirmed) session.add(const SessionEnded());
-            },
-          ),
-        ],
+            const SizedBox(height: AppSpacing.x2l - AppSpacing.md),
+            const SectionOverline(SettingsStrings.appearance),
+            const SizedBox(height: AppSpacing.md),
+            Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
+              children: [
+                for (final (value, label) in _modes)
+                  AppChip(
+                    label: label,
+                    selected: mode == value,
+                    onSelected: (_) => context.read<ThemeModeBloc>().add(
+                      ThemeModeChanged(value),
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.x2l),
+            const SectionOverline(SettingsStrings.about),
+            const SizedBox(height: AppSpacing.md),
+            FutureBuilder<PackageInfo>(
+              future: PackageInfo.fromPlatform(),
+              builder: (context, snapshot) {
+                final info = snapshot.data;
+                return Text(
+                  info == null
+                      ? ''
+                      : SettingsStrings.version(info.version, info.buildNumber),
+                  style: AppTypography.body.copyWith(color: c.textSecondary),
+                );
+              },
+            ),
+            const SizedBox(height: AppSpacing.x3l),
+            AppButton(
+              label: SettingsStrings.signOut,
+              variant: AppButtonVariant.destructiveTonal,
+              icon: Icons.logout,
+              onPressed: () async {
+                final session = context.read<SessionBloc>();
+                final confirmed = await AppDialog.confirm(
+                  context,
+                  title: SettingsStrings.signOutTitle,
+                  message: SettingsStrings.signOutMessage,
+                  confirmLabel: SettingsStrings.signOutConfirm,
+                  destructive: true,
+                );
+                if (confirmed) session.add(const SessionEnded());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

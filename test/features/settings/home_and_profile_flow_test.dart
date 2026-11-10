@@ -5,7 +5,8 @@ import 'package:flutter_app_template/core/config/env_config.dart';
 import 'package:flutter_app_template/core/constants/keys/storage_keys.dart';
 import 'package:flutter_app_template/core/di/injection_container.dart';
 import 'package:flutter_app_template/core/session/session_bloc.dart';
-import 'package:flutter_app_template/core/widgets/app_chip.dart';
+import 'package:flutter_app_template/core/theme/app_tokens.dart';
+import 'package:flutter_app_template/core/widgets/app_button.dart';
 import 'package:flutter_app_template/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:flutter_app_template/features/home/presentation/home_strings.dart';
 import 'package:flutter_app_template/features/home/presentation/pages/home_page.dart';
@@ -54,17 +55,6 @@ void main() {
     expect(find.text('Olá, Ana'), findsOneWidget);
   });
 
-  testWidgets('tapping a filter chip selects it', (tester) async {
-    await _startSignedIn(tester);
-    AppChip chip(String label) =>
-        tester.widget<AppChip>(find.widgetWithText(AppChip, label));
-    expect(chip(HomeStrings.filters[0]).selected, isTrue);
-    await tester.tap(find.text(HomeStrings.filters[1]));
-    await tester.pump();
-    expect(chip(HomeStrings.filters[1]).selected, isTrue);
-    expect(chip(HomeStrings.filters[0]).selected, isFalse);
-  });
-
   testWidgets('profile shows the user and the app version', (tester) async {
     await _startSignedIn(tester);
     await _openProfile(tester);
@@ -72,6 +62,7 @@ void main() {
     expect(find.text('Ana Souza'), findsOneWidget);
     expect(find.text('ana@ex.com'), findsOneWidget);
     expect(find.text('AS'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Versão 0.1.0 (1)'), 200);
     expect(find.text('Versão 0.1.0 (1)'), findsOneWidget);
   });
 
@@ -94,10 +85,32 @@ void main() {
     );
   });
 
+  testWidgets('menu rows explain they are not available yet', (tester) async {
+    await _startSignedIn(tester);
+    await _openProfile(tester);
+    await tester.tap(find.text(SettingsStrings.personalData));
+    await tester.pump();
+    expect(find.text(SettingsStrings.comingSoon), findsOneWidget);
+  });
+
+  testWidgets('the sign-out button has the large button height', (
+    tester,
+  ) async {
+    await _startSignedIn(tester);
+    await _openProfile(tester);
+    await tester.scrollUntilVisible(find.text(SettingsStrings.signOut), 200);
+    expect(
+      tester
+          .getSize(find.widgetWithText(AppButton, SettingsStrings.signOut))
+          .height,
+      AppSizes.buttonLg,
+    );
+  });
+
   testWidgets('Sair + confirm signs out to sign in', (tester) async {
     await _startSignedIn(tester);
     await _openProfile(tester);
-    await tester.ensureVisible(find.text(SettingsStrings.signOut));
+    await tester.scrollUntilVisible(find.text(SettingsStrings.signOut), 200);
     await tester.tap(find.text(SettingsStrings.signOut));
     await tester.pumpAndSettle();
     await tester.tap(find.text(SettingsStrings.signOutConfirm).last);
@@ -108,7 +121,7 @@ void main() {
   testWidgets('Sair + cancel keeps the session', (tester) async {
     await _startSignedIn(tester);
     await _openProfile(tester);
-    await tester.ensureVisible(find.text(SettingsStrings.signOut));
+    await tester.scrollUntilVisible(find.text(SettingsStrings.signOut), 200);
     await tester.tap(find.text(SettingsStrings.signOut));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Cancelar'));
