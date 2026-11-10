@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
-import 'package:flutter_app_template/core/widgets/app_state_views.dart';
 import 'package:flutter_app_template/features/examples/application/activity_detail_bloc.dart';
 import 'package:flutter_app_template/features/examples/application/activity_list_bloc.dart';
 import 'package:flutter_app_template/features/examples/application/transfer_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_app_template/features/examples/presentation/examples_str
 import 'package:flutter_app_template/features/examples/presentation/pages/activity_detail_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/activity_list_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/dashboard_page.dart';
-import 'package:flutter_app_template/features/examples/presentation/pages/feedback_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/transfer_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/transfer_success_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -139,19 +137,6 @@ void main() {
       expect(find.text('12 mar 2026, 18:42'), findsOneWidget);
       await tester.tap(find.text(ExamplesStrings.backHome));
       expect(homes, 1);
-    });
-
-    testWidgets('feedback demo lists states and actions ($mode)', (
-      tester,
-    ) async {
-      await _pump(tester, const FeedbackDemoPage(), dark: dark);
-      expect(find.text(ExamplesStrings.feedbackTitle), findsOneWidget);
-      await tester.scrollUntilVisible(
-        find.byType(AppErrorView),
-        200,
-        scrollable: find.byType(Scrollable).first,
-      );
-      expect(find.byType(AppErrorView), findsOneWidget);
     });
   }
 

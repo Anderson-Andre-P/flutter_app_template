@@ -10,7 +10,13 @@ import 'package:flutter_app_template/features/examples/presentation/examples_str
 import 'package:flutter_app_template/features/examples/presentation/pages/activity_detail_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/activity_list_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/dashboard_page.dart';
-import 'package:flutter_app_template/features/examples/presentation/pages/feedback_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/bottom_nav_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/modals_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/sheets_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/states_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/toasts_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/widgets_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/transfer_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/transfer_success_page.dart';
 import 'package:flutter_app_template/features/home/presentation/home_demo.dart';
@@ -53,6 +59,16 @@ Future<void> _settle(WidgetTester tester) async {
 
 Future<void> _open(WidgetTester tester, HomeDemo demo) async {
   await tester.scrollUntilVisible(find.text(demo.title), 100);
+  // Lift the card clear of the bottom bar, which overlaps the list's end.
+  final barTop = tester.getRect(find.byType(AppBottomNav)).top;
+  final cardBottom = tester.getBottomLeft(find.text(demo.title)).dy;
+  if (cardBottom > barTop - 20) {
+    await tester.drag(
+      find.byType(Scrollable).first,
+      Offset(0, barTop - 20 - cardBottom - 40),
+    );
+    await _settle(tester);
+  }
   await tester.tap(find.text(demo.title));
   await _settle(tester);
 }
@@ -68,8 +84,15 @@ void main() {
       HomeDemo.detail: ActivityDetailPage,
       HomeDemo.form: TransferPage,
       HomeDemo.success: TransferSuccessPage,
-      HomeDemo.feedback: FeedbackDemoPage,
+      HomeDemo.states: StatesDemoPage,
+      HomeDemo.widgets: WidgetsDemoPage,
+      HomeDemo.bottomNav: BottomNavDemoPage,
+      HomeDemo.modals: ModalsDemoPage,
+      HomeDemo.sheets: SheetsDemoPage,
+      HomeDemo.toasts: ToastsDemoPage,
+      HomeDemo.charts: ChartsDemoPage,
     };
+    expect(screens.keys, unorderedEquals(HomeDemo.values));
     for (final MapEntry(key: demo, value: page) in screens.entries) {
       await _open(tester, demo);
       expect(find.byType(page), findsOneWidget, reason: demo.name);
@@ -111,5 +134,22 @@ void main() {
     await tester.tap(find.text(ExamplesStrings.backHome));
     await tester.pumpAndSettle();
     expect(find.byType(HomePage), findsOneWidget);
+  });
+
+  testWidgets('a bottom sheet covers the app bottom bar', (tester) async {
+    await _start(tester);
+    await _open(tester, HomeDemo.sheets);
+    await tester.tap(find.text(ExamplesStrings.sheetActions));
+    await _settle(tester);
+    final nav = tester.getRect(find.byType(AppBottomNav).first);
+    final sheetTop = tester
+        .getTopLeft(find.text(ExamplesStrings.actionsTitle))
+        .dy;
+    final lastOption = tester
+        .getBottomLeft(find.text(ExamplesStrings.actionDelete))
+        .dy;
+    expect(sheetTop, lessThan(nav.top));
+    // The sheet reaches the bottom of the screen, over the bar.
+    expect(lastOption, greaterThan(nav.top));
   });
 }
