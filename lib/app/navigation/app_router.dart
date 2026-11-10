@@ -17,7 +17,14 @@ import '../../features/examples/presentation/examples_strings.dart';
 import '../../features/examples/presentation/pages/activity_detail_page.dart';
 import '../../features/examples/presentation/pages/activity_list_page.dart';
 import '../../features/examples/presentation/pages/dashboard_page.dart';
-import '../../features/examples/presentation/pages/feedback_demo_page.dart';
+import '../../features/examples/application/demo_selection_bloc.dart';
+import '../../features/examples/presentation/pages/bottom_nav_demo_page.dart';
+import '../../features/examples/presentation/pages/charts_demo_page.dart';
+import '../../features/examples/presentation/pages/modals_demo_page.dart';
+import '../../features/examples/presentation/pages/sheets_demo_page.dart';
+import '../../features/examples/presentation/pages/states_demo_page.dart';
+import '../../features/examples/presentation/pages/toasts_demo_page.dart';
+import '../../features/examples/presentation/pages/widgets_demo_page.dart';
 import '../../features/examples/presentation/pages/transfer_page.dart';
 import '../../features/examples/presentation/pages/transfer_success_page.dart';
 import '../../features/home/presentation/home_demo.dart';
@@ -123,7 +130,13 @@ void _openDemo(BuildContext context, HomeDemo demo) => switch (demo) {
     AppRoutes.transferDone,
     extra: ExamplesStrings.sampleReceipt(DateTime.now()),
   ),
-  HomeDemo.feedback => context.push(AppRoutes.feedback),
+  HomeDemo.states => context.push(AppRoutes.states),
+  HomeDemo.widgets => context.push(AppRoutes.widgets),
+  HomeDemo.bottomNav => context.push(AppRoutes.bottomNav),
+  HomeDemo.modals => context.push(AppRoutes.modals),
+  HomeDemo.sheets => context.push(AppRoutes.sheets),
+  HomeDemo.toasts => context.push(AppRoutes.toasts),
+  HomeDemo.charts => context.push(AppRoutes.charts),
 };
 
 /// Example screens, nested under the home tab so the bottom navigation
@@ -163,9 +176,33 @@ final _exampleRoutes = <RouteBase>[
       ),
     ),
   ),
+  GoRoute(path: 'estados', builder: (context, state) => const StatesDemoPage()),
   GoRoute(
-    path: 'feedback',
-    builder: (context, state) => const FeedbackDemoPage(),
+    path: 'widgets',
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<DemoSelectionBloc>(),
+      child: const WidgetsDemoPage(),
+    ),
+  ),
+  GoRoute(
+    path: 'barra-inferior',
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<DemoSelectionBloc>(),
+      child: const BottomNavDemoPage(),
+    ),
+  ),
+  GoRoute(path: 'modais', builder: (context, state) => const ModalsDemoPage()),
+  GoRoute(
+    path: 'bottom-sheets',
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<DemoSelectionBloc>(),
+      child: const SheetsDemoPage(),
+    ),
+  ),
+  GoRoute(path: 'toasts', builder: (context, state) => const ToastsDemoPage()),
+  GoRoute(
+    path: 'graficos',
+    builder: (context, state) => const ChartsDemoPage(),
   ),
 ];
 

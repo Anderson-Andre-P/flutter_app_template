@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/session/session_bloc.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/features/home/presentation/home_demo.dart';
+import 'package:flutter_app_template/features/home/presentation/home_strings.dart';
 import 'package:flutter_app_template/features/home/presentation/pages/home_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -60,6 +61,19 @@ void main() {
     expect(second.left, greaterThan(first.right));
     expect(third.left, first.left);
     expect(third.top, greaterThan(first.bottom));
+  });
+
+  testWidgets('demos are split into screens and components', (tester) async {
+    await pump(tester, (_) {});
+    expect(find.text(HomeStrings.screensSection.toUpperCase()), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text(HomeStrings.componentsSection.toUpperCase()),
+      100,
+    );
+    expect(
+      HomeDemo.values.where((d) => d.group == HomeDemoGroup.components),
+      contains(HomeDemo.bottomNav),
+    );
   });
 
   testWidgets('tapping a card opens its demo', (tester) async {

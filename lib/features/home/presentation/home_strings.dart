@@ -10,6 +10,9 @@ abstract final class HomeStrings {
       'Cada card abre uma tela pronta, feita só com os componentes do '
       'design system. Use como ponto de partida e apague o que não precisar.';
 
+  static const screensSection = 'Telas';
+  static const componentsSection = 'Componentes';
+
   static const dashboard = 'Painel';
   static const dashboardHint = 'Meta, destaque e gráfico';
   static const statement = 'Extrato';
@@ -20,6 +23,19 @@ abstract final class HomeStrings {
   static const formHint = 'Valor, campos e resumo';
   static const success = 'Sucesso';
   static const successHint = 'Confirmação e comprovante';
-  static const feedback = 'Feedback';
-  static const feedbackHint = 'Avisos, diálogos e estados';
+  static const states = 'Estados';
+  static const statesHint = 'Carregando, vazio e erro';
+
+  static const widgets = 'Widgets';
+  static const widgetsHint = 'Botões, campos, chips e mais';
+  static const bottomNav = 'Barra inferior';
+  static const bottomNavHint = 'De 3 a 5 abas';
+  static const modals = 'Modais';
+  static const modalsHint = 'Confirmação e alerta';
+  static const sheets = 'Bottom sheets';
+  static const sheetsHint = 'Opções, ações e conteúdo';
+  static const toasts = 'Toasts';
+  static const toastsHint = 'Tons e variações';
+  static const charts = 'Gráficos';
+  static const chartsHint = 'Barras, linha, rosca e progresso';
 }

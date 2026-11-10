@@ -7,6 +7,7 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_context.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_icon_box.dart';
+import '../../../../core/widgets/section_overline.dart';
 import '../home_demo.dart';
 import '../home_strings.dart';
 
@@ -16,13 +17,17 @@ class HomePage extends StatelessWidget {
 
   final ValueChanged<HomeDemo> onOpenDemo;
 
+  static const _groups = [
+    (HomeDemoGroup.screens, HomeStrings.screensSection),
+    (HomeDemoGroup.components, HomeStrings.componentsSection),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final name = context.select<SessionBloc, String>(
       (b) => b.state.user?.name ?? '',
     );
-    const demos = HomeDemo.values;
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -49,30 +54,55 @@ class HomePage extends StatelessWidget {
               style: AppTypography.body.copyWith(color: c.textSecondary),
             ),
             const SizedBox(height: AppSpacing.x2l),
-            for (var i = 0; i < demos.length; i += 2) ...[
-              if (i > 0) const SizedBox(height: AppSpacing.md),
-              // IntrinsicHeight keeps both cards of a row the same height
-              // whatever the text scale, without a fixed aspect ratio.
-              IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(child: _DemoCard(demos[i], onOpenDemo)),
-                    const SizedBox(width: AppSpacing.md),
-                    Expanded(
-                      child: i + 1 < demos.length
-                          ? _DemoCard(demos[i + 1], onOpenDemo)
-                          : const SizedBox.shrink(),
-                    ),
-                  ],
-                ),
+            for (final (group, title) in _groups) ...[
+              SectionOverline(title),
+              const SizedBox(height: AppSpacing.md),
+              _Grid(
+                demos: [
+                  for (final d in HomeDemo.values)
+                    if (d.group == group) d,
+                ],
+                onOpen: onOpenDemo,
               ),
+              const SizedBox(height: AppSpacing.x3l),
             ],
           ],
         ),
       ),
     );
   }
+}
+
+class _Grid extends StatelessWidget {
+  const _Grid({required this.demos, required this.onOpen});
+
+  final List<HomeDemo> demos;
+  final ValueChanged<HomeDemo> onOpen;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [
+      for (var i = 0; i < demos.length; i += 2) ...[
+        if (i > 0) const SizedBox(height: AppSpacing.md),
+        // IntrinsicHeight keeps both cards of a row the same height
+        // whatever the text scale, without a fixed aspect ratio.
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: _DemoCard(demos[i], onOpen)),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: i + 1 < demos.length
+                    ? _DemoCard(demos[i + 1], onOpen)
+                    : const SizedBox.shrink(),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ],
+  );
 }
 
 class _DemoCard extends StatelessWidget {

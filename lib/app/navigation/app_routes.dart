@@ -11,7 +11,13 @@ abstract final class AppRoutes {
   static const statement = '/inicio/extrato';
   static String statementItem(String id) => '$statement/$id';
   static const transfer = '/inicio/transferir';
-  static const feedback = '/inicio/feedback';
+  static const states = '/inicio/estados';
+  static const widgets = '/inicio/widgets';
+  static const bottomNav = '/inicio/barra-inferior';
+  static const modals = '/inicio/modais';
+  static const sheets = '/inicio/bottom-sheets';
+  static const toasts = '/inicio/toasts';
+  static const charts = '/inicio/graficos';
 
   /// Outside the shell: the confirmation has no bottom navigation.
   static const transferDone = '/transferencia-enviada';
