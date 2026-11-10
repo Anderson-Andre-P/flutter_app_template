@@ -19,8 +19,13 @@ final class AuthSessionAdapter implements SessionPort {
         ResultFailure() => null,
       };
 
+  /// Throws when signing out failed, so callers can tell; the repository
+  /// has already wiped what it could.
   @override
   Future<void> end() async {
-    await _signOut(const NoParams());
+    final result = await _signOut(const NoParams());
+    if (result case ResultFailure(:final failure)) {
+      throw StateError('sign out failed: ${failure.message}');
+    }
   }
 }

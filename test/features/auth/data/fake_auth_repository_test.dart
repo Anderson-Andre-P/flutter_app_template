@@ -5,6 +5,16 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../helpers/memory_secure_storage.dart';
 
+class _TokenDeleteFails extends MemorySecureStorage {
+  @override
+  Future<void> delete(String key) async {
+    if (key == StorageKeys.authToken) {
+      throw const StorageException('delete failed');
+    }
+    await super.delete(key);
+  }
+}
+
 void main() {
   late MemorySecureStorage storage;
   late FakeAuthRepository repo;
@@ -50,6 +60,15 @@ void main() {
     await repo.signIn(email: 'a@ex.com', password: '12345678');
     await repo.signOut();
     expect(storage.data, isEmpty);
+    expect(await repo.currentUser(), isNull);
+  });
+
+  test('signOut still clears the user when deleting the token fails', () async {
+    final failing = _TokenDeleteFails();
+    final repo = FakeAuthRepository(failing, delay: Duration.zero);
+    await repo.signIn(email: 'a@ex.com', password: '12345678');
+    await expectLater(repo.signOut(), throwsA(isA<StorageException>()));
+    expect(failing.data.containsKey(StorageKeys.authUser), isFalse);
     expect(await repo.currentUser(), isNull);
   });
 }

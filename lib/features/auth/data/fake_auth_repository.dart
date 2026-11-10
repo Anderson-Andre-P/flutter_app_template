@@ -40,10 +40,20 @@ final class FakeAuthRepository implements AuthRepository {
     return _start(User(id: _id(), name: name, email: email));
   }
 
+  /// Best effort: tries to delete every session key even if one fails, so
+  /// a stored user never signs back in on the next launch; then rethrows the
+  /// first error.
   @override
   Future<void> signOut() async {
-    await _storage.delete(StorageKeys.authToken);
-    await _storage.delete(StorageKeys.authUser);
+    Object? firstError;
+    for (final key in [StorageKeys.authUser, StorageKeys.authToken]) {
+      try {
+        await _storage.delete(key);
+      } catch (e) {
+        firstError ??= e;
+      }
+    }
+    if (firstError != null) throw firstError;
   }
 
   @override
