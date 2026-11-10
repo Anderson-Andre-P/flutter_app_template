@@ -25,7 +25,7 @@ final class SignUpParams extends Equatable {
 }
 
 /// Validates the form, then creates the account and signs in.
-final class SignUp implements UseCase<User, SignUpParams> {
+class SignUp implements UseCase<User, SignUpParams> {
   const SignUp(this._repository);
 
   final AuthRepository _repository;

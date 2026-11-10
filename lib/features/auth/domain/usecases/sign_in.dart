@@ -19,7 +19,7 @@ final class SignInParams extends Equatable {
 }
 
 /// Validates and normalizes the credentials, then signs in.
-final class SignIn implements UseCase<User, SignInParams> {
+class SignIn implements UseCase<User, SignInParams> {
   const SignIn(this._repository);
 
   final AuthRepository _repository;

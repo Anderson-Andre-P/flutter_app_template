@@ -7,7 +7,7 @@ import '../repositories/auth_repository.dart';
 /// The user of the stored session, or `null`. A storage error (e.g. iOS
 /// keychain data left by a reinstall) means "no session" — start-up must
 /// never get stuck on it.
-final class GetCurrentSession implements UseCase<User?, NoParams> {
+class GetCurrentSession implements UseCase<User?, NoParams> {
   const GetCurrentSession(this._repository, this._logger);
 
   final AuthRepository _repository;

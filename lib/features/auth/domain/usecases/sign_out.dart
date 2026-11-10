@@ -3,7 +3,7 @@ import '../../../../core/error/result.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../repositories/auth_repository.dart';
 
-final class SignOut implements UseCase<void, NoParams> {
+class SignOut implements UseCase<void, NoParams> {
   const SignOut(this._repository);
 
   final AuthRepository _repository;
