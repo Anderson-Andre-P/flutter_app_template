@@ -23,6 +23,10 @@ enum AppButtonVariant {
 
   /// Irreversible action — always confirmed in a dialog.
   destructive,
+
+  /// Destructive action at the end of a settings list (e.g. sign out):
+  /// danger text on the danger-subtle surface, no border.
+  destructiveTonal,
 }
 
 enum AppButtonSize { sm, md, lg }
@@ -81,6 +85,11 @@ class AppButton extends StatelessWidget {
               Colors.transparent,
               c.danger,
               c.danger,
+            ),
+            AppButtonVariant.destructiveTonal => (
+              c.dangerSubtle,
+              c.danger,
+              null,
             ),
           };
     final pressed = variant == AppButtonVariant.primary

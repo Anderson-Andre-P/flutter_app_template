@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/theme/app_tokens.dart';
 import 'package:flutter_app_template/core/widgets/app_button.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,29 @@ void main() {
     );
     await tester.tap(find.text('Salvar'));
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('destructiveTonal is a borderless danger-subtle button', (
+    tester,
+  ) async {
+    await pumpApp(
+      tester,
+      AppButton(
+        label: 'Sair',
+        variant: AppButtonVariant.destructiveTonal,
+        onPressed: () {},
+      ),
+    );
+    final material = tester.widget<Material>(
+      find.descendant(
+        of: find.byType(AppButton),
+        matching: find.byType(Material),
+      ),
+    );
+    expect(material.color, AppColors.light.dangerSubtle);
+    expect((material.shape! as RoundedRectangleBorder).side, BorderSide.none);
+    final text = tester.widget<Text>(find.text('Sair'));
+    expect(text.style!.color, AppColors.light.danger);
   });
 
   testWidgets('tapping calls onPressed', (tester) async {

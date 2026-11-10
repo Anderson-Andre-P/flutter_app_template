@@ -44,6 +44,10 @@ abstract final class AppSizes {
   static const double field = 48;
   static const double bottomNav = 56;
   static const double chip = 32;
+  static const double progressBar = 8;
+  static const double iconBox = 40;
+  static const double heroIcon = 80;
+  static const double chart = 160;
   static const double pill = 26;
   static const double listTileMin = 56;
   static const double modalMaxWidth = 340;
