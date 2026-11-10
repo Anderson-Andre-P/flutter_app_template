@@ -5,6 +5,11 @@ final _currency = NumberFormat.currency(
   symbol: r'R$',
   decimalDigits: 2,
 );
+final _currencyWhole = NumberFormat.currency(
+  locale: 'pt_BR',
+  symbol: r'R$',
+  decimalDigits: 0,
+);
 
 const _months = [
   'jan',
@@ -21,12 +26,14 @@ const _months = [
   'dez',
 ];
 
-/// `R$ 1.234,56` from an amount in cents. [signed] prefixes `+ ` or `– `.
+/// `R$ 1.234,56` from an amount in cents. [signed] prefixes `+ ` or `– `;
+/// `showCents: false` gives `R$ 1.234` (for round preset values).
 /// Money is always carried as integer cents, never as a double.
-String formatCents(int cents, {bool signed = false}) {
+String formatCents(int cents, {bool signed = false, bool showCents = true}) {
+  final format = showCents ? _currency : _currencyWhole;
   // NumberFormat separates the symbol with a non-breaking space; use a plain
   // one so copy and tests stay predictable.
-  final text = _currency.format(cents.abs() / 100).replaceAll(' ', ' ');
+  final text = format.format(cents.abs() / 100).replaceAll(' ', ' ');
   if (!signed) return text;
   return cents < 0 ? '– $text' : '+ $text';
 }

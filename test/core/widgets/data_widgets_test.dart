@@ -5,7 +5,6 @@ import 'package:flutter_app_template/core/widgets/app_icon_box.dart';
 import 'package:flutter_app_template/core/widgets/app_info_card.dart';
 import 'package:flutter_app_template/core/widgets/app_progress_bar.dart';
 import 'package:flutter_app_template/core/widgets/app_search_field.dart';
-import 'package:flutter_app_template/core/widgets/app_tone.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';

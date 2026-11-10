@@ -14,6 +14,11 @@ void main() {
       expect(formatCents(-18640, signed: true), '– R\$ 186,40');
     });
 
+    test('showCents: false drops the decimals', () {
+      expect(formatCents(35000, showCents: false), 'R\$ 350');
+      expect(formatCents(1000000, showCents: false), 'R\$ 10.000');
+    });
+
     test('unsigned drops the sign of a negative value', () {
       expect(formatCents(-18640), 'R\$ 186,40');
     });
