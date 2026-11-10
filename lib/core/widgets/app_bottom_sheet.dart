@@ -33,6 +33,8 @@ abstract final class AppBottomSheet {
     required Widget child,
   }) => showModalBottomSheet<T>(
     context: context,
+    // Above the shell's bottom bar, like dialogs.
+    useRootNavigator: true,
     isScrollControlled: true,
     useSafeArea: true,
     showDragHandle: false,

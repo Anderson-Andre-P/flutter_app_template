@@ -64,10 +64,13 @@ class _LinePainter extends CustomPainter {
     final max = values.fold<double>(0, (m, v) => v > m ? v : m);
     final top = _dot + _stroke;
     final usable = size.height - top * 2;
+    // Inset by the marker so the last point is never clipped at the edge.
+    const side = _dot + _stroke;
+    final width = size.width - side * 2;
     Offset at(int i) => Offset(
       values.length == 1
           ? size.width / 2
-          : size.width * i / (values.length - 1),
+          : side + width * i / (values.length - 1),
       top + usable * (1 - (max == 0 ? 0 : values[i] / max)),
     );
 
