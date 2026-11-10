@@ -1,0 +1,25 @@
+{
+  "language": "pt-BR",
+  "types": [
+    "feat",
+    "fix",
+    "chore",
+    "docs",
+    "refactor",
+    "perf",
+    "test",
+    "build"
+  ],
+  "forbiddenTrailers": [
+    "Co-Authored-By",
+    "Generated with"
+  ],
+  "localOnly": true,
+  "prAllowedBases": [
+    "homolog"
+  ],
+  "commitSpecsAfterApproval": true,
+  "roadmapInClosingCommit": false,
+  "analyze": "flutter analyze",
+  "test": "flutter test -r compact"
+}

@@ -1,0 +1,9 @@
+{
+  "forbiddenImportPrefixes": [
+    "old_app"
+  ],
+  "decimalFieldNames": [
+    "liters",
+    "odometer"
+  ]
+}

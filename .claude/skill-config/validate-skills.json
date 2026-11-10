@@ -1,0 +1,3 @@
+{
+  "projectTokens": ["KB-\\d+", "G-\\d{3}"]
+}

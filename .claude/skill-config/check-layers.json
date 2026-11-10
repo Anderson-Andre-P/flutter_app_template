@@ -1,0 +1,10 @@
+{
+  "allow": [
+    {
+      "rule": "core-imports-features",
+      "file": "core/di/",
+      "import": "features/",
+      "reason": "composition root: setupDependencies() calls each feature's register<Feature>Feature (see CLAUDE.md, 'Adding a feature')"
+    }
+  ]
+}

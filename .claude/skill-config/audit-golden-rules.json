@@ -1,0 +1,11 @@
+{
+  "forbiddenImportPrefixes": [],
+  "decimalFieldNames": [
+    "amount",
+    "price",
+    "total",
+    "quantity",
+    "balance"
+  ],
+  "allow": []
+}
