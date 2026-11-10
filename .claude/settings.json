@@ -1,0 +1,121 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "permissions": {
+    "deny": [
+      "Bash(gh pr merge *)",
+      "Bash(glab mr create *)",
+      "Bash(glab mr merge *)",
+      "Bash(git push *)",
+      "Bash(git checkout -b *)",
+      "Bash(git checkout -B *)",
+      "Bash(git switch -c *)",
+      "Bash(git switch -C *)",
+      "Bash(git switch --create *)",
+      "Bash(git branch -c *)",
+      "Bash(git worktree add *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(emulator *)",
+      "Bash(flutter emulators *)",
+      "Bash(fvm flutter emulators *)",
+      "Bash(open -a Simulator*)",
+      "Bash(open -a \"Simulator\"*)",
+      "Bash(xcrun simctl boot *)",
+      "Bash(xcrun simctl bootstatus *)",
+      "Bash(flutter drive *)",
+      "Bash(fvm flutter drive *)",
+      "Bash(flutter test integration_test*)",
+      "Bash(fvm flutter test integration_test*)",
+      "Bash(flutter install*)",
+      "Bash(fvm flutter install*)",
+      "Bash(flutter attach*)",
+      "Bash(fvm flutter attach*)",
+      "Bash(xcrun simctl launch *)",
+      "Bash(xcrun simctl install *)"
+    ],
+    "ask": [
+      "Bash(gh pr create *)",
+      "Bash(git reset *)",
+      "Bash(git checkout *)",
+      "Bash(git restore *)",
+      "Bash(git clean *)",
+      "Bash(git rm *)",
+      "Bash(git stash push*)",
+      "Bash(git stash pop*)",
+      "Bash(git stash apply*)",
+      "Bash(git stash drop*)",
+      "Bash(git stash clear*)",
+      "Bash(git branch -D *)",
+      "Bash(git branch -d *)",
+      "Bash(git cherry-pick *)",
+      "Bash(git revert *)",
+      "Bash(rm *)",
+      "Bash(flutter clean*)",
+      "Bash(fvm flutter clean*)",
+      "Bash(dart fix *)",
+      "Bash(fvm dart fix *)",
+      "Bash(flutter pub add *)",
+      "Bash(flutter pub remove *)",
+      "Bash(flutter pub upgrade *)",
+      "Bash(flutter pub downgrade *)",
+      "Bash(fvm flutter pub add *)",
+      "Bash(fvm flutter pub remove *)",
+      "Bash(fvm flutter pub upgrade *)",
+      "Bash(fvm flutter pub downgrade *)",
+      "Bash(dart pub add *)",
+      "Bash(dart pub remove *)",
+      "Edit(pubspec.yaml)",
+      "Edit(lib/core/config/env_config.dart)",
+      "Bash(flutter build *)",
+      "Bash(fvm flutter build *)",
+      "Bash(flutter run *)",
+      "Bash(fvm flutter run *)"
+    ],
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git restore --staged *)",
+      "Bash(flutter pub get*)",
+      "Bash(fvm flutter pub get*)",
+      "Bash(flutter analyze*)",
+      "Bash(fvm flutter analyze*)",
+      "Bash(flutter test*)",
+      "Bash(fvm flutter test*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch)",
+      "Bash(git branch -a*)",
+      "Bash(git branch --list*)",
+      "Bash(git stash list*)",
+      "Bash(python3 .claude/skills/*/scripts/*)",
+      "Bash(bash .claude/skills/*/scripts/*)",
+      "Bash(python3 tool/validate_skills.py*)",
+      "Bash(python3 -m unittest discover .claude/skills/*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-coauthor-commit.sh\"",
+            "statusMessage": "Checking commit message for attribution trailers..."
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-pr-target.sh\"",
+            "statusMessage": "Checking the pull request target branch..."
+          }
+        ]
+      }
+    ]
+  }
+}

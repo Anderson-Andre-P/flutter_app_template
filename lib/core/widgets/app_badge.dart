@@ -21,7 +21,7 @@ class AppBadge extends StatelessWidget {
     final fg = c.toneForeground(tone);
     return Container(
       height: AppSizes.pill,
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md - 2),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
       decoration: BoxDecoration(
         color: c.toneBackground(tone),
         borderRadius: AppRadius.brFull,
@@ -34,7 +34,7 @@ class AppBadge extends StatelessWidget {
             height: 6,
             decoration: BoxDecoration(color: fg, shape: BoxShape.circle),
           ),
-          const SizedBox(width: AppSpacing.xs + 2),
+          const SizedBox(width: AppSpacing.xs),
           Text(
             label,
             style: AppTypography.labelMedium.copyWith(

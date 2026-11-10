@@ -126,7 +126,7 @@ class _StateLayout extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppTypography.section.copyWith(color: c.textPrimary),
           ),
-          const SizedBox(height: AppSpacing.xs + 2),
+          const SizedBox(height: AppSpacing.sm),
           Text(
             message,
             textAlign: TextAlign.center,

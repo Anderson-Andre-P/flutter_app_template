@@ -57,7 +57,7 @@ class _AppTextFieldState extends State<AppTextField> {
           widget.required ? '${widget.label} *' : widget.label,
           style: AppTypography.label.copyWith(color: c.textPrimary),
         ),
-        const SizedBox(height: AppSpacing.xs + 2),
+        const SizedBox(height: AppSpacing.sm),
         TextField(
           controller: widget.controller,
           obscureText: _hidden,

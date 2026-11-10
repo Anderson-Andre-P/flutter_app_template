@@ -44,7 +44,7 @@ class AppChip extends StatelessWidget {
           onTap: enabled ? () => onSelected!(!selected) : null,
           child: Container(
             height: AppSizes.buttonSm,
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md + 2),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             alignment: Alignment.center,
             child: Text(
               label,

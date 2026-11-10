@@ -40,7 +40,7 @@ class AuthScaffold extends StatelessWidget {
                   title,
                   style: AppTypography.display.copyWith(color: c.textPrimary),
                 ),
-                const SizedBox(height: AppSpacing.xs + 2),
+                const SizedBox(height: AppSpacing.sm),
                 Text(
                   subtitle,
                   style: AppTypography.body.copyWith(color: c.textSecondary),

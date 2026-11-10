@@ -49,7 +49,7 @@ class AppListTile extends StatelessWidget {
                     ),
                   ),
                   if (subtitle != null) ...[
-                    const SizedBox(height: 2),
+                    const SizedBox(height: AppSpacing.xs),
                     Text(
                       subtitle!,
                       style: AppTypography.caption.copyWith(color: c.textMuted),

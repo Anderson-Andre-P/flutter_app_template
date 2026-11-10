@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Git commit-msg hook: validates every `git commit` (yours and the AI's) with the skill's script,
+# so the rules live in one place. Install: see references/install-hooks.md
+#   git config core.hooksPath <folder containing this file>
+set -euo pipefail
+
+skill_dir="${COMMIT_SKILL_DIR:-.claude/skills/git-commit-conventions}"
+exec python3 "$skill_dir/scripts/check_commit_msg.py" "$1"
