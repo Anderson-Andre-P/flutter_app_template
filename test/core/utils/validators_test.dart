@@ -3,7 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('normalizeEmail trims and lower-cases', () {
-    expect(Validators.normalizeEmail('  Fulano@Exemplo.com '), 'fulano@exemplo.com');
+    expect(
+      Validators.normalizeEmail('  Fulano@Exemplo.com '),
+      'fulano@exemplo.com',
+    );
   });
 
   test('isValidEmail accepts padded mixed-case addresses', () {
