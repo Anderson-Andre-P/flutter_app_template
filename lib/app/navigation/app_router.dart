@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +9,18 @@ import '../../features/auth/application/sign_up/sign_up_bloc.dart';
 import '../../features/auth/presentation/pages/sign_in_page.dart';
 import '../../features/auth/presentation/pages/sign_up_page.dart';
 import '../../features/auth/presentation/pages/splash_page.dart';
+import '../../features/examples/application/activity_detail_bloc.dart';
+import '../../features/examples/application/activity_list_bloc.dart';
+import '../../features/examples/application/transfer_bloc.dart';
+import '../../features/examples/domain/entities/transfer.dart';
+import '../../features/examples/presentation/examples_strings.dart';
+import '../../features/examples/presentation/pages/activity_detail_page.dart';
+import '../../features/examples/presentation/pages/activity_list_page.dart';
+import '../../features/examples/presentation/pages/dashboard_page.dart';
+import '../../features/examples/presentation/pages/feedback_demo_page.dart';
+import '../../features/examples/presentation/pages/transfer_page.dart';
+import '../../features/examples/presentation/pages/transfer_success_page.dart';
+import '../../features/home/presentation/home_demo.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/home/presentation/pages/home_shell.dart';
 import '../../features/settings/presentation/pages/profile_page.dart';
@@ -59,6 +71,15 @@ abstract final class AppRouter {
           ),
         ),
       ),
+      GoRoute(
+        path: AppRoutes.transferDone,
+        builder: (context, state) => TransferSuccessPage(
+          receipt: state.extra is TransferReceipt
+              ? state.extra! as TransferReceipt
+              : ExamplesStrings.sampleReceipt(DateTime.now()),
+          onHome: () => context.go(AppRoutes.home),
+        ),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => HomeShell(
           currentIndex: shell.currentIndex,
@@ -71,7 +92,9 @@ abstract final class AppRouter {
             routes: [
               GoRoute(
                 path: AppRoutes.home,
-                builder: (context, state) => const HomePage(),
+                builder: (context, state) =>
+                    HomePage(onOpenDemo: (demo) => _openDemo(context, demo)),
+                routes: _exampleRoutes,
               ),
             ],
           ),
@@ -88,6 +111,63 @@ abstract final class AppRouter {
     ],
   );
 }
+
+void _openDemo(BuildContext context, HomeDemo demo) => switch (demo) {
+  HomeDemo.dashboard => context.push(AppRoutes.dashboard),
+  HomeDemo.statement => context.push(AppRoutes.statement),
+  HomeDemo.detail => context.push(
+    AppRoutes.statementItem(ExamplesStrings.sampleActivityId),
+  ),
+  HomeDemo.form => context.push(AppRoutes.transfer),
+  HomeDemo.success => context.push(
+    AppRoutes.transferDone,
+    extra: ExamplesStrings.sampleReceipt(DateTime.now()),
+  ),
+  HomeDemo.feedback => context.push(AppRoutes.feedback),
+};
+
+/// Example screens, nested under the home tab so the bottom navigation
+/// stays visible. Paths are relative to [AppRoutes.home].
+final _exampleRoutes = <RouteBase>[
+  GoRoute(
+    path: 'painel',
+    builder: (context, state) =>
+        DashboardPage(onStartTransfer: () => context.push(AppRoutes.transfer)),
+  ),
+  GoRoute(
+    path: 'extrato',
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<ActivityListBloc>()..add(const ActivityListStarted()),
+      child: ActivityListPage(
+        onOpen: (id) => context.push(AppRoutes.statementItem(id)),
+      ),
+    ),
+    routes: [
+      GoRoute(
+        path: ':id',
+        builder: (context, state) => BlocProvider(
+          create: (_) =>
+              sl<ActivityDetailBloc>()
+                ..add(ActivityDetailRequested(state.pathParameters['id']!)),
+          child: const ActivityDetailPage(),
+        ),
+      ),
+    ],
+  ),
+  GoRoute(
+    path: 'transferir',
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<TransferBloc>(),
+      child: TransferPage(
+        onSent: (receipt) => context.go(AppRoutes.transferDone, extra: receipt),
+      ),
+    ),
+  ),
+  GoRoute(
+    path: 'feedback',
+    builder: (context, state) => const FeedbackDemoPage(),
+  ),
+];
 
 /// Adapts a stream to the [Listenable] `refreshListenable` expects.
 /// Implements [Listenable] directly (not `ChangeNotifier`): it holds no

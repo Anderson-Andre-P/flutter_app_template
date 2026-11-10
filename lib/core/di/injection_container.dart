@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/auth_feature.dart';
+import '../../features/examples/examples_feature.dart';
 import '../config/env_config.dart';
 import '../logging/app_logger.dart';
 import '../logging/debug_app_logger.dart';
@@ -41,6 +42,7 @@ Future<void> setupDependencies(
     ..registerLazySingleton(() => ThemeModeBloc(sl()));
 
   registerAuthFeature(sl);
+  registerExamplesFeature(sl);
 
   // Needs the SessionPort registered by the auth feature.
   sl.registerLazySingleton(() => SessionBloc(sl()));

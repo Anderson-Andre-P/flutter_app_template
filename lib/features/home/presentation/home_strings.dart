@@ -5,20 +5,21 @@ abstract final class HomeStrings {
 
   static String greeting(String firstName) => 'Olá, $firstName';
 
-  static const summary = 'Resumo';
-  static const filters = ['Todos', 'Abertas', 'Concluídas'];
+  static const title = 'Telas de exemplo';
+  static const subtitle =
+      'Cada card abre uma tela pronta, feita só com os componentes do '
+      'design system. Use como ponto de partida e apague o que não precisar.';
 
-  static const weekTitle = 'Tarefas da semana';
-  static const weekBody = '3 de 5 concluídas';
-  static const onTrack = 'Em dia';
-  static const pending = 'Pendente';
-
-  static const reviewTitle = 'Próxima revisão';
-  static const reviewBody = 'Amanhã às 9h';
-  static const scheduled = 'Agendada';
-
-  static const activity = 'Atividade';
-  static const emptyTitle = 'Nada por aqui ainda';
-  static const emptyMessage =
-      'Este é o lugar das suas telas. Comece criando uma feature em lib/features.';
+  static const dashboard = 'Painel';
+  static const dashboardHint = 'Meta, destaque e gráfico';
+  static const statement = 'Extrato';
+  static const statementHint = 'Busca, filtros e grupos';
+  static const detail = 'Detalhe';
+  static const detailHint = 'Status e informações';
+  static const form = 'Formulário';
+  static const formHint = 'Valor, campos e resumo';
+  static const success = 'Sucesso';
+  static const successHint = 'Confirmação e comprovante';
+  static const feedback = 'Feedback';
+  static const feedbackHint = 'Avisos, diálogos e estados';
 }

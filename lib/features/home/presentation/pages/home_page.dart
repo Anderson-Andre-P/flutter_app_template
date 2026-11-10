@@ -5,68 +5,69 @@ import '../../../../core/session/session_bloc.dart';
 import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_context.dart';
-import '../../../../core/widgets/app_badge.dart';
 import '../../../../core/widgets/app_card.dart';
-import '../../../../core/widgets/app_chip.dart';
-import '../../../../core/widgets/app_state_views.dart';
-import '../../../../core/widgets/app_top_bar.dart';
-import '../../../../core/widgets/section_overline.dart';
-import '../../application/home_filter_bloc.dart';
+import '../../../../core/widgets/app_icon_box.dart';
+import '../home_demo.dart';
 import '../home_strings.dart';
 
-/// Example home tab built only from `core/widgets` and theme tokens —
-/// replace its content with the app's own.
+/// Home tab: a two-column grid of cards, one per example screen.
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.onOpenDemo});
+
+  final ValueChanged<HomeDemo> onOpenDemo;
 
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     final name = context.select<SessionBloc, String>(
       (b) => b.state.user?.name ?? '',
     );
-    final firstName = name.split(' ').first;
-    return BlocProvider(
-      create: (_) => HomeFilterBloc(),
-      child: Scaffold(
-        appBar: AppTopBar(title: HomeStrings.greeting(firstName)),
-        body: ListView(
+    const demos = HomeDemo.values;
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: ListView(
           padding: const EdgeInsets.fromLTRB(
             AppSpacing.xl,
-            AppSpacing.xl,
+            AppSpacing.x2l,
             AppSpacing.xl,
             AppSpacing.x4l,
           ),
           children: [
-            const SectionOverline(HomeStrings.summary),
-            const SizedBox(height: AppSpacing.md),
-            const _SummaryCard(
-              title: HomeStrings.weekTitle,
-              body: HomeStrings.weekBody,
-              badges: [
-                AppBadge(label: HomeStrings.onTrack, tone: AppTone.success),
-                AppBadge(label: HomeStrings.pending, tone: AppTone.alert),
-              ],
+            Text(
+              HomeStrings.greeting(name.split(' ').first),
+              style: AppTypography.body.copyWith(color: c.textSecondary),
             ),
-            const SizedBox(height: AppSpacing.md),
-            const _SummaryCard(
-              title: HomeStrings.reviewTitle,
-              body: HomeStrings.reviewBody,
-              badges: [
-                AppBadge(label: HomeStrings.scheduled, tone: AppTone.info),
-              ],
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              HomeStrings.title,
+              style: AppTypography.display.copyWith(color: c.textPrimary),
             ),
-            const SizedBox(height: AppSpacing.x3l),
-            const SectionOverline(HomeStrings.activity),
-            const SizedBox(height: AppSpacing.md),
-            const _Filters(),
-            const SizedBox(height: AppSpacing.lg),
-            const AppCard(
-              child: AppEmptyView(
-                icon: Icons.inbox_outlined,
-                title: HomeStrings.emptyTitle,
-                message: HomeStrings.emptyMessage,
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              HomeStrings.subtitle,
+              style: AppTypography.body.copyWith(color: c.textSecondary),
+            ),
+            const SizedBox(height: AppSpacing.x2l),
+            for (var i = 0; i < demos.length; i += 2) ...[
+              if (i > 0) const SizedBox(height: AppSpacing.md),
+              // IntrinsicHeight keeps both cards of a row the same height
+              // whatever the text scale, without a fixed aspect ratio.
+              IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(child: _DemoCard(demos[i], onOpenDemo)),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: i + 1 < demos.length
+                          ? _DemoCard(demos[i + 1], onOpenDemo)
+                          : const SizedBox.shrink(),
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ],
         ),
       ),
@@ -74,65 +75,34 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _SummaryCard extends StatelessWidget {
-  const _SummaryCard({
-    required this.title,
-    required this.body,
-    required this.badges,
-  });
+class _DemoCard extends StatelessWidget {
+  const _DemoCard(this.demo, this.onOpen);
 
-  final String title;
-  final String body;
-  final List<Widget> badges;
+  final HomeDemo demo;
+  final ValueChanged<HomeDemo> onOpen;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     return AppCard(
+      key: ValueKey(demo),
+      onTap: () => onOpen(demo),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          AppIconBox(icon: demo.icon),
+          const SizedBox(height: AppSpacing.lg),
           Text(
-            title,
-            style: AppTypography.section.copyWith(color: c.textPrimary),
+            demo.title,
+            style: AppTypography.label.copyWith(color: c.textPrimary),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            body,
-            style: AppTypography.body.copyWith(color: c.textSecondary),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Wrap(
-            spacing: AppSpacing.sm,
-            runSpacing: AppSpacing.sm,
-            children: badges,
+            demo.hint,
+            style: AppTypography.caption.copyWith(color: c.textMuted),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _Filters extends StatelessWidget {
-  const _Filters();
-
-  @override
-  Widget build(BuildContext context) {
-    final selected = context.select<HomeFilterBloc, int>(
-      (b) => b.state.selected,
-    );
-    return Wrap(
-      spacing: AppSpacing.sm,
-      runSpacing: AppSpacing.sm,
-      children: [
-        for (var i = 0; i < HomeStrings.filters.length; i++)
-          AppChip(
-            label: HomeStrings.filters[i],
-            selected: i == selected,
-            onSelected: (_) =>
-                context.read<HomeFilterBloc>().add(HomeFilterSelected(i)),
-          ),
-      ],
     );
   }
 }
