@@ -23,7 +23,7 @@ import '../../features/examples/presentation/pages/transfer_success_page.dart';
 import '../../features/home/presentation/home_demo.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/home/presentation/pages/home_shell.dart';
-import '../../features/settings/presentation/pages/profile_page.dart';
+import '../../features/settings/presentation/pages/settings_page.dart';
 import 'app_routes.dart';
 
 /// Where [location] must go for the session [status], or `null` to stay.
@@ -101,8 +101,8 @@ abstract final class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: AppRoutes.profile,
-                builder: (context, state) => const ProfilePage(),
+                path: AppRoutes.settings,
+                builder: (context, state) => const SettingsPage(),
               ),
             ],
           ),

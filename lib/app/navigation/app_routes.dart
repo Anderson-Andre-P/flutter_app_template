@@ -4,7 +4,7 @@ abstract final class AppRoutes {
   static const signIn = '/entrar';
   static const signUp = '/criar-conta';
   static const home = '/inicio';
-  static const profile = '/perfil';
+  static const settings = '/configuracoes';
 
   // Example screens (lib/features/examples) — delete with the feature.
   static const dashboard = '/inicio/painel';

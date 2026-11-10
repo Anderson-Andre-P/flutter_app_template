@@ -25,8 +25,8 @@ class HomeShell extends StatelessWidget {
       items: const [
         AppBottomNavItem(icon: Icons.home_outlined, label: HomeStrings.tabHome),
         AppBottomNavItem(
-          icon: Icons.person_outline,
-          label: HomeStrings.tabProfile,
+          icon: Icons.settings_outlined,
+          label: HomeStrings.tabSettings,
         ),
       ],
     ),

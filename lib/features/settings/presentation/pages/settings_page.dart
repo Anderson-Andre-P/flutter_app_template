@@ -19,10 +19,10 @@ import '../../../../core/widgets/dialogs/app_dialog.dart';
 import '../../../../core/widgets/section_overline.dart';
 import '../settings_strings.dart';
 
-/// Profile and app settings: who is signed in, account menu (placeholders),
+/// Settings tab: who is signed in, account menu (placeholders),
 /// theme mode, version and sign out.
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   static const _modes = [
     (ThemeMode.system, SettingsStrings.themeSystem),

@@ -41,7 +41,7 @@ void main() {
       AppRoutes.home,
     );
     expect(
-      resolveRedirect(SessionStatus.authenticated, AppRoutes.profile),
+      resolveRedirect(SessionStatus.authenticated, AppRoutes.settings),
       isNull,
     );
   });

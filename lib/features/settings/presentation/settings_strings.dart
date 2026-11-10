@@ -1,6 +1,6 @@
 /// User-facing copy of the settings feature (pt-BR).
 abstract final class SettingsStrings {
-  static const title = 'Perfil';
+  static const title = 'Configurações';
 
   static const personalData = 'Dados pessoais';
   static const personalDataHint = 'Nome, e-mail e contato';
