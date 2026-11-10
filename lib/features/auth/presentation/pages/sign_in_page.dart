@@ -57,6 +57,7 @@ class SignInPage extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             AppTextField(
               label: AuthStrings.password,
+              hint: AuthStrings.passwordHint,
               errorText: state.passwordError,
               obscure: true,
               textInputAction: TextInputAction.done,

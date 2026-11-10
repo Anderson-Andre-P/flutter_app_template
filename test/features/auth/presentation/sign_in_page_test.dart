@@ -61,6 +61,13 @@ void main() {
     verify(() => bloc.add(const SignInSubmitted())).called(1);
   });
 
+  testWidgets('email and password fields show their hints', (tester) async {
+    when(() => bloc.state).thenReturn(const SignInState());
+    await pump(tester);
+    expect(find.text(AuthStrings.emailHint), findsOneWidget);
+    expect(find.text(AuthStrings.passwordHint), findsOneWidget);
+  });
+
   testWidgets('while loading the button shows progress and ignores taps', (
     tester,
   ) async {

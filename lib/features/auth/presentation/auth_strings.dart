@@ -5,6 +5,7 @@ abstract final class AuthStrings {
   static const email = 'E-mail';
   static const emailHint = 'voce@exemplo.com';
   static const password = 'Senha';
+  static const passwordHint = 'Digite sua senha';
   static const signIn = 'Entrar';
   static const forgotPassword = 'Esqueci a senha';
   static const forgotPasswordUnavailable =
