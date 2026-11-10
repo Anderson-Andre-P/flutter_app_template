@@ -10,9 +10,10 @@ pronta, para que o time só precise programar as telas do produto.
 - **Erros:** usecases retornam `Result<T>` selado e nunca lançam exceção.
 - **Design system:** tokens de cor, espaçamento, raio, tipografia e
   elevação, com tema **claro e escuro**, widgets base, dialogs e snackbars.
-- **Telas de exemplo:** splash, entrar, criar conta, início com navegação
-  inferior e perfil com troca de tema e saída. A autenticação é **falsa e
-  local**, sem backend.
+- **Telas de exemplo:** splash, entrar, criar conta, início em grade com
+  6 telas de demonstração (painel, extrato, detalhe, formulário, sucesso e
+  feedback) e perfil com troca de tema e saída. A autenticação e os dados
+  são **falsos e locais**, sem backend.
 - **Skills de IA:** `.claude/` com skills, rules, hooks e permissões, mais o
   `CLAUDE.md` e o `AGENTS.md`.
 
@@ -71,7 +72,8 @@ lib/
     widgets/         componentes do design system, dialogs/ e snackbar
   features/
     auth/            splash, entrar, criar conta (FakeAuthRepository)
-    home/            shell com navegação inferior e tela inicial
+    examples/        telas de demonstração com dados falsos (descartável)
+    home/            shell com navegação inferior e grade de demonstrações
     settings/        perfil, troca de tema e saída
 assets/              images/  vectors/  audios/  fonts/ (Inter, OFL)
 scripts/             run.sh  build.sh  test.sh  analyze.sh
@@ -91,6 +93,16 @@ tool/                resumo de testes e validação das skills
 Antes de entregar, rode
 `python3 .claude/skills/check-layers/scripts/check_layers.py` e
 `python3 .claude/skills/audit-golden-rules/scripts/audit_rules.py`.
+
+### Removendo as telas de exemplo
+
+As demonstrações ficam todas em `lib/features/examples`. Para começar limpo:
+
+1. Apague `lib/features/examples` e `test/features/examples`.
+2. Tire `registerExamplesFeature` de `lib/core/di/injection_container.dart`.
+3. Em `lib/app/navigation/`, remova as rotas de exemplo (`_exampleRoutes`,
+   `_openDemo`, `transferDone`) e os caminhos marcados em `app_routes.dart`.
+4. Troque o conteúdo de `HomePage` (e apague `home_demo.dart`).
 
 ### Usando um backend real
 

@@ -9,8 +9,9 @@ iOS). It ships the whole foundation so a new app only writes its screens:
 feature-first Clean Architecture, Bloc, DI, typed errors, logging, optional
 Sentry, secure + preference storage, an HTTP client, go_router with a
 session-aware redirect, a light/dark design system (tokens + widgets +
-dialogs + snackbars) and example screens (splash, sign in, sign up, home,
-profile) running on a **fake auth repository — there is no backend**.
+dialogs + snackbars) and example screens (splash, sign in, sign up, a home
+grid of six demos — dashboard, statement, detail, form, success, feedback —
+and profile) running on **fake repositories — there is no backend**.
 
 No flavors: one `lib/main.dart`, optional config via `--dart-define`
 (`API_BASE_URL`, `SENTRY_DSN`) or `--dart-define-from-file=.env.json`.
@@ -120,7 +121,8 @@ lib/
                        session/ storage/ theme/ usecase/ utils/ widgets/
   features/
     auth/              splash, sign in, sign up (fake repository)
-    home/              shell with bottom nav + example home tab
+    examples/          disposable demo screens on fake data (see README)
+    home/              shell with bottom nav + grid linking the demos
     settings/          profile: theme mode, version, sign out
 assets/                images/ vectors/ audios/ fonts/
 scripts/  tool/  .claude/  .githooks/
