@@ -1,4 +1,5 @@
 import 'package:flutter_app_template/core/logging/app_logger.dart';
+import 'package:flutter_app_template/core/logging/debug_app_logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 
