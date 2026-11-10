@@ -60,7 +60,8 @@ void main() {
     expect(AppRadius.md, 12);
     expect(AppRadius.xl, 22);
     expect(AppSizes.buttonLg, 48);
-    expect(AppSizes.bottomNav, 56);
+    expect(AppSizes.bottomNav, 64);
+    expect(AppSizes.bottomNavContent, 48);
     expect(AppSizes.chip, 32);
   });
 

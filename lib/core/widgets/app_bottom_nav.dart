@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../theme/app_tokens.dart';
@@ -11,7 +13,8 @@ class AppBottomNavItem {
   final String label;
 }
 
-/// 56px bottom bar (plus the bottom safe area); the active tab is primary.
+/// Bottom bar: 64px, shared with the system inset below it (see
+/// [AppSizes.bottomNavContent]); the active tab is primary.
 class AppBottomNav extends StatelessWidget {
   const AppBottomNav({
     super.key,
@@ -27,16 +30,21 @@ class AppBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final inset = MediaQuery.paddingOf(context).bottom;
+    // 64 with no inset; with one, the tabs shrink to 48 and the inset fills
+    // the rest, so the bar grows only when the inset is taller than 16.
+    final total = max(AppSizes.bottomNav, AppSizes.bottomNavContent + inset);
+    final tabsHeight = total - inset;
     return Material(
       color: c.card,
       child: DecoratedBox(
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: c.border)),
         ),
-        child: SafeArea(
-          top: false,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: inset),
           child: SizedBox(
-            height: AppSizes.bottomNav,
+            height: tabsHeight,
             child: Row(
               children: [
                 for (var i = 0; i < items.length; i++)
@@ -60,7 +68,7 @@ class AppBottomNav extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(items[i].icon, size: AppSizes.iconNav, color: color),
+            Icon(items[i].icon, size: AppSizes.icon, color: color),
             const SizedBox(height: AppSpacing.xs),
             Text(
               items[i].label,

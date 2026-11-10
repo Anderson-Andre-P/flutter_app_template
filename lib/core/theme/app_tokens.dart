@@ -42,7 +42,14 @@ abstract final class AppSizes {
   static const double buttonSm = 38;
   static const double minTouchTarget = 44;
   static const double field = 48;
-  static const double bottomNav = 56;
+
+  /// Bottom bar without a system inset (design system: 64).
+  static const double bottomNav = 64;
+
+  /// Minimum height of the tabs when a system inset (home indicator, Android
+  /// gesture/button bar) sits below them: the inset takes the rest of the 64
+  /// instead of stacking on top of it.
+  static const double bottomNavContent = 48;
   static const double chip = 32;
   static const double progressBar = 8;
   static const double iconBox = 40;
@@ -63,7 +70,6 @@ abstract final class AppSizes {
   static const double iconChip = 15;
   static const double iconField = 17;
   static const double iconTopBar = 20;
-  static const double iconNav = 20;
   static const double icon = 22;
 }
 

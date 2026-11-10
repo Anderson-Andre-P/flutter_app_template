@@ -109,32 +109,48 @@ void main() {
     expect(tapped, 1);
   });
 
-  testWidgets('bottom nav content is the nav height plus the safe area', (
-    tester,
-  ) async {
-    tester.view.padding = const FakeViewPadding(bottom: 34 * 3);
-    tester.view.devicePixelRatio = 3;
-    addTearDown(tester.view.reset);
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: AppTheme.light(),
-        home: Scaffold(
-          bottomNavigationBar: AppBottomNav(
-            items: const [
-              AppBottomNavItem(icon: Icons.home_outlined, label: 'Início'),
-              AppBottomNavItem(icon: Icons.person_outline, label: 'Perfil'),
-            ],
-            currentIndex: 0,
-            onTap: (_) {},
+  group('bottom nav height', () {
+    Future<double> heightWithInset(WidgetTester tester, double inset) async {
+      tester.view.padding = FakeViewPadding(bottom: inset * 3);
+      tester.view.devicePixelRatio = 3;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light(),
+          home: Scaffold(
+            bottomNavigationBar: AppBottomNav(
+              items: const [
+                AppBottomNavItem(icon: Icons.home_outlined, label: 'Início'),
+                AppBottomNavItem(icon: Icons.settings_outlined, label: 'A'),
+              ],
+              currentIndex: 0,
+              onTap: (_) {},
+            ),
           ),
         ),
-      ),
-    );
-    expect(
-      tester.getSize(find.byType(AppBottomNav)).height,
-      AppSizes.bottomNav + 34,
-    );
-    expect(AppSizes.bottomNav, 56);
+      );
+      return tester.getSize(find.byType(AppBottomNav)).height;
+    }
+
+    testWidgets('is the design-system 64 with no system inset', (tester) async {
+      expect(await heightWithInset(tester, 0), 64);
+    });
+
+    testWidgets('a small inset fits inside the 64', (tester) async {
+      expect(await heightWithInset(tester, 12), 64);
+    });
+
+    testWidgets('a home indicator shrinks the content to 48 instead of '
+        'stacking on top of 64', (tester) async {
+      expect(await heightWithInset(tester, 34), 48 + 34);
+    });
+
+    testWidgets('a tall Android nav inset still keeps the content at 48', (
+      tester,
+    ) async {
+      expect(await heightWithInset(tester, 48), 48 + 48);
+      expect(tester.takeException(), isNull);
+    });
   });
 
   testWidgets('top bar shows its title', (tester) async {
