@@ -67,8 +67,8 @@ class StatesDemoPage extends StatelessWidget {
             child: Column(
               children: [
                 for (var i = 0; i < 3; i++) ...[
-                  if (i > 0) const SizedBox(height: AppSpacing.lg),
-                  const Row(
+                  if (i > 0) SizedBox(height: AppSpacing.lg),
+                  Row(
                     children: [
                       AppSkeleton.circle(size: AppSizes.avatarLg),
                       SizedBox(width: AppSpacing.md),
@@ -76,7 +76,7 @@ class StatesDemoPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppSkeleton.line(),
+                            const AppSkeleton.line(),
                             SizedBox(height: AppSpacing.sm),
                             AppSkeleton.line(width: 140),
                           ],

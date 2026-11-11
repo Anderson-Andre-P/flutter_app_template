@@ -48,7 +48,7 @@ class _Body extends StatelessWidget {
     final c = context.colors;
     void soon() => AppSnackbar.info(context, ExamplesStrings.comingSoon);
     return ListView(
-      padding: const EdgeInsets.fromLTRB(
+      padding: EdgeInsets.fromLTRB(
         AppSpacing.xl,
         AppSpacing.x2l,
         AppSpacing.xl,
@@ -65,26 +65,26 @@ class _Body extends StatelessWidget {
             circle: true,
           ),
         ),
-        const SizedBox(height: AppSpacing.lg),
+        SizedBox(height: AppSpacing.lg),
         Text(
           activity.title,
           textAlign: TextAlign.center,
           style: AppTypography.section.copyWith(color: c.textPrimary),
         ),
-        const SizedBox(height: AppSpacing.xs),
+        SizedBox(height: AppSpacing.xs),
         Text(
           formatCents(activity.amountCents, signed: true),
           textAlign: TextAlign.center,
           style: AppTypography.display.copyWith(color: c.textPrimary),
         ),
-        const SizedBox(height: AppSpacing.md),
+        SizedBox(height: AppSpacing.md),
         const Center(
           child: AppBadge(
             label: ExamplesStrings.statusDone,
             tone: AppTone.success,
           ),
         ),
-        const SizedBox(height: AppSpacing.x2l),
+        SizedBox(height: AppSpacing.x2l),
         AppInfoCard(
           title: ExamplesStrings.infoTitle,
           rows: [
@@ -94,13 +94,13 @@ class _Body extends StatelessWidget {
             (ExamplesStrings.rowProtocol, activity.protocol),
           ],
         ),
-        const SizedBox(height: AppSpacing.x2l),
+        SizedBox(height: AppSpacing.x2l),
         AppButton(
           label: ExamplesStrings.shareReceipt,
           variant: AppButtonVariant.secondary,
           onPressed: soon,
         ),
-        const SizedBox(height: AppSpacing.md),
+        SizedBox(height: AppSpacing.md),
         AppButton(
           label: ExamplesStrings.dispute,
           variant: AppButtonVariant.ghost,

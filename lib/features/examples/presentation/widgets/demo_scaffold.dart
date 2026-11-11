@@ -17,7 +17,7 @@ class DemoScaffold extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppTopBar(title: title, showBack: true),
     body: ListView(
-      padding: const EdgeInsets.fromLTRB(
+      padding: EdgeInsets.fromLTRB(
         AppSpacing.xl,
         AppSpacing.lg,
         AppSpacing.xl,
@@ -43,13 +43,13 @@ class DemoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: AppSpacing.x3l),
+    padding: EdgeInsets.only(bottom: AppSpacing.x3l),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SectionOverline(title),
         if (caption != null) ...[
-          const SizedBox(height: AppSpacing.xs),
+          SizedBox(height: AppSpacing.xs),
           Text(
             caption!,
             style: AppTypography.caption.copyWith(
@@ -57,7 +57,7 @@ class DemoSection extends StatelessWidget {
             ),
           ),
         ],
-        const SizedBox(height: AppSpacing.md),
+        SizedBox(height: AppSpacing.md),
         child,
       ],
     ),
@@ -74,11 +74,11 @@ class DemoPairs extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     children: [
       for (var i = 0; i < children.length; i += 2) ...[
-        if (i > 0) const SizedBox(height: AppSpacing.md),
+        if (i > 0) SizedBox(height: AppSpacing.md),
         Row(
           children: [
             Expanded(child: children[i]),
-            const SizedBox(width: AppSpacing.md),
+            SizedBox(width: AppSpacing.md),
             Expanded(
               child: i + 1 < children.length
                   ? children[i + 1]
@@ -108,7 +108,7 @@ class DemoTrigger extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      padding: EdgeInsets.only(bottom: AppSpacing.md),
       child: Material(
         color: c.card,
         shape: RoundedRectangleBorder(
@@ -119,9 +119,9 @@ class DemoTrigger extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: AppSizes.listTileMin),
+            constraints: BoxConstraints(minHeight: AppSizes.listTileMin),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: AppSpacing.lg,
                 vertical: AppSpacing.md,
               ),
@@ -137,7 +137,7 @@ class DemoTrigger extends StatelessWidget {
                             color: c.textPrimary,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.xs),
+                        SizedBox(height: AppSpacing.xs),
                         Text(
                           hint,
                           style: AppTypography.caption.copyWith(

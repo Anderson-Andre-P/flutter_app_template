@@ -31,7 +31,7 @@ class BottomNavDemoPage extends StatelessWidget {
           ExamplesStrings.navSpec,
           style: AppTypography.body.copyWith(color: c.textSecondary),
         ),
-        const SizedBox(height: AppSpacing.x2l),
+        SizedBox(height: AppSpacing.x2l),
         for (final count in [3, 4, 5])
           DemoSection(
             title: ExamplesStrings.navTabs(count),
@@ -61,7 +61,7 @@ class _Sample extends StatelessWidget {
         border: Border.all(color: context.colors.border),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: AppSpacing.x3l),
+        padding: EdgeInsets.only(top: AppSpacing.x3l),
         // The sample sits inside a page: no system inset applies to it.
         child: MediaQuery.removePadding(
           context: context,

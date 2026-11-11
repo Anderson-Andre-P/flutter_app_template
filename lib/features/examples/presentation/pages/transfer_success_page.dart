@@ -32,14 +32,14 @@ class TransferSuccessPage extends StatelessWidget {
           children: [
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(
+                padding: EdgeInsets.fromLTRB(
                   AppSpacing.xl,
                   AppSpacing.x4l,
                   AppSpacing.xl,
                   AppSpacing.x2l,
                 ),
                 children: [
-                  const Center(
+                  Center(
                     child: AppIconBox(
                       icon: Icons.check,
                       tone: AppTone.success,
@@ -47,13 +47,13 @@ class TransferSuccessPage extends StatelessWidget {
                       circle: true,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x2l),
+                  SizedBox(height: AppSpacing.x2l),
                   Text(
                     ExamplesStrings.successTitle,
                     textAlign: TextAlign.center,
                     style: AppTypography.title.copyWith(color: c.textPrimary),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   Text(
                     ExamplesStrings.successSubtitle(
                       formatCents(receipt.amountCents),
@@ -62,7 +62,7 @@ class TransferSuccessPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: AppTypography.body.copyWith(color: c.textSecondary),
                   ),
-                  const SizedBox(height: AppSpacing.x3l),
+                  SizedBox(height: AppSpacing.x3l),
                   AppInfoCard(
                     title: ExamplesStrings.receiptTitle,
                     rows: [
@@ -78,7 +78,7 @@ class TransferSuccessPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(
+              padding: EdgeInsets.fromLTRB(
                 AppSpacing.xl,
                 0,
                 AppSpacing.xl,
@@ -87,7 +87,7 @@ class TransferSuccessPage extends StatelessWidget {
               child: Column(
                 children: [
                   AppButton(label: ExamplesStrings.backHome, onPressed: onHome),
-                  const SizedBox(height: AppSpacing.md),
+                  SizedBox(height: AppSpacing.md),
                   AppButton(
                     label: ExamplesStrings.shareReceipt,
                     variant: AppButtonVariant.secondary,

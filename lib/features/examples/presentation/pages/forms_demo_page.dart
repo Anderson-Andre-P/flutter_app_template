@@ -54,7 +54,7 @@ class FormsDemoPage extends StatelessWidget {
         ? null
         : DateTime.fromMillisecondsSinceEpoch(deadlineMs);
     final minutes = read(_time);
-    const gap = SizedBox(height: AppSpacing.lg);
+    final gap = SizedBox(height: AppSpacing.lg);
 
     return DemoScaffold(
       title: ExamplesStrings.formsTitle,
@@ -159,7 +159,7 @@ class FormsDemoPage extends StatelessWidget {
                           set(_deadline, d?.millisecondsSinceEpoch ?? _none),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.md),
+                  SizedBox(width: AppSpacing.md),
                   Expanded(
                     flex: 2,
                     child: AppTimeField(
@@ -263,7 +263,7 @@ class FormsDemoPage extends StatelessWidget {
                   in ExamplesStrings.formsFiles.indexed)
                 // Bit i set = file i removed.
                 if (selection.of(_files) & (1 << i) == 0) ...[
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   AppAttachmentTile(
                     name: name,
                     detail: detail,

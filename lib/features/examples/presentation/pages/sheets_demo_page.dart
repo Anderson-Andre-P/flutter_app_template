@@ -84,7 +84,7 @@ class SheetsDemoPage extends StatelessWidget {
               label: ExamplesStrings.contentField,
               hint: ExamplesStrings.contentFieldHint,
             ),
-            const SizedBox(height: AppSpacing.x2l),
+            SizedBox(height: AppSpacing.x2l),
             AppButton(
               label: ExamplesStrings.contentSave,
               onPressed: () => Navigator.of(sheet).pop(),
@@ -111,7 +111,7 @@ class SheetsDemoPage extends StatelessWidget {
                   AppChip(label: label, onSelected: (_) {}),
               ],
             ),
-            const SizedBox(height: AppSpacing.x2l),
+            SizedBox(height: AppSpacing.x2l),
             AppButton(
               label: ExamplesStrings.sheetFiltersApply,
               onPressed: () => Navigator.of(sheet).pop(),

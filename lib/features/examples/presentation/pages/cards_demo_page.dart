@@ -24,7 +24,7 @@ class CardsDemoPage extends StatelessWidget {
     void set(String key, int value) =>
         context.read<DemoSelectionBloc>().add(DemoSelected(key, value));
     void say(String text) => AppSnackbar.info(context, text);
-    const gap = SizedBox(height: AppSpacing.md);
+    final gap = SizedBox(height: AppSpacing.md);
     const image = AppMediaPlaceholder(kind: AppMediaKind.image);
 
     return DemoScaffold(

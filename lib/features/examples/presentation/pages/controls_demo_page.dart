@@ -137,7 +137,7 @@ class ControlsDemoPage extends StatelessWidget {
                 label: ExamplesStrings.fabNew,
                 onPressed: tapped,
               ),
-              const SizedBox(width: AppSpacing.lg),
+              SizedBox(width: AppSpacing.lg),
               AppFab(
                 icon: Icons.add,
                 label: ExamplesStrings.fabNew,
@@ -147,19 +147,19 @@ class ControlsDemoPage extends StatelessWidget {
             ],
           ),
         ),
-        const DemoSection(
+        DemoSection(
           title: ExamplesStrings.controlsTiles,
           caption: ExamplesStrings.controlsTilesCaption,
           child: Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: AppStatusTile(
                   value: ExamplesStrings.tileOpenValue,
                   label: ExamplesStrings.tileOpen,
                 ),
               ),
               SizedBox(width: AppSpacing.md),
-              Expanded(
+              const Expanded(
                 child: AppStatusTile(
                   value: ExamplesStrings.tileLateValue,
                   label: ExamplesStrings.tileLate,
@@ -179,7 +179,7 @@ class ControlsDemoPage extends StatelessWidget {
                 variant: AppButtonVariant.success,
                 onPressed: tapped,
               ),
-              const SizedBox(height: AppSpacing.md),
+              SizedBox(height: AppSpacing.md),
               AppDashedButton(
                 label: ExamplesStrings.addItem,
                 onPressed: tapped,
@@ -196,17 +196,17 @@ class ControlsDemoPage extends StatelessWidget {
             readOnly: true,
           ),
         ),
-        const DemoSection(
+        DemoSection(
           title: ExamplesStrings.controlsBand,
           caption: ExamplesStrings.controlsBandCaption,
           child: Column(
             children: [
-              AppAttentionBand(
+              const AppAttentionBand(
                 title: ExamplesStrings.bandTitle,
                 message: ExamplesStrings.bandMessage,
               ),
               SizedBox(height: AppSpacing.md),
-              AppAttentionBand(
+              const AppAttentionBand(
                 title: ExamplesStrings.bandAlertTitle,
                 message: ExamplesStrings.bandAlertMessage,
                 tone: AppTone.alert,

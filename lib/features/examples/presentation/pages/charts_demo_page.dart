@@ -81,7 +81,7 @@ class ChartsDemoPage extends StatelessWidget {
                       ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.md),
+                SizedBox(height: AppSpacing.md),
                 Wrap(
                   spacing: AppSpacing.md,
                   children: [
@@ -125,7 +125,7 @@ class ChartsDemoPage extends StatelessWidget {
                     child: Column(
                       children: [
                         AppProgressRing(value: value, label: label),
-                        const SizedBox(height: AppSpacing.sm),
+                        SizedBox(height: AppSpacing.sm),
                         Text(
                           label,
                           style: AppTypography.caption.copyWith(
@@ -147,7 +147,7 @@ class ChartsDemoPage extends StatelessWidget {
               children: [
                 for (final (label, value) in ExamplesStrings.goals) ...[
                   if (label != ExamplesStrings.goals.first.$1)
-                    const SizedBox(height: AppSpacing.lg),
+                    SizedBox(height: AppSpacing.lg),
                   Row(
                     children: [
                       Expanded(
@@ -166,7 +166,7 @@ class ChartsDemoPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   AppProgressBar(
                     value: value,
                     color: value < .25 ? c.alert : null,

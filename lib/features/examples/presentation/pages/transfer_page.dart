@@ -43,7 +43,7 @@ class TransferPage extends StatelessWidget {
         ),
         body: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) => ListView(
-            padding: const EdgeInsets.fromLTRB(
+            padding: EdgeInsets.fromLTRB(
               AppSpacing.xl,
               AppSpacing.lg,
               AppSpacing.xl,
@@ -55,13 +55,13 @@ class TransferPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: AppTypography.body.copyWith(color: c.textSecondary),
               ),
-              const SizedBox(height: AppSpacing.xs),
+              SizedBox(height: AppSpacing.xs),
               Text(
                 formatCents(state.amountCents),
                 textAlign: TextAlign.center,
                 style: AppTypography.display.copyWith(color: c.textPrimary),
               ),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
               Wrap(
                 alignment: WrapAlignment.center,
                 spacing: AppSpacing.sm,
@@ -77,14 +77,14 @@ class TransferPage extends StatelessWidget {
                 ],
               ),
               if (state.amountError != null) ...[
-                const SizedBox(height: AppSpacing.sm),
+                SizedBox(height: AppSpacing.sm),
                 Text(
                   state.amountError!,
                   textAlign: TextAlign.center,
                   style: AppTypography.caption.copyWith(color: c.danger),
                 ),
               ],
-              const SizedBox(height: AppSpacing.x2l),
+              SizedBox(height: AppSpacing.x2l),
               AppTextField(
                 label: ExamplesStrings.recipientLabel,
                 hint: ExamplesStrings.recipientHint,
@@ -93,14 +93,14 @@ class TransferPage extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 onChanged: (v) => bloc.add(TransferRecipientChanged(v)),
               ),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
               AppTextField(
                 label: ExamplesStrings.descriptionLabel,
                 hint: ExamplesStrings.descriptionHint,
                 textInputAction: TextInputAction.done,
                 onChanged: (v) => bloc.add(TransferDescriptionChanged(v)),
               ),
-              const SizedBox(height: AppSpacing.x2l),
+              SizedBox(height: AppSpacing.x2l),
               AppInfoCard(
                 title: ExamplesStrings.summaryTitle,
                 emphasizeLast: true,
@@ -115,7 +115,7 @@ class TransferPage extends StatelessWidget {
         ),
         bottomNavigationBar: SafeArea(
           // Room below for the primary button's elevation shadow.
-          minimum: const EdgeInsets.fromLTRB(
+          minimum: EdgeInsets.fromLTRB(
             AppSpacing.xl,
             AppSpacing.sm,
             AppSpacing.xl,

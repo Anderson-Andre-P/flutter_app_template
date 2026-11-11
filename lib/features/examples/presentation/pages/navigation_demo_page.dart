@@ -59,7 +59,7 @@ class NavigationDemoPage extends StatelessWidget {
     final step = selection.of(_step, fallback: 1);
     final pages = selection.of(_pages, fallback: 2);
     final shown = (pages * _pageSize).clamp(0, _total);
-    const gap = SizedBox(height: AppSpacing.lg);
+    final gap = SizedBox(height: AppSpacing.lg);
 
     return DemoScaffold(
       title: ExamplesStrings.navigationTitle,
@@ -78,7 +78,7 @@ class NavigationDemoPage extends StatelessWidget {
                 selected: tab,
                 onChanged: (i) => set(_tab, i),
               ),
-              const SizedBox(height: AppSpacing.md),
+              SizedBox(height: AppSpacing.md),
               Text(
                 ExamplesStrings.navTabBodies[tab],
                 style: AppTypography.body.copyWith(color: c.textSecondary),
@@ -161,7 +161,7 @@ class NavigationDemoPage extends StatelessWidget {
                       count: 3,
                       onPressed: () => say(ExamplesStrings.navBrand),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsetsDirectional.only(end: AppSpacing.md),
                       child: AppAvatar(
                         initials: ExamplesStrings.avatarInitials,
@@ -192,10 +192,10 @@ class NavigationDemoPage extends StatelessWidget {
                     bordered: false,
                     onPressed: () => say(ExamplesStrings.navMenuButton),
                   ),
-                  actions: const [
+                  actions: [
                     Padding(
                       padding: EdgeInsetsDirectional.only(end: AppSpacing.md),
-                      child: AppBadge(
+                      child: const AppBadge(
                         label: ExamplesStrings.navNewBadge,
                         tone: AppTone.primary,
                       ),
@@ -212,7 +212,7 @@ class NavigationDemoPage extends StatelessWidget {
                   borderRadius: AppRadius.brMd,
                   child: SizedBox(height: bar.preferredSize.height, child: bar),
                 ),
-                const SizedBox(height: AppSpacing.sm),
+                SizedBox(height: AppSpacing.sm),
               ],
             ],
           ),
@@ -254,7 +254,7 @@ class NavigationDemoPage extends StatelessWidget {
                 ),
               ),
               if (selection.of(_coach) == 0) ...[
-                const SizedBox(height: AppSpacing.md),
+                SizedBox(height: AppSpacing.md),
                 AppCoachMark(
                   title: ExamplesStrings.navCoachTitle,
                   message: ExamplesStrings.navCoachMessage,

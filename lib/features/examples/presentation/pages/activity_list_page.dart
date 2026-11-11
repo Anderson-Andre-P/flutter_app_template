@@ -39,7 +39,7 @@ class ActivityListPage extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(
+            padding: EdgeInsets.fromLTRB(
               AppSpacing.xl,
               AppSpacing.sm,
               AppSpacing.xl,
@@ -52,7 +52,7 @@ class ActivityListPage extends StatelessWidget {
                   hint: ExamplesStrings.searchHint,
                   onChanged: (q) => bloc.add(ActivityQueryChanged(q)),
                 ),
-                const SizedBox(height: AppSpacing.md),
+                SizedBox(height: AppSpacing.md),
                 BlocSelector<
                   ActivityListBloc,
                   ActivityListState,
@@ -133,12 +133,12 @@ class _List extends StatelessWidget {
           ),
         );
       } else {
-        children.add(const SizedBox(height: AppSpacing.sm));
+        children.add(SizedBox(height: AppSpacing.sm));
       }
       children.add(ActivityTile(activity: a, onTap: () => onOpen(a.id)));
     }
     return ListView(
-      padding: const EdgeInsets.fromLTRB(
+      padding: EdgeInsets.fromLTRB(
         AppSpacing.xl,
         AppSpacing.xs,
         AppSpacing.xl,

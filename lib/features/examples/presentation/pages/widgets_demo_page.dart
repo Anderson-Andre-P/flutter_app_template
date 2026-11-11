@@ -55,7 +55,7 @@ class WidgetsDemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     void tapped() => AppSnackbar.info(context, ExamplesStrings.tapped);
-    const gap = SizedBox(height: AppSpacing.md);
+    final gap = SizedBox(height: AppSpacing.md);
 
     return DemoScaffold(
       title: ExamplesStrings.widgetsTitle,
@@ -258,7 +258,7 @@ class WidgetsDemoPage extends StatelessWidget {
                       onPressed: tapped,
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.md),
+                  SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: AppBiometricButton(
                       icon: Icons.face_outlined,
@@ -305,24 +305,27 @@ class WidgetsDemoPage extends StatelessWidget {
             ),
           ),
         ),
-        const DemoSection(
+        DemoSection(
           title: ExamplesStrings.fields,
           child: Column(
             children: [
-              AppTextField(
+              const AppTextField(
                 label: ExamplesStrings.fieldName,
                 hint: ExamplesStrings.fieldNameHint,
                 required: true,
               ),
               SizedBox(height: AppSpacing.lg),
-              AppTextField(
+              const AppTextField(
                 label: ExamplesStrings.fieldEmail,
                 errorText: ExamplesStrings.fieldEmailError,
               ),
               SizedBox(height: AppSpacing.lg),
-              AppTextField(label: ExamplesStrings.fieldPassword, obscure: true),
+              const AppTextField(
+                label: ExamplesStrings.fieldPassword,
+                obscure: true,
+              ),
               SizedBox(height: AppSpacing.lg),
-              AppSearchField(hint: ExamplesStrings.fieldSearch),
+              const AppSearchField(hint: ExamplesStrings.fieldSearch),
             ],
           ),
         ),
@@ -382,7 +385,7 @@ class WidgetsDemoPage extends StatelessWidget {
             ],
           ),
         ),
-        const DemoSection(
+        DemoSection(
           title: ExamplesStrings.avatars,
           child: Row(
             children: [
@@ -396,7 +399,7 @@ class WidgetsDemoPage extends StatelessWidget {
                 size: AppSizes.avatarMd,
               ),
               SizedBox(width: AppSpacing.md),
-              AppAvatar(initials: ExamplesStrings.avatarInitials),
+              const AppAvatar(initials: ExamplesStrings.avatarInitials),
               SizedBox(width: AppSpacing.md),
               AppAvatar(
                 initials: ExamplesStrings.avatarInitials,
@@ -421,7 +424,7 @@ class WidgetsDemoPage extends StatelessWidget {
                 ExamplesStrings.avatarStatusLabel,
                 style: AppTypography.caption.copyWith(color: c.textSecondary),
               ),
-              const SizedBox(width: AppSpacing.lg),
+              SizedBox(width: AppSpacing.lg),
               const AppAvatarGroup(initials: ExamplesStrings.avatarGroup),
             ],
           ),
@@ -436,7 +439,7 @@ class WidgetsDemoPage extends StatelessWidget {
             children: [
               for (final n in ExamplesStrings.counterValues)
                 AppCounter(count: n),
-              const SizedBox(width: AppSpacing.sm),
+              SizedBox(width: AppSpacing.sm),
               const AppNewDot(label: ExamplesStrings.newDotLabel),
               Text(
                 ExamplesStrings.newDotLabel,
@@ -485,7 +488,7 @@ class WidgetsDemoPage extends StatelessWidget {
                   ExamplesStrings.cardTitle,
                   style: AppTypography.section.copyWith(color: c.textPrimary),
                 ),
-                const SizedBox(height: AppSpacing.xs),
+                SizedBox(height: AppSpacing.xs),
                 Text(
                   ExamplesStrings.cardBody,
                   style: AppTypography.body.copyWith(color: c.textSecondary),

@@ -63,10 +63,12 @@ class ChatDemoPage extends StatelessWidget {
                       author: ExamplesStrings.chatRafael,
                       initials: ExamplesStrings.chatRafaelInitials,
                       firstInGroup: false,
-                      attachment: const SizedBox(
+                      attachment: SizedBox(
                         width: 200,
                         height: 90,
-                        child: AppMediaPlaceholder(kind: AppMediaKind.image),
+                        child: const AppMediaPlaceholder(
+                          kind: AppMediaKind.image,
+                        ),
                       ),
                     ),
                     for (final (i, text) in sent.indexed)
@@ -76,7 +78,7 @@ class ChatDemoPage extends StatelessWidget {
                         mine: true,
                         firstInGroup: i == 0,
                       ),
-                    const SizedBox(height: AppSpacing.lg),
+                    SizedBox(height: AppSpacing.lg),
                     AppMessageComposer(
                       hint: ExamplesStrings.chatHint,
                       onSend: (text) =>
@@ -95,7 +97,7 @@ class ChatDemoPage extends StatelessWidget {
               children: [
                 for (final (i, (name, detail))
                     in ExamplesStrings.chatFileList.indexed) ...[
-                  if (i > 0) const SizedBox(height: AppSpacing.sm),
+                  if (i > 0) SizedBox(height: AppSpacing.sm),
                   AppAttachmentTile(
                     name: name,
                     detail: detail,
@@ -125,7 +127,7 @@ class ChatDemoPage extends StatelessWidget {
                   children: [
                     for (final (i, label)
                         in ExamplesStrings.mediaLabels.indexed) ...[
-                      if (i > 0) const SizedBox(width: AppSpacing.sm),
+                      if (i > 0) SizedBox(width: AppSpacing.sm),
                       Expanded(
                         child: AspectRatio(
                           aspectRatio: 1.6,
@@ -138,16 +140,16 @@ class ChatDemoPage extends StatelessWidget {
                     ],
                   ],
                 ),
-                const SizedBox(height: AppSpacing.md),
+                SizedBox(height: AppSpacing.md),
                 Row(
                   children: [
                     for (final name in ExamplesStrings.mediaFileTypes) ...[
                       AppFileBadge(fileName: name),
-                      const SizedBox(width: AppSpacing.sm),
+                      SizedBox(width: AppSpacing.sm),
                     ],
                   ],
                 ),
-                const SizedBox(height: AppSpacing.lg),
+                SizedBox(height: AppSpacing.lg),
                 AppButton(
                   label: ExamplesStrings.viewerOpen,
                   icon: Icons.fullscreen,
