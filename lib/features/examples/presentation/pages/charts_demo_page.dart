@@ -118,20 +118,22 @@ class ChartsDemoPage extends StatelessWidget {
           caption: ExamplesStrings.chartRingCaption,
           child: AppCard(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 for (final (label, value) in ExamplesStrings.chartRingItems)
-                  Column(
-                    children: [
-                      AppProgressRing(value: value, label: label),
-                      const SizedBox(height: AppSpacing.sm),
-                      Text(
-                        label,
-                        style: AppTypography.caption.copyWith(
-                          color: context.colors.textSecondary,
+                  Expanded(
+                    child: Column(
+                      children: [
+                        AppProgressRing(value: value, label: label),
+                        const SizedBox(height: AppSpacing.sm),
+                        Text(
+                          label,
+                          style: AppTypography.caption.copyWith(
+                            color: context.colors.textSecondary,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
               ],
             ),

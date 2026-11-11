@@ -407,19 +407,21 @@ class WidgetsDemoPage extends StatelessWidget {
         ),
         DemoSection(
           title: ExamplesStrings.avatarsMore,
-          child: Row(
+          child: Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.md,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               const AppAvatar(
                 initials: ExamplesStrings.avatarStatusInitials,
                 status: AppTone.success,
                 statusLabel: ExamplesStrings.avatarStatusLabel,
               ),
-              const SizedBox(width: AppSpacing.sm),
               Text(
                 ExamplesStrings.avatarStatusLabel,
                 style: AppTypography.caption.copyWith(color: c.textSecondary),
               ),
-              const Spacer(),
+              const SizedBox(width: AppSpacing.lg),
               const AppAvatarGroup(initials: ExamplesStrings.avatarGroup),
             ],
           ),
@@ -427,15 +429,15 @@ class WidgetsDemoPage extends StatelessWidget {
         DemoSection(
           title: ExamplesStrings.counters,
           caption: ExamplesStrings.countersCaption,
-          child: Row(
+          child: Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              for (final n in ExamplesStrings.counterValues) ...[
+              for (final n in ExamplesStrings.counterValues)
                 AppCounter(count: n),
-                const SizedBox(width: AppSpacing.sm),
-              ],
-              const SizedBox(width: AppSpacing.md),
-              const AppNewDot(label: ExamplesStrings.newDotLabel),
               const SizedBox(width: AppSpacing.sm),
+              const AppNewDot(label: ExamplesStrings.newDotLabel),
               Text(
                 ExamplesStrings.newDotLabel,
                 style: AppTypography.caption.copyWith(color: c.textSecondary),
