@@ -14,9 +14,11 @@ item quando ele estiver pronto.
 3. Use só tokens de `core/theme`, sem valores literais.
 4. Mostre o componente numa tela de demonstração de `lib/features/examples`.
 
-Prioridades: **P1** é o que quase todo app usa, **P2** é útil mas mais
-específico e **Web** é o que o DS indica só para web e tablet (no celular
-vira outra coisa).
+Prioridades: **P1** é o que quase todo app usa e **P2** é útil mas mais
+específico. O template é só para celular: o que o DS indica apenas para web
+e tablet (drawer, breadcrumb, paginação numerada, sidebar e tabelas) fica de
+fora, porque no celular vira outro componente (bottom sheet, "← Voltar",
+"Carregar mais", barra inferior e card de lista).
 
 ---
 
@@ -139,7 +141,6 @@ padding interno nunca fica abaixo de 14px.
 - [x] P2 · Tooltip ("Bloqueado após iniciar")
 - [x] P2 · Coach mark (dica de primeira execução, dispensada com um toque)
 - [x] P2 · Cabeçalho de bottom sheet com a ação "Limpar" (seção 19)
-- [ ] Web · Drawer lateral (no celular, usar o bottom sheet)
 
 ## Navegação e estrutura (Padrões, seções 17, 18 e 20)
 
@@ -159,10 +160,6 @@ padding interno nunca fica abaixo de 14px.
 - [x] P2 · Busca com botão de limpar, botão de filtros com contador e botão
   de ordenar
 - [x] P2 · Item reordenável com alça de arrastar e selos
-- [ ] Web · Breadcrumb (a partir do terceiro nível; no celular, "← Voltar
-  para…")
-- [ ] Web · Paginação numerada com "por página"
-- [ ] Web · Sidebar expandida e recolhida (no celular, a barra inferior)
 
 ## Dados e progresso (Componentes, seções 15 e 16; Padrões, seção 18)
 
@@ -176,10 +173,6 @@ padding interno nunca fica abaixo de 14px.
 - [x] P2 · Placeholders de mídia (imagem, diagrama, anexo) e ícones por tipo
   de arquivo (38 a 44px, raio de 10px)
 - [x] P2 · Visualizador em tela cheia com indicador de páginas
-- [ ] Web · Tabela com cabeçalho, seleção, prioridade, status, responsável,
-  prazo e ações (no celular, vira card de lista)
-- [ ] Web · Tabela zebrada com rodapé de totais e coluna de conclusão
-- [ ] Web · Estados de tabela (skeleton e vazio com "Limpar filtros")
 
 ## Feedback e estados (Padrões, seções 17 e 24)
 
