@@ -4,7 +4,8 @@ publish_to: 'none'
 version: 0.1.0+1
 
 environment:
-  sdk: ^3.11.0
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
 
 dependencies:
   flutter:
@@ -34,7 +35,7 @@ dependencies:
 
   # UI
   cached_network_image: ^3.4.1
-  flutter_screenutil: ^5.9.3
+  flutter_screenutil_plus: ^2.0.0
   flutter_svg: ^2.1.0
   google_fonts: ^8.2.1
   intl: ^0.20.2
