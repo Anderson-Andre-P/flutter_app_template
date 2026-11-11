@@ -149,7 +149,7 @@ padding interno nunca fica abaixo de 14px.
   `AppSegmentedControl` no estilo `tinted`
 - [x] P1 · Accordion (um painel aberto por vez; para conteúdo secundário)
 - [x] P1 · Stepper horizontal de 3 a 5 etapas (concluída, atual, futura)
-- [ ] P2 · Stepper vertical (o que já aconteceu, sem interação)
+- [x] P2 · Stepper vertical (o que já aconteceu, sem interação)
 - [x] P2 · Progresso por etapas compacto ("2 de 5" com barra e pontos)
 - [x] P1 · "Carregar mais" no fim de listas (no celular, substitui a
   paginação)
@@ -158,7 +158,7 @@ padding interno nunca fica abaixo de 14px.
   marca e selo "Novo"; barra escura de visualizador ("× Visualizador 2 de 4")
 - [x] P2 · Busca com botão de limpar, botão de filtros com contador e botão
   de ordenar
-- [ ] P2 · Item reordenável com alça de arrastar e selos
+- [x] P2 · Item reordenável com alça de arrastar e selos
 - [ ] Web · Breadcrumb (a partir do terceiro nível; no celular, "← Voltar
   para…")
 - [ ] Web · Paginação numerada com "por página"
@@ -166,16 +166,16 @@ padding interno nunca fica abaixo de 14px.
 
 ## Dados e progresso (Componentes, seções 15 e 16; Padrões, seção 18)
 
-- [ ] P2 · Timeline (ponto com halo, título, data e autor)
-- [ ] P2 · Barra de progresso segmentada (várias cores numa barra só)
+- [x] P2 · Timeline (ponto com halo, título, data e autor)
+- [x] P2 · Barra de progresso segmentada (várias cores numa barra só)
 - [x] P1 · Progresso circular determinado (anel com percentual; o spinner só
   quando não há percentual)
 - [x] P1 · Skeleton com shimmer que repete a forma do conteúdo (círculo para
   avatar, linhas, bloco). Shimmer de 1,2s em loop; nunca um spinner genérico
   em lista
-- [ ] P2 · Placeholders de mídia (imagem, diagrama, anexo) e ícones por tipo
+- [x] P2 · Placeholders de mídia (imagem, diagrama, anexo) e ícones por tipo
   de arquivo (38 a 44px, raio de 10px)
-- [ ] P2 · Visualizador em tela cheia com indicador de páginas
+- [x] P2 · Visualizador em tela cheia com indicador de páginas
 - [ ] Web · Tabela com cabeçalho, seleção, prioridade, status, responsável,
   prazo e ações (no celular, vira card de lista)
 - [ ] Web · Tabela zebrada com rodapé de totais e coluna de conclusão
@@ -201,11 +201,11 @@ padding interno nunca fica abaixo de 14px.
 
 ## Conversa (Componentes, seção 16)
 
-- [ ] P2 · Balões de chat: os próprios à direita em azul; os dos outros à
+- [x] P2 · Balões de chat: os próprios à direita em azul; os dos outros à
   esquerda em cinza, com avatar e nome só na primeira mensagem da sequência;
   separador de dia; hora e "lido". Cantos de 4px no lado de quem falou
-- [ ] P2 · Campo de mensagem com anexo e botão de enviar
-- [ ] P2 · Anexo em mensagem com estados enviado, enviando (progresso e
+- [x] P2 · Campo de mensagem com anexo e botão de enviar
+- [x] P2 · Anexo em mensagem com estados enviado, enviando (progresso e
   cancelar), falha ("Remover") e aguardando conexão
 
 ## Regras que podem virar automação
