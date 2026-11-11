@@ -30,7 +30,7 @@ criar componentes novos.
   empilhados e o mais novo por cima. Duração de 4s; erros ficam até serem
   dispensados; `role=status`, e `role=alert` para erros. Hoje o
   `AppSnackbar` é uma linha única que aparece embaixo.
-- [ ] **P1 · Diálogo destrutivo** (Padrões, seção 19): ícone no topo, botão
+- [x] **P1 · Diálogo destrutivo** (Padrões, seção 19): ícone no topo, botão
   destrutivo em largura total e Cancelar embaixo. Conferir o `AppDialog`.
 - [ ] **P1 · Estados de interação** (Padrões, seções 22 e 30): conferir
   padrão, pressionado (escurece 8%), foco (anel de 2px afastado 2px),
