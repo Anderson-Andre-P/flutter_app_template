@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/strings/common_strings.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_tokens.dart';
 import '../theme/app_typography.dart';
 import '../theme/theme_context.dart';
@@ -29,6 +30,8 @@ class AppTextField extends StatefulWidget {
     this.maxLength,
     this.inputFormatters,
     this.suffix,
+    this.prefix,
+    this.validated = false,
   });
 
   final String label;
@@ -59,6 +62,12 @@ class AppTextField extends StatefulWidget {
   /// [obscure] shows the eye button.
   final Widget? suffix;
 
+  /// Fixed text before the value, in its own tinted box ("ID-").
+  final String? prefix;
+
+  /// The value was checked and is fine: a green check at the end.
+  final bool validated;
+
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -70,6 +79,25 @@ class _AppTextFieldState extends State<AppTextField> {
   late final TextEditingController? _own = widget.controller == null
       ? TextEditingController(text: widget.initialValue)
       : null;
+
+  /// A check when [AppTextField.validated], a lock when disabled.
+  Widget? _statusIcon(AppColors c) {
+    final icon = !widget.enabled
+        ? Icon(
+            Icons.lock_outline,
+            size: AppSizes.iconField,
+            color: c.textDisabled,
+          )
+        : widget.validated
+        ? Icon(Icons.check, size: AppSizes.iconField, color: c.success)
+        : null;
+    return icon == null
+        ? null
+        : Padding(
+            padding: const EdgeInsetsDirectional.only(end: AppSpacing.md),
+            child: icon,
+          );
+  }
 
   @override
   void dispose() {
@@ -162,7 +190,31 @@ class _AppTextFieldState extends State<AppTextField> {
                                 ),
                               ),
                             )
-                          : null),
+                          : _statusIcon(c)),
+            prefixIcon: widget.prefix == null
+                ? null
+                : Container(
+                    margin: const EdgeInsetsDirectional.only(
+                      end: AppSpacing.md,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                    ),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: c.primarySubtle,
+                      borderRadius: const BorderRadiusDirectional.horizontal(
+                        start: Radius.circular(AppRadius.md),
+                      ),
+                    ),
+                    child: Text(
+                      widget.prefix!,
+                      style: AppTypography.body.copyWith(color: c.textMuted),
+                    ),
+                  ),
+            prefixIconConstraints: const BoxConstraints(
+              minHeight: AppSizes.field,
+            ),
           ),
         ),
       ],

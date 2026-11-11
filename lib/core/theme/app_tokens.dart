@@ -100,6 +100,9 @@ abstract final class AppSizes {
   /// Status dot on an avatar.
   static const double avatarStatus = 12;
 
+  /// File-type badge (PDF, JPG, XLS) at the start of an attachment.
+  static const double fileBadge = 40;
+
   /// Width of the numeric stepper (− value +).
   static const double numberStepper = 140;
 

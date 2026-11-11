@@ -24,6 +24,17 @@ abstract final class CommonStrings {
   static const timeHint = 'HH:MM';
   static const decrease = 'Diminuir';
   static const increase = 'Aumentar';
+  static const addTag = 'Adicionar...';
+
+  // Files
+  static const openFile = 'Abrir arquivo';
+  static const cancelUpload = 'Cancelar envio';
+  static const waitingConnection = 'Aguardando conexão';
+  static const removeFile = 'Remover';
+  static const capture = 'Capturar';
+  static String removePhoto(int n) => 'Remover foto $n';
+  static String photo(int n) => 'Foto $n';
+  static String range(String from, String to) => '$from – $to';
 
   // Feedback and states
   static String remove(String label) => 'Remover $label';

@@ -61,4 +61,45 @@ void main() {
       greaterThanOrEqualTo(44),
     );
   });
+
+  testBothThemes('named steps label each mark and snap to them', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      AppSlider.steps(
+        label: 'Prioridade',
+        steps: const ['Baixa', 'Média', 'Alta', 'Crítica'],
+        index: 2,
+        onChanged: (_) {},
+      ),
+      dark: dark,
+    );
+    expect(find.text('Baixa'), findsOneWidget);
+    expect(find.text('Crítica'), findsOneWidget);
+    // The current step is the value next to the label and its mark.
+    expect(find.text('Alta'), findsNWidgets(2));
+    expect(tester.widget<Slider>(find.byType(Slider)).divisions, 3);
+  });
+
+  testBothThemes('a range shows both ends next to the label', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      AppRangeSlider(
+        label: 'Prazo (dias)',
+        values: const RangeValues(7, 21),
+        min: 1,
+        max: 30,
+        valueLabel: (v) => '${v.round()}',
+        onChanged: (_) {},
+      ),
+      dark: dark,
+    );
+    expect(find.text(AppRangeSlider.rangeLabel('7', '21')), findsOneWidget);
+    expect(find.byType(RangeSlider), findsOneWidget);
+  });
 }

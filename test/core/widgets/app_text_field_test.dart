@@ -88,4 +88,34 @@ void main() {
     await tester.pump();
     expect(find.text(CommonStrings.counter(3, 400)), findsOneWidget);
   });
+
+  testBothThemes('a prefix sits in its own box before the text', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      const AppTextField(label: 'Código', prefix: 'ID-', initialValue: '2026'),
+      dark: dark,
+    );
+    expect(
+      tester.getCenter(find.text('ID-')).dx,
+      lessThan(tester.getCenter(find.text('2026')).dx),
+    );
+  });
+
+  testBothThemes('validated shows a green check', (tester, dark) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    await pumpApp(
+      tester,
+      const AppTextField(label: 'CPF', validated: true),
+      dark: dark,
+    );
+    expect(tester.widget<Icon>(find.byIcon(Icons.check)).color, c.success);
+  });
+
+  testWidgets('disabled shows a lock', (tester) async {
+    await pumpApp(tester, const AppTextField(label: 'Código', enabled: false));
+    expect(find.byIcon(Icons.lock_outline), findsOneWidget);
+  });
 }
