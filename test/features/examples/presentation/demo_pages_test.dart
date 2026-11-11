@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/widgets/app_radio.dart';
+import 'package:flutter_app_template/core/widgets/app_segmented_control.dart';
+import 'package:flutter_app_template/core/widgets/app_switch.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/core/widgets/app_bar_chart.dart';
 import 'package:flutter_app_template/core/widgets/app_bottom_nav.dart';
@@ -10,6 +13,7 @@ import 'package:flutter_app_template/features/examples/application/demo_selectio
 import 'package:flutter_app_template/features/examples/presentation/examples_strings.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/bottom_nav_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/controls_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/modals_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/sheets_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/states_demo_page.dart';
@@ -128,6 +132,42 @@ void main() {
     await _settle(tester);
     expect(find.text(ExamplesStrings.toastUndone), findsOneWidget);
   });
+
+  for (final dark in [false, true]) {
+    testWidgets(
+      'controls demo keeps each value in the bloc (${dark ? 'dark' : 'light'})',
+      (tester) async {
+        await _pump(tester, const ControlsDemoPage(), dark: dark);
+        AppSwitch location() => tester.widget<AppSwitch>(
+          find.widgetWithText(AppSwitch, ExamplesStrings.toggleLocation),
+        );
+        expect(location().value, isFalse);
+        await _tapVisible(tester, ExamplesStrings.toggleLocation);
+        expect(location().value, isTrue);
+
+        final boleto = ExamplesStrings.payments.last;
+        await _tapVisible(tester, boleto);
+        expect(
+          tester
+              .widget<AppRadio<int>>(find.widgetWithText(AppRadio<int>, boleto))
+              .groupValue,
+          ExamplesStrings.payments.length - 1,
+        );
+
+        final critical = ExamplesStrings.priorities.last;
+        await _tapVisible(tester, critical);
+        expect(
+          tester
+              .widget<AppSegmentedControl<int>>(
+                find.byType(AppSegmentedControl<int>),
+              )
+              .selected,
+          ExamplesStrings.priorities.length - 1,
+        );
+        expect(tester.takeException(), isNull);
+      },
+    );
+  }
 
   testWidgets('modals demo reports what was chosen', (tester) async {
     await _pump(tester, const ModalsDemoPage());

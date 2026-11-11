@@ -245,4 +245,33 @@ abstract final class ExamplesStrings {
     ('Notebook novo', .12),
   ];
   static String percent(double v) => '${(v * 100).round()}%';
+
+  // Controles
+  static const controlsTitle = 'Controles';
+  static const controlsToggles = 'Switch';
+  static const controlsTogglesCaption = 'Liga e desliga na hora, sem salvar';
+  static const toggleNotifications = 'Notificações';
+  static const toggleLocation = 'Localização';
+  static const toggleDisabled = 'Bloqueado';
+  static const controlsCheckboxes = 'Checkbox';
+  static const controlsCheckboxesCaption = 'Várias escolhas independentes';
+  static const checkTerms = 'Li e aceito os termos';
+  static const checkNews = 'Quero receber novidades';
+  static const checkDisabled = 'Indisponível';
+  static const controlsRadios = 'Radio';
+  static const controlsRadiosCaption = 'Uma escolha entre poucas opções';
+  static const payments = ['Pix', 'Cartão de crédito', 'Boleto'];
+  static const controlsSegmented = 'Controle segmentado';
+  static const controlsSegmentedCaption = 'Até quatro opções exclusivas';
+  static const priorities = ['Baixa', 'Média', 'Alta', 'Crítica'];
+  static const controlsFab = 'Ação flutuante';
+  static const controlsFabCaption = 'A ação de criar principal da tela';
+  static const fabNew = 'Novo';
+  static const controlsBand = 'Banda de atenção';
+  static const controlsBandCaption = 'Pede uma ação antes de seguir';
+  static const bandTitle = 'Ação necessária';
+  static const bandMessage =
+      'Confirme o endereço de entrega para liberar o pedido.';
+  static const bandAlertTitle = 'Revise antes de enviar';
+  static const bandAlertMessage = 'Dois campos ainda estão em branco.';
 }
