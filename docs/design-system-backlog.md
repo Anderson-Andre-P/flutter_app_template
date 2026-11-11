@@ -210,14 +210,12 @@ padding interno nunca fica abaixo de 14px.
   O texto desabilitado (2,3:1) é só decorativo.
 - [x] P1 · Teste de alvo de toque: pelo menos 44 × 44px em todo controle,
   mesmo quando o ícone tem 24px.
-- [ ] P2 · Texto escala até 200% sem cortar nem sobrepor: teste com
+- [x] P2 · Texto escala até 200% sem cortar nem sobrepor: teste com
   `textScaler` 2.0 nas telas de exemplo.
-  Sondagem de 11/11/2026: com `textScaler` 2.0 em 390px de largura, há cerca
-  de 50 estouros de `RenderFlex` em 7 dos 12 catálogos (barra inferior,
-  cartões, gráficos, controles, formulários, navegação e widgets). A maioria
-  vem de alturas fixas (chip de 32px, alturas de botão, barra inferior) e de
-  linhas sem `Flexible`/`Wrap`. Corrigir os componentes antes de ligar o
-  teste.
+  Corrigido em 11/11/2026: rótulos em `Flexible`, alturas fixas viraram
+  mínimas (botão, chip, badge) e a barra inferior limita o texto a 1,5×,
+  como as tab bars nativas. Cobertura: `text_scale_test.dart` (catálogos) e
+  o teste de fluxo que abre todas as telas a 200%.
 - [x] P2 · Tom de voz (Padrões, seção 31: claro, direto, humano; fazer e
   evitar) em `.claude/rules/`, para a IA escrever os textos das telas nesse
   tom.
