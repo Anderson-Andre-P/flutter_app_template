@@ -54,7 +54,7 @@ class SignInPage extends StatelessWidget {
               autofillHints: const [AutofillHints.email],
               onChanged: (v) => bloc.add(SignInEmailChanged(v)),
             ),
-            const SizedBox(height: AppSpacing.lg),
+            SizedBox(height: AppSpacing.lg),
             AppTextField(
               label: AuthStrings.password,
               hint: AuthStrings.passwordHint,
@@ -75,7 +75,7 @@ class SignInPage extends StatelessWidget {
                 child: const Text(AuthStrings.forgotPassword),
               ),
             ),
-            const SizedBox(height: AppSpacing.lg),
+            SizedBox(height: AppSpacing.lg),
             AppButton(
               label: AuthStrings.signIn,
               loading: state.status == FormStatus.loading,

@@ -57,7 +57,7 @@ class SignUpPage extends StatelessWidget {
               autofillHints: const [AutofillHints.name],
               onChanged: (v) => bloc.add(SignUpNameChanged(v)),
             ),
-            const SizedBox(height: AppSpacing.lg),
+            SizedBox(height: AppSpacing.lg),
             AppTextField(
               label: AuthStrings.email,
               hint: AuthStrings.emailHint,
@@ -68,7 +68,7 @@ class SignUpPage extends StatelessWidget {
               autofillHints: const [AutofillHints.email],
               onChanged: (v) => bloc.add(SignUpEmailChanged(v)),
             ),
-            const SizedBox(height: AppSpacing.lg),
+            SizedBox(height: AppSpacing.lg),
             AppTextField(
               label: AuthStrings.password,
               required: true,
@@ -78,7 +78,7 @@ class SignUpPage extends StatelessWidget {
               autofillHints: const [AutofillHints.newPassword],
               onChanged: (v) => bloc.add(SignUpPasswordChanged(v)),
             ),
-            const SizedBox(height: AppSpacing.lg),
+            SizedBox(height: AppSpacing.lg),
             AppTextField(
               label: AuthStrings.confirmPassword,
               required: true,
@@ -88,7 +88,7 @@ class SignUpPage extends StatelessWidget {
               onChanged: (v) => bloc.add(SignUpConfirmPasswordChanged(v)),
               onSubmitted: (_) => submit(),
             ),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: AppSpacing.md),
             InkWell(
               borderRadius: AppRadius.brSm,
               onTap: () =>
@@ -113,13 +113,13 @@ class SignUpPage extends StatelessWidget {
             ),
             if (state.termsError != null)
               Padding(
-                padding: const EdgeInsets.only(left: AppSpacing.md),
+                padding: EdgeInsets.only(left: AppSpacing.md),
                 child: Text(
                   state.termsError!,
                   style: AppTypography.caption.copyWith(color: c.danger),
                 ),
               ),
-            const SizedBox(height: AppSpacing.x2l),
+            SizedBox(height: AppSpacing.x2l),
             AppButton(
               label: AuthStrings.createAccount,
               loading: state.status == FormStatus.loading,

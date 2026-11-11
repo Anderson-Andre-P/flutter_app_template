@@ -26,7 +26,7 @@ class AuthScaffold extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
+          padding: EdgeInsets.fromLTRB(
             AppSpacing.xl,
             AppSpacing.x4l,
             AppSpacing.xl,
@@ -40,15 +40,15 @@ class AuthScaffold extends StatelessWidget {
                   title,
                   style: AppTypography.display.copyWith(color: c.textPrimary),
                 ),
-                const SizedBox(height: AppSpacing.sm),
+                SizedBox(height: AppSpacing.sm),
                 Text(
                   subtitle,
                   style: AppTypography.body.copyWith(color: c.textSecondary),
                 ),
-                const SizedBox(height: AppSpacing.x3l),
+                SizedBox(height: AppSpacing.x3l),
                 ...children,
                 if (footer != null) ...[
-                  const SizedBox(height: AppSpacing.x2l),
+                  SizedBox(height: AppSpacing.x2l),
                   footer!,
                 ],
               ],
