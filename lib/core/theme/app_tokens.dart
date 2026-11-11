@@ -72,6 +72,9 @@ abstract final class AppSizes {
   static const double fab = 58;
   static const double fabExtended = 52;
 
+  /// Coloured bar at the start of a status tile.
+  static const double statusBar = 4;
+
   /// Icon box at the start of an attention band.
   static const double bandIcon = 24;
   static const double progressBar = 8;

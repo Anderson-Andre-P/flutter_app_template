@@ -26,6 +26,9 @@ enum AppButtonVariant {
   /// Irreversible action — always confirmed in a dialog.
   destructive,
 
+  /// Concludes a task with a positive outcome ("Concluir", "Aprovar").
+  success,
+
   /// Destructive action at the end of a settings list (e.g. sign out):
   /// danger text on the danger-subtle surface, no border.
   destructiveTonal,
@@ -165,11 +168,22 @@ class AppButton extends StatelessWidget {
         fg: c.danger,
         border: c.danger,
       ),
+      AppButtonVariant.success => (
+        bg: pressed ? _darken(c.success) : c.success,
+        fg: c.onPrimary,
+        border: null,
+      ),
       AppButtonVariant.destructiveTonal => (
         bg: pressed ? darker(c.danger, c.dangerSubtle) : c.dangerSubtle,
         fg: c.danger,
         border: null,
       ),
     };
+  }
+
+  /// "Pressed darkens the fill by 8%" (design system, section 22).
+  static Color _darken(Color color) {
+    final hsl = HSLColor.fromColor(color);
+    return hsl.withLightness((hsl.lightness - .08).clamp(0, 1)).toColor();
   }
 }

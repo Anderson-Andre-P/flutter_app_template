@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
+import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/widgets/app_text_field.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -45,5 +47,30 @@ void main() {
     );
     await tester.enterText(find.byType(TextField), 'a@b.co');
     expect(value, 'a@b.co');
+  });
+
+  testBothThemes('read-only shows the read-only seal on the tinted fill', (
+    tester,
+    dark,
+  ) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    await pumpApp(
+      tester,
+      const AppTextField(label: 'Código', readOnly: true),
+      dark: dark,
+    );
+    expect(find.text(CommonStrings.readOnlySeal), findsOneWidget);
+    final field = tester.widget<TextField>(find.byType(TextField));
+    expect(field.decoration!.fillColor, c.primarySubtle);
+  });
+
+  testWidgets('initialValue fills the field without a controller', (
+    tester,
+  ) async {
+    await pumpApp(
+      tester,
+      const AppTextField(label: 'Código', initialValue: 'PED-1042'),
+    );
+    expect(find.text('PED-1042'), findsOneWidget);
   });
 }

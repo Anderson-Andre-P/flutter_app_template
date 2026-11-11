@@ -12,6 +12,7 @@ class AppTextField extends StatefulWidget {
     super.key,
     required this.label,
     this.controller,
+    this.initialValue,
     this.hint,
     this.errorText,
     this.obscure = false,
@@ -27,6 +28,9 @@ class AppTextField extends StatefulWidget {
 
   final String label;
   final TextEditingController? controller;
+
+  /// Starting text when no [controller] is given (e.g. a read-only value).
+  final String? initialValue;
   final String? hint;
   final String? errorText;
   final bool obscure;
@@ -46,6 +50,17 @@ class AppTextField extends StatefulWidget {
 class _AppTextFieldState extends State<AppTextField> {
   late bool _hidden = widget.obscure;
 
+  /// Owned only when the caller gave no controller.
+  late final TextEditingController? _own = widget.controller == null
+      ? TextEditingController(text: widget.initialValue)
+      : null;
+
+  @override
+  void dispose() {
+    _own?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
@@ -59,7 +74,7 @@ class _AppTextFieldState extends State<AppTextField> {
         ),
         const SizedBox(height: AppSpacing.sm),
         TextField(
-          controller: widget.controller,
+          controller: widget.controller ?? _own,
           obscureText: _hidden,
           readOnly: widget.readOnly,
           enabled: widget.enabled,
@@ -79,6 +94,8 @@ class _AppTextFieldState extends State<AppTextField> {
                 ? c.sunken
                 : widget.errorText != null
                 ? c.dangerSubtle
+                : widget.readOnly
+                ? c.primarySubtle
                 : null,
             constraints: const BoxConstraints(minHeight: AppSizes.field),
             suffixIcon: widget.obscure
@@ -94,6 +111,19 @@ class _AppTextFieldState extends State<AppTextField> {
                       color: c.textMuted,
                     ),
                     onPressed: () => setState(() => _hidden = !_hidden),
+                  )
+                : widget.readOnly
+                ? Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      end: AppSpacing.md,
+                    ),
+                    child: Center(
+                      widthFactor: 1,
+                      child: Text(
+                        CommonStrings.readOnlySeal,
+                        style: AppTypography.micro.copyWith(color: c.textMuted),
+                      ),
+                    ),
                   )
                 : null,
           ),

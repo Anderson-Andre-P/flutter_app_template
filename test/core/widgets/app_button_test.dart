@@ -86,4 +86,28 @@ void main() {
       expect(find.text(v.name), findsOneWidget);
     }
   });
+
+  testBothThemes('success is a solid green button', (tester, dark) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    await pumpApp(
+      tester,
+      AppButton(
+        label: 'Concluir',
+        variant: AppButtonVariant.success,
+        onPressed: () {},
+      ),
+      dark: dark,
+    );
+    final material = tester.widget<Material>(
+      find.descendant(
+        of: find.byType(AppButton),
+        matching: find.byType(Material),
+      ),
+    );
+    expect(material.color, c.success);
+    expect(
+      tester.widget<Text>(find.text('Concluir')).style!.color,
+      c.onPrimary,
+    );
+  });
 }
