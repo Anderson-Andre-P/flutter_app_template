@@ -41,17 +41,19 @@ void main() {
     }
   });
 
-  testBothThemes('line chart labels its lowest and highest points', (
+  testBothThemes('line chart labels the value of every point', (
     tester,
     dark,
   ) async {
     final labelled = <double>[];
+    const values = [84.2, 83.1, 83.6, 81.9, 80.7, 79.4];
     await pumpApp(
       tester,
       SizedBox(
         width: 300.w,
         child: AppLineChart(
-          values: const [14, 12, 10.4, 16, 20, 18],
+          values: values,
+          startAtZero: false,
           valueLabel: (v) {
             labelled.add(v);
             return '$v';
@@ -60,9 +62,17 @@ void main() {
       ),
       dark: dark,
     );
-    expect(labelled, containsAll([10.4, 20.0]));
-    expect(labelled.toSet(), {10.4, 20.0});
+    expect(labelled.toSet(), values.toSet());
     expect(tester.takeException(), isNull);
+  });
+
+  test('line chart scale fits the values when it does not start at zero', () {
+    const values = [84.2, 83.1, 79.4];
+    final (low, high) = AppLineChart.range(values, startAtZero: false);
+    expect(low, lessThan(79.4));
+    expect(low, greaterThan(70));
+    expect(high, greaterThan(84.2));
+    expect(AppLineChart.range(values), (0.0, 84.2));
   });
 
   testBothThemes('donut shows the centre text and a legend entry per '

@@ -9,9 +9,10 @@ import '../theme/theme_context.dart';
 /// The last point is marked. Optional [labels] go under the line, evenly
 /// spaced.
 ///
-/// With [valueLabel], the lowest and the highest points are marked too and
-/// carry their value, formatted by it ("10,4"), as in the design system's
-/// line chart (section 37).
+/// With [valueLabel], every point is marked and carries its value, formatted
+/// by it ("82,4"), as in the design system's line chart (section 37).
+/// [startAtZero] `false` fits the scale to the values instead: a weight that
+/// moves from 84 to 79 kg would be an almost flat line on a 0 to 84 scale.
 class AppLineChart extends StatelessWidget {
   const AppLineChart({
     super.key,
@@ -19,12 +20,34 @@ class AppLineChart extends StatelessWidget {
     this.labels = const [],
     this.height,
     this.valueLabel,
+    this.startAtZero = true,
   });
 
   final List<double> values;
   final List<String> labels;
   final double? height;
   final String Function(double value)? valueLabel;
+  final bool startAtZero;
+
+  /// Room left above and below the values when the scale fits them, as a
+  /// share of their spread.
+  static const _fitMargin = .2;
+
+  /// The bottom and top of the scale for [values].
+  static (double, double) range(
+    List<double> values, {
+    bool startAtZero = true,
+  }) {
+    if (values.isEmpty) return (0, 0);
+    final high = values.reduce((a, b) => a > b ? a : b);
+    if (startAtZero) return (0, high < 0 ? 0 : high);
+    final low = values.reduce((a, b) => a < b ? a : b);
+    // One value, or all equal: centre the line.
+    final margin = high == low
+        ? (high.abs() + 1) * _fitMargin
+        : (high - low) * _fitMargin;
+    return (low - margin, high + margin);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +62,7 @@ class AppLineChart extends StatelessWidget {
           child: CustomPaint(
             painter: _LinePainter(
               values,
+              range(values, startAtZero: startAtZero),
               c,
               valueLabel,
               AppTypography.microBold.copyWith(color: c.textSecondary),
@@ -69,6 +93,7 @@ class AppLineChart extends StatelessWidget {
 class _LinePainter extends CustomPainter {
   _LinePainter(
     this.values,
+    this.range,
     this.colors,
     this.valueLabel,
     this.labelStyle,
@@ -76,6 +101,7 @@ class _LinePainter extends CustomPainter {
   );
 
   final List<double> values;
+  final (double, double) range;
   final AppColors colors;
   final String Function(double value)? valueLabel;
   final TextStyle labelStyle;
@@ -87,7 +113,8 @@ class _LinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (values.isEmpty) return;
-    final max = values.fold<double>(0, (m, v) => v > m ? v : m);
+    final (low, high) = range;
+    final span = high - low;
     final format = valueLabel;
     TextPainter? text(double v) => format == null
         ? null
@@ -96,8 +123,11 @@ class _LinePainter extends CustomPainter {
             textDirection: TextDirection.ltr,
             textScaler: textScaler,
           )..layout());
-    // Room above the highest point and below the lowest for their values.
-    final room = format == null ? 0.0 : text(max)!.height + AppSpacing.xs;
+    // Room above the points for their values (and as much below, so the
+    // line stays centred).
+    final room = format == null
+        ? 0.0
+        : text(values.first)!.height + AppSpacing.xs;
     final top = _dot + _stroke + room;
     final usable = size.height - top * 2;
     // Inset by the marker so the last point is never clipped at the edge.
@@ -107,7 +137,7 @@ class _LinePainter extends CustomPainter {
       values.length == 1
           ? size.width / 2
           : side + width * i / (values.length - 1),
-      top + usable * (1 - (max == 0 ? 0 : values[i] / max)),
+      top + usable * (1 - (span == 0 ? 0 : (values[i] - low) / span)),
     );
 
     final line = Path()..moveTo(at(0).dx, at(0).dy);
@@ -135,30 +165,23 @@ class _LinePainter extends CustomPainter {
       ..drawCircle(p, _dot, Paint()..color = colors.primary);
     mark(at(values.length - 1));
     if (format == null) return;
-    var low = 0;
-    var high = 0;
-    for (var i = 1; i < values.length; i++) {
-      if (values[i] < values[low]) low = i;
-      if (values[i] > values[high]) high = i;
-    }
-    for (final (i, above) in [(high, true), (low, false)]) {
+    final gap = _dot + _stroke + AppSpacing.xxs;
+    for (var i = 0; i < values.length; i++) {
       final p = at(i);
       mark(p);
       final painter = text(values[i])!;
-      final gap = _dot + _stroke + AppSpacing.xxs;
       final x = (p.dx - painter.width / 2).clamp(
         0.0,
         size.width - painter.width,
       );
-      final y = above ? p.dy - gap - painter.height : p.dy + gap;
-      painter.paint(canvas, Offset(x, y));
-      if (low == high) break;
+      painter.paint(canvas, Offset(x, p.dy - gap - painter.height));
     }
   }
 
   @override
   bool shouldRepaint(_LinePainter old) =>
       old.values != values ||
+      old.range != range ||
       old.colors != colors ||
       old.valueLabel != valueLabel ||
       old.labelStyle != labelStyle ||
