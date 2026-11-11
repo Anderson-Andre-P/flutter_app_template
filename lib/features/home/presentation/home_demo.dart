@@ -74,6 +74,12 @@ enum HomeDemo {
     HomeStrings.toasts,
     HomeStrings.toastsHint,
   ),
+  forms(
+    HomeDemoGroup.components,
+    Icons.edit_calendar_outlined,
+    HomeStrings.forms,
+    HomeStrings.formsHint,
+  ),
   controls(
     HomeDemoGroup.components,
     Icons.toggle_on_outlined,

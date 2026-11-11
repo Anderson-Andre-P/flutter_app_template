@@ -40,4 +40,6 @@ abstract final class HomeStrings {
   static const chartsHint = 'Barras, linha, rosca e progresso';
   static const controls = 'Controles';
   static const controlsHint = 'Switch, checkbox, radio e FAB';
+  static const forms = 'Formulários';
+  static const formsHint = 'Select, data, hora e slider';
 }
