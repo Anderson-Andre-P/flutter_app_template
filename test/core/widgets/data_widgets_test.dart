@@ -98,6 +98,65 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  test('bar chart axis steps are round numbers from zero', () {
+    expect(AppBarChart.ticks(3.6), [0, 1, 2, 3, 4]);
+    expect(AppBarChart.ticks(7), [0, 2, 4, 6, 8]);
+    expect(AppBarChart.ticks(0.9), [0, .25, .5, .75, 1]);
+    expect(AppBarChart.ticks(0), [0]);
+  });
+
+  testBothThemes('bar chart with an axis labels its steps on the left', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      SizedBox(
+        width: 300.w,
+        child: AppBarChart(
+          values: const [2, 3.5],
+          labels: const ['S', 'T'],
+          axisLabel: (v) => '${v.round()}',
+        ),
+      ),
+      dark: dark,
+    );
+    for (final tick in ['0', '1', '2', '3', '4']) {
+      expect(find.text(tick), findsOneWidget);
+    }
+    final axis = tester.getRect(find.text('4'));
+    final bar = tester.getRect(find.byKey(const ValueKey('bar-0')));
+    expect(axis.right, lessThanOrEqualTo(bar.left));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('the goal label never covers a bar value', (tester) async {
+    await pumpApp(
+      tester,
+      SizedBox(
+        width: 300.w,
+        child: AppBarChart(
+          values: const [2, 2.9, 3.1],
+          labels: const ['S', 'T', 'Q'],
+          valueLabels: const ['2,0', '2,9', '3,1'],
+          goal: 3,
+          goalLabel: 'meta',
+          axisLabel: (v) => '${v.round()}',
+        ),
+      ),
+    );
+    final goal = tester.getRect(find.text('meta'));
+    for (final value in ['2,0', '2,9', '3,1']) {
+      expect(
+        goal.overlaps(tester.getRect(find.text(value))),
+        isFalse,
+        reason: value,
+      );
+    }
+    final lastBar = tester.getRect(find.byKey(const ValueKey('bar-2')));
+    expect(goal.left, greaterThanOrEqualTo(lastBar.right));
+  });
+
   testWidgets('a goal above every value grows the scale', (tester) async {
     await pumpApp(
       tester,
