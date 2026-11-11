@@ -112,6 +112,7 @@ class ChartsDemoPage extends StatelessWidget {
               highlightIndex: DateTime.now().weekday - 1,
               goal: ExamplesStrings.chartGoalValue,
               goalLabel: ExamplesStrings.chartGoal,
+              axisLabel: ExamplesStrings.axisValue,
             ),
           ),
         ),

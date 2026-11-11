@@ -684,6 +684,10 @@ abstract final class ExamplesStrings {
       'Peso em kg mês a mês; a escala acompanha os valores';
   static const chartWeightValues = [84.2, 83.1, 83.6, 81.9, 80.7, 79.4];
   static String decimal(double v) => v.toStringAsFixed(1).replaceAll('.', ',');
+
+  /// Chart axis step: "2" for a whole number, "2,5" otherwise.
+  static String axisValue(double v) =>
+      v == v.roundToDouble() ? '${v.round()}' : decimal(v);
   static const countdown = 'Cronômetro';
   static const countdownCaption = 'Tempo que falta; o anel esvazia';
   static const countdownLabel = 'Descanso';
