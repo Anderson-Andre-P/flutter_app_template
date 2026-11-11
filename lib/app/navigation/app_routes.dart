@@ -18,6 +18,7 @@ abstract final class AppRoutes {
   static const sheets = '/inicio/bottom-sheets';
   static const toasts = '/inicio/toasts';
   static const charts = '/inicio/graficos';
+  static const controls = '/inicio/controles';
 
   /// Outside the shell: the confirmation has no bottom navigation.
   static const transferDone = '/transferencia-enviada';

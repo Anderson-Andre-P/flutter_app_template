@@ -12,6 +12,7 @@ import 'package:flutter_app_template/features/examples/presentation/pages/activi
 import 'package:flutter_app_template/features/examples/presentation/pages/dashboard_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/bottom_nav_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/controls_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/modals_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/sheets_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/states_demo_page.dart';
@@ -91,6 +92,7 @@ void main() {
       HomeDemo.sheets: SheetsDemoPage,
       HomeDemo.toasts: ToastsDemoPage,
       HomeDemo.charts: ChartsDemoPage,
+      HomeDemo.controls: ControlsDemoPage,
     };
     expect(screens.keys, unorderedEquals(HomeDemo.values));
     for (final MapEntry(key: demo, value: page) in screens.entries) {

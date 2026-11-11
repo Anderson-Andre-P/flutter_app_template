@@ -38,4 +38,6 @@ abstract final class HomeStrings {
   static const toastsHint = 'Tons e variações';
   static const charts = 'Gráficos';
   static const chartsHint = 'Barras, linha, rosca e progresso';
+  static const controls = 'Controles';
+  static const controlsHint = 'Switch, checkbox, radio e FAB';
 }
