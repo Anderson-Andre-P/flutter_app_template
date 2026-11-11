@@ -45,4 +45,32 @@ void main() {
       expect(dayLabel(DateTime(2026, 3, 10), now: now), '10 mar');
     });
   });
+
+  group('dates and times typed in fields', () {
+    test('formatMonthYear names the month in full', () {
+      expect(formatMonthYear(DateTime(2026, 10)), 'Outubro 2026');
+      expect(formatMonthYear(DateTime(2027, 3)), 'Março 2027');
+    });
+
+    test('formatNumericDate pads day and month', () {
+      expect(formatNumericDate(DateTime(2026, 3, 9)), '09/03/2026');
+    });
+
+    test('parseNumericDate reads DD/MM/AAAA', () {
+      expect(parseNumericDate('23/10/2026'), DateTime(2026, 10, 23));
+    });
+
+    test('parseNumericDate rejects impossible or partial dates', () {
+      expect(parseNumericDate('31/02/2026'), isNull);
+      expect(parseNumericDate('12/2026'), isNull);
+      expect(parseNumericDate(''), isNull);
+    });
+
+    test('formatTime and parseTime use 24h HH:MM', () {
+      expect(formatTime(9, 5), '09:05');
+      expect(parseTime('14:30'), (hour: 14, minute: 30));
+      expect(parseTime('24:00'), isNull);
+      expect(parseTime('7:3'), isNull);
+    });
+  });
 }

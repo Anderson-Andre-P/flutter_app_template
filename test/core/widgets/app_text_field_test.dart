@@ -73,4 +73,19 @@ void main() {
     );
     expect(find.text('PED-1042'), findsOneWidget);
   });
+
+  testBothThemes('a multi-line field with maxLength counts characters', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      const AppTextField(label: 'Descrição', minLines: 3, maxLength: 400),
+      dark: dark,
+    );
+    expect(find.text(CommonStrings.counter(0, 400)), findsOneWidget);
+    await tester.enterText(find.byType(TextField), 'Olá');
+    await tester.pump();
+    expect(find.text(CommonStrings.counter(3, 400)), findsOneWidget);
+  });
 }

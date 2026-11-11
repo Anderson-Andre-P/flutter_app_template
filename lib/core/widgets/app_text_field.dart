@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../constants/strings/common_strings.dart';
 import '../theme/app_tokens.dart';
@@ -24,6 +25,10 @@ class AppTextField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.autofillHints,
+    this.minLines,
+    this.maxLength,
+    this.inputFormatters,
+    this.suffix,
   });
 
   final String label;
@@ -42,6 +47,17 @@ class AppTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
   final Iterable<String>? autofillHints;
+
+  /// More than 1 makes a text area that grows with the text.
+  final int? minLines;
+
+  /// Limits the text and shows the `0/400` counter below, on the right.
+  final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
+
+  /// Trailing widget inside the field (e.g. a calendar button). Ignored when
+  /// [obscure] shows the eye button.
+  final Widget? suffix;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -78,11 +94,29 @@ class _AppTextFieldState extends State<AppTextField> {
           obscureText: _hidden,
           readOnly: widget.readOnly,
           enabled: widget.enabled,
-          keyboardType: widget.keyboardType,
           textInputAction: widget.textInputAction,
           onChanged: widget.onChanged,
           onSubmitted: widget.onSubmitted,
           autofillHints: widget.autofillHints,
+          minLines: widget.minLines,
+          maxLines: (widget.minLines ?? 1) > 1 ? null : 1,
+          keyboardType: (widget.minLines ?? 1) > 1
+              ? TextInputType.multiline
+              : widget.keyboardType,
+          maxLength: widget.maxLength,
+          inputFormatters: widget.inputFormatters,
+          buildCounter:
+              (
+                context, {
+                required currentLength,
+                required isFocused,
+                required maxLength,
+              }) => maxLength == null
+              ? null
+              : Text(
+                  CommonStrings.counter(currentLength, maxLength),
+                  style: AppTypography.caption.copyWith(color: c.textMuted),
+                ),
           style: AppTypography.body.copyWith(
             color: widget.enabled ? c.textPrimary : c.textDisabled,
           ),
@@ -112,20 +146,23 @@ class _AppTextFieldState extends State<AppTextField> {
                     ),
                     onPressed: () => setState(() => _hidden = !_hidden),
                   )
-                : widget.readOnly
-                ? Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      end: AppSpacing.md,
-                    ),
-                    child: Center(
-                      widthFactor: 1,
-                      child: Text(
-                        CommonStrings.readOnlySeal,
-                        style: AppTypography.micro.copyWith(color: c.textMuted),
-                      ),
-                    ),
-                  )
-                : null,
+                : widget.suffix ??
+                      (widget.readOnly
+                          ? Padding(
+                              padding: const EdgeInsetsDirectional.only(
+                                end: AppSpacing.md,
+                              ),
+                              child: Center(
+                                widthFactor: 1,
+                                child: Text(
+                                  CommonStrings.readOnlySeal,
+                                  style: AppTypography.micro.copyWith(
+                                    color: c.textMuted,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : null),
           ),
         ),
       ],

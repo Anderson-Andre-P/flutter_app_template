@@ -8,6 +8,22 @@ abstract final class CommonStrings {
   static const ok = 'Entendi';
   static const close = 'Fechar';
   static const readOnlySeal = 'SOMENTE LEITURA';
+
+  // Form fields
+  static String counter(int length, int max) => '$length/$max';
+  static const selectHint = 'Selecione uma opção';
+  static const searchHint = 'Buscar';
+  static const noResults = 'Nenhum resultado';
+  static const apply = 'Aplicar';
+  static const previousMonth = 'Mês anterior';
+  static const nextMonth = 'Próximo mês';
+  static const weekdayInitials = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  static const chooseDate = 'Escolher data';
+  static const chooseTime = 'Escolher horário';
+  static const dateHint = 'DD/MM/AAAA';
+  static const timeHint = 'HH:MM';
+  static const decrease = 'Diminuir';
+  static const increase = 'Aumentar';
   static const retry = 'Tentar novamente';
   static const genericError = 'Algo deu errado. Tente de novo em instantes.';
   static const offline = 'Sem conexão. Tente de novo em instantes.';

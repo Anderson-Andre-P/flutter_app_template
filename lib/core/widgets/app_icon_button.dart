@@ -43,7 +43,7 @@ class AppIconButton extends StatelessWidget {
             borderRadius: AppRadius.brMd,
             surface: (state) => (
               color: !enabled
-                  ? c.sunken
+                  ? (bordered ? c.sunken : Colors.transparent)
                   : state.pressed
                   ? c.primarySubtle
                   : bordered

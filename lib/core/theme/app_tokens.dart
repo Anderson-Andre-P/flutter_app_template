@@ -80,6 +80,14 @@ abstract final class AppSizes {
   /// Coloured bar at the start of a status tile.
   static const double statusBar = 4;
 
+  /// Slider track thickness and handle diameter; the handle's touch
+  /// target is [minTouchTarget].
+  static const double sliderTrack = 6;
+  static const double sliderThumb = 22;
+
+  /// Width of the numeric stepper (− value +).
+  static const double numberStepper = 140;
+
   /// Icon box at the start of an attention band.
   static const double bandIcon = 24;
   static const double progressBar = 8;
