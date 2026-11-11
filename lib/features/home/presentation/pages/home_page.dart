@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(
+          padding: EdgeInsets.fromLTRB(
             AppSpacing.xl,
             AppSpacing.x2l,
             AppSpacing.xl,
@@ -43,20 +43,20 @@ class HomePage extends StatelessWidget {
               HomeStrings.greeting(name.split(' ').first),
               style: AppTypography.body.copyWith(color: c.textSecondary),
             ),
-            const SizedBox(height: AppSpacing.xs),
+            SizedBox(height: AppSpacing.xs),
             Text(
               HomeStrings.title,
               style: AppTypography.display.copyWith(color: c.textPrimary),
             ),
-            const SizedBox(height: AppSpacing.sm),
+            SizedBox(height: AppSpacing.sm),
             Text(
               HomeStrings.subtitle,
               style: AppTypography.body.copyWith(color: c.textSecondary),
             ),
-            const SizedBox(height: AppSpacing.x2l),
+            SizedBox(height: AppSpacing.x2l),
             for (final (group, title) in _groups) ...[
               SectionOverline(title),
-              const SizedBox(height: AppSpacing.md),
+              SizedBox(height: AppSpacing.md),
               _Grid(
                 demos: [
                   for (final d in HomeDemo.values)
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                 ],
                 onOpen: onOpenDemo,
               ),
-              const SizedBox(height: AppSpacing.x3l),
+              SizedBox(height: AppSpacing.x3l),
             ],
           ],
         ),
@@ -83,7 +83,7 @@ class _Grid extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     children: [
       for (var i = 0; i < demos.length; i += 2) ...[
-        if (i > 0) const SizedBox(height: AppSpacing.md),
+        if (i > 0) SizedBox(height: AppSpacing.md),
         // IntrinsicHeight keeps both cards of a row the same height
         // whatever the text scale, without a fixed aspect ratio.
         IntrinsicHeight(
@@ -91,7 +91,7 @@ class _Grid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(child: _DemoCard(demos[i], onOpen)),
-              const SizedBox(width: AppSpacing.md),
+              SizedBox(width: AppSpacing.md),
               Expanded(
                 child: i + 1 < demos.length
                     ? _DemoCard(demos[i + 1], onOpen)
@@ -121,12 +121,12 @@ class _DemoCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppIconBox(icon: demo.icon),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: AppSpacing.lg),
           Text(
             demo.title,
             style: AppTypography.label.copyWith(color: c.textPrimary),
           ),
-          const SizedBox(height: AppSpacing.xs),
+          SizedBox(height: AppSpacing.xs),
           Text(
             demo.hint,
             style: AppTypography.caption.copyWith(color: c.textMuted),
