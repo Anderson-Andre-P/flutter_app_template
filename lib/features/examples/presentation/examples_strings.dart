@@ -201,6 +201,35 @@ abstract final class ExamplesStrings {
   static const groupContinue = 'Continuar';
   static const groupDelete = 'Excluir este registro';
   static const groupKeep = 'Manter';
+  static const buttonGroupSegmented = 'Button group';
+  static const buttonGroupSegmentedCaption =
+      'Segmentos unidos; o ativo fica marcado';
+  static const views = ['Lista', 'Grade', 'Mapa', 'Calendário'];
+  static const viewList = 'Lista';
+  static const viewGrid = 'Grade';
+  static const viewMap = 'Mapa';
+  static const splitExport = 'Exportar';
+  static const splitMore = 'Outros formatos';
+  static const socialTitle = 'Login social';
+  static const socialCaption =
+      'Ícone em caixa neutra e rótulo sempre "Continuar com"';
+  static const socialProviders = [
+    ('G', 'Continuar com Google'),
+    ('A', 'Continuar com Apple'),
+    ('M', 'Continuar com Microsoft'),
+    ('S', 'Continuar com SSO corporativo'),
+  ];
+  static const touchId = 'Touch ID';
+  static const faceId = 'Face ID';
+  static const paymentTitle = 'Pagamento';
+  static const paymentCaption =
+      'O método escolhido ganha borda primária; o botão repete o valor';
+  static const paymentMethods = [
+    ('Cartão de crédito', 'Visa •••• 4021 · venc. 09/29'),
+    ('Pix', 'Confirmação imediata'),
+    ('Boleto bancário', 'Vence em 3 dias úteis'),
+  ];
+  static const payAmount = 'Pagar R\$ 828,00';
   static const fields = 'Campos';
   static const fieldName = 'Nome';
   static const fieldNameHint = 'Seu nome completo';

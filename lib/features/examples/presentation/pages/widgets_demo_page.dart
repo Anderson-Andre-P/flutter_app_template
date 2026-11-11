@@ -16,6 +16,11 @@ import '../../../../core/widgets/app_list_tile.dart';
 import '../../../../core/widgets/app_search_field.dart';
 import '../../../../core/widgets/app_snackbar.dart';
 import '../../../../core/widgets/app_text_field.dart';
+import '../../../../core/widgets/app_biometric_button.dart';
+import '../../../../core/widgets/app_option_card.dart';
+import '../../../../core/widgets/app_segmented_control.dart';
+import '../../../../core/widgets/app_social_button.dart';
+import '../../../../core/widgets/app_split_button.dart';
 import '../../application/demo_selection_bloc.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
@@ -172,6 +177,130 @@ class WidgetsDemoPage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.buttonGroupSegmented,
+          caption: ExamplesStrings.buttonGroupSegmentedCaption,
+          child: BlocSelector<DemoSelectionBloc, DemoSelectionState, int>(
+            selector: (s) => s.of('views'),
+            builder: (context, selected) {
+              void pick(int i) => context.read<DemoSelectionBloc>().add(
+                DemoSelected('views', i),
+              );
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppSegmentedControl<int>(
+                    style: AppSegmentedStyle.joined,
+                    segments: [
+                      for (final (i, label) in ExamplesStrings.views.indexed)
+                        AppSegment(value: i, label: label),
+                    ],
+                    selected: selected,
+                    onChanged: pick,
+                  ),
+                  gap,
+                  AppSegmentedControl<int>(
+                    style: AppSegmentedStyle.joined,
+                    segments: const [
+                      AppSegment(
+                        value: 0,
+                        label: ExamplesStrings.viewList,
+                        icon: Icons.view_list_outlined,
+                        iconOnly: true,
+                      ),
+                      AppSegment(
+                        value: 1,
+                        label: ExamplesStrings.viewGrid,
+                        icon: Icons.grid_view,
+                        iconOnly: true,
+                      ),
+                      AppSegment(
+                        value: 2,
+                        label: ExamplesStrings.viewMap,
+                        icon: Icons.map_outlined,
+                        iconOnly: true,
+                      ),
+                    ],
+                    selected: selected.clamp(0, 2),
+                    onChanged: pick,
+                  ),
+                  gap,
+                  AppSplitButton(
+                    label: ExamplesStrings.splitExport,
+                    menuLabel: ExamplesStrings.splitMore,
+                    onPressed: tapped,
+                    onMenu: tapped,
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.socialTitle,
+          caption: ExamplesStrings.socialCaption,
+          child: Column(
+            children: [
+              for (final (mark, label) in ExamplesStrings.socialProviders) ...[
+                AppSocialButton(mark: mark, label: label, onPressed: tapped),
+                gap,
+              ],
+              Row(
+                children: [
+                  Expanded(
+                    child: AppBiometricButton(
+                      icon: Icons.fingerprint,
+                      label: ExamplesStrings.touchId,
+                      onPressed: tapped,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: AppBiometricButton(
+                      icon: Icons.face_outlined,
+                      label: ExamplesStrings.faceId,
+                      onPressed: tapped,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.paymentTitle,
+          caption: ExamplesStrings.paymentCaption,
+          child: BlocSelector<DemoSelectionBloc, DemoSelectionState, int>(
+            selector: (s) => s.of('payment', fallback: 1),
+            builder: (context, selected) => Column(
+              children: [
+                for (final (i, (title, subtitle))
+                    in ExamplesStrings.paymentMethods.indexed) ...[
+                  AppOptionCard<int>(
+                    value: i,
+                    groupValue: selected,
+                    icon: const [
+                      Icons.credit_card,
+                      Icons.pix,
+                      Icons.receipt_long_outlined,
+                    ][i],
+                    title: title,
+                    subtitle: subtitle,
+                    onChanged: (v) => context.read<DemoSelectionBloc>().add(
+                      DemoSelected('payment', v),
+                    ),
+                  ),
+                  gap,
+                ],
+                AppButton(
+                  label: ExamplesStrings.payAmount,
+                  icon: Icons.lock_outline,
+                  onPressed: tapped,
+                ),
+              ],
+            ),
           ),
         ),
         const DemoSection(

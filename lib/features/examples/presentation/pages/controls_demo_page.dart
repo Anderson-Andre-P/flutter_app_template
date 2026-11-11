@@ -121,7 +121,7 @@ class ControlsDemoPage extends StatelessWidget {
           child: AppSegmentedControl<int>(
             segments: [
               for (final (i, label) in ExamplesStrings.priorities.indexed)
-                (value: i, label: label),
+                AppSegment(value: i, label: label),
             ],
             selected: selection.of(_priority, fallback: 1),
             onChanged: (v) => set(_priority, v),
