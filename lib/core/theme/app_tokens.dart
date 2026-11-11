@@ -20,6 +20,8 @@ abstract final class AppSpacing {
 /// Corner radius grows with the element: badge < chip < field/button < card
 /// < sheet/modal. Nested radius = parent radius − parent padding.
 abstract final class AppRadius {
+  /// The speaker's corner of a chat bubble.
+  static const double tail = 4;
   static const double xs = 6;
   static const double sm = 9;
   static const double md = 12;
@@ -102,6 +104,19 @@ abstract final class AppSizes {
 
   /// File-type badge (PDF, JPG, XLS) at the start of an attachment.
   static const double fileBadge = 40;
+
+  /// Timeline dot and its halo; page indicator dot (the current one is
+  /// [pageDotActive] wide).
+  static const double timelineDot = 10;
+  static const double timelineHalo = 18;
+  static const double pageDot = 6;
+  static const double pageDotActive = 18;
+
+  /// Gap between the parts of a segmented bar.
+  static const double barGap = 2;
+
+  /// Widest a chat bubble gets, as a share of the row.
+  static const double bubbleMaxShare = .78;
 
   /// Width of the numeric stepper (− value +).
   static const double numberStepper = 140;

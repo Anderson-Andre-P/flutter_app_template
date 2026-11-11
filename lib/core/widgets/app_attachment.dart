@@ -65,6 +65,7 @@ class AppAttachmentTile extends StatelessWidget {
     this.onOpen,
     this.onCancel,
     this.onRemove,
+    this.onDownload,
   });
 
   final String name;
@@ -77,18 +78,34 @@ class AppAttachmentTile extends StatelessWidget {
   final VoidCallback? onCancel;
   final VoidCallback? onRemove;
 
+  /// Sent files only: a download button next to open.
+  final VoidCallback? onDownload;
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final failed = status == AppAttachmentStatus.failed;
+    // The status tints the tile (design system, section 16): blue while
+    // sending, red when it failed, dimmed while waiting for a connection.
+    final (Color bg, Color line) = switch (status) {
+      AppAttachmentStatus.sent => (c.card, c.border),
+      AppAttachmentStatus.uploading => (
+        c.primarySubtle,
+        c.primary.withValues(alpha: .3),
+      ),
+      AppAttachmentStatus.failed => (
+        c.dangerSubtle,
+        c.danger.withValues(alpha: .3),
+      ),
+      AppAttachmentStatus.waiting => (c.screen, c.border),
+    };
     return Container(
+      key: ValueKey('attachment-$name'),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: c.card,
+        color: bg,
         borderRadius: AppRadius.brLg,
-        border: Border.all(
-          color: failed ? c.danger.withValues(alpha: .4) : c.border,
-        ),
+        border: Border.all(color: line),
       ),
       child: Row(
         children: [
@@ -123,11 +140,23 @@ class AppAttachmentTile extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
           switch (status) {
-            AppAttachmentStatus.sent => AppIconButton(
-              icon: Icons.visibility_outlined,
-              label: CommonStrings.openFile,
-              bordered: false,
-              onPressed: onOpen,
+            AppAttachmentStatus.sent => Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AppIconButton(
+                  icon: Icons.visibility_outlined,
+                  label: CommonStrings.openFile,
+                  bordered: false,
+                  onPressed: onOpen,
+                ),
+                if (onDownload case final download?)
+                  AppIconButton(
+                    icon: Icons.download_outlined,
+                    label: CommonStrings.download,
+                    bordered: false,
+                    onPressed: download,
+                  ),
+              ],
             ),
             AppAttachmentStatus.uploading => AppIconButton(
               icon: Icons.close,

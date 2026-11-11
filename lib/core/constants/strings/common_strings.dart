@@ -40,6 +40,15 @@ abstract final class CommonStrings {
     _ => 'Notificações, $n novas',
   };
 
+  // Data, media and chat
+  static const dragToReorder = 'Arrastar para reordenar';
+  static String pageOf(int page, int total) => '$page de $total';
+  static String share(String label, int percent) => '$label $percent%';
+  static const send = 'Enviar';
+  static const attach = 'Anexar';
+  static const download = 'Baixar';
+  static const read = 'Lido';
+
   // Files
   static const openFile = 'Abrir arquivo';
   static const cancelUpload = 'Cancelar envio';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
+import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/widgets/app_attachment.dart';
 import 'package:flutter_app_template/core/widgets/app_progress_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -118,5 +119,40 @@ void main() {
     await tester.tap(find.text(CommonStrings.capture));
     expect(removed, [0]);
     expect(captures, 1);
+  });
+
+  testBothThemes('the status tints the tile and a sent file can download', (
+    tester,
+    dark,
+  ) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    var downloads = 0;
+    await pumpApp(
+      tester,
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppAttachmentTile(
+            name: 'Manual.pdf',
+            detail: '4,2 MB',
+            status: AppAttachmentStatus.sent,
+            onOpen: () {},
+            onDownload: () => downloads++,
+          ),
+          const AppAttachmentTile(
+            name: 'foto.jpg',
+            detail: 'Enviando',
+            status: AppAttachmentStatus.uploading,
+          ),
+        ],
+      ),
+      dark: dark,
+    );
+    await tester.tap(find.bySemanticsLabel(CommonStrings.download));
+    expect(downloads, 1);
+    final uploading = tester.widget<Container>(
+      find.byKey(const ValueKey('attachment-foto.jpg')),
+    );
+    expect((uploading.decoration! as BoxDecoration).color, c.primarySubtle);
   });
 }
