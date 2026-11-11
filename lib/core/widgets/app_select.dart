@@ -8,6 +8,7 @@ import '../theme/theme_context.dart';
 import '../utils/search.dart';
 import 'app_bottom_sheet.dart';
 import 'app_interactive.dart';
+import 'app_menu_style.dart';
 import 'app_search_field.dart';
 
 /// One choice of an [AppSelect].
@@ -84,30 +85,7 @@ class AppSelect<T> extends StatelessWidget {
           LayoutBuilder(
             builder: (context, constraints) => MenuAnchor(
               alignmentOffset: const Offset(0, AppSpacing.xs),
-              style: MenuStyle(
-                backgroundColor: WidgetStatePropertyAll(c.card),
-                surfaceTintColor: const WidgetStatePropertyAll(
-                  Colors.transparent,
-                ),
-                elevation: WidgetStatePropertyAll(
-                  context.shadows.elev3.isEmpty ? 0 : AppSpacing.sm,
-                ),
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: AppRadius.brMd,
-                    side: BorderSide(color: c.border),
-                  ),
-                ),
-                padding: const WidgetStatePropertyAll(
-                  EdgeInsets.all(AppSpacing.xs),
-                ),
-                minimumSize: WidgetStatePropertyAll(
-                  Size(constraints.maxWidth, 0),
-                ),
-                maximumSize: WidgetStatePropertyAll(
-                  Size(constraints.maxWidth, double.infinity),
-                ),
-              ),
+              style: AppMenuStyle.menu(context, width: constraints.maxWidth),
               menuChildren: [
                 for (final o in options)
                   _OptionItem(
@@ -218,21 +196,7 @@ class _OptionItem extends StatelessWidget {
     final c = context.colors;
     return MenuItemButton(
       onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(
-          selected ? c.primarySubtle : Colors.transparent,
-        ),
-        overlayColor: WidgetStatePropertyAll(c.primarySubtle),
-        shape: const WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: AppRadius.brSm),
-        ),
-        minimumSize: const WidgetStatePropertyAll(
-          Size.fromHeight(AppSizes.minTouchTarget),
-        ),
-        padding: const WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: AppSpacing.md),
-        ),
-      ),
+      style: AppMenuStyle.item(context, selected: selected),
       trailingIcon: selected
           ? Container(
               key: AppSelect.selectedMarkKey,

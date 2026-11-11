@@ -85,6 +85,10 @@ abstract final class AppSizes {
   static const double sliderTrack = 6;
   static const double sliderThumb = 22;
 
+  /// Step circle of the horizontal stepper; underline of the active tab.
+  static const double stepCircle = 26;
+  static const double tabIndicator = 2;
+
   /// Width of the numeric stepper (− value +).
   static const double numberStepper = 140;
 

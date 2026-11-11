@@ -24,6 +24,13 @@ abstract final class CommonStrings {
   static const timeHint = 'HH:MM';
   static const decrease = 'Diminuir';
   static const increase = 'Aumentar';
+
+  // Navigation
+  static const moreActions = 'Mais ações';
+  static const loading = 'Carregando';
+  static String stepOf(int step, int total) => 'Passo $step de $total';
+  static String stepPosition(int step, int total, String label) =>
+      'Passo $step de $total: $label';
   static const retry = 'Tentar novamente';
   static const genericError = 'Algo deu errado. Tente de novo em instantes.';
   static const offline = 'Sem conexão. Tente de novo em instantes.';
