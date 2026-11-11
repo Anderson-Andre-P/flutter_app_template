@@ -116,19 +116,19 @@ padding interno nunca fica abaixo de 14px.
   `AppTimeField`
 - [x] P1 · Slider contínuo com o valor ao lado do rótulo e estados
   pressionado e desabilitado; área de toque de 44px
-- [ ] P2 · Slider de faixa (dois pontos, trilho preenchido entre eles)
-- [ ] P2 · Slider com passos nomeados (Baixa / Média / Alta / Crítica)
+- [x] P2 · Slider de faixa (dois pontos, trilho preenchido entre eles)
+- [x] P2 · Slider com passos nomeados (Baixa / Média / Alta / Crítica)
 - [x] P1 · Stepper numérico (− 3 +) com mínimo e máximo; até 99 (acima disso,
   campo numérico)
-- [ ] P2 · Campo com prefixo ("ID-")
-- [ ] P2 · Campo validado (check verde)
-- [ ] P2 · Campo desabilitado com cadeado
-- [ ] P2 · Campo de tags com seleção múltipla ("Marina Alves ×")
-- [ ] P2 · Upload: botão de envio (no celular vira um botão de linha única,
+- [x] P2 · Campo com prefixo ("ID-")
+- [x] P2 · Campo validado (check verde)
+- [x] P2 · Campo desabilitado com cadeado
+- [x] P2 · Campo de tags com seleção múltipla ("Marina Alves ×")
+- [x] P2 · Upload: botão de envio (no celular vira um botão de linha única,
   a área de soltar é só para web)
-- [ ] P2 · Lista de anexos com tipo (PDF/JPG/XLS), progresso de envio e
+- [x] P2 · Lista de anexos com tipo (PDF/JPG/XLS), progresso de envio e
   status (enviado, enviando, aguardando sincronização)
-- [ ] P2 · Grade de fotos capturadas com remover e o botão "Capturar"
+- [x] P2 · Grade de fotos capturadas com remover e o botão "Capturar"
 
 ## Menus e sobreposições (Padrões, seções 21 e 25)
 
