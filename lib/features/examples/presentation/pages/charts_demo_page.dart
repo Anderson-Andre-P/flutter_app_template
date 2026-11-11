@@ -123,6 +123,7 @@ class ChartsDemoPage extends StatelessWidget {
               values: ExamplesStrings.chartWeightValues,
               labels: ExamplesStrings.chartLineLabels,
               valueLabel: ExamplesStrings.decimal,
+              startAtZero: false,
             ),
           ),
         ),
@@ -164,7 +165,8 @@ class ChartsDemoPage extends StatelessWidget {
                 ),
                 SizedBox(height: AppSpacing.md),
                 Wrap(
-                  spacing: AppSpacing.md,
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
                   children: [
                     for (final (i, (label, _))
                         in ExamplesStrings.chartSegments.indexed)

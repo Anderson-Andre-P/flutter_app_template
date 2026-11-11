@@ -680,8 +680,9 @@ abstract final class ExamplesStrings {
   static const chartGoal = 'meta';
   static const chartGoalValue = 3.0;
   static const chartWaterValues = [2.0, 3.5, 3.0, 1.5, 3.2, 2.4, 2.8];
-  static const chartLineExtremesCaption = 'Peso em kg; menor e maior marcados';
-  static const chartWeightValues = [82.0, 81.4, 81.9, 80.6, 80.2, 79.8];
+  static const chartLineExtremesCaption =
+      'Peso em kg mês a mês; a escala acompanha os valores';
+  static const chartWeightValues = [84.2, 83.1, 83.6, 81.9, 80.7, 79.4];
   static String decimal(double v) => v.toStringAsFixed(1).replaceAll('.', ',');
   static const countdown = 'Cronômetro';
   static const countdownCaption = 'Tempo que falta; o anel esvazia';
