@@ -16,14 +16,14 @@ import '../storage/secure/secure_storage.dart';
 /// 401 → [UnauthorizedException], other non-2xx → [ServerException],
 /// transport errors and timeouts → [NetworkException].
 class ApiClient {
+  // Private named parameters (Dart 3.13): callers still pass `client:`,
+  // `config:` and `storage:`.
   ApiClient({
-    required http.Client client,
-    required EnvConfig config,
-    required SecureStorage storage,
+    required this._client,
+    required this._config,
+    required this._storage,
     this.timeout = const Duration(seconds: 30),
-  }) : _client = client,
-       _config = config,
-       _storage = storage;
+  });
 
   final http.Client _client;
   final EnvConfig _config;
@@ -42,9 +42,8 @@ class ApiClient {
     Map<String, String>? query,
     Object? body,
   }) async {
-    final uri = Uri.parse(
-      '${_config.apiBaseUrl}$path',
-    ).replace(queryParameters: query);
+    final uri = Uri.parse('${_config.apiBaseUrl}$path')
+        .replace(queryParameters: query);
     final request = http.Request(method, uri)
       ..headers['Content-Type'] = 'application/json'
       ..headers['Accept'] = 'application/json';
