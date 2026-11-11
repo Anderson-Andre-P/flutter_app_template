@@ -209,7 +209,9 @@ class AppSegmentedBar extends StatelessWidget {
           borderRadius: AppRadius.brFull,
           child: SizedBox(
             height: AppSizes.progressBar,
+            // Stretch: a ColoredBox without a child is otherwise 0 tall.
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 for (final (i, s) in segments.indexed)
                   if (s.value > 0) ...[

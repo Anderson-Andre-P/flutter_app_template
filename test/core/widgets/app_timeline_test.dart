@@ -59,6 +59,52 @@ void main() {
     handle.dispose();
   });
 
+  testBothThemes('every segment fills the height of the bar, in its tone', (
+    tester,
+    dark,
+  ) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    await pumpApp(
+      tester,
+      const SizedBox(
+        width: 300,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppSegmentedBar(
+              segments: [
+                AppBarSegment(
+                  label: 'Concluídas',
+                  value: 60,
+                  tone: AppTone.primary,
+                ),
+                AppBarSegment(
+                  label: 'Em atraso',
+                  value: 40,
+                  tone: AppTone.alert,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      dark: dark,
+    );
+    final bar = tester.getSize(find.byType(AppSegmentedBar));
+    final parts = find.descendant(
+      of: find.byType(AppSegmentedBar),
+      matching: find.byType(ColoredBox),
+    );
+    expect(parts, findsNWidgets(2));
+    for (final part in parts.evaluate()) {
+      expect(part.size!.height, bar.height);
+    }
+    expect(tester.widgetList<ColoredBox>(parts).map((b) => b.color), [
+      c.primary,
+      c.alert,
+    ]);
+  });
+
   testWidgets('page dots mark the current page', (tester) async {
     await pumpApp(tester, const AppPageDots(count: 4, current: 1));
     final dots = tester
