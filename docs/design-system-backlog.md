@@ -45,12 +45,12 @@ criar componentes novos.
 
 ## Controles (Componentes, seção 09)
 
-- [ ] P1 · Switch (toggle) do DS
-- [ ] P1 · Checkbox do DS
-- [ ] P1 · Radio do DS
-- [ ] P1 · Controle segmentado (Low / Medium / High / Critical)
-- [ ] P1 · FAB redondo e FAB estendido ("+ Novo")
-- [ ] P1 · Banda de atenção ("Action required": ícone, título e texto em
+- [x] P1 · Switch (toggle) do DS
+- [x] P1 · Checkbox do DS
+- [x] P1 · Radio do DS
+- [x] P1 · Controle segmentado (Low / Medium / High / Critical)
+- [x] P1 · FAB redondo e FAB estendido ("+ Novo")
+- [x] P1 · Banda de atenção ("Action required": ícone, título e texto em
   fundo de perigo suave)
 - [ ] P2 · Tile de status (número grande com barra colorida à esquerda)
 - [ ] P2 · Botão de sucesso (verde, "Sucesso · concluir")
