@@ -86,6 +86,21 @@ abstract final class AppSnackbar {
     _Toast(_ToastKind.neutral, title, description, actionLabel, onAction),
   );
 
+  /// A failure the user can retry, on the dark [AppColors.inverse] surface
+  /// that stands out in both themes — "Não foi possível salvar · Tentar
+  /// novamente" (design system, section 35). Like an error it stays until
+  /// dismissed or retried.
+  static void failure(
+    BuildContext context,
+    String title, {
+    required VoidCallback onRetry,
+    String? description,
+    String actionLabel = CommonStrings.retry,
+  }) => _show(
+    context,
+    _Toast(_ToastKind.failure, title, description, actionLabel, onRetry),
+  );
+
   /// Visible toasts, newest first.
   static final List<_Toast> _toasts = [];
   static OverlayEntry? _entry;
@@ -127,7 +142,7 @@ abstract final class AppSnackbar {
   }
 }
 
-enum _ToastKind { success, warning, error, info, neutral }
+enum _ToastKind { success, warning, error, info, neutral, failure }
 
 final class _Toast {
   _Toast(
@@ -195,9 +210,9 @@ class _ToastViewState extends State<_ToastView> {
   @override
   void initState() {
     super.initState();
-    if (widget.toast.kind != _ToastKind.error) {
-      _timer = Timer(AppDurations.toastVisible, _dismiss);
-    }
+    // Errors and failures wait for the user.
+    if (widget.toast.kind case _ToastKind.error || _ToastKind.failure) return;
+    _timer = Timer(AppDurations.toastVisible, _dismiss);
   }
 
   @override
@@ -218,6 +233,9 @@ class _ToastViewState extends State<_ToastView> {
     final toast = widget.toast;
     final c = context.colors;
     final fg = _foreground(c, toast.kind);
+    final failure = toast.kind == _ToastKind.failure;
+    final text = failure ? c.onInverse : c.textPrimary;
+    final detail = failure ? c.onInverse : c.textMuted;
     final action = toast.actionLabel;
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0, end: 1),
@@ -240,7 +258,11 @@ class _ToastViewState extends State<_ToastView> {
             shape: RoundedRectangleBorder(
               borderRadius: AppRadius.brMdPlus,
               side: BorderSide(
-                color: toast.kind == _ToastKind.neutral ? c.border : fg,
+                color: switch (toast.kind) {
+                  _ToastKind.neutral => c.border,
+                  _ToastKind.failure => c.inverse,
+                  _ => fg,
+                },
               ),
             ),
             child: Padding(
@@ -252,7 +274,14 @@ class _ToastViewState extends State<_ToastView> {
               ),
               child: Row(
                 children: [
-                  if (_icon(toast.kind) case final icon?) ...[
+                  if (failure) ...[
+                    Icon(
+                      Icons.info_outline,
+                      size: AppSizes.iconTopBar,
+                      color: c.onInverse,
+                    ),
+                    SizedBox(width: AppSpacing.md),
+                  ] else if (_icon(toast.kind) case final icon?) ...[
                     Container(
                       width: AppSizes.toastIcon,
                       height: AppSizes.toastIcon,
@@ -276,16 +305,14 @@ class _ToastViewState extends State<_ToastView> {
                       children: [
                         Text(
                           toast.title,
-                          style: AppTypography.label.copyWith(
-                            color: c.textPrimary,
-                          ),
+                          style: AppTypography.label.copyWith(color: text),
                         ),
                         if (toast.description case final description?) ...[
                           SizedBox(height: AppSpacing.xs),
                           Text(
                             description,
                             style: AppTypography.bodySmall.copyWith(
-                              color: c.textMuted,
+                              color: detail,
                             ),
                           ),
                         ],
@@ -334,6 +361,7 @@ class _ToastViewState extends State<_ToastView> {
     _ToastKind.error => c.danger,
     _ToastKind.info => c.primary,
     _ToastKind.neutral => c.link,
+    _ToastKind.failure => c.inverseLink,
   };
 
   static Color _background(AppColors c, _ToastKind kind) => switch (kind) {
@@ -342,6 +370,7 @@ class _ToastViewState extends State<_ToastView> {
     _ToastKind.error => c.dangerSubtle,
     _ToastKind.info => c.primarySubtle,
     _ToastKind.neutral => c.raised,
+    _ToastKind.failure => c.inverse,
   };
 
   static IconData? _icon(_ToastKind kind) => switch (kind) {
@@ -349,6 +378,6 @@ class _ToastViewState extends State<_ToastView> {
     _ToastKind.warning => Icons.priority_high,
     _ToastKind.error => Icons.close,
     _ToastKind.info => Icons.info_outline,
-    _ToastKind.neutral => null,
+    _ToastKind.neutral || _ToastKind.failure => null,
   };
 }

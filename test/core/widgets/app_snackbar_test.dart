@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
+import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/core/theme/app_tokens.dart';
 import 'package:flutter_app_template/core/widgets/app_snackbar.dart';
@@ -174,5 +176,38 @@ void main() {
     expect(find.text('Desfazer'), findsOneWidget);
     expect(find.byIcon(Icons.check), findsNothing);
     await tester.pump(AppDurations.toastVisible);
+  });
+
+  testBothThemes('a failure sits on the inverse surface and stays until '
+      'retried', (tester, dark) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    var retries = 0;
+    final ctx = await _host(tester, dark: dark);
+    AppSnackbar.failure(
+      ctx,
+      'Não foi possível salvar',
+      description: 'Sem conexão.',
+      onRetry: () => retries++,
+    );
+    await _shown(tester);
+    final surface = tester.widget<Material>(
+      find
+          .ancestor(
+            of: find.text('Não foi possível salvar'),
+            matching: find.byType(Material),
+          )
+          .first,
+    );
+    expect(surface.color, c.inverse);
+    expect(
+      tester.widget<Text>(find.text('Não foi possível salvar')).style!.color,
+      c.onInverse,
+    );
+    await tester.pump(AppDurations.toastVisible * 3);
+    expect(find.text('Não foi possível salvar'), findsOneWidget);
+    await tester.tap(find.text(CommonStrings.retry));
+    await tester.pump();
+    expect(retries, 1);
+    expect(find.text('Não foi possível salvar'), findsNothing);
   });
 }
