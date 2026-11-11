@@ -59,12 +59,14 @@ criar componentes novos.
 
 ## Botões (Componentes, seção 10)
 
-- [ ] P2 · Tamanhos xs (ação dentro de linha de tabela) e xl (chamada
+- [x] P2 · Tamanhos xs (ação dentro de linha de tabela) e xl (chamada
   isolada, onboarding)
-- [ ] P2 · Contornos neutro, destrutivo e de sucesso
-- [ ] P1 · Botão só de ícone (com rótulo para leitor de tela)
-- [ ] P2 · Botão com ícone à direita ("Avançar →")
-- [ ] P1 · Grupos de botões: duplo 50/50 (secundário à esquerda), triplo (o
+- [x] P2 · Contornos neutro, destrutivo e de sucesso (o neutro é o
+  `secondary` e o destrutivo, o `destructive`; o de sucesso é o
+  `outlineSuccess`)
+- [x] P1 · Botão só de ícone (com rótulo para leitor de tela)
+- [x] P2 · Botão com ícone à direita ("Avançar →")
+- [x] P1 · Grupos de botões: duplo 50/50 (secundário à esquerda), triplo (o
   primário ganha mais largura) e empilhado (obrigatório quando há ação
   destrutiva)
 - [ ] P2 · Button group segmentado (Lista / Grade / Mapa / Calendário) e só
