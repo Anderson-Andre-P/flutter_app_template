@@ -152,6 +152,23 @@ void main() {
     expect(find.byType(HomePage), findsOneWidget);
   });
 
+  testWidgets('every screen fits text at 200% on a phone', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    tester.platformDispatcher.textScaleFactorTestValue = 2;
+    addTearDown(tester.view.reset);
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    await _start(tester);
+    expect(tester.takeException(), isNull, reason: 'home');
+    for (final demo in HomeDemo.values) {
+      await _open(tester, demo);
+      expect(tester.takeException(), isNull, reason: demo.name);
+      final nav = tester.state<NavigatorState>(find.byType(Navigator).last);
+      nav.pop();
+      await _settle(tester);
+    }
+  });
+
   testWidgets('a bottom sheet covers the app bottom bar', (tester) async {
     await _start(tester);
     await _open(tester, HomeDemo.sheets);
