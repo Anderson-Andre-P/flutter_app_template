@@ -217,9 +217,15 @@ padding interno nunca fica abaixo de 14px.
   mesmo quando o ícone tem 24px.
 - [ ] P2 · Texto escala até 200% sem cortar nem sobrepor: teste com
   `textScaler` 2.0 nas telas de exemplo.
-- [ ] P2 · Tom de voz (Padrões, seção 31: claro, direto, humano; fazer e
+  Sondagem de 11/11/2026: com `textScaler` 2.0 em 390px de largura, há cerca
+  de 50 estouros de `RenderFlex` em 7 dos 12 catálogos (barra inferior,
+  cartões, gráficos, controles, formulários, navegação e widgets). A maioria
+  vem de alturas fixas (chip de 32px, alturas de botão, barra inferior) e de
+  linhas sem `Flexible`/`Wrap`. Corrigir os componentes antes de ligar o
+  teste.
+- [x] P2 · Tom de voz (Padrões, seção 31: claro, direto, humano; fazer e
   evitar) em `.claude/rules/`, para a IA escrever os textos das telas nesse
   tom.
-- [ ] P2 · Regras de mensagem dos estados (seção 24): título de até 5
+- [x] P2 · Regras de mensagem dos estados (seção 24): título de até 5
   palavras, uma frase com o próximo passo, uma ação principal, nunca culpar o
   usuário.
