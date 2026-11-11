@@ -450,6 +450,37 @@ abstract final class ExamplesStrings {
   static const navMenuItem = 'OS-2041 · Troca de bomba';
   static const navMenuActions = ['Editar', 'Duplicar', 'Atribuir a...'];
   static const navMenuDelete = 'Excluir';
+  static const modalIcon = 'Modal com ícone';
+  static const modalIconHint = 'Ícone ao lado do título e botão de fechar';
+  static const modalIconTitle = 'Aplicar modelo?';
+  static const modalIconMessage =
+      'O conteúdo atual será substituído pelo Modelo padrão v2.1. Itens já '
+      'respondidos serão perdidos.';
+  static const modalIconConfirm = 'Aplicar';
+  static const sheetFilters = 'Filtros';
+  static const sheetFiltersHint = 'Cabeçalho com a ação Limpar';
+  static const sheetFiltersClear = 'Limpar';
+  static const sheetFiltersStatus = ['Pendente', 'Pausada', 'Concluída'];
+  static const sheetFiltersApply = 'Aplicar';
+  static const sheetFiltersCleared = 'Filtros limpos';
+  static const navBars = 'Barras de topo';
+  static const navBarsCaption = 'Marca e sino, voltar com ação, visualizador';
+  static const navBrand = 'Triplicate';
+  static const navBarTitle = 'Título da tela';
+  static const navBarEdit = 'Editar';
+  static const navViewer = 'Visualizador';
+  static const navViewerPosition = '2 de 4';
+  static const navNewBadge = 'Novo';
+  static const navMenuButton = 'Menu';
+  static const navFilterBar = 'Busca e filtros';
+  static const navFilterBarCaption = 'Limpar a busca, filtros ativos e ordenar';
+  static const navFilterHint = 'Buscar ordens';
+  static const navHints = 'Tooltip e coach mark';
+  static const navHintsCaption =
+      'Explicam sem bloquear; o coach mark sai com um toque';
+  static const navLocked = 'Bloqueado após iniciar';
+  static const navCoachTitle = 'Arraste para reordenar';
+  static const navCoachMessage = 'Segure a alça à direita e mova o item.';
   static const counters = 'Contadores';
   static const countersCaption = '99+ como teto; o ponto avisa sem número';
   static const counterValues = [3, 12, 140];

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/widgets/app_bottom_sheet.dart';
 import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_chip.dart';
 import '../../../../core/widgets/app_snackbar.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../application/demo_selection_bloc.dart';
@@ -93,6 +94,33 @@ class SheetsDemoPage extends StatelessWidget {
       ),
     );
 
+    void filters() => AppBottomSheet.show<void>(
+      context,
+      title: ExamplesStrings.sheetFilters,
+      actionLabel: ExamplesStrings.sheetFiltersClear,
+      onAction: () =>
+          AppSnackbar.info(context, ExamplesStrings.sheetFiltersCleared),
+      child: Builder(
+        builder: (sheet) => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Wrap(
+              spacing: AppSpacing.sm,
+              children: [
+                for (final label in ExamplesStrings.sheetFiltersStatus)
+                  AppChip(label: label, onSelected: (_) {}),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.x2l),
+            AppButton(
+              label: ExamplesStrings.sheetFiltersApply,
+              onPressed: () => Navigator.of(sheet).pop(),
+            ),
+          ],
+        ),
+      ),
+    );
+
     return DemoScaffold(
       title: ExamplesStrings.sheetsTitle,
       children: [
@@ -105,6 +133,11 @@ class SheetsDemoPage extends StatelessWidget {
           title: ExamplesStrings.sheetActions,
           hint: ExamplesStrings.sheetActionsHint,
           onTap: actions,
+        ),
+        DemoTrigger(
+          title: ExamplesStrings.sheetFilters,
+          hint: ExamplesStrings.sheetFiltersHint,
+          onTap: filters,
         ),
         DemoTrigger(
           title: ExamplesStrings.sheetContent,

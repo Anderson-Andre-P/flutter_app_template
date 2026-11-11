@@ -47,6 +47,26 @@ class ModalsDemoPage extends StatelessWidget {
           onTap: () => confirm(destructive: true),
         ),
         DemoTrigger(
+          title: ExamplesStrings.modalIcon,
+          hint: ExamplesStrings.modalIconHint,
+          onTap: () async {
+            final ok = await AppDialog.modal(
+              context,
+              icon: Icons.task_alt,
+              title: ExamplesStrings.modalIconTitle,
+              message: ExamplesStrings.modalIconMessage,
+              confirmLabel: ExamplesStrings.modalIconConfirm,
+            );
+            if (!context.mounted) return;
+            AppSnackbar.info(
+              context,
+              ok
+                  ? ExamplesStrings.modalConfirmed
+                  : ExamplesStrings.modalCancelled,
+            );
+          },
+        ),
+        DemoTrigger(
           title: ExamplesStrings.modalAlert,
           hint: ExamplesStrings.modalAlertHint,
           onTap: () => AppDialog.alert(

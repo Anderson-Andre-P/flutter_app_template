@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constants/strings/common_strings.dart';
 import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_context.dart';
@@ -15,6 +16,13 @@ import '../../../../core/widgets/app_segmented_control.dart';
 import '../../../../core/widgets/app_snackbar.dart';
 import '../../../../core/widgets/app_stepper.dart';
 import '../../../../core/widgets/app_tabs.dart';
+import '../../../../core/widgets/app_avatar.dart';
+import '../../../../core/widgets/app_badge.dart';
+import '../../../../core/widgets/app_coach_mark.dart';
+import '../../../../core/widgets/app_filter_bar.dart';
+import '../../../../core/widgets/app_icon_button.dart';
+import '../../../../core/widgets/app_tooltip.dart';
+import '../../../../core/widgets/app_top_bar.dart';
 import '../../application/demo_selection_bloc.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
@@ -30,6 +38,7 @@ class NavigationDemoPage extends StatelessWidget {
   static const _faq = 'nav-faq';
   static const _step = 'nav-step';
   static const _pages = 'nav-pages';
+  static const _coach = 'nav-coach';
   static const _closed = -1;
   static const _pageSize = 20;
   static const _total = 179;
@@ -133,6 +142,123 @@ class NavigationDemoPage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.navBars,
+          caption: ExamplesStrings.navBarsCaption,
+          child: Column(
+            children: [
+              for (final bar in <PreferredSizeWidget>[
+                AppTopBar(
+                  title: ExamplesStrings.navBrand,
+                  brand: true,
+                  actions: [
+                    AppNotificationButton(
+                      count: 3,
+                      onPressed: () => say(ExamplesStrings.navBrand),
+                    ),
+                    const Padding(
+                      padding: EdgeInsetsDirectional.only(end: AppSpacing.md),
+                      child: AppAvatar(
+                        initials: ExamplesStrings.avatarInitials,
+                        size: AppSizes.avatarMd,
+                      ),
+                    ),
+                  ],
+                ),
+                AppTopBar(
+                  title: ExamplesStrings.navBarTitle,
+                  showBack: true,
+                  onBack: () => say(CommonStrings.back),
+                  actions: [
+                    AppIconButton(
+                      icon: Icons.edit_outlined,
+                      label: ExamplesStrings.navBarEdit,
+                      bordered: false,
+                      onPressed: () => say(ExamplesStrings.navBarEdit),
+                    ),
+                  ],
+                ),
+                AppTopBar(
+                  title: ExamplesStrings.navBrand,
+                  brand: true,
+                  leading: AppIconButton(
+                    icon: Icons.menu,
+                    label: ExamplesStrings.navMenuButton,
+                    bordered: false,
+                    onPressed: () => say(ExamplesStrings.navMenuButton),
+                  ),
+                  actions: const [
+                    Padding(
+                      padding: EdgeInsetsDirectional.only(end: AppSpacing.md),
+                      child: AppBadge(
+                        label: ExamplesStrings.navNewBadge,
+                        tone: AppTone.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                AppViewerBar(
+                  title: ExamplesStrings.navViewer,
+                  position: ExamplesStrings.navViewerPosition,
+                  onClose: () => say(CommonStrings.close),
+                ),
+              ]) ...[
+                ClipRRect(
+                  borderRadius: AppRadius.brMd,
+                  child: SizedBox(height: bar.preferredSize.height, child: bar),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+              ],
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.navFilterBar,
+          caption: ExamplesStrings.navFilterBarCaption,
+          child: AppFilterBar(
+            searchHint: ExamplesStrings.navFilterHint,
+            onSearch: (_) {},
+            activeFilters: 2,
+            onFilters: () => say(ExamplesStrings.sheetFilters),
+            onSort: () => say(CommonStrings.sort),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.navHints,
+          caption: ExamplesStrings.navHintsCaption,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: AppTooltip(
+                  message: ExamplesStrings.navLocked,
+                  child: Container(
+                    width: AppSizes.minTouchTarget,
+                    height: AppSizes.minTouchTarget,
+                    decoration: BoxDecoration(
+                      color: c.sunken,
+                      borderRadius: AppRadius.brMd,
+                    ),
+                    child: Icon(
+                      Icons.lock_outline,
+                      size: AppSizes.iconTopBar,
+                      color: c.textMuted,
+                    ),
+                  ),
+                ),
+              ),
+              if (selection.of(_coach) == 0) ...[
+                const SizedBox(height: AppSpacing.md),
+                AppCoachMark(
+                  title: ExamplesStrings.navCoachTitle,
+                  message: ExamplesStrings.navCoachMessage,
+                  onDismiss: () => set(_coach, 1),
+                ),
+              ],
+            ],
           ),
         ),
         DemoSection(
