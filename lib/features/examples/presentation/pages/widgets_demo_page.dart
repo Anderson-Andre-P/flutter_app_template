@@ -7,9 +7,11 @@ import '../../../../core/theme/theme_context.dart';
 import '../../../../core/widgets/app_avatar.dart';
 import '../../../../core/widgets/app_badge.dart';
 import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_button_group.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_chip.dart';
 import '../../../../core/widgets/app_icon_box.dart';
+import '../../../../core/widgets/app_icon_button.dart';
 import '../../../../core/widgets/app_list_tile.dart';
 import '../../../../core/widgets/app_search_field.dart';
 import '../../../../core/widgets/app_snackbar.dart';
@@ -26,16 +28,20 @@ class WidgetsDemoPage extends StatelessWidget {
     (AppButtonVariant.primary, ExamplesStrings.buttonPrimary),
     (AppButtonVariant.secondary, ExamplesStrings.buttonSecondary),
     (AppButtonVariant.outline, ExamplesStrings.buttonOutline),
+    (AppButtonVariant.outlineSuccess, ExamplesStrings.buttonOutlineSuccess),
     (AppButtonVariant.tonal, ExamplesStrings.buttonTonal),
     (AppButtonVariant.ghost, ExamplesStrings.buttonGhost),
     (AppButtonVariant.destructive, ExamplesStrings.buttonDestructive),
     (AppButtonVariant.destructiveTonal, ExamplesStrings.buttonDestructiveTonal),
+    (AppButtonVariant.success, ExamplesStrings.buttonSuccess2),
   ];
 
   static const _sizes = [
+    (AppButtonSize.xl, ExamplesStrings.sizeXl),
     (AppButtonSize.lg, ExamplesStrings.sizeLg),
     (AppButtonSize.md, ExamplesStrings.sizeMd),
     (AppButtonSize.sm, ExamplesStrings.sizeSm),
+    (AppButtonSize.xs, ExamplesStrings.sizeXs),
   ];
 
   @override
@@ -82,6 +88,89 @@ class WidgetsDemoPage extends StatelessWidget {
                   expanded: false,
                   onPressed: tapped,
                 ),
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.buttonIcons,
+          caption: ExamplesStrings.buttonIconsCaption,
+          child: Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              AppButton(
+                label: ExamplesStrings.buttonIconLeft,
+                icon: Icons.add,
+                size: AppButtonSize.md,
+                expanded: false,
+                onPressed: tapped,
+              ),
+              AppButton(
+                label: ExamplesStrings.buttonIconRight,
+                trailingIcon: Icons.arrow_forward,
+                variant: AppButtonVariant.secondary,
+                size: AppButtonSize.md,
+                expanded: false,
+                onPressed: tapped,
+              ),
+              AppIconButton(
+                icon: Icons.edit_outlined,
+                label: ExamplesStrings.buttonIconOnly,
+                onPressed: tapped,
+              ),
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.buttonGroups,
+          caption: ExamplesStrings.buttonGroupsCaption,
+          child: Column(
+            children: [
+              AppButtonGroup.pair(
+                secondary: AppButton(
+                  label: ExamplesStrings.groupDiscard,
+                  variant: AppButtonVariant.secondary,
+                  onPressed: tapped,
+                ),
+                primary: AppButton(
+                  label: ExamplesStrings.groupSave,
+                  onPressed: tapped,
+                ),
+              ),
+              gap,
+              AppButtonGroup.triple(
+                first: AppButton(
+                  label: ExamplesStrings.groupBack,
+                  variant: AppButtonVariant.secondary,
+                  size: AppButtonSize.md,
+                  onPressed: tapped,
+                ),
+                second: AppButton(
+                  label: ExamplesStrings.groupSkip,
+                  variant: AppButtonVariant.secondary,
+                  size: AppButtonSize.md,
+                  onPressed: tapped,
+                ),
+                primary: AppButton(
+                  label: ExamplesStrings.groupContinue,
+                  size: AppButtonSize.md,
+                  onPressed: tapped,
+                ),
+              ),
+              gap,
+              AppButtonGroup.stacked(
+                primary: AppButton(
+                  label: ExamplesStrings.groupDelete,
+                  variant: AppButtonVariant.destructive,
+                  onPressed: tapped,
+                ),
+                secondary: AppButton(
+                  label: ExamplesStrings.groupKeep,
+                  variant: AppButtonVariant.secondary,
+                  onPressed: tapped,
+                ),
+              ),
             ],
           ),
         ),
