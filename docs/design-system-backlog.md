@@ -38,7 +38,7 @@ criar componentes novos.
   secundário, campo de texto, chip, switch, checkbox e linha de lista.
   Feito em botão, chip, campo e linha de lista (`AppInteractive`); switch e
   checkbox seguem o mesmo padrão quando forem criados (seção Controles).
-- [ ] **P2 · Rosca** (Padrões, seção 18): anel de 26px (hoje são 18px), no
+- [x] **P2 · Rosca** (Padrões, seção 18): anel de 26px (hoje são 18px), no
   mínimo 3 arcos e rótulo central sempre presente.
 - [ ] **Decisão · Botão primário** (Componentes, seção 09): o DS diz 52px; o
   `AppSizes.buttonLg` está em 48px, que é a altura das telas de exemplo.
