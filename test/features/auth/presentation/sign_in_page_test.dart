@@ -71,9 +71,8 @@ void main() {
   testWidgets('while loading the button shows progress and ignores taps', (
     tester,
   ) async {
-    when(
-      () => bloc.state,
-    ).thenReturn(const SignInState(status: FormStatus.loading));
+    when(() => bloc.state)
+        .thenReturn(const SignInState(status: FormStatus.loading));
     await pump(tester, dark: true);
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
     await tester.tap(
@@ -119,9 +118,8 @@ void main() {
   });
 
   testWidgets('field errors from the state are shown', (tester) async {
-    when(
-      () => bloc.state,
-    ).thenReturn(const SignInState(email: 'a', submitted: true));
+    when(() => bloc.state)
+        .thenReturn(const SignInState(email: 'a', submitted: true));
     await pump(tester);
     expect(find.text('Informe um e-mail válido'), findsOneWidget);
   });

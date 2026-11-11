@@ -25,9 +25,8 @@ void main() {
 
   group('SignIn', () {
     test('normalizes the e-mail before calling the repository', () async {
-      when(
-        () => repo.signIn(email: 'ana@ex.com', password: '12345678'),
-      ).thenAnswer((_) async => _user);
+      when(() => repo.signIn(email: 'ana@ex.com', password: '12345678'))
+          .thenAnswer((_) async => _user);
       final result = await SignIn(repo)(
         const SignInParams(email: '  Ana@Ex.com ', password: '12345678'),
       );

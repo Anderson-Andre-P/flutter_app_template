@@ -27,9 +27,9 @@ void main() {
 
   blocTest<SignInBloc, SignInState>(
     'valid submit goes loading then success',
-    setUp: () => when(
-      () => signIn(_params),
-    ).thenAnswer((_) async => const Success(_user)),
+    setUp: () =>
+        when(() => signIn(_params))
+            .thenAnswer((_) async => const Success(_user)),
     build: filled,
     act: (b) => b.add(const SignInSubmitted()),
     skip: 2,
@@ -80,9 +80,9 @@ void main() {
 
   blocTest<SignInBloc, SignInState>(
     'a usecase failure exposes its message',
-    setUp: () => when(
-      () => signIn(any()),
-    ).thenAnswer((_) async => const ResultFailure(NetworkFailure())),
+    setUp: () =>
+        when(() => signIn(any()))
+            .thenAnswer((_) async => const ResultFailure(NetworkFailure())),
     build: filled,
     act: (b) => b.add(const SignInSubmitted()),
     skip: 3,
