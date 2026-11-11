@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_tokens.dart';
 import '../theme/app_typography.dart';
 import '../theme/theme_context.dart';
+import 'app_interactive.dart';
 
 /// List row: optional leading, title + subtitle, optional trailing.
 class AppListTile extends StatelessWidget {
@@ -66,11 +67,19 @@ class AppListTile extends StatelessWidget {
         ),
       ),
     );
-    return onTap == null
-        ? row
-        : Material(
-            type: MaterialType.transparency,
-            child: InkWell(onTap: onTap, child: row),
-          );
+    if (onTap == null) return row;
+    // Pressed tints the row; the focus ring stays inside, since rows sit in
+    // clipped cards.
+    return AppInteractive(
+      onTap: onTap,
+      borderRadius: BorderRadius.zero,
+      ringInside: true,
+      surface: (state) => (
+        color: state.pressed ? c.primarySubtle : Colors.transparent,
+        border: null,
+        shadows: const <BoxShadow>[],
+      ),
+      builder: (_, _) => row,
+    );
   }
 }

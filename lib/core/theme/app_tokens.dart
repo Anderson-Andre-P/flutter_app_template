@@ -70,6 +70,9 @@ abstract final class AppSizes {
   static const double listTileMin = 56;
   static const double modalMaxWidth = 340;
   static const double focusRing = 2;
+
+  /// Gap between a control and its focus ring.
+  static const double focusRingGap = 2;
   static const double errorBorder = 2;
 
   /// Icon box at the top of a dialog.

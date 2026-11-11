@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_tokens.dart';
 import '../theme/app_typography.dart';
 import '../theme/theme_context.dart';
+import 'app_interactive.dart';
 
 /// Filter chip. Selected = solid primary.
 class AppChip extends StatelessWidget {
@@ -23,34 +24,41 @@ class AppChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final enabled = onSelected != null;
-    final fg = !enabled
-        ? c.textDisabled
+    // Design system, sections 22 and 30: disabled is a neutral fill with no
+    // border; pressed tints an unselected chip and darkens a selected one.
+    ({Color bg, Color fg, Color? border}) look(bool pressed) => !enabled
+        ? (bg: c.sunken, fg: c.textDisabled, border: null)
         : selected
-        ? c.onPrimary
-        : c.textPrimary;
+        ? (
+            bg: pressed ? c.primaryHover : c.primary,
+            fg: c.onPrimary,
+            border: pressed ? c.primaryHover : c.primary,
+          )
+        : (
+            bg: pressed ? c.primarySubtle : c.card,
+            fg: pressed ? c.primary : c.textPrimary,
+            border: pressed ? c.primary : c.borderStrong,
+          );
     return Semantics(
       selected: selected,
       button: true,
-      child: Material(
-        color: selected && enabled ? c.primary : c.card,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadius.brFull,
-          side: BorderSide(
-            color: selected && enabled ? c.primary : c.borderStrong,
-          ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: enabled ? () => onSelected!(!selected) : null,
-          child: SizedBox(
-            height: AppSizes.chip,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-              child: Center(
-                widthFactor: 1,
-                child: Text(
-                  label,
-                  style: AppTypography.labelMedium.copyWith(color: fg),
+      child: AppInteractive(
+        onTap: enabled ? () => onSelected!(!selected) : null,
+        borderRadius: AppRadius.brFull,
+        surface: (state) {
+          final l = look(state.pressed);
+          return (color: l.bg, border: l.border, shadows: const <BoxShadow>[]);
+        },
+        builder: (context, state) => SizedBox(
+          height: AppSizes.chip,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+            child: Center(
+              widthFactor: 1,
+              child: Text(
+                label,
+                style: AppTypography.labelMedium.copyWith(
+                  color: look(state.pressed).fg,
                 ),
               ),
             ),

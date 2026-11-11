@@ -74,7 +74,12 @@ class _AppTextFieldState extends State<AppTextField> {
           decoration: InputDecoration(
             hintText: widget.hint,
             errorText: widget.errorText,
-            fillColor: widget.errorText != null ? c.dangerSubtle : null,
+            // Disabled: the neutral fill (design system, section 22).
+            fillColor: !widget.enabled
+                ? c.sunken
+                : widget.errorText != null
+                ? c.dangerSubtle
+                : null,
             constraints: const BoxConstraints(minHeight: AppSizes.field),
             suffixIcon: widget.obscure
                 ? IconButton(
