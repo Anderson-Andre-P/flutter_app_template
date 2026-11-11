@@ -57,6 +57,10 @@ because they must hold even when a skill is not loaded.
    `core/theme` (`context.colors`, `AppSpacing`, `AppRadius`, `AppSizes`,
    `AppDurations`, `AppTypography`); asset paths from
    `core/constants/assets/`. Screens are built from `core/widgets`.
+   Sizes follow the screen through `flutter_screenutil_plus`, but only
+   inside the tokens (`.w` widths, `.h` heights, `.r` radii and spacing,
+   `.sp` fonts, on the 360 × 690 `AppScreen.designSize`): a widget writes
+   `AppSpacing.lg`, never `16.w`. Tokens are getters, so they are not `const`.
 5. **Both themes, always.** Light and dark differ only in colours
    (`AppColors.light` / `AppColors.dark`) and shadows (dark has none). Every
    new widget is checked in both.
