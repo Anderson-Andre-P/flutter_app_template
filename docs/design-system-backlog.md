@@ -52,10 +52,10 @@ criar componentes novos.
 - [x] P1 · FAB redondo e FAB estendido ("+ Novo")
 - [x] P1 · Banda de atenção ("Action required": ícone, título e texto em
   fundo de perigo suave)
-- [ ] P2 · Tile de status (número grande com barra colorida à esquerda)
-- [ ] P2 · Botão de sucesso (verde, "Sucesso · concluir")
-- [ ] P2 · Botão tracejado "+ Adicionar item"
-- [ ] P2 · Campo somente leitura com o selo "READ-ONLY"
+- [x] P2 · Tile de status (número grande com barra colorida à esquerda)
+- [x] P2 · Botão de sucesso (verde, "Sucesso · concluir")
+- [x] P2 · Botão tracejado "+ Adicionar item"
+- [x] P2 · Campo somente leitura com o selo "READ-ONLY"
 
 ## Botões (Componentes, seção 10)
 
