@@ -25,7 +25,7 @@ vira outra coisa).
 São itens já implementados que não batem com o DS. Vale corrigir antes de
 criar componentes novos.
 
-- [ ] **P1 · Toasts** (Padrões, seção 29): o DS pede título, descrição e
+- [x] **P1 · Toasts** (Padrões, seção 29): o DS pede título, descrição e
   ação, no topo da tela abaixo da barra de topo, com no máximo dois
   empilhados e o mais novo por cima. Duração de 4s; erros ficam até serem
   dispensados; `role=status`, e `role=alert` para erros. Hoje o
