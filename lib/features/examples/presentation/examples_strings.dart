@@ -379,4 +379,52 @@ abstract final class ExamplesStrings {
   static const formsStepper = 'Stepper numérico';
   static const formsStepperCaption = 'Quantidades pequenas e exatas, até 99';
   static const formsQuantity = 'Quantidade';
+
+  // Navegação
+  static const navigationTitle = 'Navegação';
+  static const navigationTabs = 'Abas';
+  static const navTabsCaption =
+      'Sublinhadas para conteúdos diferentes; segmentadas para recortes';
+  static const navTabItems = [
+    ('Visão geral', 3),
+    ('Histórico', null),
+    ('Documentos', 12),
+  ];
+  static const navTabBodies = [
+    'Resumo do registro e dos responsáveis.',
+    'Tudo o que aconteceu, do mais recente ao mais antigo.',
+    'Contratos, fotos e anexos do registro.',
+  ];
+  static const navPeriods = ['Semana', 'Mês', 'Trimestre'];
+  static const navAccordion = 'Accordion';
+  static const navAccordionCaption = 'Um painel aberto por vez';
+  static const navFaq = [
+    (
+      'Como criar um novo registro?',
+      'Toque em Novo no canto da tela e preencha os campos obrigatórios.',
+    ),
+    (
+      'Por que o roteiro travou?',
+      'Depois que a execução começa, o roteiro é congelado para corresponder ao que foi feito.',
+    ),
+    (
+      'Funciona sem internet?',
+      'Sim. As alterações ficam no aparelho e sincronizam quando a conexão voltar.',
+    ),
+  ];
+  static const navStepper = 'Stepper';
+  static const navStepperCaption = 'De 3 a 5 etapas; dá para voltar';
+  static const navSteps = ['Detalhes', 'Prioridade', 'Responsável', 'Agenda'];
+  static const navStepBack = 'Voltar';
+  static const navStepNext = 'Avançar';
+  static const navMenu = 'Menu de contexto';
+  static const navMenuCaption = 'Até 6 ações; a destrutiva por último';
+  static const navMenuItem = 'OS-2041 · Troca de bomba';
+  static const navMenuActions = ['Editar', 'Duplicar', 'Atribuir a...'];
+  static const navMenuDelete = 'Excluir';
+  static const navLoadMore = 'Carregar mais';
+  static const navLoadMoreCaption = 'No celular, no lugar da paginação';
+  static String navLoadMoreLabel(int n) => 'Carregar mais $n';
+  static String navShowing(int shown, int total) =>
+      'Mostrando $shown de $total';
 }

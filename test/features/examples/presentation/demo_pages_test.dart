@@ -3,6 +3,7 @@ import 'package:flutter_app_template/core/constants/strings/common_strings.dart'
 import 'package:flutter_app_template/core/widgets/app_select.dart';
 import 'package:flutter_app_template/core/widgets/app_radio.dart';
 import 'package:flutter_app_template/core/widgets/app_segmented_control.dart';
+import 'package:flutter_app_template/core/widgets/app_stepper.dart';
 import 'package:flutter_app_template/core/widgets/app_switch.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/core/widgets/app_bar_chart.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_app_template/features/examples/presentation/pages/bottom
 import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/controls_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/forms_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/navigation_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/modals_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/sheets_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/states_demo_page.dart';
@@ -43,8 +45,16 @@ Future<void> _tapVisible(WidgetTester tester, String text) async {
   await tester.scrollUntilVisible(
     find.text(text),
     150,
-    scrollable: find.byType(Scrollable).first,
+    // The page's vertical list, not a sideways one inside it (tabs).
+    scrollable: find
+        .byWidgetPredicate(
+          (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+        )
+        .first,
   );
+  // Built is not on screen: the list builds a little past its edge.
+  await tester.ensureVisible(find.text(text));
+  await tester.pump();
   await tester.tap(find.text(text));
   await _settle(tester);
 }
@@ -189,6 +199,23 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await _settle(tester);
       expect(find.text(ExamplesStrings.formsDeadlinePast), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
+  for (final dark in [false, true]) {
+    testWidgets('navigation demo switches tabs, steps and loads more '
+        '(${dark ? 'dark' : 'light'})', (tester) async {
+      await _pump(tester, const NavigationDemoPage(), dark: dark);
+      await tester.tap(find.text(ExamplesStrings.navTabItems.last.$1));
+      await _settle(tester);
+      expect(find.text(ExamplesStrings.navTabBodies.last), findsOneWidget);
+
+      await _tapVisible(tester, ExamplesStrings.navStepNext);
+      expect(find.text(AppStepProgress.stepLabel(3, 4)), findsOneWidget);
+
+      await _tapVisible(tester, ExamplesStrings.navLoadMoreLabel(20));
+      expect(find.text(ExamplesStrings.navShowing(60, 179)), findsOneWidget);
       expect(tester.takeException(), isNull);
     });
   }
