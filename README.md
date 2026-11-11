@@ -22,7 +22,7 @@ pronta, para que o time só precise programar as telas do produto.
 
 ## Requisitos
 
-- Flutter 3.41 (stable) / Dart 3.11
+- Flutter 3.47 (stable) / Dart 3.13
 - Python 3.9+ (scripts das skills)
 
 ## Começando um app novo
