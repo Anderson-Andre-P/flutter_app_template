@@ -76,8 +76,10 @@ class AuthFooterLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    // Wraps on a narrow phone or with large text instead of overflowing.
+    return Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         Text(question, style: AppTypography.body.copyWith(color: c.textMuted)),
         TextButton(onPressed: onTap, child: Text(action)),
