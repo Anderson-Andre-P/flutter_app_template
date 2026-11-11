@@ -11,10 +11,10 @@ pronta, para que o time só precise programar as telas do produto.
 - **Design system:** tokens de cor, espaçamento, raio, tipografia e
   elevação, com tema **claro e escuro**, widgets base, dialogs e snackbars.
 - **Telas de exemplo:** splash, entrar, criar conta, início em grade com
-  16 demonstrações. São 6 telas (painel, extrato, detalhe, formulário,
-  sucesso e estados) e 10 catálogos de componentes (widgets, barra inferior,
+  17 demonstrações. São 6 telas (painel, extrato, detalhe, formulário,
+  sucesso e estados) e 11 catálogos de componentes (widgets, barra inferior,
   modais, bottom sheets, toasts, gráficos, controles, formulários,
-  navegação e conversa e mídia). Há também a aba Configurações,
+  navegação, conversa e mídia e cartões). Há também a aba Configurações,
   com troca de tema e saída. A autenticação e os dados
   são **falsos e locais**, sem backend.
 - **Skills de IA:** `.claude/` com skills, rules, hooks e permissões, mais o
