@@ -160,9 +160,9 @@ padding interno nunca fica abaixo de 14px.
 
 - [ ] P2 · Timeline (ponto com halo, título, data e autor)
 - [ ] P2 · Barra de progresso segmentada (várias cores numa barra só)
-- [ ] P1 · Progresso circular determinado (anel com percentual; o spinner só
+- [x] P1 · Progresso circular determinado (anel com percentual; o spinner só
   quando não há percentual)
-- [ ] P1 · Skeleton com shimmer que repete a forma do conteúdo (círculo para
+- [x] P1 · Skeleton com shimmer que repete a forma do conteúdo (círculo para
   avatar, linhas, bloco). Shimmer de 1,2s em loop; nunca um spinner genérico
   em lista
 - [ ] P2 · Placeholders de mídia (imagem, diagrama, anexo) e ícones por tipo
@@ -175,21 +175,21 @@ padding interno nunca fica abaixo de 14px.
 
 ## Feedback e estados (Padrões, seções 17 e 24)
 
-- [ ] P1 · Estado offline ("Você está offline") com "N alterações
+- [x] P1 · Estado offline ("Você está offline") com "N alterações
   pendentes"
-- [ ] P1 · Link secundário no estado de erro ("Reportar problema") e código
+- [x] P1 · Link secundário no estado de erro ("Reportar problema") e código
   do erro no texto
-- [ ] P1 · Alerta em bloco dentro da tela ("Bloqueio inline: campo
+- [x] P1 · Alerta em bloco dentro da tela ("Bloqueio inline: campo
   obrigatório ausente")
-- [ ] P2 · Toast neutro com ação ("Desfazer")
+- [x] P2 · Toast neutro com ação ("Desfazer")
 
 ## Badges, chips e avatares (Padrões, seção 28)
 
-- [ ] P1 · Contadores (3, 12, 99+ como teto) e ponto de novidade
-- [ ] P2 · Chip desabilitado
-- [ ] P1 · Chip removível com × ("Bomba 02 ×")
-- [ ] P2 · Avatar com indicador de status ("Disponível")
-- [ ] P2 · Grupo de avatares sobrepostos com "+4"
+- [x] P1 · Contadores (3, 12, 99+ como teto) e ponto de novidade
+- [x] P2 · Chip desabilitado
+- [x] P1 · Chip removível com × ("Bomba 02 ×")
+- [x] P2 · Avatar com indicador de status ("Disponível")
+- [x] P2 · Grupo de avatares sobrepostos com "+4"
 
 ## Conversa (Componentes, seção 16)
 
