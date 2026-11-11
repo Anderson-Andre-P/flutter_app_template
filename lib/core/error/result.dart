@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'failure.dart';
 
 /// The return type of every usecase: either a [Success] carrying a value or a
