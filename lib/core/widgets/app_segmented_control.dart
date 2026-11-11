@@ -5,59 +5,108 @@ import '../theme/app_typography.dart';
 import '../theme/theme_context.dart';
 import 'app_interactive.dart';
 
-/// Picks one of a few mutually exclusive values (design system, section
-/// 09: Baixa / Média / Alta / Crítica). Segments share the width; the
-/// selected one is a raised surface on the primary tint. For more than
-/// four options use a select instead.
+/// One option of an [AppSegmentedControl]. With [iconOnly] only the [icon]
+/// shows and the [label] is what a screen reader hears.
+class AppSegment<T> {
+  const AppSegment({
+    required this.value,
+    required this.label,
+    this.icon,
+    this.iconOnly = false,
+  }) : assert(!iconOnly || icon != null, 'An icon-only segment needs an icon');
+
+  final T value;
+  final String label;
+  final IconData? icon;
+  final bool iconOnly;
+}
+
+/// How an [AppSegmentedControl] looks (design system, sections 09 and 10).
+enum AppSegmentedStyle {
+  /// A raised segment on the primary tint — picks a value
+  /// (Baixa / Média / Alta / Crítica).
+  tinted,
+
+  /// Segments joined inside one outline, the active one tinted — switches
+  /// a view (Lista / Grade / Mapa / Calendário), also icon-only.
+  joined,
+}
+
+/// Picks one of a few mutually exclusive values. Segments share the width
+/// (icon-only joined segments hug their 44px). For more than four options
+/// use a select instead.
 class AppSegmentedControl<T> extends StatelessWidget {
   const AppSegmentedControl({
     super.key,
     required this.segments,
     required this.selected,
     required this.onChanged,
+    this.style = AppSegmentedStyle.tinted,
   });
 
-  final List<({T value, String label})> segments;
+  final List<AppSegment<T>> segments;
   final T selected;
 
   /// `null` disables the control.
   final ValueChanged<T>? onChanged;
+  final AppSegmentedStyle style;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final enabled = onChanged != null;
+    final joined = style == AppSegmentedStyle.joined;
+    final hug = joined && segments.every((s) => s.iconOnly);
+    final children = <Widget>[
+      for (var i = 0; i < segments.length; i++) ...[
+        if (joined && i > 0)
+          VerticalDivider(width: 1, thickness: 1, color: c.border),
+        _wrap(
+          hug,
+          _Segment(
+            segment: segments[i],
+            joined: joined,
+            selected: segments[i].value == selected,
+            onTap: enabled ? () => onChanged!(segments[i].value) : null,
+          ),
+        ),
+      ],
+    ];
     return Container(
       height: AppSizes.buttonMd,
-      padding: const EdgeInsets.all(AppSpacing.xs),
+      padding: joined ? null : const EdgeInsets.all(AppSpacing.xs),
+      clipBehavior: joined ? Clip.antiAlias : Clip.none,
       decoration: BoxDecoration(
-        color: enabled ? c.primarySubtle : c.sunken,
+        color: joined
+            ? c.card
+            : enabled
+            ? c.primarySubtle
+            : c.sunken,
         borderRadius: AppRadius.brMd,
+        border: joined ? Border.all(color: c.borderStrong) : null,
       ),
       child: Row(
-        children: [
-          for (final segment in segments)
-            Expanded(
-              child: _Segment(
-                label: segment.label,
-                selected: segment.value == selected,
-                onTap: enabled ? () => onChanged!(segment.value) : null,
-              ),
-            ),
-        ],
+        mainAxisSize: hug ? MainAxisSize.min : MainAxisSize.max,
+        children: children,
       ),
     );
   }
+
+  static Widget _wrap(bool hug, Widget child) => hug
+      ? SizedBox(width: AppSizes.minTouchTarget, child: child)
+      : Expanded(child: child);
 }
 
-class _Segment extends StatelessWidget {
+class _Segment<T> extends StatelessWidget {
   const _Segment({
-    required this.label,
+    required this.segment,
+    required this.joined,
     required this.selected,
     required this.onTap,
   });
 
-  final String label;
+  final AppSegment<T> segment;
+  final bool joined;
   final bool selected;
   final VoidCallback? onTap;
 
@@ -65,36 +114,59 @@ class _Segment extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final enabled = onTap != null;
+    final fg = !enabled
+        ? c.textDisabled
+        : selected
+        ? c.primary
+        : joined
+        ? c.textPrimary
+        : c.textMuted;
+    final icon = segment.icon;
     return Semantics(
       button: true,
       selected: selected,
       inMutuallyExclusiveGroup: true,
       enabled: enabled,
+      label: segment.iconOnly ? segment.label : null,
       child: AppInteractive(
         onTap: onTap,
-        borderRadius: AppRadius.brSm,
+        borderRadius: joined ? BorderRadius.zero : AppRadius.brSm,
+        ringInside: joined,
         surface: (state) => (
-          color: selected
+          color: joined
+              ? (selected || state.pressed
+                    ? c.primarySubtle
+                    : Colors.transparent)
+              : selected
               ? c.raised
               : state.pressed
               ? c.card.withValues(alpha: .5)
               : Colors.transparent,
           border: null,
-          shadows: selected ? context.shadows.elev1 : const <BoxShadow>[],
+          shadows: !joined && selected
+              ? context.shadows.elev1
+              : const <BoxShadow>[],
         ),
         builder: (context, state) => Center(
-          child: Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTypography.labelMedium.copyWith(
-              color: !enabled
-                  ? c.textDisabled
-                  : selected
-                  ? c.primary
-                  : c.textMuted,
-            ),
-          ),
+          child: segment.iconOnly
+              ? Icon(icon, size: AppSizes.iconField, color: fg)
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (icon != null) ...[
+                      Icon(icon, size: AppSizes.iconField, color: fg),
+                      const SizedBox(width: AppSpacing.xs),
+                    ],
+                    Flexible(
+                      child: Text(
+                        segment.label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.labelMedium.copyWith(color: fg),
+                      ),
+                    ),
+                  ],
+                ),
         ),
       ),
     );

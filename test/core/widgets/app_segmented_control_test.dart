@@ -7,9 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/pump_app.dart';
 
 const _levels = [
-  (value: 0, label: 'Baixa'),
-  (value: 1, label: 'Média'),
-  (value: 2, label: 'Alta'),
+  AppSegment(value: 0, label: 'Baixa'),
+  AppSegment(value: 1, label: 'Média'),
+  AppSegment(value: 2, label: 'Alta'),
 ];
 
 void main() {
@@ -77,6 +77,54 @@ void main() {
         isFocusable: true,
       ),
     );
+    handle.dispose();
+  });
+
+  testBothThemes('joined: the active segment is tinted inside one outline', (
+    tester,
+    dark,
+  ) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    await pumpApp(
+      tester,
+      AppSegmentedControl(
+        style: AppSegmentedStyle.joined,
+        segments: _levels,
+        selected: 0,
+        onChanged: (_) {},
+      ),
+      dark: dark,
+    );
+    expect(tester.widget<Text>(find.text('Baixa')).style!.color, c.primary);
+    expect(tester.widget<Text>(find.text('Média')).style!.color, c.textPrimary);
+  });
+
+  testWidgets('an icon-only segment reads its label', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pumpApp(
+      tester,
+      AppSegmentedControl(
+        style: AppSegmentedStyle.joined,
+        segments: const [
+          AppSegment(
+            value: 0,
+            label: 'Lista',
+            icon: Icons.list,
+            iconOnly: true,
+          ),
+          AppSegment(
+            value: 1,
+            label: 'Grade',
+            icon: Icons.grid_view,
+            iconOnly: true,
+          ),
+        ],
+        selected: 0,
+        onChanged: (_) {},
+      ),
+    );
+    expect(find.text('Lista'), findsNothing);
+    expect(find.bySemanticsLabel('Grade'), findsOneWidget);
     handle.dispose();
   });
 }
