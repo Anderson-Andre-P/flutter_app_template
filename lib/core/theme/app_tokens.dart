@@ -34,8 +34,8 @@ abstract final class AppRadius {
   static const BorderRadius brXl = BorderRadius.all(Radius.circular(xl));
   static const BorderRadius brFull = BorderRadius.all(Radius.circular(full));
 
-  /// Toast (design system: 14, between field and card).
-  static const BorderRadius brToast = BorderRadius.all(Radius.circular(14));
+  /// 14, between field and card: toast, dialog icon box.
+  static const BorderRadius brMdPlus = BorderRadius.all(Radius.circular(14));
 
   /// Top corners only — surfaces anchored to the bottom edge (bottom bar,
   /// bottom sheet).
@@ -71,6 +71,9 @@ abstract final class AppSizes {
   static const double modalMaxWidth = 340;
   static const double focusRing = 2;
   static const double errorBorder = 2;
+
+  /// Icon box at the top of a dialog.
+  static const double dialogIcon = 42;
 
   /// Round tone icon at the start of a toast.
   static const double toastIcon = 28;

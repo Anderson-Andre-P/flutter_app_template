@@ -5,12 +5,17 @@ import '../../theme/app_tokens.dart';
 import '../../theme/app_typography.dart';
 import '../../theme/theme_context.dart';
 import '../app_button.dart';
+import '../app_tone.dart';
 
 /// Modal dialogs of the design system (max 340px wide, radius `xl`).
 abstract final class AppDialog {
   /// Asks for confirmation. Resolves `true` only on the confirm button;
-  /// cancel or a tap outside resolves `false`. [destructive] stacks the
-  /// buttons with the destructive action on top.
+  /// cancel or a tap outside resolves `false`.
+  ///
+  /// [destructive] follows the design system's destructive dialog: an icon
+  /// on a danger tint at the top ([icon], a warning by default), then the
+  /// destructive action at full width with Cancelar below it. [icon] on a
+  /// plain confirm shows it on the brand tint.
   static Future<bool> confirm(
     BuildContext context, {
     required String title,
@@ -18,6 +23,7 @@ abstract final class AppDialog {
     required String confirmLabel,
     String? cancelLabel,
     bool destructive = false,
+    IconData? icon,
   }) async {
     final result = await showDialog<bool>(
       context: context,
@@ -39,6 +45,8 @@ abstract final class AppDialog {
         return _AppDialogFrame(
           title: title,
           message: message,
+          icon: destructive ? icon ?? Icons.warning_amber_rounded : icon,
+          tone: destructive ? AppTone.danger : AppTone.primary,
           actions: destructive
               ? Column(
                   children: [
@@ -85,11 +93,15 @@ class _AppDialogFrame extends StatelessWidget {
     required this.title,
     required this.message,
     required this.actions,
+    this.icon,
+    this.tone = AppTone.primary,
   });
 
   final String title;
   final String message;
   final Widget actions;
+  final IconData? icon;
+  final AppTone tone;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +116,25 @@ class _AppDialogFrame extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              if (icon case final icon?) ...[
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Container(
+                    width: AppSizes.dialogIcon,
+                    height: AppSizes.dialogIcon,
+                    decoration: BoxDecoration(
+                      color: c.toneBackground(tone),
+                      borderRadius: AppRadius.brMdPlus,
+                    ),
+                    child: Icon(
+                      icon,
+                      size: AppSizes.iconTopBar,
+                      color: c.toneForeground(tone),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+              ],
               Text(
                 title,
                 style: AppTypography.section.copyWith(color: c.textPrimary),

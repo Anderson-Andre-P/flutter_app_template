@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
+import 'package:flutter_app_template/core/widgets/app_button.dart';
 import 'package:flutter_app_template/core/widgets/dialogs/app_dialog.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../helpers/pump_app.dart';
 
 Future<BuildContext> _host(WidgetTester tester, {bool dark = false}) async {
   late BuildContext ctx;
@@ -20,14 +25,18 @@ Future<BuildContext> _host(WidgetTester tester, {bool dark = false}) async {
 }
 
 void main() {
-  Future<bool> openConfirm(BuildContext ctx, {bool destructive = false}) =>
-      AppDialog.confirm(
-        ctx,
-        title: 'Sair da conta?',
-        message: 'Você vai precisar entrar de novo.',
-        confirmLabel: 'Sair',
-        destructive: destructive,
-      );
+  Future<bool> openConfirm(
+    BuildContext ctx, {
+    bool destructive = false,
+    IconData? icon,
+  }) => AppDialog.confirm(
+    ctx,
+    title: 'Sair da conta?',
+    message: 'Você vai precisar entrar de novo.',
+    confirmLabel: 'Sair',
+    destructive: destructive,
+    icon: icon,
+  );
 
   testWidgets('confirm returns true on the confirm button', (tester) async {
     final ctx = await _host(tester);
@@ -65,5 +74,40 @@ void main() {
     await tester.pumpAndSettle();
     await done;
     expect(find.text('Mensagem'), findsNothing);
+  });
+
+  testBothThemes('destructive: icon on top, full-width action above Cancelar', (
+    tester,
+    dark,
+  ) async {
+    final ctx = await _host(tester, dark: dark);
+    unawaited(openConfirm(ctx, destructive: true, icon: Icons.logout));
+    await tester.pumpAndSettle();
+    final icon = tester.getRect(find.byIcon(Icons.logout));
+    final title = tester.getRect(find.text('Sair da conta?'));
+    final confirm = tester.getRect(find.widgetWithText(AppButton, 'Sair'));
+    final cancel = tester.getRect(find.widgetWithText(AppButton, 'Cancelar'));
+    expect(icon.bottom, lessThanOrEqualTo(title.top));
+    expect(confirm.bottom, lessThanOrEqualTo(cancel.top));
+    expect(confirm.width, cancel.width);
+    expect(confirm.left, cancel.left);
+  });
+
+  testWidgets('destructive without an icon shows a warning icon', (
+    tester,
+  ) async {
+    final ctx = await _host(tester);
+    unawaited(openConfirm(ctx, destructive: true));
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.warning_amber_rounded), findsOneWidget);
+  });
+
+  testWidgets('a plain confirm has no icon unless one is given', (
+    tester,
+  ) async {
+    final ctx = await _host(tester);
+    unawaited(openConfirm(ctx));
+    await tester.pumpAndSettle();
+    expect(find.byType(Icon), findsNothing);
   });
 }

@@ -225,7 +225,7 @@ class _ToastViewState extends State<_ToastView> {
           child: Material(
             color: _background(c, toast.kind),
             shape: RoundedRectangleBorder(
-              borderRadius: AppRadius.brToast,
+              borderRadius: AppRadius.brMdPlus,
               side: BorderSide(color: fg),
             ),
             child: Padding(
