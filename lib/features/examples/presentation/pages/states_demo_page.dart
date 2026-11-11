@@ -78,7 +78,7 @@ class StatesDemoPage extends StatelessWidget {
                           children: [
                             const AppSkeleton.line(),
                             SizedBox(height: AppSpacing.sm),
-                            AppSkeleton.line(width: 140),
+                            AppSkeleton.line(width: AppSizes.skeletonShortLine),
                           ],
                         ),
                       ),

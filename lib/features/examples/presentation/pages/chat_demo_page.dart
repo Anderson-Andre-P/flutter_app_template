@@ -64,8 +64,8 @@ class ChatDemoPage extends StatelessWidget {
                       initials: ExamplesStrings.chatRafaelInitials,
                       firstInGroup: false,
                       attachment: SizedBox(
-                        width: 200,
-                        height: 90,
+                        width: AppSizes.chatMediaWidth,
+                        height: AppSizes.chatMediaHeight,
                         child: const AppMediaPlaceholder(
                           kind: AppMediaKind.image,
                         ),
