@@ -117,7 +117,7 @@ Implemente `AuthRepository` com o `ApiClient` e registre essa implementação em
 ```dart
 final c = context.colors;                       // paleta do modo ativo
 Text('Olá', style: AppTypography.title.copyWith(color: c.textPrimary));
-const SizedBox(height: AppSpacing.lg);          // escala: xs 4 … x4l 40
+SizedBox(height: AppSpacing.lg);                // escala: xs 4 … x4l 40
 BorderRadius r = AppRadius.brMd;                // xs 6 … xl 22, full
 ```
 
@@ -126,6 +126,12 @@ BorderRadius r = AppRadius.brMd;                // xs 6 … xl 22, full
   marca, basta trocar os valores.
 - O modo segue o sistema por padrão. Em Configurações dá para forçar claro ou escuro,
   e a escolha fica salva.
+- As medidas acompanham o tamanho da tela pelo `flutter_screenutil_plus`, a
+  partir de um quadro de design de 360 × 690 (`AppScreen.designSize`). A escala
+  fica só dentro dos tokens: larguras com `.w`, alturas com `.h`, raios e
+  espaçamentos com `.r` e fontes com `.sp`. Nos widgets, escreva
+  `AppSpacing.lg`, nunca `16.w`. Como os tokens são getters, não use `const`
+  em expressões que dependem deles.
 - Nunca use cores, medidas, textos ou caminhos de asset literais nos widgets:
   use os tokens, os `*_strings.dart` e as classes em `core/constants/assets/`.
 
