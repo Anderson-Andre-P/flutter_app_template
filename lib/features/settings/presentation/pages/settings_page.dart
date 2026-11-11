@@ -160,6 +160,7 @@ class SettingsPage extends StatelessWidget {
                   message: SettingsStrings.signOutMessage,
                   confirmLabel: SettingsStrings.signOutConfirm,
                   destructive: true,
+                  icon: Icons.logout,
                 );
                 if (confirmed) session.add(const SessionEnded());
               },
