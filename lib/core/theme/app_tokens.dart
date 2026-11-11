@@ -34,6 +34,9 @@ abstract final class AppRadius {
   static const BorderRadius brXl = BorderRadius.all(Radius.circular(xl));
   static const BorderRadius brFull = BorderRadius.all(Radius.circular(full));
 
+  /// Toast (design system: 14, between field and card).
+  static const BorderRadius brToast = BorderRadius.all(Radius.circular(14));
+
   /// Top corners only — surfaces anchored to the bottom edge (bottom bar,
   /// bottom sheet).
   static const BorderRadius topXl = BorderRadius.vertical(
@@ -69,6 +72,12 @@ abstract final class AppSizes {
   static const double focusRing = 2;
   static const double errorBorder = 2;
 
+  /// Round tone icon at the start of a toast.
+  static const double toastIcon = 28;
+
+  /// Toasts never grow wider than this on a tablet.
+  static const double toastMaxWidth = 500;
+
   static const double avatarSm = 24;
   static const double avatarMd = 32;
   static const double avatarLg = 40;
@@ -89,11 +98,8 @@ abstract final class AppDurations {
   static const Duration accordion = Duration(milliseconds: 160);
   static const Duration toggle = Duration(milliseconds: 180);
 
-  /// How long a toast stays on screen.
+  /// How long a toast stays on screen. Error toasts stay until dismissed.
   static const Duration toastVisible = Duration(seconds: 4);
-
-  /// Error toasts stay longer and carry a dismiss action.
-  static const Duration toastErrorVisible = Duration(seconds: 6);
 
   static const Curve sheetCurve = Cubic(.22, .75, .3, 1);
 }

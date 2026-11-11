@@ -3,117 +3,332 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../constants/strings/common_strings.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_tokens.dart';
 import '../theme/app_typography.dart';
 import '../theme/theme_context.dart';
-import 'app_tone.dart';
 
-/// Transient, non-blocking feedback in four tones. Only one is visible at a
-/// time: a new one replaces the current. Errors stay longer and always
-/// carry a dismiss action.
+/// Transient, non-blocking feedback (design system, section 29): a title,
+/// an optional description and an optional action, in four tones.
+///
+/// Toasts show at the top, below the top bar, so they never cover the
+/// bottom navigation. At most [maxVisible] are on screen; the newest enters
+/// on top and pushes out the oldest. They leave after
+/// [AppDurations.toastVisible], except errors, which stay until dismissed
+/// and therefore always carry an action ([CommonStrings.close] by default).
+/// Any toast can also be swiped away.
+///
+/// Every toast is a live region, so a screen reader announces it as soon as
+/// it appears (the design system's `role=status` / `role=alert`).
 abstract final class AppSnackbar {
+  static const int maxVisible = 2;
+
   static void success(
     BuildContext context,
-    String message, {
+    String title, {
+    String? description,
     String? actionLabel,
     VoidCallback? onAction,
   }) => _show(
     context,
-    AppTone.success,
-    Icons.check_circle_outline,
-    message,
-    actionLabel,
-    onAction,
+    _Toast(_ToastKind.success, title, description, actionLabel, onAction),
   );
 
   static void error(
     BuildContext context,
-    String message, {
+    String title, {
+    String? description,
     String? actionLabel,
     VoidCallback? onAction,
   }) => _show(
     context,
-    AppTone.danger,
-    Icons.error_outline,
-    message,
-    actionLabel ?? CommonStrings.close,
-    onAction,
+    _Toast(
+      _ToastKind.error,
+      title,
+      description,
+      actionLabel ?? CommonStrings.close,
+      onAction,
+    ),
   );
 
   static void warning(
     BuildContext context,
-    String message, {
+    String title, {
+    String? description,
     String? actionLabel,
     VoidCallback? onAction,
   }) => _show(
     context,
-    AppTone.alert,
-    Icons.warning_amber_outlined,
-    message,
-    actionLabel,
-    onAction,
+    _Toast(_ToastKind.warning, title, description, actionLabel, onAction),
   );
 
   static void info(
     BuildContext context,
-    String message, {
+    String title, {
+    String? description,
     String? actionLabel,
     VoidCallback? onAction,
   }) => _show(
     context,
-    AppTone.info,
-    Icons.info_outline,
-    message,
-    actionLabel,
-    onAction,
+    _Toast(_ToastKind.info, title, description, actionLabel, onAction),
   );
 
-  static void _show(
-    BuildContext context,
-    AppTone tone,
-    IconData icon,
-    String message,
-    String? actionLabel,
-    VoidCallback? onAction,
-  ) {
-    final c = context.colors;
-    final fg = c.toneForeground(tone);
-    final messenger = ScaffoldMessenger.of(context)..removeCurrentSnackBar();
-    messenger.showSnackBar(
-      SnackBar(
-        duration: tone == AppTone.danger
-            ? AppDurations.toastErrorVisible
-            : AppDurations.toastVisible,
-        backgroundColor: c.toneBackground(tone),
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadius.brMd,
-          side: BorderSide(color: fg.withValues(alpha: .4)),
+  /// Visible toasts, newest first.
+  static final List<_Toast> _toasts = [];
+  static OverlayEntry? _entry;
+  static OverlayState? _overlay;
+
+  static void _show(BuildContext context, _Toast toast) {
+    final overlay = Overlay.of(context, rootOverlay: true);
+    if (!identical(overlay, _overlay)) {
+      // A different app (or a rebuilt one, as between tests): whatever was
+      // tracked belongs to an overlay that is gone.
+      _toasts.clear();
+      _entry = null;
+      _overlay = overlay;
+    }
+    _toasts.insert(0, toast);
+    if (_toasts.length > maxVisible) {
+      _toasts.removeRange(maxVisible, _toasts.length);
+    }
+    final entry = _entry;
+    if (entry == null) {
+      overlay.insert(
+        _entry = OverlayEntry(builder: (_) => _ToastStack(List.of(_toasts))),
+      );
+    } else {
+      entry.markNeedsBuild();
+    }
+  }
+
+  static void _dismiss(_Toast toast) {
+    if (!_toasts.remove(toast)) return;
+    final entry = _entry;
+    if (entry == null) return;
+    if (_toasts.isEmpty) {
+      _entry = null;
+      if (entry.mounted) entry.remove();
+    } else {
+      entry.markNeedsBuild();
+    }
+  }
+}
+
+enum _ToastKind { success, warning, error, info }
+
+final class _Toast {
+  _Toast(
+    this.kind,
+    this.title,
+    this.description,
+    this.actionLabel,
+    this.onAction,
+  );
+
+  final _ToastKind kind;
+  final String title;
+  final String? description;
+  final String? actionLabel;
+  final VoidCallback? onAction;
+}
+
+class _ToastStack extends StatelessWidget {
+  const _ToastStack(this.toasts);
+
+  final List<_Toast> toasts;
+
+  @override
+  Widget build(BuildContext context) => Positioned(
+    top: MediaQuery.paddingOf(context).top + kToolbarHeight + AppSpacing.sm,
+    left: AppSpacing.xl,
+    right: AppSpacing.xl,
+    child: Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: AppSizes.toastMaxWidth),
+        child: Material(
+          type: MaterialType.transparency,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final toast in toasts)
+                Padding(
+                  key: ObjectKey(toast),
+                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                  child: _ToastView(toast),
+                ),
+            ],
+          ),
         ),
-        content: Row(
-          children: [
-            Icon(icon, color: fg, size: AppSizes.iconTopBar),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Text(
-                message,
-                style: AppTypography.body.copyWith(color: c.textPrimary),
+      ),
+    ),
+  );
+}
+
+/// One toast. Owns its own timer, so the timer dies with the widget — when
+/// the toast is dismissed, pushed out of the stack or the app goes away.
+class _ToastView extends StatefulWidget {
+  const _ToastView(this.toast);
+
+  final _Toast toast;
+
+  @override
+  State<_ToastView> createState() => _ToastViewState();
+}
+
+class _ToastViewState extends State<_ToastView> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.toast.kind != _ToastKind.error) {
+      _timer = Timer(AppDurations.toastVisible, _dismiss);
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _dismiss() => AppSnackbar._dismiss(widget.toast);
+
+  void _act() {
+    _dismiss();
+    widget.toast.onAction?.call();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final toast = widget.toast;
+    final c = context.colors;
+    final fg = _foreground(c, toast.kind);
+    final action = toast.actionLabel;
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: 1),
+      duration: AppDurations.toast,
+      builder: (context, t, child) => Opacity(
+        opacity: t,
+        child: Transform.translate(
+          offset: Offset(0, -AppSpacing.sm * (1 - t)),
+          child: child,
+        ),
+      ),
+      child: Dismissible(
+        key: ObjectKey(toast),
+        onDismissed: (_) => _dismiss(),
+        child: Semantics(
+          container: true,
+          liveRegion: true,
+          child: Material(
+            color: _background(c, toast.kind),
+            shape: RoundedRectangleBorder(
+              borderRadius: AppRadius.brToast,
+              side: BorderSide(color: fg),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.lg,
+                AppSpacing.sm,
+                AppSpacing.lg,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: AppSizes.toastIcon,
+                    height: AppSizes.toastIcon,
+                    decoration: BoxDecoration(
+                      color: fg,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      _icon(toast.kind),
+                      size: AppSizes.iconChip,
+                      // The card colour: white on light, near-black on dark.
+                      color: c.card,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          toast.title,
+                          style: AppTypography.label.copyWith(
+                            color: c.textPrimary,
+                          ),
+                        ),
+                        if (toast.description case final description?) ...[
+                          const SizedBox(height: AppSpacing.xs),
+                          Text(
+                            description,
+                            style: AppTypography.bodySmall.copyWith(
+                              color: c.textMuted,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  if (action != null)
+                    InkWell(
+                      onTap: _act,
+                      borderRadius: AppRadius.brSm,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          minWidth: AppSizes.minTouchTarget,
+                          minHeight: AppSizes.minTouchTarget,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.sm,
+                          ),
+                          child: Center(
+                            widthFactor: 1,
+                            child: Text(
+                              action,
+                              style: AppTypography.label.copyWith(color: fg),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    const SizedBox(width: AppSpacing.sm),
+                ],
               ),
             ),
-          ],
+          ),
         ),
-        action: actionLabel == null
-            ? null
-            : SnackBarAction(
-                label: actionLabel,
-                textColor: fg,
-                // SnackBarAction hides the current snackbar right after
-                // onPressed returns; deferring the callback keeps a snackbar
-                // it shows (e.g. "Ação desfeita") from being hidden instead.
-                onPressed: onAction == null
-                    ? messenger.hideCurrentSnackBar
-                    : () => scheduleMicrotask(onAction),
-              ),
       ),
     );
   }
+
+  /// Border, icon and action colour. Info uses the brand colour, as in the
+  /// design system's toast.
+  static Color _foreground(AppColors c, _ToastKind kind) => switch (kind) {
+    _ToastKind.success => c.success,
+    _ToastKind.warning => c.alertText,
+    _ToastKind.error => c.danger,
+    _ToastKind.info => c.primary,
+  };
+
+  static Color _background(AppColors c, _ToastKind kind) => switch (kind) {
+    _ToastKind.success => c.successSubtle,
+    _ToastKind.warning => c.alertSubtle,
+    _ToastKind.error => c.dangerSubtle,
+    _ToastKind.info => c.primarySubtle,
+  };
+
+  static IconData _icon(_ToastKind kind) => switch (kind) {
+    _ToastKind.success => Icons.check,
+    _ToastKind.warning => Icons.priority_high,
+    _ToastKind.error => Icons.close,
+    _ToastKind.info => Icons.info_outline,
+  };
 }

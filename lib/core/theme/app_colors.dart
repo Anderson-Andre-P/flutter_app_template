@@ -27,6 +27,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.successSubtle,
     required this.alert,
     required this.alertSubtle,
+    required this.alertText,
     required this.danger,
     required this.dangerSubtle,
     required this.info,
@@ -97,6 +98,10 @@ class AppColors extends ThemeExtension<AppColors> {
   /// Warning band / badge background.
   final Color alertSubtle;
 
+  /// Alert as text or a small glyph: the solid [alert] is too light to
+  /// reach AA on a light surface.
+  final Color alertText;
+
   /// Error, overdue, irreversible action.
   final Color danger;
 
@@ -134,6 +139,7 @@ class AppColors extends ThemeExtension<AppColors> {
     successSubtle: Color(0xFFE4F4EC),
     alert: Color(0xFFE0A008),
     alertSubtle: Color(0xFFFEF4DA),
+    alertText: Color(0xFF946200),
     danger: Color(0xFFC81E1E),
     dangerSubtle: Color(0xFFFDE7E7),
     info: Color(0xFF0E7490),
@@ -163,6 +169,7 @@ class AppColors extends ThemeExtension<AppColors> {
     successSubtle: Color(0xFF12301F),
     alert: Color(0xFFF0B54B),
     alertSubtle: Color(0xFF3A2A12),
+    alertText: Color(0xFFF0B54B),
     danger: Color(0xFFF27A7A),
     dangerSubtle: Color(0xFF3A1A1C),
     info: Color(0xFF5FC6DE),
@@ -193,6 +200,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? successSubtle,
     Color? alert,
     Color? alertSubtle,
+    Color? alertText,
     Color? danger,
     Color? dangerSubtle,
     Color? info,
@@ -220,6 +228,7 @@ class AppColors extends ThemeExtension<AppColors> {
     successSubtle: successSubtle ?? this.successSubtle,
     alert: alert ?? this.alert,
     alertSubtle: alertSubtle ?? this.alertSubtle,
+    alertText: alertText ?? this.alertText,
     danger: danger ?? this.danger,
     dangerSubtle: dangerSubtle ?? this.dangerSubtle,
     info: info ?? this.info,
@@ -252,6 +261,7 @@ class AppColors extends ThemeExtension<AppColors> {
       successSubtle: Color.lerp(successSubtle, other.successSubtle, t)!,
       alert: Color.lerp(alert, other.alert, t)!,
       alertSubtle: Color.lerp(alertSubtle, other.alertSubtle, t)!,
+      alertText: Color.lerp(alertText, other.alertText, t)!,
       danger: Color.lerp(danger, other.danger, t)!,
       dangerSubtle: Color.lerp(dangerSubtle, other.dangerSubtle, t)!,
       info: Color.lerp(info, other.info, t)!,
