@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_colors.dart';
+import 'package:flutter_app_template/core/theme/app_tokens.dart';
 import 'package:flutter_app_template/core/widgets/app_day_marks.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -134,5 +135,48 @@ void main() {
       expect(find.text('$d'), findsOneWidget);
     }
     expect(tester.takeException(), isNull);
+  });
+
+  double gapBetween(WidgetTester tester, String a, String b) {
+    Rect tile(String day) => tester.getRect(
+      find.ancestor(of: find.text(day), matching: find.byType(AspectRatio)),
+    );
+    return tile(b).left - tile(a).right;
+  }
+
+  testWidgets('calendar columns are as far apart as its rows', (tester) async {
+    await pumpApp(
+      tester,
+      SizedBox(
+        width: 288,
+        child: AppMarkedCalendar(
+          month: DateTime(2026, 11),
+          dayBuilder: (context, day) =>
+              AppGoalDay(day: day.day, value: '3,0', status: AppGoalStatus.met),
+        ),
+      ),
+    );
+    Rect tile(String day) => tester.getRect(
+      find.ancestor(of: find.text(day), matching: find.byType(AspectRatio)),
+    );
+    final rowGap = tile('8').top - tile('1').bottom;
+    expect(rowGap, greaterThanOrEqualTo(AppSpacing.xs));
+    expect(gapBetween(tester, '1', '2'), greaterThanOrEqualTo(rowGap - .5));
+  });
+
+  testWidgets('the day strip keeps a gap between goal tiles', (tester) async {
+    await pumpApp(
+      tester,
+      SizedBox(
+        width: 288,
+        child: AppDayStrip(
+          days: [
+            for (var d = 8; d <= 14; d++)
+              AppGoalDay(day: d, value: '3,0', status: AppGoalStatus.met),
+          ],
+        ),
+      ),
+    );
+    expect(gapBetween(tester, '8', '9'), greaterThanOrEqualTo(AppSpacing.xs));
   });
 }

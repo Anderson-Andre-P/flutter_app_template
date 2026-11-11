@@ -186,9 +186,24 @@ class AppDayStrip extends StatelessWidget {
   final List<Widget> days;
 
   @override
+  Widget build(BuildContext context) => _Columns(days);
+}
+
+/// Equal columns, each item centred, as far apart as the rows of a
+/// calendar ([AppSpacing.xs]).
+class _Columns extends StatelessWidget {
+  const _Columns(this.children);
+
+  final List<Widget> children;
+
+  @override
   Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [for (final day in days) Flexible(child: Center(child: day))],
+    children: [
+      for (final (i, child) in children.indexed) ...[
+        if (i > 0) SizedBox(width: AppSpacing.xs),
+        Expanded(child: Center(child: child)),
+      ],
+    ],
   );
 }
 
@@ -224,34 +239,21 @@ class AppMarkedCalendar extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          children: [
-            for (final initial in CommonStrings.weekdayInitials)
-              Expanded(
-                child: ExcludeSemantics(
-                  child: Text(
-                    initial,
-                    textAlign: TextAlign.center,
-                    style: AppTypography.microBold.copyWith(color: c.textMuted),
-                  ),
-                ),
+        _Columns([
+          for (final initial in CommonStrings.weekdayInitials)
+            ExcludeSemantics(
+              child: Text(
+                initial,
+                style: AppTypography.microBold.copyWith(color: c.textMuted),
               ),
-          ],
-        ),
+            ),
+        ]),
         for (var row = 0; row < cells.length; row += 7) ...[
           SizedBox(height: AppSpacing.xs),
-          Row(
-            children: [
-              for (final day in cells.sublist(row, row + 7))
-                Expanded(
-                  child: Center(
-                    child: day == null
-                        ? const SizedBox.shrink()
-                        : dayBuilder(context, day),
-                  ),
-                ),
-            ],
-          ),
+          _Columns([
+            for (final day in cells.sublist(row, row + 7))
+              day == null ? const SizedBox.shrink() : dayBuilder(context, day),
+          ]),
         ],
       ],
     );
