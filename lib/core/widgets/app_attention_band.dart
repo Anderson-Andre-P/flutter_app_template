@@ -33,7 +33,7 @@ class AppAttentionBand extends StatelessWidget {
       container: true,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(AppSpacing.lg),
+        padding: EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
           color: c.toneBackground(tone),
           borderRadius: AppRadius.brMdPlus,
@@ -55,7 +55,7 @@ class AppAttentionBand extends StatelessWidget {
                   ),
                   child: Icon(icon, size: AppSizes.iconChip, color: fg),
                 ),
-                const SizedBox(width: AppSpacing.sm),
+                SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
                     title.toUpperCase(),
@@ -64,7 +64,7 @@ class AppAttentionBand extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.sm),
+            SizedBox(height: AppSpacing.sm),
             Text(
               message,
               style: AppTypography.bodySmall.copyWith(color: c.textSecondary),

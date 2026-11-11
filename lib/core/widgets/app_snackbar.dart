@@ -158,7 +158,7 @@ class _ToastStack extends StatelessWidget {
     child: Align(
       alignment: Alignment.topCenter,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: AppSizes.toastMaxWidth),
+        constraints: BoxConstraints(maxWidth: AppSizes.toastMaxWidth),
         child: Material(
           type: MaterialType.transparency,
           child: Column(
@@ -167,7 +167,7 @@ class _ToastStack extends StatelessWidget {
               for (final toast in toasts)
                 Padding(
                   key: ObjectKey(toast),
-                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                  padding: EdgeInsets.only(bottom: AppSpacing.sm),
                   child: _ToastView(toast),
                 ),
             ],
@@ -244,7 +244,7 @@ class _ToastViewState extends State<_ToastView> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
+              padding: EdgeInsets.fromLTRB(
                 AppSpacing.lg,
                 AppSpacing.lg,
                 AppSpacing.sm,
@@ -267,7 +267,7 @@ class _ToastViewState extends State<_ToastView> {
                         color: c.card,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.md),
+                    SizedBox(width: AppSpacing.md),
                   ],
                   Expanded(
                     child: Column(
@@ -281,7 +281,7 @@ class _ToastViewState extends State<_ToastView> {
                           ),
                         ),
                         if (toast.description case final description?) ...[
-                          const SizedBox(height: AppSpacing.xs),
+                          SizedBox(height: AppSpacing.xs),
                           Text(
                             description,
                             style: AppTypography.bodySmall.copyWith(
@@ -302,7 +302,7 @@ class _ToastViewState extends State<_ToastView> {
                           minHeight: AppSizes.minTouchTarget,
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: AppSpacing.sm,
                           ),
                           child: Center(
@@ -316,7 +316,7 @@ class _ToastViewState extends State<_ToastView> {
                       ),
                     )
                   else
-                    const SizedBox(width: AppSpacing.sm),
+                    SizedBox(width: AppSpacing.sm),
                 ],
               ),
             ),

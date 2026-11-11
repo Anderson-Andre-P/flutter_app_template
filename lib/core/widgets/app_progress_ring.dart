@@ -14,17 +14,18 @@ class AppProgressRing extends StatelessWidget {
     super.key,
     required this.value,
     this.label,
-    this.size = AppSizes.progressRing,
+    this.size,
   });
 
   final double value;
 
   /// What is progressing, for screen readers ("Envio").
   final String? label;
-  final double size;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? AppSizes.progressRing;
     final c = context.colors;
     final share = value.clamp(0.0, 1.0);
     final percent = '${(share * 100).round()}%';
@@ -58,7 +59,7 @@ class _RingPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const stroke = AppSizes.progressRingStroke;
+    final stroke = AppSizes.progressRingStroke;
     final rect = Rect.fromCircle(
       center: size.center(Offset.zero),
       radius: min(size.width, size.height) / 2 - stroke / 2,

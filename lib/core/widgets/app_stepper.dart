@@ -53,7 +53,7 @@ class AppStepper extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.sm),
+                    SizedBox(height: AppSpacing.sm),
                     Text(
                       steps[i],
                       textAlign: TextAlign.center,
@@ -156,9 +156,9 @@ class AppStepProgress extends StatelessWidget {
             style: AppTypography.caption.copyWith(color: c.textSecondary),
           ),
         ),
-        const SizedBox(width: AppSpacing.md),
+        SizedBox(width: AppSpacing.md),
         Expanded(child: AppProgressBar(value: share)),
-        const SizedBox(width: AppSpacing.md),
+        SizedBox(width: AppSpacing.md),
         Text(
           '${(share * 100).round()}%',
           style: AppTypography.captionBold.copyWith(color: c.primary),

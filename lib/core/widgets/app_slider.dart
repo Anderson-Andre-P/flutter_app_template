@@ -238,11 +238,11 @@ class _RingThumb extends SliderComponentShape {
 
   final Color ring;
 
-  static const _ringWidth = 2.5;
+  static double get _ringWidth => AppSizes.sliderRing;
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) =>
-      const Size.square(AppSizes.sliderThumb);
+      Size.square(AppSizes.sliderThumb);
 
   @override
   void paint(
@@ -259,7 +259,7 @@ class _RingThumb extends SliderComponentShape {
     required double textScaleFactor,
     required Size sizeWithOverflow,
   }) {
-    const radius = AppSizes.sliderThumb / 2;
+    final radius = AppSizes.sliderThumb / 2;
     context.canvas
       ..drawCircle(center, radius, Paint()..color = sliderTheme.thumbColor!)
       ..drawCircle(
@@ -280,7 +280,7 @@ class _RingRangeThumb extends RangeSliderThumbShape {
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) =>
-      const Size.square(AppSizes.sliderThumb);
+      Size.square(AppSizes.sliderThumb);
 
   @override
   void paint(
@@ -296,7 +296,7 @@ class _RingRangeThumb extends RangeSliderThumbShape {
     Thumb? thumb,
     bool? isPressed,
   }) {
-    const radius = AppSizes.sliderThumb / 2;
+    final radius = AppSizes.sliderThumb / 2;
     context.canvas
       ..drawCircle(center, radius, Paint()..color = sliderTheme.thumbColor!)
       ..drawCircle(

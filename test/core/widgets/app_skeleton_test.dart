@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_tokens.dart';
 import 'package:flutter_app_template/core/widgets/app_skeleton.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';
@@ -12,13 +13,13 @@ void main() {
   ) async {
     await pumpApp(
       tester,
-      const AppShimmer(
+      AppShimmer(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             AppSkeleton.circle(size: AppSizes.avatarLg),
-            AppSkeleton.line(width: 120),
-            AppSkeleton.block(height: 80),
+            AppSkeleton.line(width: 120.w),
+            AppSkeleton.block(height: 80.h),
           ],
         ),
       ),

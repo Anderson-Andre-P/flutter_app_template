@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/widgets/app_slider.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';
@@ -31,7 +32,7 @@ void main() {
     await pumpApp(
       tester,
       SizedBox(
-        width: 300,
+        width: 300.w,
         child: AppSlider(
           label: 'Volume',
           value: 50,

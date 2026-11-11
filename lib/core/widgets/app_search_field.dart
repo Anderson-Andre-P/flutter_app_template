@@ -44,7 +44,7 @@ class _AppSearchFieldState extends State<AppSearchField> {
       style: AppTypography.body.copyWith(color: c.textPrimary),
       decoration: InputDecoration(
         hintText: widget.hint,
-        constraints: const BoxConstraints(minHeight: AppSizes.field),
+        constraints: BoxConstraints(minHeight: AppSizes.field),
         prefixIcon: Icon(
           Icons.search,
           size: AppSizes.iconField,

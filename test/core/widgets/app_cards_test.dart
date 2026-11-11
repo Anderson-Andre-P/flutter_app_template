@@ -3,11 +3,12 @@ import 'package:flutter_app_template/core/constants/strings/common_strings.dart'
 import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/widgets/app_cards.dart';
 import 'package:flutter_app_template/core/widgets/app_media_placeholder.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';
 
-Widget _wide(Widget child) => SizedBox(width: 360, child: child);
+Widget _wide(Widget child) => SizedBox(width: 360.w, child: child);
 
 void main() {
   testBothThemes('basic, media, progress and link cards', (tester, dark) async {

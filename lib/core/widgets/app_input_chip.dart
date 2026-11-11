@@ -20,7 +20,7 @@ class AppInputChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Container(
-      constraints: const BoxConstraints(minHeight: AppSizes.chip),
+      constraints: BoxConstraints(minHeight: AppSizes.chip),
       padding: EdgeInsetsDirectional.only(
         start: AppSpacing.md,
         end: onRemoved == null ? AppSpacing.md : 0,

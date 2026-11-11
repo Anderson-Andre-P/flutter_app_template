@@ -1,124 +1,140 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+
+// Sizes follow the screen (flutter_screenutil_plus). Every token is the
+// design-system number on the `AppScreen.designSize` frame, scaled by kind:
+// widths `.w`, heights `.h`, radii and square shapes (icons, avatars,
+// controls) `.r`, fonts `.sp` (in `AppTypography`). Spacing is used both
+// across and down, so it scales with `.r` (the smaller ratio). Widgets keep
+// reading tokens, never `16.w` (golden rule 4). Not scaled, on purpose: the
+// 44px minimum touch target, the focus ring and error border, hairlines,
+// ratios and the full radius; durations and shadows neither. Values are
+// getters, so they are not `const`.
+
+/// The frame the sizes are designed on.
+abstract final class AppScreen {
+  static const Size designSize = Size(360, 690);
+}
 
 /// Spacing scale: base 4, named by size (not by number) so a step can be
 /// tuned without renaming. Screen margin = [xl]; between cards = [md];
 /// between sections = [x3l].
 abstract final class AppSpacing {
-  static const double xs = 4;
-  static const double sm = 8;
-  static const double md = 12;
-  static const double lg = 16;
-  static const double xl = 20;
-  static const double x2l = 24;
-  static const double x3l = 32;
-  static const double x4l = 40;
+  static double get xs => 4.r;
+  static double get sm => 8.r;
+  static double get md => 12.r;
+  static double get lg => 16.r;
+  static double get xl => 20.r;
+  static double get x2l => 24.r;
+  static double get x3l => 32.r;
+  static double get x4l => 40.r;
 
   /// Horizontal margin of every screen.
-  static const EdgeInsets screen = EdgeInsets.symmetric(horizontal: xl);
+  static EdgeInsets get screen => EdgeInsets.symmetric(horizontal: xl);
 }
 
 /// Corner radius grows with the element: badge < chip < field/button < card
 /// < sheet/modal. Nested radius = parent radius − parent padding.
 abstract final class AppRadius {
   /// The speaker's corner of a chat bubble.
-  static const double tail = 4;
-  static const double xs = 6;
-  static const double sm = 9;
-  static const double md = 12;
-  static const double lg = 16;
-  static const double xl = 22;
+  static double get tail => 4.r;
+  static double get xs => 6.r;
+  static double get sm => 9.r;
+  static double get md => 12.r;
+  static double get lg => 16.r;
+  static double get xl => 22.r;
   static const double full = 999;
 
-  static const BorderRadius brXs = BorderRadius.all(Radius.circular(xs));
-  static const BorderRadius brSm = BorderRadius.all(Radius.circular(sm));
-  static const BorderRadius brMd = BorderRadius.all(Radius.circular(md));
-  static const BorderRadius brLg = BorderRadius.all(Radius.circular(lg));
-  static const BorderRadius brXl = BorderRadius.all(Radius.circular(xl));
-  static const BorderRadius brFull = BorderRadius.all(Radius.circular(full));
+  static BorderRadius get brXs => BorderRadius.all(Radius.circular(xs));
+  static BorderRadius get brSm => BorderRadius.all(Radius.circular(sm));
+  static BorderRadius get brMd => BorderRadius.all(Radius.circular(md));
+  static BorderRadius get brLg => BorderRadius.all(Radius.circular(lg));
+  static BorderRadius get brXl => BorderRadius.all(Radius.circular(xl));
+  static BorderRadius get brFull =>
+      const BorderRadius.all(Radius.circular(full));
 
   /// 14, between field and card: toast, dialog icon box.
-  static const BorderRadius brMdPlus = BorderRadius.all(Radius.circular(14));
+  static BorderRadius get brMdPlus => BorderRadius.all(Radius.circular(14.r));
 
   /// Top corners only — surfaces anchored to the bottom edge (bottom bar,
   /// bottom sheet).
-  static const BorderRadius topXl = BorderRadius.vertical(
-    top: Radius.circular(xl),
-  );
+  static BorderRadius get topXl =>
+      BorderRadius.vertical(top: Radius.circular(xl));
 }
 
 /// Fixed component sizes from the design system.
 abstract final class AppSizes {
   /// Isolated call to action, onboarding.
-  static const double buttonXl = 58;
+  static double get buttonXl => 58.h;
 
   /// The screen's primary action (design system, section 09: 52px).
-  static const double buttonLg = 52;
+  static double get buttonLg => 52.h;
 
   /// "Continuar com …" identity-provider buttons (section 10: 48px).
-  static const double socialButton = 48;
-  static const double buttonMd = 44;
-  static const double buttonSm = 38;
+  static double get socialButton => 48.h;
+  static double get buttonMd => 44.h;
+  static double get buttonSm => 38.h;
 
   /// Action inside a table or list row.
-  static const double buttonXs = 30;
+  static double get buttonXs => 30.h;
   static const double minTouchTarget = 44;
-  static const double field = 48;
+  static double get field => 48.h;
 
   /// Bottom bar without a system inset (design system: 64).
-  static const double bottomNav = 64;
+  static double get bottomNav => 64.h;
 
   /// Minimum height of the tabs when a system inset (home indicator, Android
   /// gesture/button bar) sits below them: the inset takes the rest of the 64
   /// instead of stacking on top of it.
-  static const double bottomNavContent = 48;
+  static double get bottomNavContent => 48.h;
 
   /// Largest text scale inside fixed-height bars (bottom navigation).
   static const double barTextScaleMax = 1.5;
-  static const double chip = 32;
+  static double get chip => 32.h;
 
   /// Switch track and knob; checkbox and radio box.
-  static const double switchWidth = 46;
-  static const double switchHeight = 26;
-  static const double switchKnob = 20;
-  static const double switchInset = (switchHeight - switchKnob) / 2;
-  static const double checkbox = 22;
+  static double get switchWidth => 46.r;
+  static double get switchHeight => 26.r;
+  static double get switchKnob => 20.r;
+  static double get switchInset => (switchHeight - switchKnob) / 2;
+  static double get checkbox => 22.r;
 
   /// Round FAB side and extended FAB height.
-  static const double fab = 58;
-  static const double fabExtended = 52;
+  static double get fab => 58.r;
+  static double get fabExtended => 52.h;
 
   /// Coloured bar at the start of a status tile.
-  static const double statusBar = 4;
+  static double get statusBar => 4.w;
 
   /// Slider track thickness and handle diameter; the handle's touch
   /// target is [minTouchTarget].
-  static const double sliderTrack = 6;
-  static const double sliderThumb = 22;
+  static double get sliderTrack => 6.r;
+  static double get sliderThumb => 22.r;
 
   /// Step circle of the horizontal stepper; underline of the active tab.
-  static const double stepCircle = 26;
+  static double get stepCircle => 26.r;
   static const double tabIndicator = 2;
 
   /// Notification counter pill and the "new" dot.
-  static const double counter = 20;
-  static const double newDot = 8;
+  static double get counter => 20.r;
+  static double get newDot => 8.r;
 
   /// Determinate progress ring and its stroke.
-  static const double progressRing = 56;
-  static const double progressRingStroke = 6;
+  static double get progressRing => 56.r;
+  static double get progressRingStroke => 6.r;
 
   /// Status dot on an avatar.
-  static const double avatarStatus = 12;
+  static double get avatarStatus => 12.r;
 
   /// File-type badge (PDF, JPG, XLS) at the start of an attachment.
-  static const double fileBadge = 40;
+  static double get fileBadge => 40.r;
 
   /// Timeline dot and its halo; page indicator dot (the current one is
   /// [pageDotActive] wide).
-  static const double timelineDot = 10;
-  static const double timelineHalo = 18;
-  static const double pageDot = 6;
-  static const double pageDotActive = 18;
+  static double get timelineDot => 10.r;
+  static double get timelineHalo => 18.r;
+  static double get pageDot => 6.r;
+  static double get pageDotActive => 18.r;
 
   /// Gap between the parts of a segmented bar.
   static const double barGap = 2;
@@ -127,51 +143,74 @@ abstract final class AppSizes {
   static const double bubbleMaxShare = .78;
 
   /// Media strip of a card, and the thumbnail of a horizontal card.
-  static const double cardMedia = 104;
-  static const double cardThumb = 112;
+  static double get cardMedia => 104.h;
+  static double get cardThumb => 112.w;
 
   /// Width of the numeric stepper (− value +).
-  static const double numberStepper = 140;
+  static double get numberStepper => 140.w;
 
   /// Icon box at the start of an attention band.
-  static const double bandIcon = 24;
-  static const double progressBar = 8;
-  static const double iconBox = 40;
-  static const double heroIcon = 80;
-  static const double chart = 160;
+  static double get bandIcon => 24.r;
+  static double get progressBar => 8.r;
+  static double get iconBox => 40.r;
+  static double get heroIcon => 80.r;
+  static double get chart => 160.h;
 
   /// Thickness of the donut chart's ring.
-  static const double donutRing = 26;
-  static const double sheetHandleWidth = 36;
-  static const double sheetHandleHeight = 4;
-  static const double pill = 26;
-  static const double listTileMin = 56;
-  static const double modalMaxWidth = 340;
+  static double get donutRing => 26.r;
+  static double get sheetHandleWidth => 36.w;
+  static double get sheetHandleHeight => 4.h;
+  static double get pill => 26.h;
+  static double get listTileMin => 56.h;
+  static double get modalMaxWidth => 340.w;
   static const double focusRing = 2;
 
   /// Gap between a control and its focus ring.
   static const double focusRingGap = 2;
   static const double errorBorder = 2;
 
+  /// Dividers and 1px separators: never scaled, a hairline stays a hairline.
+  static const double hairline = 1;
+
+  /// Spinner inside a button.
+  static double get spinner => 18.r;
+
+  /// Status dot of a badge.
+  static double get badgeDot => 6.r;
+
+  /// Line chart stroke and point; slider handle ring; dashed outline.
+  static double get chartStroke => 2.5.r;
+  static double get chartDot => 4.r;
+  static double get sliderRing => 2.5.r;
+  static double get dash => 5.r;
+  static double get dashGap => 4.r;
+
+  /// The short line of a skeleton (a subtitle under a full line).
+  static double get skeletonShortLine => 140.w;
+
+  /// An image placed in a chat bubble.
+  static double get chatMediaWidth => 200.w;
+  static double get chatMediaHeight => 90.h;
+
   /// Icon box at the top of a dialog.
-  static const double dialogIcon = 42;
+  static double get dialogIcon => 42.r;
 
   /// Round tone icon at the start of a toast.
-  static const double toastIcon = 28;
+  static double get toastIcon => 28.r;
 
   /// Toasts never grow wider than this on a tablet.
-  static const double toastMaxWidth = 500;
+  static double get toastMaxWidth => 500.w;
 
-  static const double avatarSm = 24;
-  static const double avatarMd = 32;
-  static const double avatarLg = 40;
-  static const double avatarXl = 56;
+  static double get avatarSm => 24.r;
+  static double get avatarMd => 32.r;
+  static double get avatarLg => 40.r;
+  static double get avatarXl => 56.r;
 
-  static const double iconInline = 12;
-  static const double iconChip = 15;
-  static const double iconField = 17;
-  static const double iconTopBar = 20;
-  static const double icon = 22;
+  static double get iconInline => 12.r;
+  static double get iconChip => 15.r;
+  static double get iconField => 17.r;
+  static double get iconTopBar => 20.r;
+  static double get icon => 22.r;
 }
 
 /// Motion tokens.

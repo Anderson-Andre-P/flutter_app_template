@@ -47,7 +47,7 @@ class AppSocialButton extends StatelessWidget {
               shadows: const <BoxShadow>[],
             ),
             builder: (context, state) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
               child: Row(
                 children: [
                   ExcludeSemantics(
@@ -70,7 +70,7 @@ class AppSocialButton extends StatelessWidget {
                           ),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.md),
+                  SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: Text(
                       label,

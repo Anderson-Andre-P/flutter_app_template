@@ -66,10 +66,10 @@ class _AppTagFieldState extends State<AppTagField> {
           widget.label,
           style: AppTypography.label.copyWith(color: c.textPrimary),
         ),
-        const SizedBox(height: AppSpacing.sm),
+        SizedBox(height: AppSpacing.sm),
         Container(
-          constraints: const BoxConstraints(minHeight: AppSizes.field),
-          padding: const EdgeInsets.symmetric(
+          constraints: BoxConstraints(minHeight: AppSizes.field),
+          padding: EdgeInsets.symmetric(
             horizontal: AppSpacing.sm,
             vertical: AppSpacing.xs,
           ),
@@ -85,9 +85,7 @@ class _AppTagFieldState extends State<AppTagField> {
               for (final (i, tag) in widget.tags.indexed)
                 AppInputChip(label: tag, onRemoved: () => widget.onRemoved(i)),
               ConstrainedBox(
-                constraints: const BoxConstraints(
-                  minWidth: AppSizes.numberStepper,
-                ),
+                constraints: BoxConstraints(minWidth: AppSizes.numberStepper),
                 child: IntrinsicWidth(
                   child: TextField(
                     controller: _controller,
@@ -102,7 +100,7 @@ class _AppTagFieldState extends State<AppTagField> {
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         horizontal: AppSpacing.xs,
                         vertical: AppSpacing.md,
                       ),
@@ -114,7 +112,7 @@ class _AppTagFieldState extends State<AppTagField> {
           ),
         ),
         if (widget.helper case final helper?) ...[
-          const SizedBox(height: AppSpacing.xs),
+          SizedBox(height: AppSpacing.xs),
           Text(
             helper,
             style: AppTypography.caption.copyWith(color: c.textMuted),

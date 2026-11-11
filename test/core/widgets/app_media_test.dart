@@ -5,6 +5,7 @@ import 'package:flutter_app_template/core/constants/strings/common_strings.dart'
 import 'package:flutter_app_template/core/widgets/app_drag_handle.dart';
 import 'package:flutter_app_template/core/widgets/app_media_placeholder.dart';
 import 'package:flutter_app_template/core/widgets/app_viewer.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';
@@ -13,10 +14,10 @@ void main() {
   testBothThemes('a media placeholder shows its kind', (tester, dark) async {
     await pumpApp(
       tester,
-      const SizedBox(
-        width: 120,
-        height: 80,
-        child: AppMediaPlaceholder(
+      SizedBox(
+        width: 120.w,
+        height: 80.h,
+        child: const AppMediaPlaceholder(
           kind: AppMediaKind.diagram,
           label: 'diagrama',
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_app_template/core/constants/strings/common_strings.dart'
 import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/widgets/app_attachment.dart';
 import 'package:flutter_app_template/core/widgets/app_progress_bar.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';
@@ -106,7 +107,7 @@ void main() {
     await pumpApp(
       tester,
       SizedBox(
-        width: 360,
+        width: 360.w,
         child: AppPhotoGrid(
           photos: const [null, null],
           onRemove: removed.add,

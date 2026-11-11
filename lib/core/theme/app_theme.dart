@@ -56,7 +56,7 @@ abstract final class AppTheme {
       borderSide: BorderSide(color: color, width: width),
     );
 
-    const buttonShape = WidgetStatePropertyAll<OutlinedBorder>(
+    final buttonShape = WidgetStatePropertyAll<OutlinedBorder>(
       RoundedRectangleBorder(borderRadius: AppRadius.brMd),
     );
 
@@ -68,7 +68,11 @@ abstract final class AppTheme {
       textTheme: textTheme,
       scaffoldBackgroundColor: c.screen,
       canvasColor: c.screen,
-      dividerTheme: DividerThemeData(color: c.border, thickness: 1, space: 1),
+      dividerTheme: DividerThemeData(
+        color: c.border,
+        thickness: AppSizes.hairline,
+        space: AppSizes.hairline,
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: c.screen,
         foregroundColor: c.textPrimary,
@@ -81,7 +85,7 @@ abstract final class AppTheme {
         filled: true,
         fillColor: c.field,
         hintStyle: AppTypography.body.copyWith(color: c.textMuted),
-        contentPadding: const EdgeInsets.symmetric(
+        contentPadding: EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.md,
         ),
@@ -97,7 +101,7 @@ abstract final class AppTheme {
         style: ButtonStyle(
           shape: buttonShape,
           textStyle: WidgetStatePropertyAll(AppTypography.label),
-          minimumSize: const WidgetStatePropertyAll(
+          minimumSize: WidgetStatePropertyAll(
             Size(AppSizes.minTouchTarget, AppSizes.buttonMd),
           ),
         ),
@@ -130,7 +134,7 @@ abstract final class AppTheme {
         backgroundColor: c.raised,
         surfaceTintColor: Colors.transparent,
         barrierColor: c.scrim,
-        shape: const RoundedRectangleBorder(borderRadius: AppRadius.brXl),
+        shape: RoundedRectangleBorder(borderRadius: AppRadius.brXl),
         titleTextStyle: AppTypography.section.copyWith(color: c.textPrimary),
         contentTextStyle: AppTypography.body.copyWith(color: c.textSecondary),
       ),
@@ -138,7 +142,7 @@ abstract final class AppTheme {
         backgroundColor: c.raised,
         surfaceTintColor: Colors.transparent,
         modalBarrierColor: c.scrim,
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(AppRadius.xl),
           ),
@@ -149,7 +153,7 @@ abstract final class AppTheme {
         elevation: 0,
         backgroundColor: c.raised,
         contentTextStyle: AppTypography.body.copyWith(color: c.textPrimary),
-        shape: const RoundedRectangleBorder(borderRadius: AppRadius.brMd),
+        shape: RoundedRectangleBorder(borderRadius: AppRadius.brMd),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: c.primary,

@@ -71,7 +71,7 @@ class AppCheckMark extends StatelessWidget {
                     : null,
               ),
               if (label case final label?) ...[
-                const SizedBox(width: AppSpacing.sm),
+                SizedBox(width: AppSpacing.sm),
                 Flexible(
                   child: Text(
                     label,

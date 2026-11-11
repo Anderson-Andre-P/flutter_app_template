@@ -36,7 +36,7 @@ class AppCoachMark extends StatelessWidget {
           onTap: onDismiss,
           borderRadius: AppRadius.brMd,
           child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.md),
+            padding: EdgeInsets.all(AppSpacing.md),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,7 +45,7 @@ class AppCoachMark extends StatelessWidget {
                   size: AppSizes.iconField,
                   color: c.primary,
                 ),
-                const SizedBox(width: AppSpacing.sm),
+                SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class AppCoachMark extends StatelessWidget {
                         title,
                         style: AppTypography.label.copyWith(color: c.primary),
                       ),
-                      const SizedBox(height: AppSpacing.xs),
+                      SizedBox(height: AppSpacing.xs),
                       Text(
                         message,
                         style: AppTypography.caption.copyWith(

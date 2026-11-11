@@ -55,9 +55,9 @@ class AppChip extends StatelessWidget {
             );
           },
           builder: (context, state) => ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: AppSizes.chip),
+            constraints: BoxConstraints(minHeight: AppSizes.chip),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               child: Center(
                 widthFactor: 1,
                 heightFactor: 1,

@@ -154,7 +154,7 @@ class _TimeListState extends State<_TimeList> {
               borderRadius: AppRadius.brSm,
               onTap: () => Navigator.of(context).pop(t),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
                   child: Text(

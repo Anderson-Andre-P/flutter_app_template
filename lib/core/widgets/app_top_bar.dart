@@ -137,7 +137,7 @@ class AppViewerBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         if (position case final p?)
           Padding(
-            padding: const EdgeInsetsDirectional.only(end: AppSpacing.xl),
+            padding: EdgeInsetsDirectional.only(end: AppSpacing.xl),
             child: Center(
               child: Text(
                 p,

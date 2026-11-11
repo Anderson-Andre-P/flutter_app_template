@@ -1,7 +1,10 @@
 import 'package:flutter/painting.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 
 /// Type scale of the design system (Inter). Styles carry no colour: widgets
-/// apply `textPrimary` (or another role) from `context.colors`.
+/// apply `textPrimary` (or another role) from `context.colors`. Font sizes
+/// follow the screen with `.sp`; the system text size (accessibility) still
+/// applies on top, through `MediaQuery.textScaler`.
 abstract final class AppTypography {
   static const String fontFamily = 'Inter';
   static const String monoFamily = 'monospace';
@@ -10,111 +13,93 @@ abstract final class AppTypography {
   static const TextStyle _base = TextStyle(fontFamily: fontFamily);
 
   /// Onboarding, splash, welcome.
-  static final TextStyle display = _base.copyWith(
-    fontSize: 26,
+  static TextStyle get display => _base.copyWith(
+    fontSize: 26.sp,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.7,
   );
 
   /// Screen and object title.
-  static final TextStyle title = _base.copyWith(
-    fontSize: 23,
+  static TextStyle get title => _base.copyWith(
+    fontSize: 23.sp,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.7,
   );
 
   /// Subtitle inside a long screen.
-  static final TextStyle heading = _base.copyWith(
-    fontSize: 20,
+  static TextStyle get heading => _base.copyWith(
+    fontSize: 20.sp,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.5,
   );
 
   /// Card header.
-  static final TextStyle section = _base.copyWith(
-    fontSize: 14.5,
+  static TextStyle get section => _base.copyWith(
+    fontSize: 14.5.sp,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.3,
   );
 
   /// Description, paragraph, list item.
-  static final TextStyle body = _base.copyWith(
-    fontSize: 13.5,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle get body =>
+      _base.copyWith(fontSize: 13.5.sp, fontWeight: FontWeight.w400);
 
   /// Body inside a dense card.
-  static final TextStyle bodySmall = _base.copyWith(
-    fontSize: 12.5,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle get bodySmall =>
+      _base.copyWith(fontSize: 12.5.sp, fontWeight: FontWeight.w400);
 
   /// Field label, button, link.
-  static final TextStyle label = _base.copyWith(
-    fontSize: 12.5,
-    fontWeight: FontWeight.w700,
-  );
+  static TextStyle get label =>
+      _base.copyWith(fontSize: 12.5.sp, fontWeight: FontWeight.w700);
 
   /// Supporting label, list row.
-  static final TextStyle labelMedium = _base.copyWith(
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-  );
+  static TextStyle get labelMedium =>
+      _base.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w500);
 
   /// Metadata, timestamp.
-  static final TextStyle caption = _base.copyWith(
-    fontSize: 11.5,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle get caption =>
+      _base.copyWith(fontSize: 11.5.sp, fontWeight: FontWeight.w400);
 
   /// Highlighted metadata.
-  static final TextStyle captionBold = _base.copyWith(
-    fontSize: 11.5,
-    fontWeight: FontWeight.w700,
-  );
+  static TextStyle get captionBold =>
+      _base.copyWith(fontSize: 11.5.sp, fontWeight: FontWeight.w700);
 
   /// Section divider — render in CAPS (`SectionOverline` does it).
-  static final TextStyle overline = _base.copyWith(
-    fontSize: 11,
+  static TextStyle get overline => _base.copyWith(
+    fontSize: 11.sp,
     fontWeight: FontWeight.w700,
     letterSpacing: 0.9,
   );
 
   /// Discreet group label — render in CAPS.
-  static final TextStyle overlineRegular = _base.copyWith(
-    fontSize: 10.5,
+  static TextStyle get overlineRegular => _base.copyWith(
+    fontSize: 10.5.sp,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.9,
   );
 
   /// Small auxiliary text.
-  static final TextStyle micro = _base.copyWith(
-    fontSize: 10,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle get micro =>
+      _base.copyWith(fontSize: 10.sp, fontWeight: FontWeight.w400);
 
-  static final TextStyle microMedium = _base.copyWith(
-    fontSize: 10,
-    fontWeight: FontWeight.w500,
-  );
+  static TextStyle get microMedium =>
+      _base.copyWith(fontSize: 10.sp, fontWeight: FontWeight.w500);
 
-  static final TextStyle microBold = _base.copyWith(
-    fontSize: 10.5,
-    fontWeight: FontWeight.w700,
-  );
+  static TextStyle get microBold =>
+      _base.copyWith(fontSize: 10.5.sp, fontWeight: FontWeight.w700);
 
   /// Codes and identifiers.
-  static const TextStyle mono = TextStyle(
+  static TextStyle get mono => TextStyle(
     fontFamily: monoFamily,
     fontFamilyFallback: monoFallback,
-    fontSize: 11.5,
+    fontSize: 11.5.sp,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle monoBold = TextStyle(
+  static TextStyle get monoBold => TextStyle(
     fontFamily: monoFamily,
     fontFamilyFallback: monoFallback,
-    fontSize: 12,
+    fontSize: 12.sp,
     fontWeight: FontWeight.w700,
   );
 }

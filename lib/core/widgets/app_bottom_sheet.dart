@@ -42,7 +42,7 @@ abstract final class AppBottomSheet {
     showDragHandle: false,
     backgroundColor: context.colors.card,
     barrierColor: context.colors.scrim,
-    shape: const RoundedRectangleBorder(borderRadius: AppRadius.topXl),
+    shape: RoundedRectangleBorder(borderRadius: AppRadius.topXl),
     sheetAnimationStyle: const AnimationStyle(
       duration: AppDurations.sheet,
       curve: AppDurations.sheetCurve,
@@ -77,9 +77,7 @@ abstract final class AppBottomSheet {
                 borderRadius: AppRadius.brMd,
                 onTap: () => Navigator.of(sheetContext).pop(o.value),
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minHeight: AppSizes.listTileMin,
-                  ),
+                  constraints: BoxConstraints(minHeight: AppSizes.listTileMin),
                   child: Row(
                     children: [
                       if (o.icon != null) ...[
@@ -88,7 +86,7 @@ abstract final class AppBottomSheet {
                           size: AppSizes.icon,
                           color: o.destructive ? c.danger : c.textSecondary,
                         ),
-                        const SizedBox(width: AppSpacing.md),
+                        SizedBox(width: AppSpacing.md),
                       ],
                       Expanded(
                         child: Text(
@@ -141,7 +139,7 @@ class _Sheet extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(
+          padding: EdgeInsets.fromLTRB(
             AppSpacing.xl,
             AppSpacing.md,
             AppSpacing.xl,
@@ -162,7 +160,7 @@ class _Sheet extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
               Row(
                 children: [
                   Expanded(
@@ -188,13 +186,13 @@ class _Sheet extends StatelessWidget {
                 ],
               ),
               if (message != null) ...[
-                const SizedBox(height: AppSpacing.xs),
+                SizedBox(height: AppSpacing.xs),
                 Text(
                   message!,
                   style: AppTypography.body.copyWith(color: c.textSecondary),
                 ),
               ],
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
               Flexible(child: SingleChildScrollView(child: child)),
             ],
           ),

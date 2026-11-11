@@ -59,7 +59,7 @@ class AppSwitch extends StatelessWidget {
                     duration: AppDurations.toggle,
                     width: AppSizes.switchWidth,
                     height: AppSizes.switchHeight,
-                    padding: const EdgeInsets.all(AppSizes.switchInset),
+                    padding: EdgeInsets.all(AppSizes.switchInset),
                     decoration: BoxDecoration(
                       color: track,
                       borderRadius: AppRadius.brFull,
@@ -81,7 +81,7 @@ class AppSwitch extends StatelessWidget {
                     ),
                   ),
                   if (label case final label?) ...[
-                    const SizedBox(width: AppSpacing.sm),
+                    SizedBox(width: AppSpacing.sm),
                     Flexible(
                       child: Text(
                         label,

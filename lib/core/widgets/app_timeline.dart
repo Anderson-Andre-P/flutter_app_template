@@ -145,7 +145,7 @@ class _Row extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.md),
+          SizedBox(width: AppSpacing.md),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(bottom: last ? 0 : AppSpacing.lg),
@@ -158,7 +158,7 @@ class _Row extends StatelessWidget {
                       color: highlight ? c.primary : c.textPrimary,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.xs),
+                  SizedBox(height: AppSpacing.xs),
                   Text(
                     event.meta,
                     style: AppTypography.caption.copyWith(color: c.textMuted),
@@ -254,7 +254,7 @@ class AppPageDots extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             for (var i = 0; i < count; i++) ...[
-              if (i > 0) const SizedBox(width: AppSpacing.xs),
+              if (i > 0) SizedBox(width: AppSpacing.xs),
               AnimatedContainer(
                 duration: AppDurations.toggle,
                 width: i == current ? AppSizes.pageDotActive : AppSizes.pageDot,

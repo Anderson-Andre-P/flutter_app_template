@@ -43,11 +43,11 @@ class AppStatusTile extends StatelessWidget {
               ColoredBox(
                 key: barKey,
                 color: c.toneForeground(tone),
-                child: const SizedBox(width: AppSizes.statusBar),
+                child: SizedBox(width: AppSizes.statusBar),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  padding: EdgeInsets.all(AppSpacing.lg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -58,7 +58,7 @@ class AppStatusTile extends StatelessWidget {
                           color: c.textPrimary,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.xs),
+                      SizedBox(height: AppSpacing.xs),
                       Text(
                         label,
                         style: AppTypography.caption.copyWith(

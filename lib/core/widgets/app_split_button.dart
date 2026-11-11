@@ -35,7 +35,7 @@ class AppSplitButton extends StatelessWidget {
       shadows: const <BoxShadow>[],
     );
     Color fg(bool enabled) => enabled ? c.onPrimary : c.textDisabled;
-    const radius = Radius.circular(AppRadius.md);
+    final radius = Radius.circular(AppRadius.md);
     return SizedBox(
       height: AppSizes.buttonMd,
       child: DecoratedBox(
@@ -53,12 +53,10 @@ class AppSplitButton extends StatelessWidget {
               enabled: onPressed != null,
               child: AppInteractive(
                 onTap: onPressed,
-                borderRadius: const BorderRadius.horizontal(left: radius),
+                borderRadius: BorderRadius.horizontal(left: radius),
                 surface: (state) => surface(onPressed != null, state),
                 builder: (context, state) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.lg,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                   child: Center(
                     widthFactor: 1,
                     child: Text(
@@ -72,7 +70,7 @@ class AppSplitButton extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 1,
+              width: AppSizes.hairline,
               child: ColoredBox(color: c.onPrimary.withValues(alpha: .3)),
             ),
             Semantics(
@@ -81,7 +79,7 @@ class AppSplitButton extends StatelessWidget {
               label: menuLabel,
               child: AppInteractive(
                 onTap: onMenu,
-                borderRadius: const BorderRadius.horizontal(right: radius),
+                borderRadius: BorderRadius.horizontal(right: radius),
                 surface: (state) => surface(onMenu != null, state),
                 builder: (context, state) => SizedBox(
                   width: AppSizes.minTouchTarget,

@@ -13,17 +13,18 @@ class AppIconBox extends StatelessWidget {
     super.key,
     required this.icon,
     this.tone = AppTone.primary,
-    this.size = AppSizes.iconBox,
+    this.size,
     this.circle = false,
   });
 
   final IconData icon;
   final AppTone tone;
-  final double size;
+  final double? size;
   final bool circle;
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? AppSizes.iconBox;
     final c = context.colors;
     return Container(
       width: size,

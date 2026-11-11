@@ -26,18 +26,15 @@ class AppListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final row = ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: AppSizes.listTileMin),
+      constraints: BoxConstraints(minHeight: AppSizes.listTileMin),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.sm,
         ),
         child: Row(
           children: [
-            if (leading != null) ...[
-              leading!,
-              const SizedBox(width: AppSpacing.md),
-            ],
+            if (leading != null) ...[leading!, SizedBox(width: AppSpacing.md)],
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +47,7 @@ class AppListTile extends StatelessWidget {
                     ),
                   ),
                   if (subtitle != null) ...[
-                    const SizedBox(height: AppSpacing.xs),
+                    SizedBox(height: AppSpacing.xs),
                     Text(
                       subtitle!,
                       style: AppTypography.caption.copyWith(color: c.textMuted),
@@ -60,7 +57,7 @@ class AppListTile extends StatelessWidget {
               ),
             ),
             if (trailing != null) ...[
-              const SizedBox(width: AppSpacing.md),
+              SizedBox(width: AppSpacing.md),
               // At most half the row, so large text wraps the trailing
               // value instead of pushing the row off screen.
               ConstrainedBox(

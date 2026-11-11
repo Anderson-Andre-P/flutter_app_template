@@ -75,7 +75,7 @@ class AppBottomNav extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(items[i].icon, size: AppSizes.icon, color: color),
-            const SizedBox(height: AppSpacing.xs),
+            SizedBox(height: AppSpacing.xs),
             Text(
               items[i].label,
               maxLines: 1,

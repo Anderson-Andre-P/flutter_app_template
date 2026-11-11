@@ -50,7 +50,7 @@ class AppOptionCard<T> extends StatelessWidget {
             shadows: const <BoxShadow>[],
           ),
           builder: (context, state) => Padding(
-            padding: const EdgeInsets.all(AppSpacing.md),
+            padding: EdgeInsets.all(AppSpacing.md),
             child: Row(
               children: [
                 Container(
@@ -66,7 +66,7 @@ class AppOptionCard<T> extends StatelessWidget {
                     color: selected ? c.primary : c.textSecondary,
                   ),
                 ),
-                const SizedBox(width: AppSpacing.md),
+                SizedBox(width: AppSpacing.md),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +79,7 @@ class AppOptionCard<T> extends StatelessWidget {
                         ),
                       ),
                       if (subtitle case final subtitle?) ...[
-                        const SizedBox(height: AppSpacing.xs),
+                        SizedBox(height: AppSpacing.xs),
                         Text(
                           subtitle,
                           style: AppTypography.caption.copyWith(
@@ -90,7 +90,7 @@ class AppOptionCard<T> extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: AppSpacing.md),
+                SizedBox(width: AppSpacing.md),
                 AnimatedContainer(
                   duration: AppDurations.toggle,
                   width: AppSizes.checkbox,

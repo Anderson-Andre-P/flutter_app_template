@@ -68,7 +68,7 @@ class AppSelect<T> extends StatelessWidget {
           required ? '$label *' : label,
           style: AppTypography.label.copyWith(color: c.textPrimary),
         ),
-        const SizedBox(height: AppSpacing.sm),
+        SizedBox(height: AppSpacing.sm),
         if (options.length > maxInline)
           box(() async {
             final picked = await AppBottomSheet.show<T>(
@@ -84,7 +84,7 @@ class AppSelect<T> extends StatelessWidget {
         else
           LayoutBuilder(
             builder: (context, constraints) => MenuAnchor(
-              alignmentOffset: const Offset(0, AppSpacing.xs),
+              alignmentOffset: Offset(0, AppSpacing.xs),
               style: AppMenuStyle.menu(context, width: constraints.maxWidth),
               menuChildren: [
                 for (final o in options)
@@ -99,7 +99,7 @@ class AppSelect<T> extends StatelessWidget {
             ),
           ),
         if (errorText case final error?) ...[
-          const SizedBox(height: AppSpacing.xs),
+          SizedBox(height: AppSpacing.xs),
           Text(error, style: AppTypography.caption.copyWith(color: c.danger)),
         ],
       ],
@@ -150,7 +150,7 @@ class _SelectBox extends StatelessWidget {
               shadows: const <BoxShadow>[],
             ),
             builder: (context, state) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
               child: Row(
                 children: [
                   Expanded(
@@ -249,10 +249,10 @@ class _SearchableOptions<T> extends StatelessWidget {
           hint: CommonStrings.searchHint,
           onChanged: context.read<_QueryBloc>().add,
         ),
-        const SizedBox(height: AppSpacing.sm),
+        SizedBox(height: AppSpacing.sm),
         if (shown.isEmpty)
           Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+            padding: EdgeInsets.all(AppSpacing.lg),
             child: Text(
               CommonStrings.noResults,
               textAlign: TextAlign.center,
@@ -261,9 +261,7 @@ class _SearchableOptions<T> extends StatelessWidget {
           )
         else
           ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxHeight: AppSizes.listTileMin * 6,
-            ),
+            constraints: BoxConstraints(maxHeight: AppSizes.listTileMin * 6),
             child: ListView(
               shrinkWrap: true,
               children: [
@@ -283,9 +281,7 @@ class _SearchableOptions<T> extends StatelessWidget {
                     ),
                     selected: o.value == value,
                     selectedTileColor: c.primarySubtle,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: AppRadius.brSm,
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: AppRadius.brSm),
                     onTap: () => Navigator.of(context).pop(o.value),
                   ),
               ],

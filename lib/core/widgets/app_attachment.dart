@@ -101,7 +101,7 @@ class AppAttachmentTile extends StatelessWidget {
     };
     return Container(
       key: ValueKey('attachment-$name'),
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: AppRadius.brLg,
@@ -110,7 +110,7 @@ class AppAttachmentTile extends StatelessWidget {
       child: Row(
         children: [
           AppFileBadge(fileName: name),
-          const SizedBox(width: AppSpacing.md),
+          SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +124,7 @@ class AppAttachmentTile extends StatelessWidget {
                     color: c.textPrimary,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.xs),
+                SizedBox(height: AppSpacing.xs),
                 Text(
                   detail,
                   style: AppTypography.caption.copyWith(
@@ -132,13 +132,13 @@ class AppAttachmentTile extends StatelessWidget {
                   ),
                 ),
                 if (status == AppAttachmentStatus.uploading) ...[
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   AppProgressBar(value: progress),
                 ],
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.sm),
+          SizedBox(width: AppSpacing.sm),
           switch (status) {
             AppAttachmentStatus.sent => Row(
               mainAxisSize: MainAxisSize.min,
@@ -219,7 +219,7 @@ class AppUploadButton extends StatelessWidget {
         onPressed: onPressed,
       ),
       if (hint case final hint?) ...[
-        const SizedBox(height: AppSpacing.xs),
+        SizedBox(height: AppSpacing.xs),
         Text(
           hint,
           textAlign: TextAlign.center,
@@ -344,9 +344,7 @@ class _CaptureTile extends StatelessWidget {
         side: BorderSide(color: c.borderStrong),
       ),
       child: InkWell(
-        customBorder: const RoundedRectangleBorder(
-          borderRadius: AppRadius.brMd,
-        ),
+        customBorder: RoundedRectangleBorder(borderRadius: AppRadius.brMd),
         onTap: onCapture,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -356,7 +354,7 @@ class _CaptureTile extends StatelessWidget {
               size: AppSizes.iconTopBar,
               color: c.primary,
             ),
-            const SizedBox(height: AppSpacing.xs),
+            SizedBox(height: AppSpacing.xs),
             Text(
               CommonStrings.capture,
               style: AppTypography.captionBold.copyWith(color: c.primary),

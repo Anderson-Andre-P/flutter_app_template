@@ -13,15 +13,16 @@ class AppLineChart extends StatelessWidget {
     super.key,
     required this.values,
     this.labels = const [],
-    this.height = AppSizes.chart,
+    this.height,
   });
 
   final List<double> values;
   final List<String> labels;
-  final double height;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
+    final height = this.height ?? AppSizes.chart;
     final c = context.colors;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -32,7 +33,7 @@ class AppLineChart extends StatelessWidget {
           child: CustomPaint(painter: _LinePainter(values, c)),
         ),
         if (labels.isNotEmpty) ...[
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
           Row(
             children: [
               for (final l in labels)
@@ -57,8 +58,8 @@ class _LinePainter extends CustomPainter {
   final List<double> values;
   final AppColors colors;
 
-  static const _stroke = 2.5;
-  static const _dot = 4.0;
+  static double get _stroke => AppSizes.chartStroke;
+  static double get _dot => AppSizes.chartDot;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -67,7 +68,7 @@ class _LinePainter extends CustomPainter {
     final top = _dot + _stroke;
     final usable = size.height - top * 2;
     // Inset by the marker so the last point is never clipped at the edge.
-    const side = _dot + _stroke;
+    final side = _dot + _stroke;
     final width = size.width - side * 2;
     Offset at(int i) => Offset(
       values.length == 1

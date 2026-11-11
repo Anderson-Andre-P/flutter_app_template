@@ -21,7 +21,7 @@ abstract final class AppMenuStyle {
           side: BorderSide(color: c.border),
         ),
       ),
-      padding: const WidgetStatePropertyAll(EdgeInsets.all(AppSpacing.xs)),
+      padding: WidgetStatePropertyAll(EdgeInsets.all(AppSpacing.xs)),
       minimumSize: width == null
           ? null
           : WidgetStatePropertyAll(Size(width, 0)),
@@ -38,13 +38,13 @@ abstract final class AppMenuStyle {
         selected ? c.primarySubtle : Colors.transparent,
       ),
       overlayColor: WidgetStatePropertyAll(c.primarySubtle),
-      shape: const WidgetStatePropertyAll(
+      shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: AppRadius.brSm),
       ),
       minimumSize: const WidgetStatePropertyAll(
         Size.fromHeight(AppSizes.minTouchTarget),
       ),
-      padding: const WidgetStatePropertyAll(
+      padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(horizontal: AppSpacing.md),
       ),
     );

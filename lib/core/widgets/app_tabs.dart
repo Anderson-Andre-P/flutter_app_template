@@ -91,9 +91,7 @@ class _TabItem extends StatelessWidget {
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.md,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
                   child: Center(
                     widthFactor: 1,
                     child: Row(
@@ -108,9 +106,9 @@ class _TabItem extends StatelessWidget {
                                   .copyWith(color: fg),
                         ),
                         if (tab.count case final count?) ...[
-                          const SizedBox(width: AppSpacing.xs),
+                          SizedBox(width: AppSpacing.xs),
                           Container(
-                            padding: const EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                               horizontal: AppSpacing.xs,
                             ),
                             decoration: BoxDecoration(

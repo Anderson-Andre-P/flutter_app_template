@@ -53,14 +53,14 @@ abstract final class AppDialog {
               ? Column(
                   children: [
                     confirmButton,
-                    const SizedBox(height: AppSpacing.sm),
+                    SizedBox(height: AppSpacing.sm),
                     cancelButton,
                   ],
                 )
               : Row(
                   children: [
                     Expanded(child: cancelButton),
-                    const SizedBox(width: AppSpacing.sm),
+                    SizedBox(width: AppSpacing.sm),
                     Expanded(child: confirmButton),
                   ],
                 ),
@@ -87,11 +87,11 @@ abstract final class AppDialog {
       builder: (ctx) {
         final c = ctx.colors;
         return Dialog(
-          insetPadding: const EdgeInsets.all(AppSpacing.x2l),
+          insetPadding: EdgeInsets.all(AppSpacing.x2l),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppSizes.modalMaxWidth),
+            constraints: BoxConstraints(maxWidth: AppSizes.modalMaxWidth),
             child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.xl),
+              padding: EdgeInsets.all(AppSpacing.xl),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -112,7 +112,7 @@ abstract final class AppDialog {
                           color: c.primary,
                         ),
                       ),
-                      const SizedBox(width: AppSpacing.md),
+                      SizedBox(width: AppSpacing.md),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +125,7 @@ abstract final class AppDialog {
                                 color: c.textPrimary,
                               ),
                             ),
-                            const SizedBox(height: AppSpacing.xs),
+                            SizedBox(height: AppSpacing.xs),
                             Text(
                               message,
                               style: AppTypography.bodySmall.copyWith(
@@ -143,7 +143,7 @@ abstract final class AppDialog {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.x2l),
+                  SizedBox(height: AppSpacing.x2l),
                   AppButtonGroup.pair(
                     secondary: AppButton(
                       label: cancelLabel ?? CommonStrings.cancel,
@@ -206,11 +206,11 @@ class _AppDialogFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Dialog(
-      insetPadding: const EdgeInsets.all(AppSpacing.x2l),
+      insetPadding: EdgeInsets.all(AppSpacing.x2l),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: AppSizes.modalMaxWidth),
+        constraints: BoxConstraints(maxWidth: AppSizes.modalMaxWidth),
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.x2l),
+          padding: EdgeInsets.all(AppSpacing.x2l),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -232,18 +232,18 @@ class _AppDialogFrame extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSpacing.md),
+                SizedBox(height: AppSpacing.md),
               ],
               Text(
                 title,
                 style: AppTypography.section.copyWith(color: c.textPrimary),
               ),
-              const SizedBox(height: AppSpacing.sm),
+              SizedBox(height: AppSpacing.sm),
               Text(
                 message,
                 style: AppTypography.body.copyWith(color: c.textSecondary),
               ),
-              const SizedBox(height: AppSpacing.x2l),
+              SizedBox(height: AppSpacing.x2l),
               actions,
             ],
           ),

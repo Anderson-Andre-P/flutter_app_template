@@ -9,37 +9,41 @@ import '../theme/theme_context.dart';
 /// media. Wrap the shapes in one [AppShimmer]. Never a generic spinner in a
 /// list.
 class AppSkeleton extends StatelessWidget {
-  const AppSkeleton.line({super.key, this.width, this.height = AppSpacing.md})
-    : _circle = false,
-      _radius = AppRadius.brXs;
+  const AppSkeleton.line({super.key, this.width, this.height})
+    : _shape = _Shape.line;
 
-  const AppSkeleton.block({super.key, this.width, required this.height})
-    : _circle = false,
-      _radius = AppRadius.brMd;
+  const AppSkeleton.block({super.key, this.width, required double this.height})
+    : _shape = _Shape.block;
 
   const AppSkeleton.circle({super.key, required double size})
     : width = size,
       height = size,
-      _circle = true,
-      _radius = null;
+      _shape = _Shape.circle;
 
   /// `null` fills the width.
   final double? width;
-  final double height;
-  final bool _circle;
-  final BorderRadius? _radius;
+
+  /// A line defaults to [AppSpacing.md].
+  final double? height;
+  final _Shape _shape;
 
   @override
   Widget build(BuildContext context) => Container(
     width: width ?? double.infinity,
-    height: height,
+    height: height ?? AppSpacing.md,
     decoration: BoxDecoration(
       color: context.colors.sunken,
-      shape: _circle ? BoxShape.circle : BoxShape.rectangle,
-      borderRadius: _radius,
+      shape: _shape == _Shape.circle ? BoxShape.circle : BoxShape.rectangle,
+      borderRadius: switch (_shape) {
+        _Shape.line => AppRadius.brXs,
+        _Shape.block => AppRadius.brMd,
+        _Shape.circle => null,
+      },
     ),
   );
 }
+
+enum _Shape { line, block, circle }
 
 /// Sweeps a highlight across the [AppSkeleton]s below it every
 /// [AppDurations.shimmer], looped; still when the system asks for reduced

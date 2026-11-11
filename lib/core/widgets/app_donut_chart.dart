@@ -30,13 +30,13 @@ class AppDonutChart extends StatelessWidget {
     required this.segments,
     required this.centerLabel,
     this.centerCaption,
-    this.size = AppSizes.chart,
+    this.size,
   });
 
   final List<AppChartSegment> segments;
   final String centerLabel;
   final String? centerCaption;
-  final double size;
+  final double? size;
 
   static const _palette = [
     AppTone.primary,
@@ -50,6 +50,7 @@ class AppDonutChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? AppSizes.chart;
     assert(segments.length >= 3, 'A donut needs at least three arcs.');
     final c = context.colors;
     final colors = [
@@ -84,7 +85,7 @@ class AppDonutChart extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppSpacing.lg),
+        SizedBox(height: AppSpacing.lg),
         Wrap(
           alignment: WrapAlignment.center,
           spacing: AppSpacing.lg,
@@ -102,7 +103,7 @@ class AppDonutChart extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.xs),
+                  SizedBox(width: AppSpacing.xs),
                   Text(
                     segments[i].label,
                     style: AppTypography.caption.copyWith(
@@ -125,7 +126,7 @@ class _DonutPainter extends CustomPainter {
   final List<Color> colors;
   final Color track;
 
-  static const _thickness = AppSizes.donutRing;
+  static final _thickness = AppSizes.donutRing;
   static const _gap = .03;
 
   @override

@@ -18,11 +18,11 @@ class AppCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Container(
-      constraints: const BoxConstraints(
+      constraints: BoxConstraints(
         minWidth: AppSizes.counter,
         minHeight: AppSizes.counter,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.xs),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: c.danger,

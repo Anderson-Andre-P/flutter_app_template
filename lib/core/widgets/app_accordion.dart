@@ -34,7 +34,7 @@ class AppAccordion extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     children: [
       for (var i = 0; i < items.length; i++) ...[
-        if (i > 0) const SizedBox(height: AppSpacing.sm),
+        if (i > 0) SizedBox(height: AppSpacing.sm),
         _Panel(
           item: items[i],
           open: i == expanded,
@@ -87,11 +87,9 @@ class _Panel extends StatelessWidget {
                   shadows: const <BoxShadow>[],
                 ),
                 builder: (context, state) => ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minHeight: AppSizes.listTileMin,
-                  ),
+                  constraints: BoxConstraints(minHeight: AppSizes.listTileMin),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: AppSpacing.lg,
                       vertical: AppSpacing.sm,
                     ),
@@ -111,7 +109,7 @@ class _Panel extends StatelessWidget {
                               color: c.primary,
                             ),
                           ),
-                          const SizedBox(width: AppSpacing.md),
+                          SizedBox(width: AppSpacing.md),
                         ],
                         Expanded(
                           child: Text(
@@ -142,7 +140,7 @@ class _Panel extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: open
                 ? Padding(
-                    padding: const EdgeInsets.fromLTRB(
+                    padding: EdgeInsets.fromLTRB(
                       AppSpacing.lg,
                       0,
                       AppSpacing.lg,

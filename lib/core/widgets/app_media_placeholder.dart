@@ -26,7 +26,7 @@ class AppMediaPlaceholder extends StatelessWidget {
           color: c.sunken,
           borderRadius: AppRadius.brMd,
         ),
-        padding: const EdgeInsets.all(AppSpacing.sm),
+        padding: EdgeInsets.all(AppSpacing.sm),
         child: Stack(
           children: [
             Center(

@@ -32,7 +32,7 @@ class AppFilterBar extends StatelessWidget {
       Expanded(
         child: AppSearchField(hint: searchHint, onChanged: onSearch),
       ),
-      const SizedBox(width: AppSpacing.sm),
+      SizedBox(width: AppSpacing.sm),
       Stack(
         clipBehavior: Clip.none,
         children: [
@@ -54,7 +54,7 @@ class AppFilterBar extends StatelessWidget {
         ],
       ),
       if (onSort case final sort?) ...[
-        const SizedBox(width: AppSpacing.sm),
+        SizedBox(width: AppSpacing.sm),
         AppIconButton(
           icon: Icons.swap_vert,
           label: CommonStrings.sort,

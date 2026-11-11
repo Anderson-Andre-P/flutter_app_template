@@ -94,7 +94,7 @@ class _AppTextFieldState extends State<AppTextField> {
     return icon == null
         ? null
         : Padding(
-            padding: const EdgeInsetsDirectional.only(end: AppSpacing.md),
+            padding: EdgeInsetsDirectional.only(end: AppSpacing.md),
             child: icon,
           );
   }
@@ -116,7 +116,7 @@ class _AppTextFieldState extends State<AppTextField> {
           widget.required ? '${widget.label} *' : widget.label,
           style: AppTypography.label.copyWith(color: c.textPrimary),
         ),
-        const SizedBox(height: AppSpacing.sm),
+        SizedBox(height: AppSpacing.sm),
         TextField(
           controller: widget.controller ?? _own,
           obscureText: _hidden,
@@ -159,7 +159,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 : widget.readOnly
                 ? c.primarySubtle
                 : null,
-            constraints: const BoxConstraints(minHeight: AppSizes.field),
+            constraints: BoxConstraints(minHeight: AppSizes.field),
             suffixIcon: widget.obscure
                 ? IconButton(
                     tooltip: _hidden
@@ -177,7 +177,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 : widget.suffix ??
                       (widget.readOnly
                           ? Padding(
-                              padding: const EdgeInsetsDirectional.only(
+                              padding: EdgeInsetsDirectional.only(
                                 end: AppSpacing.md,
                               ),
                               child: Center(
@@ -194,16 +194,12 @@ class _AppTextFieldState extends State<AppTextField> {
             prefixIcon: widget.prefix == null
                 ? null
                 : Container(
-                    margin: const EdgeInsetsDirectional.only(
-                      end: AppSpacing.md,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.md,
-                    ),
+                    margin: EdgeInsetsDirectional.only(end: AppSpacing.md),
+                    padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: c.primarySubtle,
-                      borderRadius: const BorderRadiusDirectional.horizontal(
+                      borderRadius: BorderRadiusDirectional.horizontal(
                         start: Radius.circular(AppRadius.md),
                       ),
                     ),
@@ -212,9 +208,7 @@ class _AppTextFieldState extends State<AppTextField> {
                       style: AppTypography.body.copyWith(color: c.textMuted),
                     ),
                   ),
-            prefixIconConstraints: const BoxConstraints(
-              minHeight: AppSizes.field,
-            ),
+            prefixIconConstraints: BoxConstraints(minHeight: AppSizes.field),
           ),
         ),
       ],

@@ -55,7 +55,7 @@ class AppCalendar extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _CalendarBody(firstDate: firstDate, lastDate: lastDate),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
               BlocBuilder<_CalendarBloc, _CalendarState>(
                 builder: (context, state) => AppButtonGroup.pair(
                   secondary: AppButton(
@@ -187,7 +187,7 @@ class _CalendarBody extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.sm),
+        SizedBox(height: AppSpacing.sm),
         Row(
           children: [
             for (final initial in CommonStrings.weekdayInitials)
@@ -201,7 +201,7 @@ class _CalendarBody extends StatelessWidget {
               ),
           ],
         ),
-        const SizedBox(height: AppSpacing.xs),
+        SizedBox(height: AppSpacing.xs),
         for (var row = 0; row < cells.length; row += 7)
           Row(
             children: [

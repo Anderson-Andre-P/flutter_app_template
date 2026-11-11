@@ -41,12 +41,12 @@ class AppBasicCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _Heading(overline: overline, title: title),
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
           _Body(body),
           if (footer case final f?) ...[
-            const SizedBox(height: AppSpacing.lg),
-            Divider(height: 1, color: c.border),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: AppSpacing.lg),
+            Divider(height: AppSizes.hairline, color: c.border),
+            SizedBox(height: AppSpacing.md),
             Row(
               children: [
                 Container(
@@ -57,7 +57,7 @@ class AppBasicCard extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                 ),
-                const SizedBox(width: AppSpacing.sm),
+                SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
                     f,
@@ -116,13 +116,13 @@ class AppMediaCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+            padding: EdgeInsets.all(AppSpacing.lg),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _Heading(overline: overline, title: title),
                 if (meta case final m?) ...[
-                  const SizedBox(height: AppSpacing.xs),
+                  SizedBox(height: AppSpacing.xs),
                   Text(
                     m,
                     style: AppTypography.caption.copyWith(color: c.textMuted),
@@ -162,11 +162,11 @@ class AppProgressCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _Heading(overline: overline, title: title),
-        const SizedBox(height: AppSpacing.sm),
+        SizedBox(height: AppSpacing.sm),
         _Body(body),
-        const SizedBox(height: AppSpacing.lg),
+        SizedBox(height: AppSpacing.lg),
         AppProgressBar(value: progress),
-        const SizedBox(height: AppSpacing.lg),
+        SizedBox(height: AppSpacing.lg),
         AppButton(
           label: actionLabel,
           size: AppButtonSize.md,
@@ -202,10 +202,10 @@ class AppLinkCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _Heading(overline: overline, title: title),
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
           _Body(body),
-          const SizedBox(height: AppSpacing.md),
-          Divider(height: 1, color: c.border),
+          SizedBox(height: AppSpacing.md),
+          Divider(height: AppSizes.hairline, color: c.border),
           AppButton(
             label: linkLabel,
             trailingIcon: Icons.arrow_forward,
@@ -261,7 +261,7 @@ class AppHorizontalCard extends StatelessWidget {
             SizedBox(width: AppSizes.cardThumb, child: thumbnail),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.lg),
+                padding: EdgeInsets.all(AppSpacing.lg),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -269,28 +269,28 @@ class AppHorizontalCard extends StatelessWidget {
                       children: [
                         if (overline case final o?) ...[
                           Flexible(child: SectionOverline(o)),
-                          const SizedBox(width: AppSpacing.sm),
+                          SizedBox(width: AppSpacing.sm),
                         ],
                         if (badge case final b?)
                           AppBadge(label: b, tone: badgeTone),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.sm),
+                    SizedBox(height: AppSpacing.sm),
                     Text(
                       title,
                       style: AppTypography.label.copyWith(color: c.textPrimary),
                     ),
                     if (body case final b?) ...[
-                      const SizedBox(height: AppSpacing.xs),
+                      SizedBox(height: AppSpacing.xs),
                       _Body(b),
                     ],
                     if (ownerLabel != null || date != null) ...[
-                      const SizedBox(height: AppSpacing.md),
+                      SizedBox(height: AppSpacing.md),
                       Row(
                         children: [
                           if (ownerInitials case final i?) ...[
                             AppAvatar(initials: i, size: AppSizes.avatarSm),
-                            const SizedBox(width: AppSpacing.sm),
+                            SizedBox(width: AppSpacing.sm),
                           ],
                           if (ownerLabel case final l?)
                             Expanded(
@@ -364,7 +364,7 @@ class AppFieldCard extends StatelessWidget {
             title,
             style: AppTypography.label.copyWith(color: c.textPrimary),
           ),
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: AppSpacing.md),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -378,7 +378,7 @@ class AppFieldCard extends StatelessWidget {
                   suffix: unit == null
                       ? null
                       : Padding(
-                          padding: const EdgeInsetsDirectional.only(
+                          padding: EdgeInsetsDirectional.only(
                             end: AppSpacing.md,
                           ),
                           child: Center(
@@ -393,7 +393,7 @@ class AppFieldCard extends StatelessWidget {
                         ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.sm),
+              SizedBox(width: AppSpacing.sm),
               AppButton(
                 label: actionLabel,
                 expanded: false,
@@ -402,7 +402,7 @@ class AppFieldCard extends StatelessWidget {
             ],
           ),
           if (help case final h?) ...[
-            const SizedBox(height: AppSpacing.sm),
+            SizedBox(height: AppSpacing.sm),
             Row(
               children: [
                 Icon(
@@ -410,7 +410,7 @@ class AppFieldCard extends StatelessWidget {
                   size: AppSizes.iconChip,
                   color: c.textMuted,
                 ),
-                const SizedBox(width: AppSpacing.xs),
+                SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Text(
                     h,
@@ -421,14 +421,12 @@ class AppFieldCard extends StatelessWidget {
             ),
           ],
           if (attachmentLabel case final a?) ...[
-            const SizedBox(height: AppSpacing.md),
-            Divider(height: 1, color: c.border),
+            SizedBox(height: AppSpacing.md),
+            Divider(height: AppSizes.hairline, color: c.border),
             InkWell(
               onTap: onAttach,
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  minHeight: AppSizes.listTileMin,
-                ),
+                constraints: BoxConstraints(minHeight: AppSizes.listTileMin),
                 child: Row(
                   children: [
                     Container(
@@ -444,7 +442,7 @@ class AppFieldCard extends StatelessWidget {
                         color: c.primary,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.md),
+                    SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Text(
                         a,
@@ -525,7 +523,7 @@ class AppProductCard extends StatelessWidget {
                     top: AppSpacing.sm,
                     left: AppSpacing.sm,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: AppSpacing.sm,
                         vertical: AppSpacing.xs,
                       ),
@@ -554,13 +552,13 @@ class AppProductCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+            padding: EdgeInsets.all(AppSpacing.lg),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _Heading(overline: overline, title: title),
                 if (rating case final r?) ...[
-                  const SizedBox(height: AppSpacing.xs),
+                  SizedBox(height: AppSpacing.xs),
                   Semantics(
                     label: CommonStrings.rating(r),
                     child: ExcludeSemantics(
@@ -587,7 +585,7 @@ class AppProductCard extends StatelessWidget {
                     ),
                   ),
                 ],
-                const SizedBox(height: AppSpacing.lg),
+                SizedBox(height: AppSpacing.lg),
                 Wrap(
                   spacing: AppSpacing.sm,
                   crossAxisAlignment: WrapCrossAlignment.end,
@@ -609,7 +607,7 @@ class AppProductCard extends StatelessWidget {
                     ],
                   ],
                 ),
-                const SizedBox(height: AppSpacing.md),
+                SizedBox(height: AppSpacing.md),
                 Row(
                   children: [
                     SizedBox(
@@ -622,7 +620,7 @@ class AppProductCard extends StatelessWidget {
                         onChanged: onQuantity,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.sm),
+                    SizedBox(width: AppSpacing.sm),
                     Expanded(
                       child: AppButton(
                         label: addLabel,
@@ -692,7 +690,7 @@ class AppCtaCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(AppSpacing.xl),
+              padding: EdgeInsets.all(AppSpacing.xl),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -703,16 +701,16 @@ class AppCtaCard extends StatelessWidget {
                         color: fg.withValues(alpha: .8),
                       ),
                     ),
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   Text(title, style: AppTypography.heading.copyWith(color: fg)),
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   Text(
                     body,
                     style: AppTypography.bodySmall.copyWith(
                       color: fg.withValues(alpha: .9),
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x2l),
+                  SizedBox(height: AppSpacing.x2l),
                   Material(
                     color: c.card,
                     borderRadius: AppRadius.brMd,
@@ -785,7 +783,7 @@ class AppPricingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.xl),
+      padding: EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
         color: c.card,
         borderRadius: AppRadius.brLg,
@@ -806,12 +804,12 @@ class AppPricingCard extends StatelessWidget {
                 AppBadge(label: b, tone: AppTone.primary),
             ],
           ),
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: AppSpacing.md),
           Text(
             title,
             style: AppTypography.heading.copyWith(color: c.textPrimary),
           ),
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
           Wrap(
             spacing: AppSpacing.sm,
             crossAxisAlignment: WrapCrossAlignment.end,
@@ -828,16 +826,16 @@ class AppPricingCard extends StatelessWidget {
               ],
             ],
           ),
-          const SizedBox(height: AppSpacing.lg),
-          Divider(height: 1, color: c.border),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: AppSpacing.lg),
+          Divider(height: AppSizes.hairline, color: c.border),
+          SizedBox(height: AppSpacing.lg),
           for (final f in features)
             Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              padding: EdgeInsets.only(bottom: AppSpacing.sm),
               child: Row(
                 children: [
                   Icon(Icons.check, size: AppSizes.iconChip, color: c.success),
-                  const SizedBox(width: AppSpacing.sm),
+                  SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(
                       f,
@@ -849,10 +847,10 @@ class AppPricingCard extends StatelessWidget {
                 ],
               ),
             ),
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: AppSpacing.md),
           AppButton(label: actionLabel, onPressed: onAction),
           if (footnote case final n?) ...[
-            const SizedBox(height: AppSpacing.sm),
+            SizedBox(height: AppSpacing.sm),
             Text(
               n,
               textAlign: TextAlign.center,
@@ -877,7 +875,7 @@ class _Heading extends StatelessWidget {
     children: [
       if (overline case final o?) ...[
         SectionOverline(o),
-        const SizedBox(height: AppSpacing.sm),
+        SizedBox(height: AppSpacing.sm),
       ],
       Text(
         title,

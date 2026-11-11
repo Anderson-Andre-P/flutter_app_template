@@ -93,7 +93,7 @@ class AppErrorView extends StatelessWidget {
             expanded: false,
           ),
           if (secondaryLabel case final label?) ...[
-            const SizedBox(height: AppSpacing.xs),
+            SizedBox(height: AppSpacing.xs),
             AppButton(
               label: label,
               onPressed: onSecondary,
@@ -135,7 +135,7 @@ class AppOfflineView extends StatelessWidget {
           ? null
           : Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(AppSpacing.md),
+              padding: EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 color: c.alertSubtle,
                 borderRadius: AppRadius.brMd,
@@ -179,7 +179,7 @@ class _StateLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Padding(
-      padding: const EdgeInsets.all(AppSpacing.x2l),
+      padding: EdgeInsets.all(AppSpacing.x2l),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -192,22 +192,19 @@ class _StateLayout extends StatelessWidget {
             ),
             child: Icon(icon, color: iconColor, size: AppSizes.icon + 4),
           ),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: AppSpacing.lg),
           Text(
             title,
             textAlign: TextAlign.center,
             style: AppTypography.section.copyWith(color: c.textPrimary),
           ),
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
           Text(
             message,
             textAlign: TextAlign.center,
             style: AppTypography.body.copyWith(color: c.textSecondary),
           ),
-          if (action != null) ...[
-            const SizedBox(height: AppSpacing.x2l),
-            action!,
-          ],
+          if (action != null) ...[SizedBox(height: AppSpacing.x2l), action!],
         ],
       ),
     );

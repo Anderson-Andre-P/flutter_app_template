@@ -15,10 +15,7 @@ void main() {
       AppFab(icon: Icons.add, label: 'Novo', onPressed: () {}),
       dark: dark,
     );
-    expect(
-      tester.getSize(find.byType(AppFab)),
-      const Size.square(AppSizes.fab),
-    );
+    expect(tester.getSize(find.byType(AppFab)), Size.square(AppSizes.fab));
     expect(find.text('Novo'), findsNothing);
   });
 

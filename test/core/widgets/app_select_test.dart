@@ -22,7 +22,7 @@ Future<void> _pump(
 }) => pumpApp(
   tester,
   Padding(
-    padding: const EdgeInsets.all(AppSpacing.lg),
+    padding: EdgeInsets.all(AppSpacing.lg),
     child: AppSelect<int>(
       label: 'Prioridade',
       options: options,

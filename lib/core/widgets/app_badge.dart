@@ -21,8 +21,8 @@ class AppBadge extends StatelessWidget {
     final fg = c.toneForeground(tone);
     return Container(
       // Grows with large text instead of cutting it.
-      constraints: const BoxConstraints(minHeight: AppSizes.pill),
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      constraints: BoxConstraints(minHeight: AppSizes.pill),
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
       decoration: BoxDecoration(
         color: c.toneBackground(tone),
         borderRadius: AppRadius.brFull,
@@ -31,11 +31,11 @@ class AppBadge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 6,
-            height: 6,
+            width: AppSizes.badgeDot,
+            height: AppSizes.badgeDot,
             decoration: BoxDecoration(color: fg, shape: BoxShape.circle),
           ),
-          const SizedBox(width: AppSpacing.xs),
+          SizedBox(width: AppSpacing.xs),
           Flexible(
             child: Text(
               label,

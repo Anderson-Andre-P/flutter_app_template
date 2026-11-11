@@ -38,15 +38,15 @@ class AppChatBubble extends StatelessWidget {
   /// Shown under the text (an image placeholder, a file tile).
   final Widget? attachment;
 
-  static const _corner = Radius.circular(AppRadius.tail);
-  static const _round = Radius.circular(AppRadius.lg);
+  static final _corner = Radius.circular(AppRadius.tail);
+  static final _round = Radius.circular(AppRadius.lg);
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final showHeader = !mine && firstInGroup;
     final bubble = Container(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: AppSpacing.md,
         vertical: AppSpacing.sm,
       ),
@@ -71,7 +71,7 @@ class AppChatBubble extends StatelessWidget {
       children: [
         Text(time, style: AppTypography.caption.copyWith(color: c.textMuted)),
         if (mine && read) ...[
-          const SizedBox(width: AppSpacing.xs),
+          SizedBox(width: AppSpacing.xs),
           Semantics(
             label: CommonStrings.read,
             child: Icon(
@@ -98,7 +98,7 @@ class AppChatBubble extends StatelessWidget {
               width: AppSizes.avatarMd,
               child: showHeader && initials != null
                   ? Padding(
-                      padding: const EdgeInsets.only(top: AppSpacing.lg),
+                      padding: EdgeInsets.only(top: AppSpacing.lg),
                       child: AppAvatar(
                         initials: initials!,
                         size: AppSizes.avatarMd,
@@ -106,7 +106,7 @@ class AppChatBubble extends StatelessWidget {
                     )
                   : null,
             ),
-            const SizedBox(width: AppSpacing.sm),
+            SizedBox(width: AppSpacing.sm),
           ],
           Flexible(
             child: LayoutBuilder(
@@ -127,14 +127,14 @@ class AppChatBubble extends StatelessWidget {
                           color: c.textSecondary,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.xs),
+                      SizedBox(height: AppSpacing.xs),
                     ],
                     bubble,
                     if (attachment case final a?) ...[
-                      const SizedBox(height: AppSpacing.xs),
+                      SizedBox(height: AppSpacing.xs),
                       a,
                     ],
-                    const SizedBox(height: AppSpacing.xs),
+                    SizedBox(height: AppSpacing.xs),
                     meta,
                   ],
                 ),
@@ -158,8 +158,8 @@ class AppChatDay extends StatelessWidget {
     final c = context.colors;
     return Center(
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-        padding: const EdgeInsets.symmetric(
+        margin: EdgeInsets.symmetric(vertical: AppSpacing.sm),
+        padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,
           vertical: AppSpacing.xs,
         ),
@@ -219,7 +219,7 @@ class _AppMessageComposerState extends State<AppMessageComposer> {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Container(
-      padding: const EdgeInsetsDirectional.only(
+      padding: EdgeInsetsDirectional.only(
         start: AppSpacing.lg,
         end: AppSpacing.xs,
       ),
@@ -245,9 +245,7 @@ class _AppMessageComposerState extends State<AppMessageComposer> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: AppSpacing.md,
-                ),
+                contentPadding: EdgeInsets.symmetric(vertical: AppSpacing.md),
               ),
             ),
           ),

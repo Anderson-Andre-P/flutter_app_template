@@ -33,7 +33,7 @@ class AppInlineAlert extends StatelessWidget {
       liveRegion: true,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.md,
         ),
@@ -47,7 +47,7 @@ class AppInlineAlert extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon, size: AppSizes.iconField, color: fg),
-            const SizedBox(width: AppSpacing.sm),
+            SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Text(
                 message,

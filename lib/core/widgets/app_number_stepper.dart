@@ -48,7 +48,7 @@ class AppNumberStepper extends StatelessWidget {
             label,
             style: AppTypography.label.copyWith(color: c.textPrimary),
           ),
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
         ],
         Container(
           width: AppSizes.numberStepper,

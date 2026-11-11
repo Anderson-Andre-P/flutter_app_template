@@ -41,7 +41,7 @@ class AppBiometricButton extends StatelessWidget {
             shadows: const <BoxShadow>[],
           ),
           builder: (context, state) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+            padding: EdgeInsets.symmetric(vertical: AppSpacing.lg),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -58,7 +58,7 @@ class AppBiometricButton extends StatelessWidget {
                     color: enabled ? c.primary : c.textDisabled,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.sm),
+                SizedBox(height: AppSpacing.sm),
                 Text(
                   label,
                   style: AppTypography.labelMedium.copyWith(

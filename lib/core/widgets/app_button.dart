@@ -124,9 +124,9 @@ class AppButton extends StatelessWidget {
                     heightFactor: 1,
                     child: loading
                         ? SizedBox.square(
-                            dimension: 18,
+                            dimension: AppSizes.spinner,
                             child: CircularProgressIndicator(
-                              strokeWidth: 2,
+                              strokeWidth: AppSizes.focusRing,
                               color: fg,
                             ),
                           )
@@ -135,7 +135,7 @@ class AppButton extends StatelessWidget {
                             children: [
                               if (icon != null) ...[
                                 Icon(icon, size: AppSizes.iconField, color: fg),
-                                const SizedBox(width: AppSpacing.sm),
+                                SizedBox(width: AppSpacing.sm),
                               ],
                               Flexible(
                                 child: Text(
@@ -148,7 +148,7 @@ class AppButton extends StatelessWidget {
                                 ),
                               ),
                               if (trailingIcon != null) ...[
-                                const SizedBox(width: AppSpacing.sm),
+                                SizedBox(width: AppSpacing.sm),
                                 Icon(
                                   trailingIcon,
                                   size: AppSizes.iconField,

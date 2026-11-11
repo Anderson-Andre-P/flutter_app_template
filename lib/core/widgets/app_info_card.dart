@@ -29,7 +29,7 @@ class AppInfoCard extends StatelessWidget {
         children: [
           SectionOverline(title),
           for (var i = 0; i < rows.length; i++) ...[
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: AppSpacing.md),
             Row(
               children: [
                 Expanded(
@@ -40,7 +40,7 @@ class AppInfoCard extends StatelessWidget {
                         : AppTypography.body.copyWith(color: c.textSecondary),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.md),
+                SizedBox(width: AppSpacing.md),
                 // Long values (a protocol, large text) wrap instead of
                 // pushing the row off the card.
                 Flexible(

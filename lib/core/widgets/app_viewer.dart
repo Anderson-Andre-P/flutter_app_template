@@ -83,14 +83,14 @@ class _ViewerPageState extends State<_ViewerPage> {
                 children: [
                   for (final p in pages)
                     Padding(
-                      padding: const EdgeInsets.all(AppSpacing.lg),
+                      padding: EdgeInsets.all(AppSpacing.lg),
                       child: Center(child: p),
                     ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
+              padding: EdgeInsets.all(AppSpacing.lg),
               child: AppPageDots(
                 count: pages.length,
                 current: page,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/widgets/app_donut_chart.dart';
 import 'package:flutter_app_template/core/widgets/app_line_chart.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';
@@ -9,9 +10,9 @@ void main() {
   testBothThemes('line chart paints with its labels', (tester, dark) async {
     await pumpApp(
       tester,
-      const SizedBox(
-        width: 300,
-        child: AppLineChart(
+      SizedBox(
+        width: 300.w,
+        child: const AppLineChart(
           values: [3, 5, 2, 7],
           labels: ['Jan', 'Fev', 'Mar', 'Abr'],
         ),
@@ -31,7 +32,10 @@ void main() {
     ]) {
       await pumpApp(
         tester,
-        SizedBox(width: 300, child: AppLineChart(values: values)),
+        SizedBox(
+          width: 300.w,
+          child: AppLineChart(values: values),
+        ),
       );
       expect(tester.takeException(), isNull, reason: '$values');
     }

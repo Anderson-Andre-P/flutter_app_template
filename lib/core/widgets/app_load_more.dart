@@ -37,7 +37,7 @@ class AppLoadMore extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppTypography.caption.copyWith(color: c.textMuted),
           ),
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
         ],
         MergeSemantics(
           child: Semantics(

@@ -48,7 +48,7 @@ class AppDashedButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(icon, size: AppSizes.iconField, color: fg),
-                  const SizedBox(width: AppSpacing.xs),
+                  SizedBox(width: AppSpacing.xs),
                   Flexible(
                     child: Text(
                       label,
@@ -72,8 +72,8 @@ class _DashedBorder extends CustomPainter {
 
   final Color color;
 
-  static const _dash = 5.0;
-  static const _gap = 4.0;
+  static double get _dash => AppSizes.dash;
+  static double get _gap => AppSizes.dashGap;
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -49,14 +49,12 @@ class AppFab extends StatelessWidget {
             ),
             builder: (context, state) => extended
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.x2l,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: AppSpacing.x2l),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(icon, size: AppSizes.icon, color: fg),
-                        const SizedBox(width: AppSpacing.sm),
+                        SizedBox(width: AppSpacing.sm),
                         Text(
                           label,
                           style: AppTypography.label.copyWith(color: fg),

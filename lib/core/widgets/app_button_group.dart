@@ -48,7 +48,7 @@ class AppButtonGroup extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buttons[0],
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
           _buttons[1],
         ],
       );
@@ -56,7 +56,7 @@ class AppButtonGroup extends StatelessWidget {
     return Row(
       children: [
         for (var i = 0; i < _buttons.length; i++) ...[
-          if (i > 0) const SizedBox(width: AppSpacing.sm),
+          if (i > 0) SizedBox(width: AppSpacing.sm),
           Expanded(flex: _flex[i], child: _buttons[i]),
         ],
       ],

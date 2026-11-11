@@ -53,7 +53,7 @@ class AppMoreMenu extends StatelessWidget {
     final c = context.colors;
     return MenuAnchor(
       style: AppMenuStyle.menu(context),
-      alignmentOffset: const Offset(0, AppSpacing.xs),
+      alignmentOffset: Offset(0, AppSpacing.xs),
       menuChildren: [
         for (final action in actions) ...[
           if (action.destructive && actions.length > 1)

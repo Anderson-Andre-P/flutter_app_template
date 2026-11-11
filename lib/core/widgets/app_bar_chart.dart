@@ -12,16 +12,17 @@ class AppBarChart extends StatelessWidget {
     required this.values,
     required this.labels,
     this.highlightIndex,
-    this.height = AppSizes.chart,
+    this.height,
   });
 
   final List<double> values;
   final List<String> labels;
   final int? highlightIndex;
-  final double height;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
+    final height = this.height ?? AppSizes.chart;
     final c = context.colors;
     assert(values.length == labels.length, 'one label per value');
     final max = values.fold<double>(0, (m, v) => v > m ? v : m);
@@ -31,7 +32,7 @@ class AppBarChart extends StatelessWidget {
         for (var i = 0; i < values.length; i++)
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.xs),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -54,7 +55,7 @@ class AppBarChart extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   Text(
                     labels[i],
                     style: AppTypography.micro.copyWith(color: c.textMuted),

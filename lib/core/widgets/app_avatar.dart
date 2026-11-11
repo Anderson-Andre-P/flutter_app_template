@@ -14,14 +14,14 @@ class AppAvatar extends StatelessWidget {
   const AppAvatar({
     super.key,
     required this.initials,
-    this.size = AppSizes.avatarLg,
+    this.size,
     this.status,
     this.statusLabel,
     this.ring,
   }) : assert(status == null || statusLabel != null, 'Name the status');
 
   final String initials;
-  final double size;
+  final double? size;
   final AppTone? status;
   final String? statusLabel;
 
@@ -32,6 +32,7 @@ class AppAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? AppSizes.avatarLg;
     final c = context.colors;
     final face = Container(
       width: size,
@@ -89,15 +90,16 @@ class AppAvatarGroup extends StatelessWidget {
     super.key,
     required this.initials,
     this.max = 3,
-    this.size = AppSizes.avatarMd,
+    this.size,
   });
 
   final List<String> initials;
   final int max;
-  final double size;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? AppSizes.avatarMd;
     final c = context.colors;
     final shown = initials.take(max).toList();
     final rest = initials.length - shown.length;

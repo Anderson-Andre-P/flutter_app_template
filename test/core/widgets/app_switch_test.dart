@@ -38,7 +38,7 @@ void main() {
     );
     expect(
       tester.getSize(find.byKey(AppSwitch.trackKey)),
-      const Size(AppSizes.switchWidth, AppSizes.switchHeight),
+      Size(AppSizes.switchWidth, AppSizes.switchHeight),
     );
   });
 

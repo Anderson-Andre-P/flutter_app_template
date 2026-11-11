@@ -60,7 +60,11 @@ class AppSegmentedControl<T> extends StatelessWidget {
     final children = <Widget>[
       for (var i = 0; i < segments.length; i++) ...[
         if (joined && i > 0)
-          VerticalDivider(width: 1, thickness: 1, color: c.border),
+          VerticalDivider(
+            width: AppSizes.hairline,
+            thickness: AppSizes.hairline,
+            color: c.border,
+          ),
         _wrap(
           hug,
           _Segment(
@@ -150,7 +154,7 @@ class _Segment<T> extends StatelessWidget {
           builder: (context, state) => joined
               ? _content(fg, icon)
               : Padding(
-                  padding: const EdgeInsets.all(AppSpacing.xs),
+                  padding: EdgeInsets.all(AppSpacing.xs),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       color: selected
@@ -179,7 +183,7 @@ class _Segment<T> extends StatelessWidget {
             children: [
               if (icon != null) ...[
                 Icon(icon, size: AppSizes.iconField, color: fg),
-                const SizedBox(width: AppSpacing.xs),
+                SizedBox(width: AppSpacing.xs),
               ],
               Flexible(
                 child: Text(

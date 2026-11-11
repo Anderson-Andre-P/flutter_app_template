@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
 import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/widgets/app_chat.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/pump_app.dart';
@@ -14,9 +15,9 @@ void main() {
     final c = dark ? AppColors.dark : AppColors.light;
     await pumpApp(
       tester,
-      const SizedBox(
-        width: 360,
-        child: Column(
+      SizedBox(
+        width: 360.w,
+        child: const Column(
           children: [
             AppChatBubble(
               text: 'Consegue conferir?',
