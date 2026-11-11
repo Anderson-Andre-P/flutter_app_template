@@ -64,9 +64,11 @@ void main() {
 
   testWidgets('heights follow the size scale', (tester) async {
     for (final (size, height) in [
+      (AppButtonSize.xl, AppSizes.buttonXl),
       (AppButtonSize.lg, AppSizes.buttonLg),
       (AppButtonSize.md, AppSizes.buttonMd),
       (AppButtonSize.sm, AppSizes.buttonSm),
+      (AppButtonSize.xs, AppSizes.buttonXs),
     ]) {
       await pumpApp(
         tester,
@@ -109,5 +111,42 @@ void main() {
       tester.widget<Text>(find.text('Concluir')).style!.color,
       c.onPrimary,
     );
+  });
+
+  testWidgets('a trailing icon sits after the label', (tester) async {
+    await pumpApp(
+      tester,
+      AppButton(
+        label: 'Avançar',
+        trailingIcon: Icons.arrow_forward,
+        expanded: false,
+        onPressed: () {},
+      ),
+    );
+    expect(
+      tester.getCenter(find.byIcon(Icons.arrow_forward)).dx,
+      greaterThan(tester.getCenter(find.text('Avançar')).dx),
+    );
+  });
+
+  testBothThemes('outlineSuccess is a green outline', (tester, dark) async {
+    final c = dark ? AppColors.dark : AppColors.light;
+    await pumpApp(
+      tester,
+      AppButton(
+        label: 'Aprovar',
+        variant: AppButtonVariant.outlineSuccess,
+        onPressed: () {},
+      ),
+      dark: dark,
+    );
+    final material = tester.widget<Material>(
+      find.descendant(
+        of: find.byType(AppButton),
+        matching: find.byType(Material),
+      ),
+    );
+    expect((material.shape! as RoundedRectangleBorder).side.color, c.success);
+    expect(tester.widget<Text>(find.text('Aprovar')).style!.color, c.success);
   });
 }

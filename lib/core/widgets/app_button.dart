@@ -17,6 +17,9 @@ enum AppButtonVariant {
   /// Same-weight action repeated on the screen.
   outline,
 
+  /// Positive alternative of the same weight (e.g. "Aprovar").
+  outlineSuccess,
+
   /// Frequent, low-risk action inside a card.
   tonal,
 
@@ -34,7 +37,10 @@ enum AppButtonVariant {
   destructiveTonal,
 }
 
-enum AppButtonSize { sm, md, lg }
+/// xs: action inside a table row · sm: action chip, filter bar ·
+/// md: form default · lg: the screen's primary · xl: isolated call to
+/// action, onboarding.
+enum AppButtonSize { xs, sm, md, lg, xl }
 
 /// The design-system button. [onPressed] `null` or [loading] disables it.
 class AppButton extends StatelessWidget {
@@ -45,6 +51,7 @@ class AppButton extends StatelessWidget {
     this.variant = AppButtonVariant.primary,
     this.size = AppButtonSize.lg,
     this.icon,
+    this.trailingIcon,
     this.loading = false,
     this.expanded = true,
   });
@@ -53,7 +60,12 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final AppButtonVariant variant;
   final AppButtonSize size;
+
+  /// Before the label.
   final IconData? icon;
+
+  /// After the label, for actions that move forward ("Avançar →").
+  final IconData? trailingIcon;
   final bool loading;
 
   /// Fills the available width.
@@ -62,9 +74,17 @@ class AppButton extends StatelessWidget {
   bool get _enabled => onPressed != null && !loading;
 
   double get _height => switch (size) {
+    AppButtonSize.xl => AppSizes.buttonXl,
     AppButtonSize.lg => AppSizes.buttonLg,
     AppButtonSize.md => AppSizes.buttonMd,
     AppButtonSize.sm => AppSizes.buttonSm,
+    AppButtonSize.xs => AppSizes.buttonXs,
+  };
+
+  double get _padding => switch (size) {
+    AppButtonSize.xl => AppSpacing.x2l,
+    AppButtonSize.xs => AppSpacing.md,
+    _ => AppSpacing.lg,
   };
 
   @override
@@ -92,7 +112,7 @@ class AppButton extends StatelessWidget {
           builder: (context, state) {
             final fg = _look(c, state.pressed).fg;
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              padding: EdgeInsets.symmetric(horizontal: _padding),
               child: Center(
                 widthFactor: 1,
                 child: loading
@@ -118,6 +138,14 @@ class AppButton extends StatelessWidget {
                               style: AppTypography.label.copyWith(color: fg),
                             ),
                           ),
+                          if (trailingIcon != null) ...[
+                            const SizedBox(width: AppSpacing.sm),
+                            Icon(
+                              trailingIcon,
+                              size: AppSizes.iconField,
+                              color: fg,
+                            ),
+                          ],
                         ],
                       ),
               ),
@@ -152,6 +180,11 @@ class AppButton extends StatelessWidget {
         bg: pressed ? c.primarySubtle : Colors.transparent,
         fg: c.primary,
         border: c.primary,
+      ),
+      AppButtonVariant.outlineSuccess => (
+        bg: pressed ? c.successSubtle : Colors.transparent,
+        fg: c.success,
+        border: c.success,
       ),
       AppButtonVariant.tonal => (
         bg: pressed ? darker(c.primary, c.primarySubtle) : c.primarySubtle,

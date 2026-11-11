@@ -46,9 +46,14 @@ abstract final class AppRadius {
 
 /// Fixed component sizes from the design system.
 abstract final class AppSizes {
+  /// Isolated call to action, onboarding.
+  static const double buttonXl = 58;
   static const double buttonLg = 48;
   static const double buttonMd = 44;
   static const double buttonSm = 38;
+
+  /// Action inside a table or list row.
+  static const double buttonXs = 30;
   static const double minTouchTarget = 44;
   static const double field = 48;
 
