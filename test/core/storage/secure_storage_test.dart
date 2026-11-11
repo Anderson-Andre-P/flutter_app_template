@@ -31,9 +31,8 @@ void main() {
   });
 
   test('a plugin error becomes a StorageException', () async {
-    when(
-      () => plugin.read(key: 'k'),
-    ).thenThrow(PlatformException(code: 'BadPadding'));
+    when(() => plugin.read(key: 'k'))
+        .thenThrow(PlatformException(code: 'BadPadding'));
     expect(() => storage.read('k'), throwsA(isA<StorageException>()));
   });
 }
