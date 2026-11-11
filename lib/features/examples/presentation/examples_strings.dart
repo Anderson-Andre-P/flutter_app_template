@@ -274,4 +274,19 @@ abstract final class ExamplesStrings {
       'Confirme o endereço de entrega para liberar o pedido.';
   static const bandAlertTitle = 'Revise antes de enviar';
   static const bandAlertMessage = 'Dois campos ainda estão em branco.';
+  static const controlsTiles = 'Tiles de status';
+  static const controlsTilesCaption = 'Contagens que pedem atenção';
+  static const tileOpenValue = '24';
+  static const tileOpen = 'Em aberto';
+  static const tileLateValue = '3';
+  static const tileLate = 'Em atraso';
+  static const controlsMoreButtons = 'Outros botões';
+  static const controlsMoreButtonsCaption =
+      'Concluir com sucesso e acrescentar um item';
+  static const buttonSuccess = 'Concluir pedido';
+  static const addItem = 'Adicionar item';
+  static const controlsReadOnly = 'Somente leitura';
+  static const controlsReadOnlyCaption = 'Valor definido pelo sistema';
+  static const readOnlyLabel = 'Código do pedido';
+  static const readOnlyValue = 'PED-1042';
 }

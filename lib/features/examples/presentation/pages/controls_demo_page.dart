@@ -3,19 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/widgets/app_attention_band.dart';
+import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_checkbox.dart';
+import '../../../../core/widgets/app_dashed_button.dart';
 import '../../../../core/widgets/app_fab.dart';
 import '../../../../core/widgets/app_radio.dart';
 import '../../../../core/widgets/app_segmented_control.dart';
 import '../../../../core/widgets/app_snackbar.dart';
+import '../../../../core/widgets/app_status_tile.dart';
 import '../../../../core/widgets/app_switch.dart';
+import '../../../../core/widgets/app_text_field.dart';
 import '../../application/demo_selection_bloc.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
 
 /// Catalogue of the selection controls (design system, section 09):
-/// switch, checkbox, radio, segmented control, FAB and attention band.
+/// switch, checkbox, radio, segmented control, FAB, status tiles, the
+/// success and dashed buttons, a read-only field and attention bands.
 /// Every value lives in the screen's [DemoSelectionBloc] (0 = off, 1 = on).
 class ControlsDemoPage extends StatelessWidget {
   const ControlsDemoPage({super.key});
@@ -140,6 +145,55 @@ class ControlsDemoPage extends StatelessWidget {
                 onPressed: tapped,
               ),
             ],
+          ),
+        ),
+        const DemoSection(
+          title: ExamplesStrings.controlsTiles,
+          caption: ExamplesStrings.controlsTilesCaption,
+          child: Row(
+            children: [
+              Expanded(
+                child: AppStatusTile(
+                  value: ExamplesStrings.tileOpenValue,
+                  label: ExamplesStrings.tileOpen,
+                ),
+              ),
+              SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: AppStatusTile(
+                  value: ExamplesStrings.tileLateValue,
+                  label: ExamplesStrings.tileLate,
+                  tone: AppTone.alert,
+                ),
+              ),
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.controlsMoreButtons,
+          caption: ExamplesStrings.controlsMoreButtonsCaption,
+          child: Column(
+            children: [
+              AppButton(
+                label: ExamplesStrings.buttonSuccess,
+                variant: AppButtonVariant.success,
+                onPressed: tapped,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              AppDashedButton(
+                label: ExamplesStrings.addItem,
+                onPressed: tapped,
+              ),
+            ],
+          ),
+        ),
+        const DemoSection(
+          title: ExamplesStrings.controlsReadOnly,
+          caption: ExamplesStrings.controlsReadOnlyCaption,
+          child: AppTextField(
+            label: ExamplesStrings.readOnlyLabel,
+            initialValue: ExamplesStrings.readOnlyValue,
+            readOnly: true,
           ),
         ),
         const DemoSection(
