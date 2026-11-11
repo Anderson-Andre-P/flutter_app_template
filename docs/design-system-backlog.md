@@ -97,19 +97,20 @@ padding interno nunca fica abaixo de 14px.
 
 ## Formulários (Componentes, seção 14; Padrões, seções 25 a 27)
 
-- [ ] P1 · Área de texto com contador (0/400)
-- [ ] P1 · Select fechado e aberto, com estados padrão, erro e desabilitado;
+- [x] P1 · Área de texto com contador (0/400)
+- [x] P1 · Select fechado e aberto, com estados padrão, erro e desabilitado;
   até 7 opções (acima disso, busca na lista); item atual com tinta e marcador
-- [ ] P1 · Campo de data e campo de hora (DD/MM/AAAA, 24h HH:MM), com
+- [x] P1 · Campo de data e campo de hora (DD/MM/AAAA, 24h HH:MM), com
   estados de erro ("Data no passado.") e "definido pelo sistema"
-- [ ] P1 · Calendário do DS: mês com navegação e datas passadas bloqueadas.
+- [x] P1 · Calendário do DS: mês com navegação e datas passadas bloqueadas.
   No celular abre em bottom sheet de altura total, com Cancelar e Aplicar
-- [ ] P2 · Lista de horários (13:00, 13:30…)
-- [ ] P1 · Slider contínuo com o valor ao lado do rótulo e estados
+- [x] P2 · Lista de horários (13:00, 13:30…) — no bottom sheet do
+  `AppTimeField`
+- [x] P1 · Slider contínuo com o valor ao lado do rótulo e estados
   pressionado e desabilitado; área de toque de 44px
 - [ ] P2 · Slider de faixa (dois pontos, trilho preenchido entre eles)
 - [ ] P2 · Slider com passos nomeados (Baixa / Média / Alta / Crítica)
-- [ ] P1 · Stepper numérico (− 3 +) com mínimo e máximo; até 99 (acima disso,
+- [x] P1 · Stepper numérico (− 3 +) com mínimo e máximo; até 99 (acima disso,
   campo numérico)
 - [ ] P2 · Campo com prefixo ("ID-")
 - [ ] P2 · Campo validado (check verde)
