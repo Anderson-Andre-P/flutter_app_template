@@ -5,6 +5,8 @@ import '../../theme/app_tokens.dart';
 import '../../theme/app_typography.dart';
 import '../../theme/theme_context.dart';
 import '../app_button.dart';
+import '../app_button_group.dart';
+import '../app_icon_button.dart';
 import '../app_tone.dart';
 
 /// Modal dialogs of the design system (max 340px wide, radius `xl`).
@@ -62,6 +64,103 @@ abstract final class AppDialog {
                     Expanded(child: confirmButton),
                   ],
                 ),
+        );
+      },
+    );
+    return result ?? false;
+  }
+
+  /// A decision with context (design system, section 21): the [icon] on
+  /// the brand tint beside a title of at most two lines, a × to close, and
+  /// Cancelar / [confirmLabel] side by side. Resolves `true` only on the
+  /// confirm button.
+  static Future<bool> modal(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String message,
+    required String confirmLabel,
+    String? cancelLabel,
+  }) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (ctx) {
+        final c = ctx.colors;
+        return Dialog(
+          insetPadding: const EdgeInsets.all(AppSpacing.x2l),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: AppSizes.modalMaxWidth),
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.xl),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: AppSizes.dialogIcon,
+                        height: AppSizes.dialogIcon,
+                        decoration: BoxDecoration(
+                          color: c.primarySubtle,
+                          borderRadius: AppRadius.brMdPlus,
+                        ),
+                        child: Icon(
+                          icon,
+                          size: AppSizes.iconTopBar,
+                          color: c.primary,
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTypography.section.copyWith(
+                                color: c.textPrimary,
+                              ),
+                            ),
+                            const SizedBox(height: AppSpacing.xs),
+                            Text(
+                              message,
+                              style: AppTypography.bodySmall.copyWith(
+                                color: c.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      AppIconButton(
+                        icon: Icons.close,
+                        label: CommonStrings.close,
+                        bordered: false,
+                        onPressed: () => Navigator.of(ctx).pop(false),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.x2l),
+                  AppButtonGroup.pair(
+                    secondary: AppButton(
+                      label: cancelLabel ?? CommonStrings.cancel,
+                      size: AppButtonSize.md,
+                      variant: AppButtonVariant.secondary,
+                      onPressed: () => Navigator.of(ctx).pop(false),
+                    ),
+                    primary: AppButton(
+                      label: confirmLabel,
+                      size: AppButtonSize.md,
+                      onPressed: () => Navigator.of(ctx).pop(true),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       },
     );

@@ -26,6 +26,20 @@ abstract final class CommonStrings {
   static const increase = 'Aumentar';
   static const addTag = 'Adicionar...';
 
+  // Bars and search
+  static const clearSearch = 'Limpar busca';
+  static const sort = 'Ordenar';
+  static String filtersOn(int n) => switch (n) {
+    0 => 'Filtros',
+    1 => 'Filtros, 1 ativo',
+    _ => 'Filtros, $n ativos',
+  };
+  static String notifications(int n) => switch (n) {
+    0 => 'Notificações',
+    1 => 'Notificações, 1 nova',
+    _ => 'Notificações, $n novas',
+  };
+
   // Files
   static const openFile = 'Abrir arquivo';
   static const cancelUpload = 'Cancelar envio';

@@ -90,4 +90,36 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byIcon(Icons.check), findsOneWidget);
   });
+
+  testWidgets('a header action sits next to the title', (tester) async {
+    var cleared = 0;
+    late BuildContext ctx;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light(),
+        home: Builder(
+          builder: (c) {
+            ctx = c;
+            return const Scaffold();
+          },
+        ),
+      ),
+    );
+    unawaited(
+      AppBottomSheet.show<void>(
+        ctx,
+        title: 'Filtros',
+        actionLabel: 'Limpar',
+        onAction: () => cleared++,
+        child: const Text('Status'),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      tester.getCenter(find.text('Limpar')).dy,
+      closeTo(tester.getCenter(find.text('Filtros')).dy, 12),
+    );
+    await tester.tap(find.text('Limpar'));
+    expect(cleared, 1);
+  });
 }

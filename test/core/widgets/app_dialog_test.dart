@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/core/widgets/app_button.dart';
 import 'package:flutter_app_template/core/widgets/dialogs/app_dialog.dart';
@@ -109,5 +110,41 @@ void main() {
     unawaited(openConfirm(ctx));
     await tester.pumpAndSettle();
     expect(find.byType(Icon), findsNothing);
+  });
+
+  testBothThemes('modal: icon beside the title and a close button', (
+    tester,
+    dark,
+  ) async {
+    final ctx = await _host(tester, dark: dark);
+    final result = AppDialog.modal(
+      ctx,
+      icon: Icons.task_alt,
+      title: 'Aplicar modelo?',
+      message: 'O conteúdo atual será substituído.',
+      confirmLabel: 'Aplicar',
+    );
+    await tester.pumpAndSettle();
+    final icon = tester.getRect(find.byIcon(Icons.task_alt));
+    final title = tester.getRect(find.text('Aplicar modelo?'));
+    expect(icon.right, lessThanOrEqualTo(title.left));
+    await tester.tap(find.bySemanticsLabel(CommonStrings.close));
+    await tester.pumpAndSettle();
+    expect(await result, isFalse);
+  });
+
+  testWidgets('modal resolves true on the confirm button', (tester) async {
+    final ctx = await _host(tester);
+    final result = AppDialog.modal(
+      ctx,
+      icon: Icons.task_alt,
+      title: 'Aplicar modelo?',
+      message: 'O conteúdo atual será substituído.',
+      confirmLabel: 'Aplicar',
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Aplicar'));
+    await tester.pumpAndSettle();
+    expect(await result, isTrue);
   });
 }

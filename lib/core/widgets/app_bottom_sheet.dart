@@ -30,6 +30,8 @@ abstract final class AppBottomSheet {
     BuildContext context, {
     required String title,
     String? message,
+    String? actionLabel,
+    VoidCallback? onAction,
     required Widget child,
   }) => showModalBottomSheet<T>(
     context: context,
@@ -45,7 +47,13 @@ abstract final class AppBottomSheet {
       duration: AppDurations.sheet,
       curve: AppDurations.sheetCurve,
     ),
-    builder: (_) => _Sheet(title: title, message: message, child: child),
+    builder: (_) => _Sheet(
+      title: title,
+      message: message,
+      actionLabel: actionLabel,
+      onAction: onAction,
+      child: child,
+    ),
   );
 
   /// A list of [options]; resolves to the tapped value, or `null` when
@@ -108,11 +116,22 @@ abstract final class AppBottomSheet {
 }
 
 class _Sheet extends StatelessWidget {
-  const _Sheet({required this.title, required this.child, this.message});
+  const _Sheet({
+    required this.title,
+    required this.child,
+    this.message,
+    this.actionLabel,
+    this.onAction,
+  });
 
   final String title;
   final String? message;
   final Widget child;
+
+  /// Header action next to the title — "Limpar" on a filter sheet (design
+  /// system, section 19).
+  final String? actionLabel;
+  final VoidCallback? onAction;
 
   @override
   Widget build(BuildContext context) {
@@ -144,9 +163,29 @@ class _Sheet extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),
-              Text(
-                title,
-                style: AppTypography.heading.copyWith(color: c.textPrimary),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: AppTypography.heading.copyWith(
+                        color: c.textPrimary,
+                      ),
+                    ),
+                  ),
+                  if (actionLabel case final label?)
+                    TextButton(
+                      onPressed: onAction,
+                      style: TextButton.styleFrom(
+                        foregroundColor: c.link,
+                        minimumSize: const Size(
+                          AppSizes.minTouchTarget,
+                          AppSizes.minTouchTarget,
+                        ),
+                      ),
+                      child: Text(label),
+                    ),
+                ],
               ),
               if (message != null) ...[
                 const SizedBox(height: AppSpacing.xs),
