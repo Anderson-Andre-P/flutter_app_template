@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/strings/common_strings.dart';
 import '../theme/app_tokens.dart';
 import '../theme/app_typography.dart';
 import '../theme/theme_context.dart';
@@ -51,12 +52,24 @@ class AppErrorView extends StatelessWidget {
     required this.message,
     required this.retryLabel,
     required this.onRetry,
+    this.code,
+    this.secondaryLabel,
+    this.onSecondary,
   });
 
   final String title;
   final String message;
   final String retryLabel;
   final VoidCallback onRetry;
+
+  /// Error code the user can quote to support ("ERR-503"), appended to the
+  /// message.
+  final String? code;
+
+  /// A secondary action, shown as a link below the retry ("Reportar
+  /// problema").
+  final String? secondaryLabel;
+  final VoidCallback? onSecondary;
 
   @override
   Widget build(BuildContext context) {
@@ -66,14 +79,73 @@ class AppErrorView extends StatelessWidget {
       iconColor: c.danger,
       iconBackground: c.dangerSubtle,
       title: title,
-      message: message,
-      action: AppButton(
-        label: retryLabel,
-        onPressed: onRetry,
-        variant: AppButtonVariant.secondary,
-        size: AppButtonSize.md,
-        expanded: false,
+      message: code == null
+          ? message
+          : '$message ${CommonStrings.errorCode(code!)}',
+      action: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppButton(
+            label: retryLabel,
+            onPressed: onRetry,
+            variant: AppButtonVariant.secondary,
+            size: AppButtonSize.md,
+            expanded: false,
+          ),
+          if (secondaryLabel case final label?) ...[
+            const SizedBox(height: AppSpacing.xs),
+            AppButton(
+              label: label,
+              onPressed: onSecondary,
+              variant: AppButtonVariant.ghost,
+              size: AppButtonSize.sm,
+              expanded: false,
+            ),
+          ],
+        ],
       ),
+    );
+  }
+}
+
+/// No connection (design system, section 24): what was done is safe on the
+/// device and syncs later; [pending] says how much is waiting.
+class AppOfflineView extends StatelessWidget {
+  const AppOfflineView({
+    super.key,
+    required this.pending,
+    this.title = CommonStrings.offlineTitle,
+    this.message = CommonStrings.offlineMessage,
+  });
+
+  final int pending;
+  final String title;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return _StateLayout(
+      icon: Icons.cloud_off_outlined,
+      iconColor: c.alertText,
+      iconBackground: c.alertSubtle,
+      title: title,
+      message: message,
+      action: pending == 0
+          ? null
+          : Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: c.alertSubtle,
+                borderRadius: AppRadius.brMd,
+              ),
+              child: Text(
+                CommonStrings.pendingChanges(pending),
+                textAlign: TextAlign.center,
+                style: AppTypography.label.copyWith(color: c.alertText),
+              ),
+            ),
     );
   }
 }

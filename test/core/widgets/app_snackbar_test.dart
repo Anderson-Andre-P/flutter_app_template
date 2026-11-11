@@ -158,4 +158,21 @@ void main() {
     handle.dispose();
     await tester.pump(AppDurations.toastVisible);
   });
+
+  testBothThemes('neutral shows on the neutral surface with its action', (
+    tester,
+    dark,
+  ) async {
+    final ctx = await _host(tester, dark: dark);
+    AppSnackbar.neutral(
+      ctx,
+      'Item arquivado',
+      actionLabel: 'Desfazer',
+      onAction: () {},
+    );
+    await _shown(tester);
+    expect(find.text('Desfazer'), findsOneWidget);
+    expect(find.byIcon(Icons.check), findsNothing);
+    await tester.pump(AppDurations.toastVisible);
+  });
 }

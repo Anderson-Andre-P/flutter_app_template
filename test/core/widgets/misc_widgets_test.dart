@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/core/theme/app_tokens.dart';
 import 'package:flutter_app_template/core/widgets/app_avatar.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_app_template/core/widgets/app_badge.dart';
 import 'package:flutter_app_template/core/widgets/app_bottom_nav.dart';
 import 'package:flutter_app_template/core/widgets/app_card.dart';
 import 'package:flutter_app_template/core/widgets/app_chip.dart';
+import 'package:flutter_app_template/core/widgets/app_inline_alert.dart';
 import 'package:flutter_app_template/core/widgets/app_list_tile.dart';
 import 'package:flutter_app_template/core/widgets/app_state_views.dart';
 import 'package:flutter_app_template/core/widgets/app_top_bar.dart';
@@ -249,5 +251,91 @@ void main() {
   testWidgets('loading view shows a progress indicator', (tester) async {
     await pumpApp(tester, const AppLoadingView());
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+
+  testBothThemes('an avatar with status reads the status', (
+    tester,
+    dark,
+  ) async {
+    final handle = tester.ensureSemantics();
+    await pumpApp(
+      tester,
+      const AppAvatar(
+        initials: 'JM',
+        status: AppTone.success,
+        statusLabel: 'Disponível',
+      ),
+      dark: dark,
+    );
+    expect(find.byKey(AppAvatar.statusKey), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp('Disponível')), findsOneWidget);
+    handle.dispose();
+  });
+
+  testBothThemes('an avatar group shows the first ones and +N', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      const AppAvatarGroup(
+        initials: ['AE', 'JM', 'RS', 'LP', 'TC', 'MV', 'GB'],
+      ),
+      dark: dark,
+    );
+    expect(find.text('AE'), findsOneWidget);
+    expect(find.text('RS'), findsOneWidget);
+    expect(find.text('LP'), findsNothing);
+    expect(find.text('+4'), findsOneWidget);
+  });
+
+  testBothThemes('the error view adds the code and a secondary link', (
+    tester,
+    dark,
+  ) async {
+    var reported = 0;
+    await pumpApp(
+      tester,
+      AppErrorView(
+        title: 'Não foi possível carregar',
+        message: 'Verifique a conexão e tente novamente.',
+        code: 'ERR-503',
+        retryLabel: 'Tentar novamente',
+        onRetry: () {},
+        secondaryLabel: 'Reportar problema',
+        onSecondary: () => reported++,
+      ),
+      dark: dark,
+    );
+    expect(find.textContaining('ERR-503'), findsOneWidget);
+    await tester.tap(find.text('Reportar problema'));
+    expect(reported, 1);
+  });
+
+  testBothThemes('the offline view counts the pending changes', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(tester, const AppOfflineView(pending: 3), dark: dark);
+    expect(find.text(CommonStrings.offlineTitle), findsOneWidget);
+    expect(find.text(CommonStrings.pendingChanges(3)), findsOneWidget);
+  });
+
+  test('pending changes reads in the singular and the plural', () {
+    expect(CommonStrings.pendingChanges(1), '1 alteração pendente');
+    expect(CommonStrings.pendingChanges(3), '3 alterações pendentes');
+  });
+
+  testBothThemes('an inline alert shows its icon and message', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      const AppInlineAlert(message: 'Campo obrigatório ausente'),
+      dark: dark,
+    );
+    expect(find.byIcon(Icons.error_outline), findsOneWidget);
+    expect(find.text('Campo obrigatório ausente'), findsOneWidget);
   });
 }

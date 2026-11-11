@@ -25,6 +25,17 @@ abstract final class CommonStrings {
   static const decrease = 'Diminuir';
   static const increase = 'Aumentar';
 
+  // Feedback and states
+  static String remove(String label) => 'Remover $label';
+  static const offlineTitle = 'Você está offline';
+  static const offlineMessage =
+      'As alterações ficam salvas no aparelho e sincronizam quando a '
+      'conexão voltar.';
+  static String pendingChanges(int n) =>
+      n == 1 ? '1 alteração pendente' : '$n alterações pendentes';
+  static String errorCode(String code) =>
+      'Se persistir, informe o código $code.';
+
   // Navigation
   static const moreActions = 'Mais ações';
   static const loading = 'Carregando';

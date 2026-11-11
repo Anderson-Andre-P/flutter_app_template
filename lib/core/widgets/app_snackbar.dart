@@ -73,6 +73,19 @@ abstract final class AppSnackbar {
     _Toast(_ToastKind.info, title, description, actionLabel, onAction),
   );
 
+  /// Neutral feedback with an action, on the plain surface — "Item
+  /// arquivado · Desfazer" (design system, section 17). No tone icon.
+  static void neutral(
+    BuildContext context,
+    String title, {
+    String? description,
+    String? actionLabel,
+    VoidCallback? onAction,
+  }) => _show(
+    context,
+    _Toast(_ToastKind.neutral, title, description, actionLabel, onAction),
+  );
+
   /// Visible toasts, newest first.
   static final List<_Toast> _toasts = [];
   static OverlayEntry? _entry;
@@ -114,7 +127,7 @@ abstract final class AppSnackbar {
   }
 }
 
-enum _ToastKind { success, warning, error, info }
+enum _ToastKind { success, warning, error, info, neutral }
 
 final class _Toast {
   _Toast(
@@ -226,7 +239,9 @@ class _ToastViewState extends State<_ToastView> {
             color: _background(c, toast.kind),
             shape: RoundedRectangleBorder(
               borderRadius: AppRadius.brMdPlus,
-              side: BorderSide(color: fg),
+              side: BorderSide(
+                color: toast.kind == _ToastKind.neutral ? c.border : fg,
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(
@@ -237,21 +252,23 @@ class _ToastViewState extends State<_ToastView> {
               ),
               child: Row(
                 children: [
-                  Container(
-                    width: AppSizes.toastIcon,
-                    height: AppSizes.toastIcon,
-                    decoration: BoxDecoration(
-                      color: fg,
-                      shape: BoxShape.circle,
+                  if (_icon(toast.kind) case final icon?) ...[
+                    Container(
+                      width: AppSizes.toastIcon,
+                      height: AppSizes.toastIcon,
+                      decoration: BoxDecoration(
+                        color: fg,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        icon,
+                        size: AppSizes.iconChip,
+                        // The card colour: white on light, near-black on dark.
+                        color: c.card,
+                      ),
                     ),
-                    child: Icon(
-                      _icon(toast.kind),
-                      size: AppSizes.iconChip,
-                      // The card colour: white on light, near-black on dark.
-                      color: c.card,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.md),
+                    const SizedBox(width: AppSpacing.md),
+                  ],
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -316,6 +333,7 @@ class _ToastViewState extends State<_ToastView> {
     _ToastKind.warning => c.alertText,
     _ToastKind.error => c.danger,
     _ToastKind.info => c.primary,
+    _ToastKind.neutral => c.link,
   };
 
   static Color _background(AppColors c, _ToastKind kind) => switch (kind) {
@@ -323,12 +341,14 @@ class _ToastViewState extends State<_ToastView> {
     _ToastKind.warning => c.alertSubtle,
     _ToastKind.error => c.dangerSubtle,
     _ToastKind.info => c.primarySubtle,
+    _ToastKind.neutral => c.raised,
   };
 
-  static IconData _icon(_ToastKind kind) => switch (kind) {
+  static IconData? _icon(_ToastKind kind) => switch (kind) {
     _ToastKind.success => Icons.check,
     _ToastKind.warning => Icons.priority_high,
     _ToastKind.error => Icons.close,
     _ToastKind.info => Icons.info_outline,
+    _ToastKind.neutral => null,
   };
 }

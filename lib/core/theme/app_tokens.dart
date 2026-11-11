@@ -89,6 +89,17 @@ abstract final class AppSizes {
   static const double stepCircle = 26;
   static const double tabIndicator = 2;
 
+  /// Notification counter pill and the "new" dot.
+  static const double counter = 20;
+  static const double newDot = 8;
+
+  /// Determinate progress ring and its stroke.
+  static const double progressRing = 56;
+  static const double progressRingStroke = 6;
+
+  /// Status dot on an avatar.
+  static const double avatarStatus = 12;
+
   /// Width of the numeric stepper (− value +).
   static const double numberStepper = 140;
 
@@ -140,6 +151,9 @@ abstract final class AppDurations {
   static const Duration toast = Duration(milliseconds: 200);
   static const Duration accordion = Duration(milliseconds: 160);
   static const Duration toggle = Duration(milliseconds: 180);
+
+  /// One sweep of the skeleton shimmer, looped.
+  static const Duration shimmer = Duration(milliseconds: 1200);
 
   /// How long a toast stays on screen. Error toasts stay until dismissed.
   static const Duration toastVisible = Duration(seconds: 4);
