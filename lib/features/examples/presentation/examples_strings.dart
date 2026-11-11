@@ -337,4 +337,46 @@ abstract final class ExamplesStrings {
   static const controlsReadOnlyCaption = 'Valor definido pelo sistema';
   static const readOnlyLabel = 'Código do pedido';
   static const readOnlyValue = 'PED-1042';
+
+  // Formulários
+  static const formsTitle = 'Formulários';
+  static const formsText = 'Área de texto';
+  static const formsTextCaption = 'Com contador de caracteres';
+  static const formsDescription = 'Descrição';
+  static const formsDescriptionHint = 'Contexto e instruções...';
+  static const formsSelect = 'Select';
+  static const formsSelectCaption =
+      'Até 7 opções abrem logo abaixo; acima disso, com busca';
+  static const formsPriority = 'Prioridade';
+  static const formsCity = 'Cidade';
+  static const cities = [
+    'Belém',
+    'Belo Horizonte',
+    'Brasília',
+    'Curitiba',
+    'Florianópolis',
+    'Goiânia',
+    'Manaus',
+    'Porto Alegre',
+    'Recife',
+    'Rio de Janeiro',
+    'Salvador',
+    'São Paulo',
+  ];
+  static const formsDateTime = 'Data e hora';
+  static const formsDateTimeCaption = 'Aceitam digitação; o prazo não volta';
+  static const formsDeadline = 'Prazo';
+  static const formsDeadlinePast = 'Data no passado.';
+  static const formsTime = 'Hora';
+  static const formsSystemDate = 'Criado em';
+  static const formsSystemDateHint = 'Definido pelo sistema';
+  static const formsSliders = 'Slider';
+  static const formsSlidersCaption = 'O valor fica sempre ao lado do rótulo';
+  static const formsVolume = 'Volume de alertas';
+  static const formsTolerance = 'Tolerância do parâmetro';
+  static String units(double v) => '${v.round()} un';
+  static String percent0(double v) => '${v.round()}%';
+  static const formsStepper = 'Stepper numérico';
+  static const formsStepperCaption = 'Quantidades pequenas e exatas, até 99';
+  static const formsQuantity = 'Quantidade';
 }

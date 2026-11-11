@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
+import 'package:flutter_app_template/core/widgets/app_select.dart';
 import 'package:flutter_app_template/core/widgets/app_radio.dart';
 import 'package:flutter_app_template/core/widgets/app_segmented_control.dart';
 import 'package:flutter_app_template/core/widgets/app_switch.dart';
@@ -14,6 +16,7 @@ import 'package:flutter_app_template/features/examples/presentation/examples_str
 import 'package:flutter_app_template/features/examples/presentation/pages/bottom_nav_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/controls_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/forms_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/modals_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/sheets_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/states_demo_page.dart';
@@ -167,6 +170,27 @@ void main() {
         expect(tester.takeException(), isNull);
       },
     );
+  }
+
+  for (final dark in [false, true]) {
+    testWidgets('forms demo picks a priority and flags a past deadline '
+        '(${dark ? 'dark' : 'light'})', (tester) async {
+      await _pump(tester, const FormsDemoPage(), dark: dark);
+      await tester.tap(find.byKey(AppSelect.fieldKey).first);
+      await _settle(tester);
+      await tester.tap(find.text(ExamplesStrings.priorities.last).last);
+      await _settle(tester);
+      expect(find.text(ExamplesStrings.priorities.last), findsOneWidget);
+
+      final deadline = find
+          .widgetWithText(TextField, CommonStrings.dateHint)
+          .first;
+      await tester.enterText(deadline, '01012020');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await _settle(tester);
+      expect(find.text(ExamplesStrings.formsDeadlinePast), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
   }
 
   testWidgets('modals demo reports what was chosen', (tester) async {
