@@ -33,7 +33,7 @@ class AppSocialButton extends StatelessWidget {
         button: true,
         enabled: enabled,
         child: SizedBox(
-          height: AppSizes.buttonLg,
+          height: AppSizes.socialButton,
           child: AppInteractive(
             onTap: onPressed,
             borderRadius: AppRadius.brMd,

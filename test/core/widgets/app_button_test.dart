@@ -58,8 +58,8 @@ void main() {
     expect(taps, 0);
   });
 
-  test('the large button matches the field height of the design', () {
-    expect(AppSizes.buttonLg, AppSizes.field);
+  test('the large button is the design system primary height (52)', () {
+    expect(AppSizes.buttonLg, 52);
   });
 
   testWidgets('heights follow the size scale', (tester) async {

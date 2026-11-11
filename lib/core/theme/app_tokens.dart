@@ -50,7 +50,12 @@ abstract final class AppRadius {
 abstract final class AppSizes {
   /// Isolated call to action, onboarding.
   static const double buttonXl = 58;
-  static const double buttonLg = 48;
+
+  /// The screen's primary action (design system, section 09: 52px).
+  static const double buttonLg = 52;
+
+  /// "Continuar com …" identity-provider buttons (section 10: 48px).
+  static const double socialButton = 48;
   static const double buttonMd = 44;
   static const double buttonSm = 38;
 

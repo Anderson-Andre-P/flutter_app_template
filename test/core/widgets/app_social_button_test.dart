@@ -24,7 +24,7 @@ void main() {
     expect(find.byIcon(Icons.chevron_right), findsOneWidget);
     expect(
       tester.getSize(find.byType(AppSocialButton)).height,
-      AppSizes.buttonLg,
+      AppSizes.socialButton,
     );
     await tester.tap(find.text('Continuar com Google'));
     expect(taps, 1);
