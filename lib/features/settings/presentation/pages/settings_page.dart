@@ -59,7 +59,7 @@ class SettingsPage extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(
+          padding: EdgeInsets.fromLTRB(
             AppSpacing.xl,
             AppSpacing.x2l,
             AppSpacing.xl,
@@ -70,14 +70,14 @@ class SettingsPage extends StatelessWidget {
               SettingsStrings.title,
               style: AppTypography.display.copyWith(color: c.textPrimary),
             ),
-            const SizedBox(height: AppSpacing.x2l),
+            SizedBox(height: AppSpacing.x2l),
             Row(
               children: [
                 AppAvatar(
                   initials: initialsOf(user?.name ?? ''),
                   size: AppSizes.avatarXl,
                 ),
-                const SizedBox(width: AppSpacing.lg),
+                SizedBox(width: AppSpacing.lg),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +88,7 @@ class SettingsPage extends StatelessWidget {
                           color: c.textPrimary,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.xs),
+                      SizedBox(height: AppSpacing.xs),
                       Text(
                         user?.email ?? '',
                         style: AppTypography.caption.copyWith(
@@ -100,7 +100,7 @@ class SettingsPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x2l),
+            SizedBox(height: AppSpacing.x2l),
             for (final (icon, title, hint) in _menu) ...[
               AppCard(
                 padding: EdgeInsets.zero,
@@ -113,11 +113,11 @@ class SettingsPage extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right, color: c.textMuted),
                 ),
               ),
-              const SizedBox(height: AppSpacing.md),
+              SizedBox(height: AppSpacing.md),
             ],
-            const SizedBox(height: AppSpacing.x2l - AppSpacing.md),
+            SizedBox(height: AppSpacing.x2l - AppSpacing.md),
             const SectionOverline(SettingsStrings.appearance),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: AppSpacing.md),
             Wrap(
               spacing: AppSpacing.sm,
               runSpacing: AppSpacing.sm,
@@ -132,9 +132,9 @@ class SettingsPage extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x2l),
+            SizedBox(height: AppSpacing.x2l),
             const SectionOverline(SettingsStrings.about),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: AppSpacing.md),
             FutureBuilder<PackageInfo>(
               future: PackageInfo.fromPlatform(),
               builder: (context, snapshot) {
@@ -147,7 +147,7 @@ class SettingsPage extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: AppSpacing.x3l),
+            SizedBox(height: AppSpacing.x3l),
             AppButton(
               label: SettingsStrings.signOut,
               variant: AppButtonVariant.destructiveTonal,
