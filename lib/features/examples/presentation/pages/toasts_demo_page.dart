@@ -5,7 +5,8 @@ import '../../../../core/widgets/app_snackbar.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
 
-/// Every snackbar tone, plus one with an action and one with long text.
+/// Every toast tone (title, description and action), a title-only toast,
+/// one whose action shows another toast, and two stacked at once.
 class ToastsDemoPage extends StatelessWidget {
   const ToastsDemoPage({super.key});
 
@@ -29,6 +30,7 @@ class ToastsDemoPage extends StatelessWidget {
                 () => AppSnackbar.success(
                   context,
                   ExamplesStrings.toastSuccessMessage,
+                  description: ExamplesStrings.toastSuccessDescription,
                 ),
               ),
               trigger(
@@ -36,6 +38,7 @@ class ToastsDemoPage extends StatelessWidget {
                 () => AppSnackbar.warning(
                   context,
                   ExamplesStrings.toastWarningMessage,
+                  description: ExamplesStrings.toastWarningDescription,
                 ),
               ),
               trigger(
@@ -43,12 +46,17 @@ class ToastsDemoPage extends StatelessWidget {
                 () => AppSnackbar.error(
                   context,
                   ExamplesStrings.toastErrorMessage,
+                  description: ExamplesStrings.toastErrorDescription,
+                  actionLabel: ExamplesStrings.toastRetry,
                 ),
               ),
               trigger(
                 ExamplesStrings.toastInfo,
-                () =>
-                    AppSnackbar.info(context, ExamplesStrings.toastInfoMessage),
+                () => AppSnackbar.info(
+                  context,
+                  ExamplesStrings.toastInfoMessage,
+                  description: ExamplesStrings.toastInfoDescription,
+                ),
               ),
             ],
           ),
@@ -62,16 +70,31 @@ class ToastsDemoPage extends StatelessWidget {
                 () => AppSnackbar.info(
                   context,
                   ExamplesStrings.toastActionMessage,
+                  description: ExamplesStrings.toastActionDescription,
                   actionLabel: ExamplesStrings.toastActionLabel,
                   onAction: () =>
                       AppSnackbar.success(context, ExamplesStrings.toastUndone),
                 ),
               ),
               trigger(
-                ExamplesStrings.toastLong,
-                () =>
-                    AppSnackbar.info(context, ExamplesStrings.toastLongMessage),
+                ExamplesStrings.toastTitleOnly,
+                () => AppSnackbar.success(
+                  context,
+                  ExamplesStrings.toastSuccessMessage,
+                ),
               ),
+              trigger(ExamplesStrings.toastStacked, () {
+                AppSnackbar.info(
+                  context,
+                  ExamplesStrings.toastFirst,
+                  description: ExamplesStrings.toastStackDescription,
+                );
+                AppSnackbar.success(
+                  context,
+                  ExamplesStrings.toastSecond,
+                  description: ExamplesStrings.toastStackDescription,
+                );
+              }),
             ],
           ),
         ),

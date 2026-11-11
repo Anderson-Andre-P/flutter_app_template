@@ -93,17 +93,26 @@ abstract final class ExamplesStrings {
   static const toastError = 'Erro';
   static const toastInfo = 'Info';
   static const toastWithAction = 'Com ação';
-  static const toastLong = 'Texto longo';
-  static const toastSuccessMessage = 'Alterações salvas.';
-  static const toastWarningMessage = 'Sua sessão expira em 5 minutos.';
-  static const toastErrorMessage = 'Não foi possível salvar.';
-  static const toastInfoMessage = 'Uma nova versão está disponível.';
-  static const toastActionMessage = 'Item arquivado.';
+  static const toastTitleOnly = 'Só título';
+  static const toastStacked = 'Empilhar dois';
+  static const toastSuccessMessage = 'Alterações salvas';
+  static const toastSuccessDescription = 'Enviadas para revisão do gestor.';
+  static const toastWarningMessage = 'Sem conexão estável';
+  static const toastWarningDescription =
+      'Salvamos no aparelho; sincroniza depois.';
+  static const toastErrorMessage = 'Não foi possível salvar';
+  static const toastErrorDescription = 'Verifique os campos e tente de novo.';
+  static const toastRetry = 'Tentar';
+  static const toastInfoMessage = 'Nova versão disponível';
+  static const toastInfoDescription = 'Atualize para ver as melhorias.';
+  static const toastActionMessage = 'Item arquivado';
+  static const toastActionDescription = 'Ele saiu da sua lista.';
   static const toastActionLabel = 'Desfazer';
-  static const toastUndone = 'Ação desfeita.';
-  static const toastLongMessage =
-      'Sincronizamos seus dados com sucesso. Algumas alterações feitas '
-      'offline podem levar alguns minutos para aparecer.';
+  static const toastUndone = 'Ação desfeita';
+  static const toastFirst = 'Primeiro aviso';
+  static const toastSecond = 'Segundo aviso';
+  static const toastStackDescription =
+      'O mais novo entra por cima; cabem dois.';
 
   // Modais
   static const modalsTitle = 'Modais';
