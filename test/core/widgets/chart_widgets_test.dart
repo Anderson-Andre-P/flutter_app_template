@@ -64,8 +64,29 @@ void main() {
   ) async {
     await pumpApp(
       tester,
-      const AppDonutChart(segments: [AppChartSegment(label: 'A', value: 0)]),
+      const AppDonutChart(
+        centerLabel: '0',
+        segments: [
+          AppChartSegment(label: 'A', value: 0),
+          AppChartSegment(label: 'B', value: 0),
+          AppChartSegment(label: 'C', value: 0),
+        ],
+      ),
     );
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('donut needs at least three segments', (tester) async {
+    await pumpApp(
+      tester,
+      const AppDonutChart(
+        centerLabel: '68%',
+        segments: [
+          AppChartSegment(label: 'A', value: 1),
+          AppChartSegment(label: 'B', value: 2),
+        ],
+      ),
+    );
+    expect(tester.takeException(), isAssertionError);
   });
 }

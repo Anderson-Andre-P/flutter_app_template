@@ -64,6 +64,9 @@ abstract final class AppSizes {
   static const double iconBox = 40;
   static const double heroIcon = 80;
   static const double chart = 160;
+
+  /// Thickness of the donut chart's ring.
+  static const double donutRing = 26;
   static const double sheetHandleWidth = 36;
   static const double sheetHandleHeight = 4;
   static const double pill = 26;

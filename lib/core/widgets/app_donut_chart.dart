@@ -19,19 +19,22 @@ class AppChartSegment {
   final AppTone? tone;
 }
 
-/// Donut chart with optional centre text and a legend below. Colour is
-/// never the only cue: every slice is named in the legend.
+/// Donut chart with the total in the centre and a legend below (design
+/// system, section 18): a [AppSizes.donutRing] ring of at least three arcs
+/// — fewer reads better as a progress bar — and a centre label always
+/// present. Colour is never the only cue: every slice is named in the
+/// legend.
 class AppDonutChart extends StatelessWidget {
   const AppDonutChart({
     super.key,
     required this.segments,
-    this.centerLabel,
+    required this.centerLabel,
     this.centerCaption,
     this.size = AppSizes.chart,
   });
 
   final List<AppChartSegment> segments;
-  final String? centerLabel;
+  final String centerLabel;
   final String? centerCaption;
   final double size;
 
@@ -47,6 +50,7 @@ class AppDonutChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    assert(segments.length >= 3, 'A donut needs at least three arcs.');
     final c = context.colors;
     final colors = [
       for (var i = 0; i < segments.length; i++) c.toneForeground(_toneOf(i)),
@@ -66,11 +70,10 @@ class AppDonutChart extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (centerLabel != null)
-                    Text(
-                      centerLabel!,
-                      style: AppTypography.title.copyWith(color: c.textPrimary),
-                    ),
+                  Text(
+                    centerLabel,
+                    style: AppTypography.title.copyWith(color: c.textPrimary),
+                  ),
                   if (centerCaption != null)
                     Text(
                       centerCaption!,
@@ -122,7 +125,7 @@ class _DonutPainter extends CustomPainter {
   final List<Color> colors;
   final Color track;
 
-  static const _thickness = 18.0;
+  static const _thickness = AppSizes.donutRing;
   static const _gap = .03;
 
   @override
