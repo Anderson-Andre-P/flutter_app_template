@@ -91,16 +91,16 @@ criar componentes novos.
 Raio de 14 a 18px, borda e sombra de 1px; a imagem sangra até a borda; o
 padding interno nunca fica abaixo de 14px.
 
-- [ ] P2 · Card básico com rodapé de metadados
-- [ ] P2 · Card com imagem e selo ("OPERATIONAL")
-- [ ] P2 · Card com barra de progresso e botão
-- [ ] P2 · Card com link "Ver tudo →"
-- [ ] P2 · Card horizontal com miniatura, selo, avatar do responsável e data
-- [ ] P2 · Card com campo, unidade, faixa de ajuda e anexo obrigatório
-- [ ] P2 · Card de produto (selo de desconto, favorito, avaliação em
+- [x] P2 · Card básico com rodapé de metadados
+- [x] P2 · Card com imagem e selo ("OPERATIONAL")
+- [x] P2 · Card com barra de progresso e botão
+- [x] P2 · Card com link "Ver tudo →"
+- [x] P2 · Card horizontal com miniatura, selo, avatar do responsável e data
+- [x] P2 · Card com campo, unidade, faixa de ajuda e anexo obrigatório
+- [x] P2 · Card de produto (selo de desconto, favorito, avaliação em
   estrelas, preço com valor riscado, stepper de quantidade, "Adicionar")
-- [ ] P2 · Card de chamada para ação (fundo primário, botão branco e link)
-- [ ] P2 · Card de preços (selo "Mais escolhido", preço por período, lista de
+- [x] P2 · Card de chamada para ação (fundo primário, botão branco e link)
+- [x] P2 · Card de preços (selo "Mais escolhido", preço por período, lista de
   itens com check)
 
 ## Formulários (Componentes, seção 14; Padrões, seções 25 a 27)
