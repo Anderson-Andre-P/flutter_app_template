@@ -39,26 +39,32 @@ class AppChip extends StatelessWidget {
             fg: pressed ? c.primary : c.textPrimary,
             border: pressed ? c.primary : c.borderStrong,
           );
-    return Semantics(
-      selected: selected,
-      button: true,
-      child: AppInteractive(
-        onTap: enabled ? () => onSelected!(!selected) : null,
-        borderRadius: AppRadius.brFull,
-        surface: (state) {
-          final l = look(state.pressed);
-          return (color: l.bg, border: l.border, shadows: const <BoxShadow>[]);
-        },
-        builder: (context, state) => SizedBox(
-          height: AppSizes.chip,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: Center(
-              widthFactor: 1,
-              child: Text(
-                label,
-                style: AppTypography.labelMedium.copyWith(
-                  color: look(state.pressed).fg,
+    return MergeSemantics(
+      child: Semantics(
+        selected: selected,
+        button: true,
+        child: AppInteractive(
+          onTap: enabled ? () => onSelected!(!selected) : null,
+          borderRadius: AppRadius.brFull,
+          surface: (state) {
+            final l = look(state.pressed);
+            return (
+              color: l.bg,
+              border: l.border,
+              shadows: const <BoxShadow>[],
+            );
+          },
+          builder: (context, state) => SizedBox(
+            height: AppSizes.chip,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              child: Center(
+                widthFactor: 1,
+                child: Text(
+                  label,
+                  style: AppTypography.labelMedium.copyWith(
+                    color: look(state.pressed).fg,
+                  ),
                 ),
               ),
             ),

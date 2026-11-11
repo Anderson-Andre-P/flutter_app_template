@@ -28,43 +28,44 @@ class AppIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final enabled = onPressed != null;
-    return Semantics(
-      container: true,
-      button: true,
-      enabled: enabled,
-      label: label,
-      child: Tooltip(
-        message: label,
-        excludeFromSemantics: true,
-        child: SizedBox.square(
-          dimension: AppSizes.minTouchTarget,
-          child: AppInteractive(
-            onTap: onPressed,
-            borderRadius: AppRadius.brMd,
-            surface: (state) => (
-              color: !enabled
-                  ? (bordered ? c.sunken : Colors.transparent)
-                  : state.pressed
-                  ? c.primarySubtle
-                  : bordered
-                  ? c.card
-                  : Colors.transparent,
-              border: !bordered || !enabled
-                  ? null
-                  : state.pressed
-                  ? c.primary
-                  : c.borderStrong,
-              shadows: const <BoxShadow>[],
-            ),
-            builder: (context, state) => Center(
-              child: Icon(
-                icon,
-                size: AppSizes.iconTopBar,
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        enabled: enabled,
+        label: label,
+        child: Tooltip(
+          message: label,
+          excludeFromSemantics: true,
+          child: SizedBox.square(
+            dimension: AppSizes.minTouchTarget,
+            child: AppInteractive(
+              onTap: onPressed,
+              borderRadius: AppRadius.brMd,
+              surface: (state) => (
                 color: !enabled
-                    ? c.textDisabled
+                    ? (bordered ? c.sunken : Colors.transparent)
+                    : state.pressed
+                    ? c.primarySubtle
+                    : bordered
+                    ? c.card
+                    : Colors.transparent,
+                border: !bordered || !enabled
+                    ? null
                     : state.pressed
                     ? c.primary
-                    : c.textPrimary,
+                    : c.borderStrong,
+                shadows: const <BoxShadow>[],
+              ),
+              builder: (context, state) => Center(
+                child: Icon(
+                  icon,
+                  size: AppSizes.iconTopBar,
+                  color: !enabled
+                      ? c.textDisabled
+                      : state.pressed
+                      ? c.primary
+                      : c.textPrimary,
+                ),
               ),
             ),
           ),

@@ -72,9 +72,10 @@ class AppSegmentedControl<T> extends StatelessWidget {
         ),
       ],
     ];
+    // The border is drawn over the segments, not around them, so each
+    // segment keeps the full 44px touch height.
     return Container(
       height: AppSizes.buttonMd,
-      padding: joined ? null : const EdgeInsets.all(AppSpacing.xs),
       clipBehavior: joined ? Clip.antiAlias : Clip.none,
       decoration: BoxDecoration(
         color: joined
@@ -83,8 +84,13 @@ class AppSegmentedControl<T> extends StatelessWidget {
             ? c.primarySubtle
             : c.sunken,
         borderRadius: AppRadius.brMd,
-        border: joined ? Border.all(color: c.borderStrong) : null,
       ),
+      foregroundDecoration: joined
+          ? BoxDecoration(
+              borderRadius: AppRadius.brMd,
+              border: Border.all(color: c.borderStrong),
+            )
+          : null,
       child: Row(
         mainAxisSize: hug ? MainAxisSize.min : MainAxisSize.max,
         children: children,
@@ -122,53 +128,68 @@ class _Segment<T> extends StatelessWidget {
         ? c.textPrimary
         : c.textMuted;
     final icon = segment.icon;
-    return Semantics(
-      button: true,
-      selected: selected,
-      inMutuallyExclusiveGroup: true,
-      enabled: enabled,
-      label: segment.iconOnly ? segment.label : null,
-      child: AppInteractive(
-        onTap: onTap,
-        borderRadius: joined ? BorderRadius.zero : AppRadius.brSm,
-        ringInside: joined,
-        surface: (state) => (
-          color: joined
-              ? (selected || state.pressed
-                    ? c.primarySubtle
-                    : Colors.transparent)
-              : selected
-              ? c.raised
-              : state.pressed
-              ? c.card.withValues(alpha: .5)
-              : Colors.transparent,
-          border: null,
-          shadows: !joined && selected
-              ? context.shadows.elev1
-              : const <BoxShadow>[],
-        ),
-        builder: (context, state) => Center(
-          child: segment.iconOnly
-              ? Icon(icon, size: AppSizes.iconField, color: fg)
-              : Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (icon != null) ...[
-                      Icon(icon, size: AppSizes.iconField, color: fg),
-                      const SizedBox(width: AppSpacing.xs),
-                    ],
-                    Flexible(
-                      child: Text(
-                        segment.label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypography.labelMedium.copyWith(color: fg),
-                      ),
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        selected: selected,
+        inMutuallyExclusiveGroup: true,
+        enabled: enabled,
+        label: segment.iconOnly ? segment.label : null,
+        child: AppInteractive(
+          onTap: onTap,
+          borderRadius: joined ? BorderRadius.zero : AppRadius.brMd,
+          ringInside: true,
+          surface: (state) => (
+            color: joined && (selected || state.pressed)
+                ? c.primarySubtle
+                : Colors.transparent,
+            border: null,
+            shadows: const <BoxShadow>[],
+          ),
+          // Tinted: the raised pill is drawn inside the full-height target.
+          builder: (context, state) => joined
+              ? _content(fg, icon)
+              : Padding(
+                  padding: const EdgeInsets.all(AppSpacing.xs),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: selected
+                          ? c.raised
+                          : state.pressed
+                          ? c.card.withValues(alpha: .5)
+                          : Colors.transparent,
+                      borderRadius: AppRadius.brSm,
+                      boxShadow: selected
+                          ? context.shadows.elev1
+                          : const <BoxShadow>[],
                     ),
-                  ],
+                    child: _content(fg, icon),
+                  ),
                 ),
         ),
       ),
     );
   }
+
+  Widget _content(Color fg, IconData? icon) => Center(
+    child: segment.iconOnly
+        ? Icon(icon, size: AppSizes.iconField, color: fg)
+        : Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                Icon(icon, size: AppSizes.iconField, color: fg),
+                const SizedBox(width: AppSpacing.xs),
+              ],
+              Flexible(
+                child: Text(
+                  segment.label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTypography.labelMedium.copyWith(color: fg),
+                ),
+              ),
+            ],
+          ),
+  );
 }

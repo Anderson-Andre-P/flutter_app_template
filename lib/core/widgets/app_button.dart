@@ -90,67 +90,75 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    return Semantics(
-      button: true,
-      enabled: _enabled,
-      child: SizedBox(
-        height: _height,
-        width: expanded ? double.infinity : null,
-        child: AppInteractive(
-          onTap: _enabled ? onPressed : null,
-          borderRadius: AppRadius.brMd,
-          surface: (state) {
-            final look = _look(c, state.pressed);
-            return (
-              color: look.bg,
-              border: look.border,
-              shadows: variant == AppButtonVariant.primary && _enabled
-                  ? context.shadows.elev2
-                  : const <BoxShadow>[],
-            );
-          },
-          builder: (context, state) {
-            final fg = _look(c, state.pressed).fg;
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: _padding),
-              child: Center(
-                widthFactor: 1,
-                child: loading
-                    ? SizedBox.square(
-                        dimension: 18,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: fg,
-                        ),
-                      )
-                    : Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (icon != null) ...[
-                            Icon(icon, size: AppSizes.iconField, color: fg),
-                            const SizedBox(width: AppSpacing.sm),
-                          ],
-                          Flexible(
-                            child: Text(
-                              label,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTypography.label.copyWith(color: fg),
-                            ),
-                          ),
-                          if (trailingIcon != null) ...[
-                            const SizedBox(width: AppSpacing.sm),
-                            Icon(
-                              trailingIcon,
-                              size: AppSizes.iconField,
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        enabled: _enabled,
+        // The visual height is the size's; the touch target never goes below
+        // 44 (AppInteractive pads the smaller sizes invisibly).
+        child: SizedBox(
+          width: expanded ? double.infinity : null,
+          child: AppInteractive(
+            onTap: _enabled ? onPressed : null,
+            borderRadius: AppRadius.brMd,
+            surface: (state) {
+              final look = _look(c, state.pressed);
+              return (
+                color: look.bg,
+                border: look.border,
+                shadows: variant == AppButtonVariant.primary && _enabled
+                    ? context.shadows.elev2
+                    : const <BoxShadow>[],
+              );
+            },
+            builder: (context, state) {
+              final fg = _look(c, state.pressed).fg;
+              return SizedBox(
+                height: _height,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: _padding),
+                  child: Center(
+                    widthFactor: 1,
+                    child: loading
+                        ? SizedBox.square(
+                            dimension: 18,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
                               color: fg,
                             ),
-                          ],
-                        ],
-                      ),
-              ),
-            );
-          },
+                          )
+                        : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (icon != null) ...[
+                                Icon(icon, size: AppSizes.iconField, color: fg),
+                                const SizedBox(width: AppSpacing.sm),
+                              ],
+                              Flexible(
+                                child: Text(
+                                  label,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTypography.label.copyWith(
+                                    color: fg,
+                                  ),
+                                ),
+                              ),
+                              if (trailingIcon != null) ...[
+                                const SizedBox(width: AppSpacing.sm),
+                                Icon(
+                                  trailingIcon,
+                                  size: AppSizes.iconField,
+                                  color: fg,
+                                ),
+                              ],
+                            ],
+                          ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

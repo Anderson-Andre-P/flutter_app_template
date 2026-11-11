@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../theme/app_tokens.dart';
 import '../theme/theme_context.dart';
@@ -73,7 +76,7 @@ class _AppInteractiveState extends State<AppInteractive> {
     final ringRadius = widget.ringInside
         ? radius
         : radius + const BorderRadius.all(Radius.circular(outside));
-    return Stack(
+    final control = Stack(
       fit: StackFit.passthrough,
       clipBehavior: Clip.none,
       children: [
@@ -123,6 +126,106 @@ class _AppInteractiveState extends State<AppInteractive> {
             ),
           ),
       ],
+    );
+    // Every control answers to at least 44 × 44, even when it is drawn
+    // smaller (a 32px chip, a 30px button): the extra area is invisible and
+    // forwards the touch to the control, and the screen-reader node takes
+    // the full size.
+    return Semantics(
+      container: true,
+      child: _TapTarget(
+        minSize: const Size.square(AppSizes.minTouchTarget),
+        child: control,
+      ),
+    );
+  }
+}
+
+/// Lays out [child] at its own size, takes at least [minSize] itself and
+/// sends any touch inside that area to the child's centre — the same thing
+/// Material's padded tap target does.
+class _TapTarget extends SingleChildRenderObjectWidget {
+  const _TapTarget({required this.minSize, required super.child});
+
+  final Size minSize;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderTapTarget(minSize);
+
+  @override
+  void updateRenderObject(
+    BuildContext context,
+    _RenderTapTarget renderObject,
+  ) => renderObject.minSize = minSize;
+}
+
+class _RenderTapTarget extends RenderShiftedBox {
+  _RenderTapTarget(this._minSize) : super(null);
+
+  Size _minSize;
+  Size get minSize => _minSize;
+  set minSize(Size value) {
+    if (value == _minSize) return;
+    _minSize = value;
+    markNeedsLayout();
+  }
+
+  @override
+  double computeMinIntrinsicWidth(double height) =>
+      math.max(child?.getMinIntrinsicWidth(height) ?? 0, minSize.width);
+
+  @override
+  double computeMinIntrinsicHeight(double width) =>
+      math.max(child?.getMinIntrinsicHeight(width) ?? 0, minSize.height);
+
+  @override
+  double computeMaxIntrinsicWidth(double height) =>
+      math.max(child?.getMaxIntrinsicWidth(height) ?? 0, minSize.width);
+
+  @override
+  double computeMaxIntrinsicHeight(double width) =>
+      math.max(child?.getMaxIntrinsicHeight(width) ?? 0, minSize.height);
+
+  Size _sizeFor(BoxConstraints constraints, Size childSize) =>
+      constraints.constrain(
+        Size(
+          math.max(childSize.width, minSize.width),
+          math.max(childSize.height, minSize.height),
+        ),
+      );
+
+  @override
+  Size computeDryLayout(BoxConstraints constraints) {
+    final child = this.child;
+    if (child == null) return constraints.constrain(minSize);
+    return _sizeFor(constraints, child.getDryLayout(constraints));
+  }
+
+  @override
+  void performLayout() {
+    final child = this.child;
+    if (child == null) {
+      size = constraints.constrain(minSize);
+      return;
+    }
+    child.layout(constraints, parentUsesSize: true);
+    size = _sizeFor(constraints, child.size);
+    (child.parentData! as BoxParentData).offset = Alignment.center.alongOffset(
+      size - child.size as Offset,
+    );
+  }
+
+  @override
+  bool hitTest(BoxHitTestResult result, {required Offset position}) {
+    if (super.hitTest(result, position: position)) return true;
+    final child = this.child;
+    if (child == null || !size.contains(position)) return false;
+    final center = child.size.center(Offset.zero);
+    return result.addWithRawTransform(
+      transform: MatrixUtils.forceToPoint(center),
+      position: center,
+      hitTest: (result, position) => child.hitTest(result, position: center),
     );
   }
 }

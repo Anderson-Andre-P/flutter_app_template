@@ -46,6 +46,10 @@ class AppNumberStepper extends StatelessWidget {
           decoration: BoxDecoration(
             color: c.field,
             borderRadius: AppRadius.brMd,
+          ),
+          // Over the buttons, so they keep their full 44px.
+          foregroundDecoration: BoxDecoration(
+            borderRadius: AppRadius.brMd,
             border: Border.all(color: c.borderStrong),
           ),
           child: Row(

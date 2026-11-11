@@ -240,33 +240,35 @@ class _Day extends StatelessWidget {
     return Center(
       child: SizedBox.square(
         dimension: AppSizes.minTouchTarget,
-        child: Semantics(
-          button: true,
-          selected: selected,
-          enabled: onTap != null,
-          child: AppInteractive(
-            onTap: onTap,
-            borderRadius: AppRadius.brFull,
-            surface: (state) => (
-              color: selected
-                  ? c.primary
-                  : state.pressed
-                  ? c.primarySubtle
-                  : Colors.transparent,
-              border: null,
-              shadows: const <BoxShadow>[],
-            ),
-            builder: (context, state) => Center(
-              child: Text(
-                '${day.day}',
-                style: (selected ? AppTypography.label : AppTypography.body)
-                    .copyWith(
-                      color: selected
-                          ? c.onPrimary
-                          : onTap == null
-                          ? c.textDisabled
-                          : c.textPrimary,
-                    ),
+        child: MergeSemantics(
+          child: Semantics(
+            button: true,
+            selected: selected,
+            enabled: onTap != null,
+            child: AppInteractive(
+              onTap: onTap,
+              borderRadius: AppRadius.brFull,
+              surface: (state) => (
+                color: selected
+                    ? c.primary
+                    : state.pressed
+                    ? c.primarySubtle
+                    : Colors.transparent,
+                border: null,
+                shadows: const <BoxShadow>[],
+              ),
+              builder: (context, state) => Center(
+                child: Text(
+                  '${day.day}',
+                  style: (selected ? AppTypography.label : AppTypography.body)
+                      .copyWith(
+                        color: selected
+                            ? c.onPrimary
+                            : onTap == null
+                            ? c.textDisabled
+                            : c.textPrimary,
+                      ),
+                ),
               ),
             ),
           ),

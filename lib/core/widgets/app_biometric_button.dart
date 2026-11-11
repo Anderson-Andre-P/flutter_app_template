@@ -24,47 +24,49 @@ class AppBiometricButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final enabled = onPressed != null;
-    return Semantics(
-      button: true,
-      enabled: enabled,
-      child: AppInteractive(
-        onTap: onPressed,
-        borderRadius: AppRadius.brLg,
-        surface: (state) => (
-          color: !enabled
-              ? c.sunken
-              : state.pressed
-              ? c.primarySubtle
-              : c.card,
-          border: state.pressed ? c.primary : c.border,
-          shadows: const <BoxShadow>[],
-        ),
-        builder: (context, state) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: AppSizes.avatarMd + AppSpacing.xs,
-                height: AppSizes.avatarMd + AppSpacing.xs,
-                decoration: BoxDecoration(
-                  color: c.primarySubtle,
-                  borderRadius: AppRadius.brSm,
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        enabled: enabled,
+        child: AppInteractive(
+          onTap: onPressed,
+          borderRadius: AppRadius.brLg,
+          surface: (state) => (
+            color: !enabled
+                ? c.sunken
+                : state.pressed
+                ? c.primarySubtle
+                : c.card,
+            border: state.pressed ? c.primary : c.border,
+            shadows: const <BoxShadow>[],
+          ),
+          builder: (context, state) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: AppSizes.avatarMd + AppSpacing.xs,
+                  height: AppSizes.avatarMd + AppSpacing.xs,
+                  decoration: BoxDecoration(
+                    color: c.primarySubtle,
+                    borderRadius: AppRadius.brSm,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: AppSizes.iconField,
+                    color: enabled ? c.primary : c.textDisabled,
+                  ),
                 ),
-                child: Icon(
-                  icon,
-                  size: AppSizes.iconField,
-                  color: enabled ? c.primary : c.textDisabled,
+                const SizedBox(height: AppSpacing.sm),
+                Text(
+                  label,
+                  style: AppTypography.labelMedium.copyWith(
+                    color: enabled ? c.textPrimary : c.textDisabled,
+                  ),
                 ),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              Text(
-                label,
-                style: AppTypography.labelMedium.copyWith(
-                  color: enabled ? c.textPrimary : c.textDisabled,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

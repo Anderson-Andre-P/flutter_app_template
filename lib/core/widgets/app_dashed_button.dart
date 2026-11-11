@@ -27,29 +27,31 @@ class AppDashedButton extends StatelessWidget {
     final c = context.colors;
     final enabled = onPressed != null;
     final fg = enabled ? c.primary : c.textDisabled;
-    return Semantics(
-      button: true,
-      enabled: enabled,
-      child: SizedBox(
-        height: AppSizes.buttonMd,
-        width: double.infinity,
-        child: CustomPaint(
-          foregroundPainter: _DashedBorder(c.borderStrong),
-          child: AppInteractive(
-            onTap: onPressed,
-            borderRadius: AppRadius.brMd,
-            surface: (state) => (
-              color: state.pressed ? c.primarySubtle : Colors.transparent,
-              border: null,
-              shadows: const <BoxShadow>[],
-            ),
-            builder: (context, state) => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(icon, size: AppSizes.iconField, color: fg),
-                const SizedBox(width: AppSpacing.xs),
-                Text(label, style: AppTypography.label.copyWith(color: fg)),
-              ],
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        enabled: enabled,
+        child: SizedBox(
+          height: AppSizes.buttonMd,
+          width: double.infinity,
+          child: CustomPaint(
+            foregroundPainter: _DashedBorder(c.borderStrong),
+            child: AppInteractive(
+              onTap: onPressed,
+              borderRadius: AppRadius.brMd,
+              surface: (state) => (
+                color: state.pressed ? c.primarySubtle : Colors.transparent,
+                border: null,
+                shadows: const <BoxShadow>[],
+              ),
+              builder: (context, state) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, size: AppSizes.iconField, color: fg),
+                  const SizedBox(width: AppSpacing.xs),
+                  Text(label, style: AppTypography.label.copyWith(color: fg)),
+                ],
+              ),
             ),
           ),
         ),

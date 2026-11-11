@@ -28,62 +28,64 @@ class AppSocialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final enabled = onPressed != null;
-    return Semantics(
-      button: true,
-      enabled: enabled,
-      child: SizedBox(
-        height: AppSizes.buttonLg,
-        child: AppInteractive(
-          onTap: onPressed,
-          borderRadius: AppRadius.brMd,
-          surface: (state) => (
-            color: !enabled
-                ? c.sunken
-                : state.pressed
-                ? c.primarySubtle
-                : c.card,
-            border: state.pressed ? c.primary : c.borderStrong,
-            shadows: const <BoxShadow>[],
-          ),
-          builder: (context, state) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            child: Row(
-              children: [
-                ExcludeSemantics(
-                  child: Container(
-                    width: AppSizes.avatarSm + AppSpacing.xs,
-                    height: AppSizes.avatarSm + AppSpacing.xs,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: c.sunken,
-                      borderRadius: AppRadius.brXs,
-                      border: Border.all(color: c.border),
-                    ),
-                    child:
-                        markWidget ??
-                        Text(
-                          mark!,
-                          style: AppTypography.labelMedium.copyWith(
-                            color: c.textSecondary,
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        enabled: enabled,
+        child: SizedBox(
+          height: AppSizes.buttonLg,
+          child: AppInteractive(
+            onTap: onPressed,
+            borderRadius: AppRadius.brMd,
+            surface: (state) => (
+              color: !enabled
+                  ? c.sunken
+                  : state.pressed
+                  ? c.primarySubtle
+                  : c.card,
+              border: state.pressed ? c.primary : c.borderStrong,
+              shadows: const <BoxShadow>[],
+            ),
+            builder: (context, state) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              child: Row(
+                children: [
+                  ExcludeSemantics(
+                    child: Container(
+                      width: AppSizes.avatarSm + AppSpacing.xs,
+                      height: AppSizes.avatarSm + AppSpacing.xs,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: c.sunken,
+                        borderRadius: AppRadius.brXs,
+                        border: Border.all(color: c.border),
+                      ),
+                      child:
+                          markWidget ??
+                          Text(
+                            mark!,
+                            style: AppTypography.labelMedium.copyWith(
+                              color: c.textSecondary,
+                            ),
                           ),
-                        ),
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.md),
-                Expanded(
-                  child: Text(
-                    label,
-                    style: AppTypography.body.copyWith(
-                      color: enabled ? c.textPrimary : c.textDisabled,
                     ),
                   ),
-                ),
-                Icon(
-                  Icons.chevron_right,
-                  size: AppSizes.iconTopBar,
-                  color: c.textMuted,
-                ),
-              ],
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: Text(
+                      label,
+                      style: AppTypography.body.copyWith(
+                        color: enabled ? c.textPrimary : c.textDisabled,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.chevron_right,
+                    size: AppSizes.iconTopBar,
+                    color: c.textMuted,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

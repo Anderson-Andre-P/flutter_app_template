@@ -74,7 +74,16 @@ void main() {
         tester,
         AppButton(label: 'x', size: size, expanded: false, onPressed: () {}),
       );
-      expect(tester.getSize(find.byType(AppButton)).height, height);
+      final visual = find.descendant(
+        of: find.byType(AppButton),
+        matching: find.byType(Material),
+      );
+      expect(tester.getSize(visual).height, height);
+      // Smaller sizes are drawn smaller but still answer to 44px.
+      expect(
+        tester.getSize(find.byType(AppButton)).height,
+        height < AppSizes.minTouchTarget ? AppSizes.minTouchTarget : height,
+      );
     }
   });
 

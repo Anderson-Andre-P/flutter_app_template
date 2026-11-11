@@ -69,8 +69,16 @@ void main() {
     );
     final a = tester.getRect(find.widgetWithText(AppChip, 'Sistema'));
     final b = tester.getRect(find.widgetWithText(AppChip, 'Claro'));
+    Rect visual(String label) => tester.getRect(
+      find.descendant(
+        of: find.widgetWithText(AppChip, label),
+        matching: find.byType(Material),
+      ),
+    );
     expect(a.width, lessThan(200));
-    expect(a.height, AppSizes.chip);
+    // Drawn at 32px; the touch target around it is 44px.
+    expect(visual('Sistema').height, AppSizes.chip);
+    expect(a.height, AppSizes.minTouchTarget);
     expect(b.top, a.top);
     expect(b.left - a.right, AppSpacing.sm);
   });

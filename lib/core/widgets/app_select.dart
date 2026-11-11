@@ -133,45 +133,47 @@ class _SelectBox extends StatelessWidget {
               border: Border.all(color: c.danger, width: AppSizes.errorBorder),
             )
           : null,
-      child: Semantics(
-        button: true,
-        enabled: enabled,
-        child: AppInteractive(
-          onTap: onTap,
-          borderRadius: AppRadius.brMd,
-          surface: (state) => (
-            color: !enabled
-                ? c.sunken
-                : error
-                ? c.dangerSubtle
-                : c.field,
-            border: enabled ? c.borderStrong : null,
-            shadows: const <BoxShadow>[],
-          ),
-          builder: (context, state) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    text,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTypography.body.copyWith(
-                      color: !enabled
-                          ? c.textDisabled
-                          : placeholder
-                          ? c.textMuted
-                          : c.textPrimary,
+      child: MergeSemantics(
+        child: Semantics(
+          button: true,
+          enabled: enabled,
+          child: AppInteractive(
+            onTap: onTap,
+            borderRadius: AppRadius.brMd,
+            surface: (state) => (
+              color: !enabled
+                  ? c.sunken
+                  : error
+                  ? c.dangerSubtle
+                  : c.field,
+              border: enabled ? c.borderStrong : null,
+              shadows: const <BoxShadow>[],
+            ),
+            builder: (context, state) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      text,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.body.copyWith(
+                        color: !enabled
+                            ? c.textDisabled
+                            : placeholder
+                            ? c.textMuted
+                            : c.textPrimary,
+                      ),
                     ),
                   ),
-                ),
-                Icon(
-                  Icons.arrow_drop_down,
-                  size: AppSizes.iconTopBar,
-                  color: enabled ? c.textMuted : c.textDisabled,
-                ),
-              ],
+                  Icon(
+                    Icons.arrow_drop_down,
+                    size: AppSizes.iconTopBar,
+                    color: enabled ? c.textMuted : c.textDisabled,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

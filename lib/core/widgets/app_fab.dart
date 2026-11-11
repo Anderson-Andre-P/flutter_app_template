@@ -27,45 +27,47 @@ class AppFab extends StatelessWidget {
     final c = context.colors;
     final enabled = onPressed != null;
     final fg = enabled ? c.onPrimary : c.textDisabled;
-    return Semantics(
-      button: true,
-      enabled: enabled,
-      label: extended ? null : label,
-      child: SizedBox(
-        width: extended ? null : AppSizes.fab,
-        height: extended ? AppSizes.fabExtended : AppSizes.fab,
-        child: AppInteractive(
-          onTap: onPressed,
-          borderRadius: AppRadius.brLg,
-          surface: (state) => (
-            color: !enabled
-                ? c.sunken
-                : state.pressed
-                ? c.primaryHover
-                : c.primary,
-            border: null,
-            shadows: enabled ? context.shadows.elev2 : const <BoxShadow>[],
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        enabled: enabled,
+        label: extended ? null : label,
+        child: SizedBox(
+          width: extended ? null : AppSizes.fab,
+          height: extended ? AppSizes.fabExtended : AppSizes.fab,
+          child: AppInteractive(
+            onTap: onPressed,
+            borderRadius: AppRadius.brLg,
+            surface: (state) => (
+              color: !enabled
+                  ? c.sunken
+                  : state.pressed
+                  ? c.primaryHover
+                  : c.primary,
+              border: null,
+              shadows: enabled ? context.shadows.elev2 : const <BoxShadow>[],
+            ),
+            builder: (context, state) => extended
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.x2l,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(icon, size: AppSizes.icon, color: fg),
+                        const SizedBox(width: AppSpacing.sm),
+                        Text(
+                          label,
+                          style: AppTypography.label.copyWith(color: fg),
+                        ),
+                      ],
+                    ),
+                  )
+                : Center(
+                    child: Icon(icon, size: AppSizes.icon, color: fg),
+                  ),
           ),
-          builder: (context, state) => extended
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.x2l,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(icon, size: AppSizes.icon, color: fg),
-                      const SizedBox(width: AppSpacing.sm),
-                      Text(
-                        label,
-                        style: AppTypography.label.copyWith(color: fg),
-                      ),
-                    ],
-                  ),
-                )
-              : Center(
-                  child: Icon(icon, size: AppSizes.icon, color: fg),
-                ),
         ),
       ),
     );

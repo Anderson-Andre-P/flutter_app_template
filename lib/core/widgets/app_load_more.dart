@@ -39,33 +39,35 @@ class AppLoadMore extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.sm),
         ],
-        Semantics(
-          button: true,
-          enabled: enabled,
-          label: loading ? CommonStrings.loading : null,
-          child: SizedBox(
-            height: AppSizes.buttonMd,
-            child: AppInteractive(
-              onTap: enabled ? onPressed : null,
-              borderRadius: AppRadius.brMd,
-              surface: (state) => (
-                color: state.pressed ? c.primarySubtle : c.card,
-                border: c.border,
-                shadows: const <BoxShadow>[],
-              ),
-              builder: (context, state) => Center(
-                child: loading
-                    ? SizedBox.square(
-                        dimension: AppSizes.iconField,
-                        child: CircularProgressIndicator(
-                          strokeWidth: AppSizes.focusRing,
-                          color: c.primary,
+        MergeSemantics(
+          child: Semantics(
+            button: true,
+            enabled: enabled,
+            label: loading ? CommonStrings.loading : null,
+            child: SizedBox(
+              height: AppSizes.buttonMd,
+              child: AppInteractive(
+                onTap: enabled ? onPressed : null,
+                borderRadius: AppRadius.brMd,
+                surface: (state) => (
+                  color: state.pressed ? c.primarySubtle : c.card,
+                  border: c.border,
+                  shadows: const <BoxShadow>[],
+                ),
+                builder: (context, state) => Center(
+                  child: loading
+                      ? SizedBox.square(
+                          dimension: AppSizes.iconField,
+                          child: CircularProgressIndicator(
+                            strokeWidth: AppSizes.focusRing,
+                            color: c.primary,
+                          ),
+                        )
+                      : Text(
+                          label,
+                          style: AppTypography.label.copyWith(color: c.primary),
                         ),
-                      )
-                    : Text(
-                        label,
-                        style: AppTypography.label.copyWith(color: c.primary),
-                      ),
+                ),
               ),
             ),
           ),
