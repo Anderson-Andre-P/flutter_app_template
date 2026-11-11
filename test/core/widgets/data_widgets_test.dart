@@ -69,6 +69,47 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testBothThemes('bar chart shows the values and the goal line', (
+    tester,
+    dark,
+  ) async {
+    await pumpApp(
+      tester,
+      SizedBox(
+        width: 300.w,
+        child: const AppBarChart(
+          values: [2, 4],
+          labels: ['S', 'T'],
+          valueLabels: ['2,0', '4,0'],
+          goal: 3,
+          goalLabel: 'meta',
+        ),
+      ),
+      dark: dark,
+    );
+    expect(find.text('2,0'), findsOneWidget);
+    expect(find.text('4,0'), findsOneWidget);
+    expect(find.text('meta'), findsOneWidget);
+    // The goal line sits between the two bars' tops.
+    final line = tester.getBottomLeft(find.byKey(AppBarChart.goalKey)).dy;
+    final low = tester.getTopLeft(find.byKey(const ValueKey('bar-0'))).dy;
+    final high = tester.getTopLeft(find.byKey(const ValueKey('bar-1'))).dy;
+    expect(line, inExclusiveRange(high, low));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a goal above every value grows the scale', (tester) async {
+    await pumpApp(
+      tester,
+      SizedBox(
+        width: 300.w,
+        child: const AppBarChart(values: [2], labels: ['S'], goal: 4),
+      ),
+    );
+    final bar = tester.getSize(find.byKey(const ValueKey('bar-0'))).height;
+    expect(bar, closeTo(AppSizes.chart / 2, 1));
+  });
+
   testBothThemes('icon box shows its icon in every tone', (tester, dark) async {
     await pumpApp(
       tester,

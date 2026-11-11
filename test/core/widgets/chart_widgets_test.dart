@@ -41,6 +41,30 @@ void main() {
     }
   });
 
+  testBothThemes('line chart labels its lowest and highest points', (
+    tester,
+    dark,
+  ) async {
+    final labelled = <double>[];
+    await pumpApp(
+      tester,
+      SizedBox(
+        width: 300.w,
+        child: AppLineChart(
+          values: const [14, 12, 10.4, 16, 20, 18],
+          valueLabel: (v) {
+            labelled.add(v);
+            return '$v';
+          },
+        ),
+      ),
+      dark: dark,
+    );
+    expect(labelled, containsAll([10.4, 20.0]));
+    expect(labelled.toSet(), {10.4, 20.0});
+    expect(tester.takeException(), isNull);
+  });
+
   testBothThemes('donut shows the centre text and a legend entry per '
       'segment', (tester, dark) async {
     await pumpApp(
