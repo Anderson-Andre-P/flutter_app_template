@@ -43,5 +43,7 @@ abstract final class HomeStrings {
   static const forms = 'Formulários';
   static const formsHint = 'Select, data, hora e slider';
   static const navigation = 'Navegação';
+  static const chat = 'Conversa e mídia';
+  static const chatHint = 'Comentários, anexos e visualizador';
   static const navigationHint = 'Abas, accordion, stepper e menu';
 }

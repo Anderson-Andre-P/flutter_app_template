@@ -20,6 +20,7 @@ import '../../features/examples/presentation/pages/dashboard_page.dart';
 import '../../features/examples/application/demo_selection_bloc.dart';
 import '../../features/examples/presentation/pages/bottom_nav_demo_page.dart';
 import '../../features/examples/presentation/pages/charts_demo_page.dart';
+import '../../features/examples/presentation/pages/chat_demo_page.dart';
 import '../../features/examples/presentation/pages/controls_demo_page.dart';
 import '../../features/examples/presentation/pages/forms_demo_page.dart';
 import '../../features/examples/presentation/pages/navigation_demo_page.dart';
@@ -143,6 +144,7 @@ void _openDemo(BuildContext context, HomeDemo demo) => switch (demo) {
   HomeDemo.controls => context.push(AppRoutes.controls),
   HomeDemo.forms => context.push(AppRoutes.forms),
   HomeDemo.navigation => context.push(AppRoutes.navigation),
+  HomeDemo.chat => context.push(AppRoutes.chat),
 };
 
 /// Example screens, nested under the home tab so the bottom navigation
@@ -210,6 +212,7 @@ final _exampleRoutes = <RouteBase>[
     path: 'graficos',
     builder: (context, state) => const ChartsDemoPage(),
   ),
+  GoRoute(path: 'conversa', builder: (context, state) => const ChatDemoPage()),
   GoRoute(
     path: 'navegacao',
     builder: (context, state) => BlocProvider(
