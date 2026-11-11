@@ -41,9 +41,10 @@ Future<void> _settle(WidgetTester tester) async {
   await tester.pump(const Duration(seconds: 1));
 }
 
-Future<void> _tapVisible(WidgetTester tester, String text) async {
+/// Scrolls the page until [finder] is on screen.
+Future<void> _reveal(WidgetTester tester, Finder finder) async {
   await tester.scrollUntilVisible(
-    find.text(text),
+    finder,
     150,
     // The page's vertical list, not a sideways one inside it (tabs).
     scrollable: find
@@ -53,8 +54,12 @@ Future<void> _tapVisible(WidgetTester tester, String text) async {
         .first,
   );
   // Built is not on screen: the list builds a little past its edge.
-  await tester.ensureVisible(find.text(text));
+  await tester.ensureVisible(finder);
   await tester.pump();
+}
+
+Future<void> _tapVisible(WidgetTester tester, String text) async {
+  await _reveal(tester, find.text(text));
   await tester.tap(find.text(text));
   await _settle(tester);
 }
@@ -186,12 +191,25 @@ void main() {
     testWidgets('forms demo picks a priority and flags a past deadline '
         '(${dark ? 'dark' : 'light'})', (tester) async {
       await _pump(tester, const FormsDemoPage(), dark: dark);
+      await _reveal(tester, find.text('${ExamplesStrings.formsPriority} *'));
       await tester.tap(find.byKey(AppSelect.fieldKey).first);
       await _settle(tester);
-      await tester.tap(find.text(ExamplesStrings.priorities.last).last);
+      await tester.tap(
+        find.descendant(
+          of: find.byType(MenuItemButton),
+          matching: find.text(ExamplesStrings.priorities.last),
+        ),
+      );
       await _settle(tester);
-      expect(find.text(ExamplesStrings.priorities.last), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byType(AppSelect<int>).first,
+          matching: find.text(ExamplesStrings.priorities.last),
+        ),
+        findsOneWidget,
+      );
 
+      await _reveal(tester, find.text('${ExamplesStrings.formsDeadline} *'));
       final deadline = find
           .widgetWithText(TextField, CommonStrings.dateHint)
           .first;

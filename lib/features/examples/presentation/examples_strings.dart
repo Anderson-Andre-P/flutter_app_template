@@ -379,6 +379,34 @@ abstract final class ExamplesStrings {
   static const formsStepper = 'Stepper numérico';
   static const formsStepperCaption = 'Quantidades pequenas e exatas, até 99';
   static const formsQuantity = 'Quantidade';
+  static const formsFieldVariants = 'Variações de campo';
+  static const formsFieldVariantsCaption = 'Prefixo, validado e desabilitado';
+  static const formsIdLabel = 'Número do registro';
+  static const formsIdPrefix = 'ID-';
+  static const formsIdValue = '2026-0042';
+  static const formsCpf = 'CPF';
+  static const formsCpfValue = '123.456.789-09';
+  static const formsLocked = 'Responsável';
+  static const formsLockedValue = 'Definido pelo gestor';
+  static const formsTags = 'Destinatários';
+  static const formsTagsHelper = 'Vários cabem; toque em × para tirar';
+  static const formsInitialTags = ['Marina Alves'];
+  static const formsDeadlineRange = 'Prazo (dias)';
+  static String days(double v) => '${v.round()}';
+  static const formsStepsSlider = 'Prioridade (passos)';
+  static const formsAttachments = 'Anexos';
+  static const formsAttachmentsCaption =
+      'No celular, um botão de envio; a área de soltar é só na web';
+  static const formsUpload = 'Enviar documento';
+  static const formsUploadHint = 'PDF, PNG ou XLSX até 25 MB';
+  static const formsFiles = [
+    ('Relatorio_agosto.pdf', '1,8 MB · enviado hoje'),
+    ('Anexo_referencia.jpg', 'Enviando · 72%'),
+    ('Dados_semana34.xlsx', '420 KB · aguardando sincronização'),
+    ('Foto_painel.png', 'Falha no envio'),
+  ];
+  static const formsPhotos = 'Fotos capturadas';
+  static const formsPhotosCaption = 'Dá para remover antes de sincronizar';
 
   // Navegação
   static const navigationTitle = 'Navegação';

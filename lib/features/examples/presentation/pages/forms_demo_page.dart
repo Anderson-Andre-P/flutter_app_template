@@ -9,7 +9,11 @@ import '../../../../core/widgets/app_select.dart';
 import '../../../../core/widgets/app_slider.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/app_time_field.dart';
+import '../../../../core/widgets/app_attachment.dart';
+import '../../../../core/widgets/app_snackbar.dart';
+import '../../../../core/widgets/app_tag_field.dart';
 import '../../application/demo_selection_bloc.dart';
+import '../../application/demo_tags_bloc.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
 
@@ -27,6 +31,11 @@ class FormsDemoPage extends StatelessWidget {
   static const _volume = 'forms-volume';
   static const _tolerance = 'forms-tolerance';
   static const _quantity = 'forms-quantity';
+  static const _rangeStart = 'forms-range-start';
+  static const _rangeEnd = 'forms-range-end';
+  static const _stepsSlider = 'forms-steps';
+  static const _photos = 'forms-photos';
+  static const _files = 'forms-files';
   static const _none = -1;
 
   @override
@@ -58,6 +67,46 @@ class FormsDemoPage extends StatelessWidget {
             hint: ExamplesStrings.formsDescriptionHint,
             minLines: 3,
             maxLength: 400,
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.formsFieldVariants,
+          caption: ExamplesStrings.formsFieldVariantsCaption,
+          child: Column(
+            children: [
+              const AppTextField(
+                label: ExamplesStrings.formsIdLabel,
+                prefix: ExamplesStrings.formsIdPrefix,
+                initialValue: ExamplesStrings.formsIdValue,
+              ),
+              gap,
+              const AppTextField(
+                label: ExamplesStrings.formsCpf,
+                initialValue: ExamplesStrings.formsCpfValue,
+                validated: true,
+              ),
+              gap,
+              const AppTextField(
+                label: ExamplesStrings.formsLocked,
+                initialValue: ExamplesStrings.formsLockedValue,
+                enabled: false,
+              ),
+              gap,
+              BlocProvider(
+                create: (_) => DemoTagsBloc(ExamplesStrings.formsInitialTags),
+                child: BlocBuilder<DemoTagsBloc, List<String>>(
+                  builder: (context, tags) => AppTagField(
+                    label: ExamplesStrings.formsTags,
+                    helper: ExamplesStrings.formsTagsHelper,
+                    tags: tags,
+                    onAdded: (t) =>
+                        context.read<DemoTagsBloc>().add(DemoTagAdded(t)),
+                    onRemoved: (i) =>
+                        context.read<DemoTagsBloc>().add(DemoTagRemoved(i)),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         DemoSection(
@@ -158,6 +207,29 @@ class FormsDemoPage extends StatelessWidget {
                   valueLabel: ExamplesStrings.units,
                   onChanged: (v) => set(_tolerance, v.round()),
                 ),
+                gap,
+                AppRangeSlider(
+                  label: ExamplesStrings.formsDeadlineRange,
+                  values: RangeValues(
+                    selection.of(_rangeStart, fallback: 7).toDouble(),
+                    selection.of(_rangeEnd, fallback: 21).toDouble(),
+                  ),
+                  min: 1,
+                  max: 30,
+                  divisions: 29,
+                  valueLabel: ExamplesStrings.days,
+                  onChanged: (r) {
+                    set(_rangeStart, r.start.round());
+                    set(_rangeEnd, r.end.round());
+                  },
+                ),
+                gap,
+                AppSlider.steps(
+                  label: ExamplesStrings.formsStepsSlider,
+                  steps: ExamplesStrings.priorities,
+                  index: selection.of(_stepsSlider, fallback: 2),
+                  onChanged: (i) => set(_stepsSlider, i),
+                ),
               ],
             ),
           ),
@@ -173,6 +245,49 @@ class FormsDemoPage extends StatelessWidget {
               min: 1,
               onChanged: (v) => set(_quantity, v),
             ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.formsAttachments,
+          caption: ExamplesStrings.formsAttachmentsCaption,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AppUploadButton(
+                label: ExamplesStrings.formsUpload,
+                hint: ExamplesStrings.formsUploadHint,
+                onPressed: () =>
+                    AppSnackbar.info(context, ExamplesStrings.comingSoon),
+              ),
+              for (final (i, (name, detail))
+                  in ExamplesStrings.formsFiles.indexed)
+                // Bit i set = file i removed.
+                if (selection.of(_files) & (1 << i) == 0) ...[
+                  const SizedBox(height: AppSpacing.sm),
+                  AppAttachmentTile(
+                    name: name,
+                    detail: detail,
+                    status: AppAttachmentStatus.values[i],
+                    progress: .72,
+                    onOpen: () => AppSnackbar.info(context, name),
+                    onCancel: () =>
+                        set(_files, selection.of(_files) | (1 << i)),
+                    onRemove: () =>
+                        set(_files, selection.of(_files) | (1 << i)),
+                  ),
+                ],
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.formsPhotos,
+          caption: ExamplesStrings.formsPhotosCaption,
+          child: AppPhotoGrid(
+            photos: List.filled(selection.of(_photos, fallback: 2), null),
+            onRemove: (_) =>
+                set(_photos, selection.of(_photos, fallback: 2) - 1),
+            onCapture: () =>
+                set(_photos, selection.of(_photos, fallback: 2) + 1),
           ),
         ),
       ],
