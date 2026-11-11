@@ -41,12 +41,16 @@ class AppInfoCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.md),
-                Text(
-                  rows[i].$2,
-                  textAlign: TextAlign.end,
-                  style: _bold(i)
-                      ? AppTypography.label.copyWith(color: c.textPrimary)
-                      : AppTypography.body.copyWith(color: c.textPrimary),
+                // Long values (a protocol, large text) wrap instead of
+                // pushing the row off the card.
+                Flexible(
+                  child: Text(
+                    rows[i].$2,
+                    textAlign: TextAlign.end,
+                    style: _bold(i)
+                        ? AppTypography.label.copyWith(color: c.textPrimary)
+                        : AppTypography.body.copyWith(color: c.textPrimary),
+                  ),
                 ),
               ],
             ),

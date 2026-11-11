@@ -20,7 +20,7 @@ class AppInputChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Container(
-      height: AppSizes.chip,
+      constraints: const BoxConstraints(minHeight: AppSizes.chip),
       padding: EdgeInsetsDirectional.only(
         start: AppSpacing.md,
         end: onRemoved == null ? AppSpacing.md : 0,
@@ -32,9 +32,13 @@ class AppInputChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            label,
-            style: AppTypography.labelMedium.copyWith(color: c.primary),
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppTypography.labelMedium.copyWith(color: c.primary),
+            ),
           ),
           if (onRemoved case final remove?)
             Semantics(

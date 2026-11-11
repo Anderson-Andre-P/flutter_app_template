@@ -58,9 +58,11 @@ class AppBasicCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                Text(
-                  f,
-                  style: AppTypography.caption.copyWith(color: c.textMuted),
+                Expanded(
+                  child: Text(
+                    f,
+                    style: AppTypography.caption.copyWith(color: c.textMuted),
+                  ),
                 ),
               ],
             ),
@@ -452,7 +454,9 @@ class AppFieldCard extends StatelessWidget {
                       ),
                     ),
                     if (requiredLabel case final r?)
-                      AppBadge(label: r, tone: AppTone.alert),
+                      Flexible(
+                        child: AppBadge(label: r, tone: AppTone.alert),
+                      ),
                   ],
                 ),
               ),
@@ -560,7 +564,9 @@ class AppProductCard extends StatelessWidget {
                   Semantics(
                     label: CommonStrings.rating(r),
                     child: ExcludeSemantics(
-                      child: Row(
+                      child: Wrap(
+                        spacing: AppSpacing.xs,
+                        crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           for (var i = 1; i <= 5; i++)
                             Icon(
@@ -569,7 +575,6 @@ class AppProductCard extends StatelessWidget {
                               color: c.alert,
                             ),
                           if (ratingLabel case final l?) ...[
-                            const SizedBox(width: AppSpacing.xs),
                             Text(
                               l,
                               style: AppTypography.caption.copyWith(
@@ -583,9 +588,9 @@ class AppProductCard extends StatelessWidget {
                   ),
                 ],
                 const SizedBox(height: AppSpacing.lg),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  crossAxisAlignment: WrapCrossAlignment.end,
                   children: [
                     Text(
                       price,
@@ -594,7 +599,6 @@ class AppProductCard extends StatelessWidget {
                       ),
                     ),
                     if (oldPrice case final o?) ...[
-                      const SizedBox(width: AppSpacing.sm),
                       Text(
                         o,
                         style: AppTypography.caption.copyWith(
@@ -791,9 +795,13 @@ class AppPricingCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
             children: [
-              if (overline case final o?) Expanded(child: SectionOverline(o)),
+              if (overline case final o?) SectionOverline(o),
               if (badge case final b?)
                 AppBadge(label: b, tone: AppTone.primary),
             ],
@@ -804,16 +812,15 @@ class AppPricingCard extends StatelessWidget {
             style: AppTypography.heading.copyWith(color: c.textPrimary),
           ),
           const SizedBox(height: AppSpacing.sm),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
+          Wrap(
+            spacing: AppSpacing.sm,
+            crossAxisAlignment: WrapCrossAlignment.end,
             children: [
               Text(
                 price,
                 style: AppTypography.display.copyWith(color: c.textPrimary),
               ),
               if (period case final p?) ...[
-                const SizedBox(width: AppSpacing.sm),
                 Text(
                   p,
                   style: AppTypography.caption.copyWith(color: c.textMuted),

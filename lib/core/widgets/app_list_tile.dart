@@ -61,7 +61,14 @@ class AppListTile extends StatelessWidget {
             ),
             if (trailing != null) ...[
               const SizedBox(width: AppSpacing.md),
-              trailing!,
+              // At most half the row, so large text wraps the trailing
+              // value instead of pushing the row off screen.
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.sizeOf(context).width / 2,
+                ),
+                child: trailing,
+              ),
             ],
           ],
         ),

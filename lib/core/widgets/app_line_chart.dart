@@ -34,12 +34,14 @@ class AppLineChart extends StatelessWidget {
         if (labels.isNotEmpty) ...[
           const SizedBox(height: AppSpacing.sm),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               for (final l in labels)
-                Text(
-                  l,
-                  style: AppTypography.micro.copyWith(color: c.textMuted),
+                Expanded(
+                  child: Text(
+                    l,
+                    textAlign: TextAlign.center,
+                    style: AppTypography.micro.copyWith(color: c.textMuted),
+                  ),
                 ),
             ],
           ),

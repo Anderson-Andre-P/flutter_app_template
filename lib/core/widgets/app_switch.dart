@@ -82,10 +82,12 @@ class AppSwitch extends StatelessWidget {
                   ),
                   if (label case final label?) ...[
                     const SizedBox(width: AppSpacing.sm),
-                    Text(
-                      label,
-                      style: AppTypography.labelMedium.copyWith(
-                        color: enabled ? c.textPrimary : c.textDisabled,
+                    Flexible(
+                      child: Text(
+                        label,
+                        style: AppTypography.labelMedium.copyWith(
+                          color: enabled ? c.textPrimary : c.textDisabled,
+                        ),
                       ),
                     ),
                   ],

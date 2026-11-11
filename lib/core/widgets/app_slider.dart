@@ -98,8 +98,20 @@ class AppSlider extends StatelessWidget {
         ),
         if (stepLabels case final steps?)
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [for (final s in steps) Text(s, style: caption)],
+            children: [
+              for (final (i, s) in steps.indexed)
+                Expanded(
+                  child: Text(
+                    s,
+                    style: caption,
+                    textAlign: i == 0
+                        ? TextAlign.start
+                        : i == steps.length - 1
+                        ? TextAlign.end
+                        : TextAlign.center,
+                  ),
+                ),
+            ],
           )
         else if (showLimits)
           Row(

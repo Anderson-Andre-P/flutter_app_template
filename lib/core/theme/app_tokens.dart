@@ -66,6 +66,9 @@ abstract final class AppSizes {
   /// gesture/button bar) sits below them: the inset takes the rest of the 64
   /// instead of stacking on top of it.
   static const double bottomNavContent = 48;
+
+  /// Largest text scale inside fixed-height bars (bottom navigation).
+  static const double barTextScaleMax = 1.5;
   static const double chip = 32;
 
   /// Switch track and knob; checkbox and radio box.

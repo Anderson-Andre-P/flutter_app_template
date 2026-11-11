@@ -44,13 +44,19 @@ class AppBottomNav extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Padding(
         padding: EdgeInsets.only(bottom: inset),
-        child: SizedBox(
-          height: tabsHeight,
-          child: Row(
-            children: [
-              for (var i = 0; i < items.length; i++)
-                Expanded(child: _tab(c.primary, c.textMuted, i)),
-            ],
+        // The bar's height is fixed by the design system, so its labels
+        // scale at most 1.5× (as platform tab bars do); the screens above
+        // take the full 200%.
+        child: MediaQuery.withClampedTextScaling(
+          maxScaleFactor: AppSizes.barTextScaleMax,
+          child: SizedBox(
+            height: tabsHeight,
+            child: Row(
+              children: [
+                for (var i = 0; i < items.length; i++)
+                  Expanded(child: _tab(c.primary, c.textMuted, i)),
+              ],
+            ),
           ),
         ),
       ),
@@ -72,6 +78,8 @@ class AppBottomNav extends StatelessWidget {
             const SizedBox(height: AppSpacing.xs),
             Text(
               items[i].label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style:
                   (selected
                           ? AppTypography.microBold

@@ -113,12 +113,15 @@ class AppButton extends StatelessWidget {
             },
             builder: (context, state) {
               final fg = _look(c, state.pressed).fg;
-              return SizedBox(
-                height: _height,
+              // A minimum, so large text grows the button instead of being
+              // cut.
+              return ConstrainedBox(
+                constraints: BoxConstraints(minHeight: _height),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: _padding),
                   child: Center(
                     widthFactor: 1,
+                    heightFactor: 1,
                     child: loading
                         ? SizedBox.square(
                             dimension: 18,

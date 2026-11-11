@@ -150,9 +150,11 @@ class AppStepProgress extends StatelessWidget {
     final share = total == 0 ? 0.0 : current / total;
     return Row(
       children: [
-        Text(
-          stepLabel(current, total),
-          style: AppTypography.caption.copyWith(color: c.textSecondary),
+        Flexible(
+          child: Text(
+            stepLabel(current, total),
+            style: AppTypography.caption.copyWith(color: c.textSecondary),
+          ),
         ),
         const SizedBox(width: AppSpacing.md),
         Expanded(child: AppProgressBar(value: share)),
