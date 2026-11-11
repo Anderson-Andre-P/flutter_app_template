@@ -40,6 +40,14 @@ criar componentes novos.
   checkbox seguem o mesmo padrão quando forem criados (seção Controles).
 - [x] **P2 · Rosca** (Padrões, seção 18): anel de 26px (hoje são 18px), no
   mínimo 3 arcos e rótulo central sempre presente.
+- [ ] **Decisão · Contraste da paleta** (Padrões, seção 23): o teste
+  `test/core/theme/contrast_test.dart` mostra pares abaixo do AA, listados
+  em `knownLow`. Texto (4,5:1): `textMuted` sobre `screen` (claro, 4,35),
+  sobre `field` (claro 4,47, escuro 4,27) e sobre `primarySubtle` (4,1 nos
+  dois); `success` sobre `successSubtle` (claro, 4,07). Ícones e bordas
+  (3:1): `alert` sólido sobre `card` (claro, 2,28) e `borderStrong` sobre
+  `card` (1,28 claro, 1,68 escuro), que é a borda dos campos. Ajustar a
+  paleta e tirar o par da lista.
 - [ ] **Decisão · Botão primário** (Componentes, seção 09): o DS diz 52px; o
   `AppSizes.buttonLg` está em 48px, que é a altura das telas de exemplo.
 
@@ -202,10 +210,10 @@ padding interno nunca fica abaixo de 14px.
 
 ## Regras que podem virar automação
 
-- [ ] P1 · Teste de contraste AA (Padrões, seção 23): 4,5:1 para texto e
+- [x] P1 · Teste de contraste AA (Padrões, seção 23): 4,5:1 para texto e
   3:1 para ícones e bordas, entre os pares de cores dos temas claro e escuro.
   O texto desabilitado (2,3:1) é só decorativo.
-- [ ] P1 · Teste de alvo de toque: pelo menos 44 × 44px em todo controle,
+- [x] P1 · Teste de alvo de toque: pelo menos 44 × 44px em todo controle,
   mesmo quando o ícone tem 24px.
 - [ ] P2 · Texto escala até 200% sem cortar nem sobrepor: teste com
   `textScaler` 2.0 nas telas de exemplo.
