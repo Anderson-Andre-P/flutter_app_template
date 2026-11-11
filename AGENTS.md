@@ -13,7 +13,9 @@ Short cross-tool summary for AI coding agents. Claude Code reads `CLAUDE.md`
 - **Errors:** usecases return `Result<T>` and never throw.
 - **UI:** no string, colour, spacing, size or asset literals in widgets — use
   `*_strings.dart`, `core/theme` tokens and `core/constants/assets`; build
-  screens from `core/widgets`; check both themes.
+  screens from `core/widgets`; check both themes. Sizes scale with the
+  screen through `flutter_screenutil_plus`, only inside the tokens (360 × 690
+  design size): widgets write `AppSpacing.lg`, never `16.w`.
 - **JSON:** hand-written `fromJson`/`toJson`, no code generation.
 - **Language:** code and docs in English, UI copy in pt-BR, commits in
   Portuguese (`tipo(escopo): mensagem`), never an attribution trailer.
