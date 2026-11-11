@@ -5,6 +5,7 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_context.dart';
 import '../../../../core/widgets/app_bar_chart.dart';
 import '../../../../core/widgets/app_card.dart';
+import '../../../../core/widgets/app_progress_ring.dart';
 import '../../../../core/widgets/app_donut_chart.dart';
 import '../../../../core/widgets/app_line_chart.dart';
 import '../../../../core/widgets/app_progress_bar.dart';
@@ -52,6 +53,30 @@ class ChartsDemoPage extends StatelessWidget {
               segments: [
                 for (final (label, value) in ExamplesStrings.chartDonutSegments)
                   AppChartSegment(label: label, value: value),
+              ],
+            ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.chartRing,
+          caption: ExamplesStrings.chartRingCaption,
+          child: AppCard(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                for (final (label, value) in ExamplesStrings.chartRingItems)
+                  Column(
+                    children: [
+                      AppProgressRing(value: value, label: label),
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(
+                        label,
+                        style: AppTypography.caption.copyWith(
+                          color: context.colors.textSecondary,
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),

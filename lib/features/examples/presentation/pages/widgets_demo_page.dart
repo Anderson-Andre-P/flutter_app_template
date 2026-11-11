@@ -21,6 +21,8 @@ import '../../../../core/widgets/app_option_card.dart';
 import '../../../../core/widgets/app_segmented_control.dart';
 import '../../../../core/widgets/app_social_button.dart';
 import '../../../../core/widgets/app_split_button.dart';
+import '../../../../core/widgets/app_counter.dart';
+import '../../../../core/widgets/app_input_chip.dart';
 import '../../application/demo_selection_bloc.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
@@ -345,6 +347,28 @@ class WidgetsDemoPage extends StatelessWidget {
           ),
         ),
         DemoSection(
+          title: ExamplesStrings.chipsMore,
+          child: BlocSelector<DemoSelectionBloc, DemoSelectionState, int>(
+            // Bit i set = chip i removed.
+            selector: (s) => s.of('input-chips'),
+            builder: (context, removed) => Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
+              children: [
+                const AppChip(label: ExamplesStrings.chipArchived),
+                for (final (i, label) in ExamplesStrings.inputChips.indexed)
+                  if (removed & (1 << i) == 0)
+                    AppInputChip(
+                      label: label,
+                      onRemoved: () => context.read<DemoSelectionBloc>().add(
+                        DemoSelected('input-chips', removed | (1 << i)),
+                      ),
+                    ),
+              ],
+            ),
+          ),
+        ),
+        DemoSection(
           title: ExamplesStrings.badges,
           child: Wrap(
             spacing: AppSpacing.sm,
@@ -377,6 +401,44 @@ class WidgetsDemoPage extends StatelessWidget {
               AppAvatar(
                 initials: ExamplesStrings.avatarInitials,
                 size: AppSizes.avatarXl,
+              ),
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.avatarsMore,
+          child: Row(
+            children: [
+              const AppAvatar(
+                initials: ExamplesStrings.avatarStatusInitials,
+                status: AppTone.success,
+                statusLabel: ExamplesStrings.avatarStatusLabel,
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Text(
+                ExamplesStrings.avatarStatusLabel,
+                style: AppTypography.caption.copyWith(color: c.textSecondary),
+              ),
+              const Spacer(),
+              const AppAvatarGroup(initials: ExamplesStrings.avatarGroup),
+            ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.counters,
+          caption: ExamplesStrings.countersCaption,
+          child: Row(
+            children: [
+              for (final n in ExamplesStrings.counterValues) ...[
+                AppCounter(count: n),
+                const SizedBox(width: AppSpacing.sm),
+              ],
+              const SizedBox(width: AppSpacing.md),
+              const AppNewDot(label: ExamplesStrings.newDotLabel),
+              const SizedBox(width: AppSpacing.sm),
+              Text(
+                ExamplesStrings.newDotLabel,
+                style: AppTypography.caption.copyWith(color: c.textSecondary),
               ),
             ],
           ),

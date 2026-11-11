@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/strings/common_strings.dart';
+import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/widgets/app_card.dart';
+import '../../../../core/widgets/app_inline_alert.dart';
+import '../../../../core/widgets/app_skeleton.dart';
 import '../../../../core/widgets/app_snackbar.dart';
 import '../../../../core/widgets/app_state_views.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
 
-/// The three screen states every list or detail needs.
+/// The screen states every list or detail needs — loading, empty, error
+/// and offline — plus an inline alert and a skeleton list.
 class StatesDemoPage extends StatelessWidget {
   const StatesDemoPage({super.key});
 
@@ -38,8 +42,51 @@ class StatesDemoPage extends StatelessWidget {
           child: AppErrorView(
             title: ExamplesStrings.stateErrorTitle,
             message: ExamplesStrings.stateErrorMessage,
+            code: ExamplesStrings.stateErrorCode,
             retryLabel: CommonStrings.retry,
             onRetry: () => AppSnackbar.info(context, CommonStrings.retry),
+            secondaryLabel: ExamplesStrings.stateReport,
+            onSecondary: () =>
+                AppSnackbar.info(context, ExamplesStrings.comingSoon),
+          ),
+        ),
+      ),
+      const DemoSection(
+        title: ExamplesStrings.stateOffline,
+        child: AppCard(child: AppOfflineView(pending: 3)),
+      ),
+      const DemoSection(
+        title: ExamplesStrings.stateInline,
+        child: AppInlineAlert(message: ExamplesStrings.stateInlineMessage),
+      ),
+      DemoSection(
+        title: ExamplesStrings.stateSkeleton,
+        caption: ExamplesStrings.stateSkeletonCaption,
+        child: AppCard(
+          child: AppShimmer(
+            child: Column(
+              children: [
+                for (var i = 0; i < 3; i++) ...[
+                  if (i > 0) const SizedBox(height: AppSpacing.lg),
+                  const Row(
+                    children: [
+                      AppSkeleton.circle(size: AppSizes.avatarLg),
+                      SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppSkeleton.line(),
+                            SizedBox(height: AppSpacing.sm),
+                            AppSkeleton.line(width: 140),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
       ),

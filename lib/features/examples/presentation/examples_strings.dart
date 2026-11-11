@@ -422,6 +422,34 @@ abstract final class ExamplesStrings {
   static const navMenuItem = 'OS-2041 · Troca de bomba';
   static const navMenuActions = ['Editar', 'Duplicar', 'Atribuir a...'];
   static const navMenuDelete = 'Excluir';
+  static const counters = 'Contadores';
+  static const countersCaption = '99+ como teto; o ponto avisa sem número';
+  static const counterValues = [3, 12, 140];
+  static const newDotLabel = 'Ponto: há novidade';
+  static const chipsMore = 'Chips desabilitado e com remoção';
+  static const chipArchived = 'Arquivadas';
+  static const inputChips = ['Bomba 02', 'Marina Alves', 'Setor B'];
+  static const avatarsMore = 'Avatar com status e grupo';
+  static const avatarStatusInitials = 'JM';
+  static const avatarStatusLabel = 'Disponível';
+  static const avatarGroup = ['AE', 'JM', 'RS', 'LP', 'TC', 'MV', 'GB'];
+  static const stateOffline = 'Sem conexão';
+  static const stateErrorCode = 'ERR-503';
+  static const stateReport = 'Reportar problema';
+  static const stateInline = 'Alerta em bloco';
+  static const stateInlineMessage = 'Bloqueio: campo obrigatório ausente';
+  static const stateSkeleton = 'Carregando lista';
+  static const stateSkeletonCaption = 'Skeleton na forma do conteúdo';
+  static const chartRing = 'Progresso circular';
+  static const chartRingCaption =
+      'Quando há percentual; o spinner é para quando não há';
+  static const chartRingItems = [
+    ('Envio', .72),
+    ('Sincronia', .35),
+    ('Backup', 1.0),
+  ];
+  static const toastNeutral = 'Neutro';
+  static const toastNeutralMessage = 'Item arquivado';
   static const navLoadMore = 'Carregar mais';
   static const navLoadMoreCaption = 'No celular, no lugar da paginação';
   static String navLoadMoreLabel(int n) => 'Carregar mais $n';

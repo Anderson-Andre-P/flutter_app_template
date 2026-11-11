@@ -83,6 +83,16 @@ class ToastsDemoPage extends StatelessWidget {
                   ExamplesStrings.toastSuccessMessage,
                 ),
               ),
+              trigger(
+                ExamplesStrings.toastNeutral,
+                () => AppSnackbar.neutral(
+                  context,
+                  ExamplesStrings.toastNeutralMessage,
+                  actionLabel: ExamplesStrings.toastActionLabel,
+                  onAction: () =>
+                      AppSnackbar.success(context, ExamplesStrings.toastUndone),
+                ),
+              ),
               trigger(ExamplesStrings.toastStacked, () {
                 AppSnackbar.info(
                   context,
