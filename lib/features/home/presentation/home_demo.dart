@@ -86,6 +86,12 @@ enum HomeDemo {
     HomeStrings.navigation,
     HomeStrings.navigationHint,
   ),
+  cards(
+    HomeDemoGroup.components,
+    Icons.dashboard_customize_outlined,
+    HomeStrings.cards,
+    HomeStrings.cardsHint,
+  ),
   chat(
     HomeDemoGroup.components,
     Icons.forum_outlined,

@@ -44,6 +44,8 @@ abstract final class HomeStrings {
   static const formsHint = 'Select, data, hora e slider';
   static const navigation = 'Navegação';
   static const chat = 'Conversa e mídia';
+  static const cards = 'Cartões';
+  static const cardsHint = 'Nove anatomias de cartão';
   static const chatHint = 'Comentários, anexos e visualizador';
   static const navigationHint = 'Abas, accordion, stepper e menu';
 }

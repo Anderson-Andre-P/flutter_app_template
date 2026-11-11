@@ -19,6 +19,7 @@ import '../../features/examples/presentation/pages/activity_list_page.dart';
 import '../../features/examples/presentation/pages/dashboard_page.dart';
 import '../../features/examples/application/demo_selection_bloc.dart';
 import '../../features/examples/presentation/pages/bottom_nav_demo_page.dart';
+import '../../features/examples/presentation/pages/cards_demo_page.dart';
 import '../../features/examples/presentation/pages/charts_demo_page.dart';
 import '../../features/examples/presentation/pages/chat_demo_page.dart';
 import '../../features/examples/presentation/pages/controls_demo_page.dart';
@@ -145,6 +146,7 @@ void _openDemo(BuildContext context, HomeDemo demo) => switch (demo) {
   HomeDemo.forms => context.push(AppRoutes.forms),
   HomeDemo.navigation => context.push(AppRoutes.navigation),
   HomeDemo.chat => context.push(AppRoutes.chat),
+  HomeDemo.cards => context.push(AppRoutes.cards),
 };
 
 /// Example screens, nested under the home tab so the bottom navigation
@@ -213,6 +215,13 @@ final _exampleRoutes = <RouteBase>[
     builder: (context, state) => const ChartsDemoPage(),
   ),
   GoRoute(path: 'conversa', builder: (context, state) => const ChatDemoPage()),
+  GoRoute(
+    path: 'cartoes',
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<DemoSelectionBloc>(),
+      child: const CardsDemoPage(),
+    ),
+  ),
   GoRoute(
     path: 'navegacao',
     builder: (context, state) => BlocProvider(

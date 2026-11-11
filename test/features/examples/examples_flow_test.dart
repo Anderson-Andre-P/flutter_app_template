@@ -11,6 +11,7 @@ import 'package:flutter_app_template/features/examples/presentation/pages/activi
 import 'package:flutter_app_template/features/examples/presentation/pages/activity_list_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/dashboard_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/bottom_nav_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/cards_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/chat_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/controls_demo_page.dart';
@@ -105,6 +106,7 @@ void main() {
       HomeDemo.forms: FormsDemoPage,
       HomeDemo.navigation: NavigationDemoPage,
       HomeDemo.chat: ChatDemoPage,
+      HomeDemo.cards: CardsDemoPage,
     };
     expect(screens.keys, unorderedEquals(HomeDemo.values));
     for (final MapEntry(key: demo, value: page) in screens.entries) {

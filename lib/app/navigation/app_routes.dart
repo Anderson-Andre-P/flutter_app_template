@@ -22,6 +22,7 @@ abstract final class AppRoutes {
   static const forms = '/inicio/formularios';
   static const navigation = '/inicio/navegacao';
   static const chat = '/inicio/conversa';
+  static const cards = '/inicio/cartoes';
 
   /// Outside the shell: the confirmation has no bottom navigation.
   static const transferDone = '/transferencia-enviada';
