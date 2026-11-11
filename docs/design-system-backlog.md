@@ -204,6 +204,56 @@ padding interno nunca fica abaixo de 14px.
 - [x] P2 · Anexo em mensagem com estados enviado, enviando (progresso e
   cancelar), falha ("Remover") e aguardando conexão
 
+## Componentes dos apps (Componentes, seções 33 a 38)
+
+Seções novas, com componentes de verdade (sets e variantes), desenhadas para
+o Fit&Runner e o Simulador de GPS. As cores seguem a paleta do template, não
+a dos apps.
+
+**Já cobertos** (só conferir medidas e tons): botão e suas variantes, botão
+de ícone, FAB, chip e badge nos cinco tons, toggle, checkbox, radio,
+segmentado de 2 a 4 opções, campo e select, busca (seção 34); bottom nav,
+app bar, linha de lista, toasts nos quatro tons, modal com ícone e estado
+vazio (seção 35); gráficos de barras e de linha, anel de progresso, barra de
+segmentos e barra de progresso (seção 37).
+
+Criados em 11/11/2026 (demonstrações nas telas Controles, Navegação, Toasts
+e Gráficos):
+
+- [x] P2 · Stepper de carga (seção 34): `AppLoadStepper` — rótulo, valor,
+  unidade, dica e −passo/+passo; o passo é de quem usa
+- [x] P2 · Mini stepper (seção 34): `AppMiniStepper`, botões de 32px dentro
+  do alvo de 44px
+- [x] P2 · Cabeçalho de aba (seção 35): `AppTabHeader`
+- [x] P2 · Cabeçalho de seção com ação (seção 35): `AppSectionHeader`
+- [x] P1 · Item de configuração (seção 35): `AppSettingsTile` (seta) e
+  `AppSettingsTile.toggle` (switch; a linha toda é o alvo)
+- [x] P2 · Snackbar de erro escuro com "Tentar" (seção 35):
+  `AppSnackbar.failure`, no topo como os outros toasts, sobre as cores novas
+  `inverse`, `onInverse` e `inverseLink`; fica até tentar ou dispensar
+- [x] P2 · Cronômetro circular (seção 37): `AppCountdownRing`, tamanhos
+  `countdownLg`, `countdownMd` e `countdownSm`
+- [x] P2 · Faixa de dias (seção 37): `AppHistoryDay`, `AppGoalDay` e
+  `AppDayStrip`
+- [x] P2 · Calendário com marcação por dia (seção 37): `AppMarkedCalendar`,
+  só leitura, com `dayBuilder` (dia de histórico ou de meta)
+- [x] P2 · Métrica (seção 37): `AppMetric`
+- [x] P2 · KPI com tendência (seção 37): `AppKpi`; `positive` diz se a
+  variação é boa notícia, não se subiu
+- [x] P2 · Gráficos (seção 37): `valueLabels`, `goal` e `goalLabel` no
+  `AppBarChart`; `valueLabel` no `AppLineChart` marca o menor e o maior ponto
+
+Fora do template:
+
+- Status bar, indicador home e notificação do sistema (seção 35): são
+  moldura de mockup, quem desenha é o sistema operacional.
+- Mapa (seções 37 e 38): precisa de um pacote de mapa, que é uma dependência
+  nova e depende de decisão do time.
+- Ícones do app (seção 33): conjunto dos apps; o template segue com o da
+  seção 08.
+- Treino e alongamento (seção 36) e Simulador de GPS (seção 38): são do
+  domínio de cada app e ficam no projeto dele.
+
 ## Regras que podem virar automação
 
 - [x] P1 · Teste de contraste AA (Padrões, seção 23): 4,5:1 para texto e
