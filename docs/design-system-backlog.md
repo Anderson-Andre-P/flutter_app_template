@@ -124,7 +124,7 @@ padding interno nunca fica abaixo de 14px.
 
 ## Menus e sobreposições (Padrões, seções 21 e 25)
 
-- [ ] P1 · Menu de contexto ancorado num botão ("Mais ações"): até 6 itens,
+- [x] P1 · Menu de contexto ancorado num botão ("Mais ações"): até 6 itens,
   ação destrutiva por último, separada por divisor e em vermelho
 - [ ] P2 · Modal com ícone e botão de fechar (largura máxima de 340px no
   celular)
@@ -135,14 +135,15 @@ padding interno nunca fica abaixo de 14px.
 
 ## Navegação e estrutura (Padrões, seções 17, 18 e 20)
 
-- [ ] P1 · Abas sublinhadas com contador (Visão geral 3 / Histórico /
+- [x] P1 · Abas sublinhadas com contador (Visão geral 3 / Histórico /
   Documentos 12)
-- [ ] P1 · Abas segmentadas (Semana / Mês / Trimestre)
-- [ ] P1 · Accordion (um painel aberto por vez; para conteúdo secundário)
-- [ ] P1 · Stepper horizontal de 3 a 5 etapas (concluída, atual, futura)
+- [x] P1 · Abas segmentadas (Semana / Mês / Trimestre) — o
+  `AppSegmentedControl` no estilo `tinted`
+- [x] P1 · Accordion (um painel aberto por vez; para conteúdo secundário)
+- [x] P1 · Stepper horizontal de 3 a 5 etapas (concluída, atual, futura)
 - [ ] P2 · Stepper vertical (o que já aconteceu, sem interação)
-- [ ] P2 · Progresso por etapas compacto ("2 de 5" com barra e pontos)
-- [ ] P1 · "Carregar mais" no fim de listas (no celular, substitui a
+- [x] P2 · Progresso por etapas compacto ("2 de 5" com barra e pontos)
+- [x] P1 · "Carregar mais" no fim de listas (no celular, substitui a
   paginação)
 - [ ] P2 · Barra de topo com marca, sino com contador e avatar
 - [ ] P2 · Variações da barra de topo: voltar com título e ação; menu com
