@@ -32,10 +32,12 @@ criar componentes novos.
   `AppSnackbar` é uma linha única que aparece embaixo.
 - [x] **P1 · Diálogo destrutivo** (Padrões, seção 19): ícone no topo, botão
   destrutivo em largura total e Cancelar embaixo. Conferir o `AppDialog`.
-- [ ] **P1 · Estados de interação** (Padrões, seções 22 e 30): conferir
+- [x] **P1 · Estados de interação** (Padrões, seções 22 e 30): conferir
   padrão, pressionado (escurece 8%), foco (anel de 2px afastado 2px),
   desabilitado e erro (contorno de 2px e mensagem) em botão primário e
   secundário, campo de texto, chip, switch, checkbox e linha de lista.
+  Feito em botão, chip, campo e linha de lista (`AppInteractive`); switch e
+  checkbox seguem o mesmo padrão quando forem criados (seção Controles).
 - [ ] **P2 · Rosca** (Padrões, seção 18): anel de 26px (hoje são 18px), no
   mínimo 3 arcos e rótulo central sempre presente.
 - [ ] **Decisão · Botão primário** (Componentes, seção 09): o DS diz 52px; o
