@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
 import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
+import 'package:flutter_app_template/core/widgets/app_counter.dart';
 import 'package:flutter_app_template/core/widgets/app_top_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -76,4 +77,22 @@ void main() {
     );
     handle.dispose();
   });
+
+  for (final count in [3, 12, 140]) {
+    testWidgets('the counter ($count) sits on the bell\'s top-right corner '
+        'and leaves the bell visible', (tester) async {
+      await _pump(
+        tester,
+        AppTopBar(
+          title: 'Início',
+          actions: [AppNotificationButton(count: count, onPressed: () {})],
+        ),
+      );
+      final bell = tester.getRect(find.byIcon(Icons.notifications_none));
+      final counter = tester.getRect(find.byType(AppCounter));
+      expect(counter.left, greaterThanOrEqualTo(bell.center.dx));
+      expect(counter.bottom, lessThanOrEqualTo(bell.center.dy));
+      expect(counter.height, lessThan(bell.height));
+    });
+  }
 }

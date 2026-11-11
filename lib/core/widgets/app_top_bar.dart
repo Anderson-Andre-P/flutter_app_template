@@ -86,12 +86,16 @@ class AppNotificationButton extends StatelessWidget {
         bordered: false,
         onPressed: onPressed,
       ),
+      // Starts at the bell's vertical centre line and ends above its middle,
+      // so it covers only the corner; it grows to the right for 12 or 99+.
       if (count > 0)
         Positioned(
-          top: AppSpacing.xs,
-          right: AppSpacing.xs,
+          top: AppSpacing.xxs,
+          left: AppSizes.minTouchTarget / 2,
           child: IgnorePointer(
-            child: ExcludeSemantics(child: AppCounter(count: count)),
+            child: ExcludeSemantics(
+              child: AppCounter(count: count, ring: context.colors.screen),
+            ),
           ),
         ),
     ],

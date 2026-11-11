@@ -125,6 +125,11 @@ abstract final class AppSizes {
 
   /// Notification counter pill and the "new" dot.
   static double get counter => 20.r;
+
+  /// Counter over an icon (the bell), ring included, and the ring that
+  /// cuts it out of the icon below.
+  static double get counterCompact => 18.r;
+  static const double counterRing = 2;
   static double get newDot => 8.r;
 
   /// Determinate progress ring and its stroke.
