@@ -69,13 +69,13 @@ criar componentes novos.
 - [x] P1 · Grupos de botões: duplo 50/50 (secundário à esquerda), triplo (o
   primário ganha mais largura) e empilhado (obrigatório quando há ação
   destrutiva)
-- [ ] P2 · Button group segmentado (Lista / Grade / Mapa / Calendário) e só
+- [x] P2 · Button group segmentado (Lista / Grade / Mapa / Calendário) e só
   com ícones
-- [ ] P2 · Split button (ação padrão com menu de variações)
-- [ ] P2 · Login social ("Continuar com Google/Apple/Microsoft/SSO", 48px,
+- [x] P2 · Split button (ação padrão com menu de variações)
+- [x] P2 · Login social ("Continuar com Google/Apple/Microsoft/SSO", 48px,
   ícone em caixa neutra)
-- [ ] P2 · Botões de biometria (Touch ID / Face ID)
-- [ ] P2 · Seletor de forma de pagamento (card com radio, borda primária e
+- [x] P2 · Botões de biometria (Touch ID / Face ID)
+- [x] P2 · Seletor de forma de pagamento (card com radio, borda primária e
   fundo tonal quando selecionado; o botão de pagar repete o valor)
 
 ## Cards (Componentes, seção 12)
