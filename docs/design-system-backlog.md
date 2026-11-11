@@ -52,8 +52,9 @@ criar componentes novos.
   **Decidido em 11/11/2026:** por enquanto a paleta fica igual ao design,
   sem exigir AA em tudo. Os pares seguem em `knownLow`, e o teste continua
   barrando qualquer par novo abaixo do AA.
-- [ ] **Decisão · Botão primário** (Componentes, seção 09): o DS diz 52px; o
-  `AppSizes.buttonLg` está em 48px, que é a altura das telas de exemplo.
+- [x] **Decisão · Botão primário** (Componentes, seção 09): o DS diz 52px e
+  o `AppSizes.buttonLg` estava em 48px. **Decidido em 11/11/2026:** 52px,
+  como no DS; o login social segue em 48px (`AppSizes.socialButton`).
 
 ## Controles (Componentes, seção 09)
 
