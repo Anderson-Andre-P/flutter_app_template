@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/memory_secure_storage.dart';
+import '../helpers/phone_screen.dart';
 
 const _config = EnvConfig(apiBaseUrl: 'https://api.test', sentryDsn: '');
 
@@ -25,6 +26,7 @@ Future<GoRouter> _start(
   await setupDependencies(_config, secureStorage: storage);
   final router = AppRouter.create(sl<SessionBloc>());
   sl<SessionBloc>().add(const SessionChecked());
+  usePhoneScreen(tester);
   await tester.pumpWidget(App(router: router));
   await tester.pumpAndSettle();
   return router;

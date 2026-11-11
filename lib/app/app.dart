@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/di/injection_container.dart';
 import '../core/session/session_bloc.dart';
 import '../core/theme/app_theme.dart';
+import '../core/theme/app_tokens.dart';
 import '../core/theme/mode/theme_mode_bloc.dart';
 
 /// Root widget: app-wide blocs, light/dark theme, pt-BR, router.
@@ -23,17 +25,23 @@ class App extends StatelessWidget {
       BlocProvider<ThemeModeBloc>.value(value: sl<ThemeModeBloc>()),
       BlocProvider<SessionBloc>.value(value: sl<SessionBloc>()),
     ],
-    child: BlocBuilder<ThemeModeBloc, ThemeModeState>(
-      builder: (context, theme) => MaterialApp.router(
-        title: title,
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light(),
-        darkTheme: AppTheme.dark(),
-        themeMode: theme.mode,
-        locale: locale,
-        supportedLocales: const [locale],
-        localizationsDelegates: GlobalMaterialLocalizations.delegates,
-        routerConfig: router,
+    // Above MaterialApp, so the themes are built with sizes for this screen;
+    // a new size rebuilds them.
+    child: ScreenUtilPlusInit(
+      designSize: AppScreen.designSize,
+      minTextAdapt: true,
+      builder: (context, _) => BlocBuilder<ThemeModeBloc, ThemeModeState>(
+        builder: (context, theme) => MaterialApp.router(
+          title: title,
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light(),
+          darkTheme: AppTheme.dark(),
+          themeMode: theme.mode,
+          locale: locale,
+          supportedLocales: const [locale],
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          routerConfig: router,
+        ),
       ),
     ),
   );
