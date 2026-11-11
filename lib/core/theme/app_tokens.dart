@@ -118,6 +118,10 @@ abstract final class AppSizes {
   /// Widest a chat bubble gets, as a share of the row.
   static const double bubbleMaxShare = .78;
 
+  /// Media strip of a card, and the thumbnail of a horizontal card.
+  static const double cardMedia = 104;
+  static const double cardThumb = 112;
+
   /// Width of the numeric stepper (− value +).
   static const double numberStepper = 140;
 

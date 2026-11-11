@@ -49,6 +49,10 @@ abstract final class CommonStrings {
   static const download = 'Baixar';
   static const read = 'Lido';
 
+  static const favorite = 'Favoritar';
+  static String rating(double v) =>
+      'Avaliação ${v.toStringAsFixed(1).replaceAll('.', ',')} de 5';
+
   // Files
   static const openFile = 'Abrir arquivo';
   static const cancelUpload = 'Cancelar envio';

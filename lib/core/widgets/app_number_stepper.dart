@@ -17,6 +17,7 @@ class AppNumberStepper extends StatelessWidget {
     required this.onChanged,
     this.min = 0,
     this.max = 99,
+    this.compact = false,
   });
 
   final String label;
@@ -26,6 +27,10 @@ class AppNumberStepper extends StatelessWidget {
 
   /// `null` disables both buttons.
   final ValueChanged<int>? onChanged;
+
+  /// Hides the label above (it is still read to screen readers) — inside a
+  /// card next to the button it controls.
+  final bool compact;
 
   static const maxValue = 99;
 
@@ -38,8 +43,13 @@ class AppNumberStepper extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(label, style: AppTypography.label.copyWith(color: c.textPrimary)),
-        const SizedBox(height: AppSpacing.sm),
+        if (!compact) ...[
+          Text(
+            label,
+            style: AppTypography.label.copyWith(color: c.textPrimary),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+        ],
         Container(
           width: AppSizes.numberStepper,
           height: AppSizes.minTouchTarget,
