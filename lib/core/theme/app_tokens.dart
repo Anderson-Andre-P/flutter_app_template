@@ -20,6 +20,9 @@ abstract final class AppScreen {
 /// tuned without renaming. Screen margin = [xl]; between cards = [md];
 /// between sections = [x3l].
 abstract final class AppSpacing {
+  /// Hairline gap between tightly paired pieces (a day and its dots, a
+  /// metric's label and value).
+  static double get xxs => 2.r;
   static double get xs => 4.r;
   static double get sm => 8.r;
   static double get md => 12.r;
@@ -40,6 +43,10 @@ abstract final class AppRadius {
   static double get tail => 4.r;
   static double get xs => 6.r;
   static double get sm => 9.r;
+
+  /// 10, between [sm] and [md]: day tiles, the settings icon box and the
+  /// buttons of the mini stepper.
+  static double get smPlus => 10.r;
   static double get md => 12.r;
   static double get lg => 16.r;
   static double get xl => 22.r;
@@ -47,6 +54,7 @@ abstract final class AppRadius {
 
   static BorderRadius get brXs => BorderRadius.all(Radius.circular(xs));
   static BorderRadius get brSm => BorderRadius.all(Radius.circular(sm));
+  static BorderRadius get brSmPlus => BorderRadius.all(Radius.circular(smPlus));
   static BorderRadius get brMd => BorderRadius.all(Radius.circular(md));
   static BorderRadius get brLg => BorderRadius.all(Radius.circular(lg));
   static BorderRadius get brXl => BorderRadius.all(Radius.circular(xl));
@@ -148,6 +156,34 @@ abstract final class AppSizes {
 
   /// Width of the numeric stepper (− value +).
   static double get numberStepper => 140.w;
+
+  /// Button of the mini stepper (inside a 44px touch target) and the width
+  /// of its value.
+  static double get miniStepperButton => 32.r;
+  static double get miniStepperValue => 44.w;
+
+  /// Width of the load stepper card (label, value, − and + buttons).
+  static double get loadStepper => 171.w;
+
+  /// Icon box at the start of a settings row.
+  static double get settingsIcon => 34.r;
+
+  /// Countdown ring: full screen, inside a card, and compact (beside other
+  /// content). Its stroke is a share of the side.
+  static double get countdownLg => 248.r;
+  static double get countdownMd => 220.r;
+  static double get countdownSm => 96.r;
+  static const double countdownStrokeShare = .05;
+
+  /// Day of the history strip: the number circle, its activity dot and the
+  /// cell width; the goal tile is a square.
+  static double get dayCircle => 32.r;
+  static double get dayMark => 5.r;
+  static double get dayCell => 44.w;
+  static double get goalDay => 44.r;
+
+  /// Goal line across a bar chart.
+  static const double chartGoalLine = 2;
 
   /// Icon box at the start of an attention band.
   static double get bandIcon => 24.r;

@@ -44,6 +44,9 @@ void main() {
     'dangerSubtle': c.dangerSubtle,
     'info': c.info,
     'infoSubtle': c.infoSubtle,
+    'inverse': c.inverse,
+    'onInverse': c.onInverse,
+    'inverseLink': c.inverseLink,
   };
 
   const text = <_Pair>[
@@ -71,6 +74,8 @@ void main() {
     ('alertText', 'card'),
     ('alertText', 'alertSubtle'),
     ('info', 'infoSubtle'),
+    ('onInverse', 'inverse'),
+    ('inverseLink', 'inverse'),
   ];
 
   const ui = <_Pair>[

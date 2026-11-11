@@ -19,6 +19,20 @@ abstract final class AppTypography {
     letterSpacing: -0.7,
   );
 
+  /// The number of a load stepper ("45 kg").
+  static TextStyle get metricLg => _base.copyWith(
+    fontSize: 36.sp,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -1,
+  );
+
+  /// The number of a metric ("5,20 km").
+  static TextStyle get metric => _base.copyWith(
+    fontSize: 30.sp,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.8,
+  );
+
   /// Screen and object title.
   static TextStyle get title => _base.copyWith(
     fontSize: 23.sp,

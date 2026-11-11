@@ -33,6 +33,9 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.info,
     required this.infoSubtle,
     required this.scrim,
+    required this.inverse,
+    required this.onInverse,
+    required this.inverseLink,
   });
 
   /// Main action, active tab, link, selection.
@@ -117,6 +120,15 @@ class AppColors extends ThemeExtension<AppColors> {
   /// Overlay behind dialogs and sheets (42%).
   final Color scrim;
 
+  /// Dark surface that stands out in both themes: the failure snackbar.
+  final Color inverse;
+
+  /// Text and icons on [inverse].
+  final Color onInverse;
+
+  /// Text action on [inverse] ("Tentar").
+  final Color inverseLink;
+
   static const light = AppColors(
     primary: Color(0xFF004AC6),
     primaryHover: Color(0xFF00379A),
@@ -145,6 +157,9 @@ class AppColors extends ThemeExtension<AppColors> {
     info: Color(0xFF0E7490),
     infoSubtle: Color(0xFFE2F1F5),
     scrim: Color(0x6B0B1628),
+    inverse: Color(0xFF22304A),
+    onInverse: Color(0xFFFFFFFF),
+    inverseLink: Color(0xFF7FA6F2),
   );
 
   static const dark = AppColors(
@@ -175,6 +190,9 @@ class AppColors extends ThemeExtension<AppColors> {
     info: Color(0xFF5FC6DE),
     infoSubtle: Color(0xFF12303A),
     scrim: Color(0x6B0B1628),
+    inverse: Color(0xFF1C2432),
+    onInverse: Color(0xFFFFFFFF),
+    inverseLink: Color(0xFF7FA6F2),
   );
 
   @override
@@ -206,6 +224,9 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? info,
     Color? infoSubtle,
     Color? scrim,
+    Color? inverse,
+    Color? onInverse,
+    Color? inverseLink,
   }) => AppColors(
     primary: primary ?? this.primary,
     primaryHover: primaryHover ?? this.primaryHover,
@@ -234,6 +255,9 @@ class AppColors extends ThemeExtension<AppColors> {
     info: info ?? this.info,
     infoSubtle: infoSubtle ?? this.infoSubtle,
     scrim: scrim ?? this.scrim,
+    inverse: inverse ?? this.inverse,
+    onInverse: onInverse ?? this.onInverse,
+    inverseLink: inverseLink ?? this.inverseLink,
   );
 
   @override
@@ -267,6 +291,9 @@ class AppColors extends ThemeExtension<AppColors> {
       info: Color.lerp(info, other.info, t)!,
       infoSubtle: Color.lerp(infoSubtle, other.infoSubtle, t)!,
       scrim: Color.lerp(scrim, other.scrim, t)!,
+      inverse: Color.lerp(inverse, other.inverse, t)!,
+      onInverse: Color.lerp(onInverse, other.onInverse, t)!,
+      inverseLink: Color.lerp(inverseLink, other.inverseLink, t)!,
     );
   }
 }
