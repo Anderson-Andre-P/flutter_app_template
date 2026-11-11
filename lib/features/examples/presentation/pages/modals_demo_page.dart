@@ -24,6 +24,7 @@ class ModalsDemoPage extends StatelessWidget {
             ? ExamplesStrings.modalDestructiveLabel
             : ExamplesStrings.modalConfirmLabel,
         destructive: destructive,
+        icon: destructive ? Icons.delete_outline : null,
       );
       if (!context.mounted) return;
       AppSnackbar.info(
