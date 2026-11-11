@@ -93,6 +93,18 @@ class ToastsDemoPage extends StatelessWidget {
                       AppSnackbar.success(context, ExamplesStrings.toastUndone),
                 ),
               ),
+              trigger(
+                ExamplesStrings.toastFailure,
+                () => AppSnackbar.failure(
+                  context,
+                  ExamplesStrings.toastFailureMessage,
+                  description: ExamplesStrings.toastFailureDescription,
+                  onRetry: () => AppSnackbar.success(
+                    context,
+                    ExamplesStrings.toastFailureRetried,
+                  ),
+                ),
+              ),
               trigger(ExamplesStrings.toastStacked, () {
                 AppSnackbar.info(
                   context,

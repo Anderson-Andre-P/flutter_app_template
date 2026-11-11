@@ -264,17 +264,7 @@ abstract final class ExamplesStrings {
   // Gráficos
   static const chartsTitle = 'Gráficos';
   static const chartBars = 'Barras';
-  static const chartBarsCaption = 'Atividade por dia; hoje em destaque';
   static const chartLine = 'Linha';
-  static const chartLineCaption = 'Evolução nos últimos 6 meses';
-  static const chartLineValues = [
-    1200.0,
-    1850.0,
-    1600.0,
-    2400.0,
-    2100.0,
-    2950.0,
-  ];
   static const chartLineLabels = ['Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov'];
   static const chartDonut = 'Rosca';
   static const chartDonutCaption = 'Divisão do orçamento';
@@ -650,4 +640,82 @@ abstract final class ExamplesStrings {
   static String navLoadMoreLabel(int n) => 'Carregar mais $n';
   static String navShowing(int shown, int total) =>
       'Mostrando $shown de $total';
+
+  // Componentes dos apps (design system, seções 34, 35 e 37)
+  static const loadStepper = 'Stepper de carga';
+  static const loadStepperCaption = 'Passo de 1 kg até 5 kg, depois de 5 kg';
+  static const loadLabel = 'Carga';
+  static const loadUnit = 'kg';
+  static String loadPrevious(int kg) => 'anterior: $kg kg';
+  static String stepDown(int step) => '−$step';
+  static String stepUp(int step) => '+$step';
+  static const miniStepper = 'Mini stepper';
+  static const miniStepperCaption = 'Para tabelas e linhas densas';
+  static const miniStepperSets = 'Séries';
+  static const tabHeader = 'Cabeçalho de aba';
+  static const tabHeaderCaption = 'Abre cada aba principal';
+  static const tabHeaderOverline = 'Quarta, 11 de novembro';
+  static const tabHeaderTitle = 'Hoje';
+  static const tabHeaderAction = 'Novo treino';
+  static const sectionHeader = 'Cabeçalho de seção';
+  static const sectionHeaderCaption = 'Rótulo da seção com uma ação ao lado';
+  static const sectionHeaderTitle = 'Rotinas';
+  static const sectionHeaderAction = 'Ver tudo';
+  static const settingsTiles = 'Item de configuração';
+  static const settingsTilesCaption = 'Abre a opção ou liga e desliga na hora';
+  static const settingsTheme = 'Tema';
+  static const settingsThemeSubtitle = 'Claro, escuro ou do sistema';
+  static const settingsThemeDetail = 'Automático';
+  static const settingsReminders = 'Lembretes';
+  static const settingsRemindersSubtitle = 'Avisa na hora do treino';
+  static const settingsSound = 'Som';
+  static const settingsSoundSubtitle = 'Toca ao fim do descanso';
+  static const settingsSoundDetail = 'Indisponível';
+  static const toastFailure = 'Falha com nova tentativa';
+  static const toastFailureMessage = 'Não foi possível salvar';
+  static const toastFailureDescription = 'Sem conexão no momento.';
+  static const toastFailureRetried = 'Salvo na segunda tentativa';
+  static const chartBarsGoalCaption =
+      'Litros por dia; hoje em destaque e a linha da meta';
+  static const chartGoal = 'meta';
+  static const chartGoalValue = 3.0;
+  static const chartWaterValues = [2.0, 3.5, 3.0, 1.5, 3.2, 2.4, 2.8];
+  static const chartLineExtremesCaption = 'Peso em kg; menor e maior marcados';
+  static const chartWeightValues = [82.0, 81.4, 81.9, 80.6, 80.2, 79.8];
+  static String decimal(double v) => v.toStringAsFixed(1).replaceAll('.', ',');
+  static const countdown = 'Cronômetro';
+  static const countdownCaption = 'Tempo que falta; o anel esvazia';
+  static const countdownLabel = 'Descanso';
+  static const countdownTime = '1:12';
+  static const countdownTotal = 'de 1:30';
+  static const countdownShare = 72 / 90;
+  static const countdownHold = 'Postura';
+  static const countdownHoldTime = '0:20';
+  static const countdownHoldTotal = 'de 0:30';
+  static const countdownHoldShare = 20 / 30;
+  static const dayStrip = 'Faixa de dias';
+  static const dayStripCaption =
+      'Histórico com um ponto por atividade; meta do dia';
+  static const dayToday = 'hoje';
+  static const goalMet = 'meta batida';
+  static const goalBelow = 'abaixo da meta';
+  static const markedCalendar = 'Calendário marcado';
+  static const markedCalendarCaption = 'O mês inteiro, só para leitura';
+  static const markedHistory = 'Histórico';
+  static const markedGoal = 'Meta';
+  static const metrics = 'Métricas';
+  static const metricsCaption = 'Leitura rápida e comparação com o período';
+  static const metricDistance = 'Distância';
+  static const metricDistanceValue = '5,20';
+  static const metricDistanceUnit = 'km';
+  static const metricPace = 'Ritmo';
+  static const metricPaceValue = '5:48';
+  static const metricPaceUnit = '/km';
+  static const kpiWorkouts = 'Treinos';
+  static const kpiWorkoutsValue = '12';
+  static const kpiPeriod = 'no mês';
+  static const kpiWorkoutsChange = '+3 vs mês anterior';
+  static const kpiMissed = 'Faltas';
+  static const kpiMissedValue = '4';
+  static const kpiMissedChange = '+2 vs mês anterior';
 }

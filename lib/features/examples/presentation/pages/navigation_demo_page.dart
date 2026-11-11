@@ -20,6 +20,8 @@ import '../../../../core/widgets/app_avatar.dart';
 import '../../../../core/widgets/app_badge.dart';
 import '../../../../core/widgets/app_coach_mark.dart';
 import '../../../../core/widgets/app_filter_bar.dart';
+import '../../../../core/widgets/app_headers.dart';
+import '../../../../core/widgets/app_settings_tile.dart';
 import '../../../../core/widgets/app_icon_button.dart';
 import '../../../../core/widgets/app_tooltip.dart';
 import '../../../../core/widgets/app_top_bar.dart';
@@ -32,7 +34,9 @@ import '../widgets/demo_scaffold.dart';
 
 /// Catalogue of the navigation pieces (design system, sections 20 and 25):
 /// underlined and segmented tabs, accordion, stepper and step progress,
-/// context menu and "Carregar mais". State lives in [DemoSelectionBloc].
+/// context menu and "Carregar mais"; and the tab and section headers and
+/// the settings rows of the app components (section 35). State lives in
+/// [DemoSelectionBloc].
 class NavigationDemoPage extends StatelessWidget {
   const NavigationDemoPage({super.key});
 
@@ -42,6 +46,7 @@ class NavigationDemoPage extends StatelessWidget {
   static const _step = 'nav-step';
   static const _pages = 'nav-pages';
   static const _coach = 'nav-coach';
+  static const _reminders = 'nav-reminders';
   static const _closed = -1;
   static const _pageSize = 20;
   static const _total = 179;
@@ -348,6 +353,61 @@ class NavigationDemoPage extends StatelessWidget {
             label: ExamplesStrings.navLoadMoreLabel(_pageSize),
             summary: ExamplesStrings.navShowing(shown, _total),
             onPressed: shown >= _total ? null : () => set(_pages, pages + 1),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.tabHeader,
+          caption: ExamplesStrings.tabHeaderCaption,
+          child: AppTabHeader(
+            overline: ExamplesStrings.tabHeaderOverline,
+            title: ExamplesStrings.tabHeaderTitle,
+            action: AppIconButton(
+              icon: Icons.add,
+              label: ExamplesStrings.tabHeaderAction,
+              onPressed: () => say(ExamplesStrings.tabHeaderAction),
+            ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.sectionHeader,
+          caption: ExamplesStrings.sectionHeaderCaption,
+          child: AppSectionHeader(
+            title: ExamplesStrings.sectionHeaderTitle,
+            actionLabel: ExamplesStrings.sectionHeaderAction,
+            onAction: () => say(ExamplesStrings.sectionHeaderAction),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.settingsTiles,
+          caption: ExamplesStrings.settingsTilesCaption,
+          child: AppCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                AppSettingsTile(
+                  icon: Icons.palette_outlined,
+                  title: ExamplesStrings.settingsTheme,
+                  subtitle: ExamplesStrings.settingsThemeSubtitle,
+                  detail: ExamplesStrings.settingsThemeDetail,
+                  onTap: () => say(ExamplesStrings.settingsTheme),
+                ),
+                AppSettingsTile.toggle(
+                  icon: Icons.notifications_none,
+                  title: ExamplesStrings.settingsReminders,
+                  subtitle: ExamplesStrings.settingsRemindersSubtitle,
+                  checked: selection.of(_reminders, fallback: 1) == 1,
+                  onChanged: (v) => set(_reminders, v ? 1 : 0),
+                ),
+                const AppSettingsTile.toggle(
+                  icon: Icons.volume_up_outlined,
+                  title: ExamplesStrings.settingsSound,
+                  subtitle: ExamplesStrings.settingsSoundSubtitle,
+                  detail: ExamplesStrings.settingsSoundDetail,
+                  checked: false,
+                  onChanged: null,
+                ),
+              ],
+            ),
           ),
         ),
       ],

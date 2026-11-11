@@ -8,6 +8,9 @@ import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_checkbox.dart';
 import '../../../../core/widgets/app_dashed_button.dart';
 import '../../../../core/widgets/app_fab.dart';
+import '../../../../core/widgets/app_list_tile.dart';
+import '../../../../core/widgets/app_load_stepper.dart';
+import '../../../../core/widgets/app_mini_stepper.dart';
 import '../../../../core/widgets/app_radio.dart';
 import '../../../../core/widgets/app_segmented_control.dart';
 import '../../../../core/widgets/app_snackbar.dart';
@@ -20,7 +23,8 @@ import '../widgets/demo_scaffold.dart';
 
 /// Catalogue of the selection controls (design system, section 09):
 /// switch, checkbox, radio, segmented control, FAB, status tiles, the
-/// success and dashed buttons, a read-only field and attention bands.
+/// success and dashed buttons, a read-only field and attention bands; and
+/// the load and mini steppers of the app components (section 34).
 /// Every value lives in the screen's [DemoSelectionBloc] (0 = off, 1 = on).
 class ControlsDemoPage extends StatelessWidget {
   const ControlsDemoPage({super.key});
@@ -31,6 +35,15 @@ class ControlsDemoPage extends StatelessWidget {
   static const _news = 'controls-news';
   static const _payment = 'controls-payment';
   static const _priority = 'controls-priority';
+  static const _load = 'controls-load';
+  static const _sets = 'controls-sets';
+  static const _loadStart = 45;
+  static const _previousLoad = 40;
+  static const _setsStart = 3;
+
+  /// 1 kg up to 5 kg, then 5 kg (design system, section 34).
+  static int _stepFrom(int kg) => kg < 5 ? 1 : 5;
+  static int _stepBelow(int kg) => kg <= 5 ? 1 : 5;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +54,9 @@ class ControlsDemoPage extends StatelessWidget {
         context.read<DemoSelectionBloc>().add(DemoSelected(key, value));
     void toggle(String key, bool value) => set(key, value ? 1 : 0);
     void tapped() => AppSnackbar.info(context, ExamplesStrings.tapped);
+    final load = selection.of(_load, fallback: _loadStart);
+    final up = _stepFrom(load);
+    final down = _stepBelow(load);
 
     return DemoScaffold(
       title: ExamplesStrings.controlsTitle,
@@ -213,6 +229,40 @@ class ControlsDemoPage extends StatelessWidget {
                 icon: Icons.edit_note_outlined,
               ),
             ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.loadStepper,
+          caption: ExamplesStrings.loadStepperCaption,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: AppLoadStepper(
+              label: ExamplesStrings.loadLabel,
+              value: '$load',
+              unit: ExamplesStrings.loadUnit,
+              hint: ExamplesStrings.loadPrevious(_previousLoad),
+              decreaseLabel: ExamplesStrings.stepDown(down),
+              increaseLabel: ExamplesStrings.stepUp(up),
+              onDecrease: load <= 0 ? null : () => set(_load, load - down),
+              onIncrease: () => set(_load, load + up),
+            ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.miniStepper,
+          caption: ExamplesStrings.miniStepperCaption,
+          child: AppCard(
+            padding: EdgeInsets.zero,
+            child: AppListTile(
+              title: ExamplesStrings.miniStepperSets,
+              trailing: AppMiniStepper(
+                label: ExamplesStrings.miniStepperSets,
+                value: selection.of(_sets, fallback: _setsStart),
+                min: 1,
+                max: 10,
+                onChanged: (v) => set(_sets, v),
+              ),
+            ),
           ),
         ),
       ],
