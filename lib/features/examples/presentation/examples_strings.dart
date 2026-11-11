@@ -482,6 +482,76 @@ abstract final class ExamplesStrings {
   static const navReorderRequired = 'Obrigatório';
   static const navReorderAttachment = 'Anexo exigido';
 
+  // Cartões
+  static const cardsTitle = 'Cartões';
+  static const cardsInfo = 'Informação';
+  static const cardsInfoCaption = 'Básico, com imagem, com botão e com link';
+  static const cardBasicOverline = 'Básico';
+  static const cardBasicTitle = 'Título do cartão';
+  static const cardBasicBody =
+      'Corpo curto de apoio. Sem ação, só informação agrupada.';
+  static const cardBasicFooter = 'Atualizado há 5 min';
+  static const cardMediaOverline = 'Com imagem';
+  static const cardMediaBadge = 'Em operação';
+  static const cardMediaTitle = 'Item 02';
+  static const cardMediaMeta = 'ID-2026-0042 · Grupo A';
+  static const cardProgressOverline = 'Com botão';
+  static const cardProgressTitle = 'Etapas pendentes';
+  static const cardProgressBody = '3 de 5 itens concluídos nesta execução.';
+  static const cardProgressAction = 'Continuar';
+  static const cardLinkOverline = 'Com link';
+  static const cardLinkTitle = 'Histórico do item';
+  static const cardLinkBody = '28 eventos registrados desde a criação.';
+  static const cardLinkLabel = 'Ver tudo';
+  static const cardsList = 'Lista e registro';
+  static const cardsListCaption = 'Horizontal com miniatura; cartão com campo';
+  static const cardHorizontalOverline = 'Horizontal';
+  static const cardHorizontalBadge = 'Média';
+  static const cardHorizontalTitle = 'Revisão periódica do módulo';
+  static const cardHorizontalBody =
+      'Miniatura à esquerda, conteúdo flexível à direita.';
+  static const cardHorizontalOwnerInitials = 'RS';
+  static const cardHorizontalOwner = 'Rafael Souza · Responsável';
+  static const cardHorizontalDate = '11 ago';
+  static const cardFieldTitle = 'Registrar valor';
+  static const cardFieldLabel = 'Pressão';
+  static const cardFieldUnit = 'bar';
+  static const cardFieldValue = '3,4';
+  static const cardFieldHelp = 'Faixa aceitável entre 3,0 e 4,0';
+  static const cardFieldSave = 'Salvar';
+  static const cardFieldAttach = 'Anexar comprovação';
+  static const cardFieldRequired = 'Obrigatório';
+  static const cardsCommerce = 'Venda e planos';
+  static const cardsCommerceCaption = 'Produto, chamada para ação e preços';
+  static const cardProductOverline = 'Loja';
+  static const cardProductTitle = 'Kit de manutenção preventiva';
+  static const cardProductDiscount = '-15%';
+  static const cardProductRating = 4.2;
+  static const cardProductRatingLabel = '4,2 · 38 avaliações';
+  static const cardProductPrice = r'R$ 289';
+  static const cardProductOldPrice = r'R$ 340';
+  static const cardProductAdd = 'Adicionar';
+  static const cardProductAdded = 'Adicionado ao carrinho';
+  static const cardCtaOverline = 'Comece aqui';
+  static const cardCtaTitle = 'Nenhum modelo ativo ainda';
+  static const cardCtaBody =
+      'Crie o primeiro modelo para que os registros possam ser executados com comprovação.';
+  static const cardCtaAction = 'Criar modelo';
+  static const cardCtaLink = 'Ver exemplos';
+  static const cardPricingOverline = 'Plano';
+  static const cardPricingBadge = 'Mais escolhido';
+  static const cardPricingTitle = 'Operação';
+  static const cardPricingPrice = r'R$ 69';
+  static const cardPricingPeriod = '/ usuário / mês';
+  static const cardPricingFeatures = [
+    'Registros ilimitados',
+    'Recorrência e agendamento',
+    'Itens ilimitados com documentos',
+    'Painel de indicadores e exportação',
+  ];
+  static const cardPricingAction = 'Começar teste';
+  static const cardPricingNote = '30 dias grátis, sem cartão';
+
   // Conversa e mídia
   static const chatTitle = 'Conversa e mídia';
   static const chatThread = 'Comentários';

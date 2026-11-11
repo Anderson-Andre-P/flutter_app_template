@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/features/examples/application/demo_selection_bloc.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/bottom_nav_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/cards_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/chat_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/controls_demo_page.dart';
@@ -32,6 +33,7 @@ void main() {
     'bottom nav': BottomNavDemoPage(),
     'charts': ChartsDemoPage(),
     'chat': ChatDemoPage(),
+    'cards': CardsDemoPage(),
   };
 
   for (final MapEntry(key: name, value: page) in pages.entries) {
