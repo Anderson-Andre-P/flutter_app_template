@@ -10,9 +10,9 @@ feature-first Clean Architecture, Bloc, DI, typed errors, logging, optional
 Sentry, secure + preference storage, an HTTP client, go_router with a
 session-aware redirect, a light/dark design system (tokens + widgets +
 dialogs + snackbars) and example screens (splash, sign in, sign up, a home
-grid of sixteen demos — six screens and ten component catalogues: widgets,
+grid of seventeen demos — six screens and eleven component catalogues: widgets,
 bottom bar, modals, bottom sheets, toasts, charts, controls, forms, navigation,
-chat and media — and settings) running on **fake repositories — there is no backend**.
+chat and media, cards — and settings) running on **fake repositories — there is no backend**.
 
 No flavors: one `lib/main.dart`, optional config via `--dart-define`
 (`API_BASE_URL`, `SENTRY_DSN`) or `--dart-define-from-file=.env.json`.
