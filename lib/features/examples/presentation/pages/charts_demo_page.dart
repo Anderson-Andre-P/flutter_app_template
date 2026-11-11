@@ -4,7 +4,9 @@ import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_context.dart';
 import '../../../../core/widgets/app_bar_chart.dart';
+import '../../../../core/widgets/app_badge.dart';
 import '../../../../core/widgets/app_card.dart';
+import '../../../../core/widgets/app_timeline.dart';
 import '../../../../core/widgets/app_progress_ring.dart';
 import '../../../../core/widgets/app_donut_chart.dart';
 import '../../../../core/widgets/app_line_chart.dart';
@@ -53,6 +55,60 @@ class ChartsDemoPage extends StatelessWidget {
               segments: [
                 for (final (label, value) in ExamplesStrings.chartDonutSegments)
                   AppChartSegment(label: label, value: value),
+              ],
+            ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.chartSegmented,
+          caption: ExamplesStrings.chartSegmentedCaption,
+          child: AppCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSegmentedBar(
+                  segments: [
+                    for (final (i, (label, value))
+                        in ExamplesStrings.chartSegments.indexed)
+                      AppBarSegment(
+                        label: label,
+                        value: value,
+                        tone: const [
+                          AppTone.primary,
+                          AppTone.alert,
+                          AppTone.danger,
+                        ][i],
+                      ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.md),
+                Wrap(
+                  spacing: AppSpacing.md,
+                  children: [
+                    for (final (i, (label, _))
+                        in ExamplesStrings.chartSegments.indexed)
+                      AppBadge(
+                        label: label,
+                        tone: const [
+                          AppTone.primary,
+                          AppTone.alert,
+                          AppTone.danger,
+                        ][i],
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.chartTimeline,
+          caption: ExamplesStrings.chartTimelineCaption,
+          child: AppCard(
+            child: AppTimeline(
+              events: [
+                for (final (title, meta) in ExamplesStrings.timelineEvents)
+                  AppTimelineEvent(title: title, meta: meta),
               ],
             ),
           ),

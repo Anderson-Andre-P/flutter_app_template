@@ -23,7 +23,10 @@ import '../../../../core/widgets/app_filter_bar.dart';
 import '../../../../core/widgets/app_icon_button.dart';
 import '../../../../core/widgets/app_tooltip.dart';
 import '../../../../core/widgets/app_top_bar.dart';
+import '../../../../core/widgets/app_drag_handle.dart';
+import '../../../../core/widgets/app_timeline.dart';
 import '../../application/demo_selection_bloc.dart';
+import '../../application/demo_tags_bloc.dart';
 import '../examples_strings.dart';
 import '../widgets/demo_scaffold.dart';
 
@@ -259,6 +262,61 @@ class NavigationDemoPage extends StatelessWidget {
                 ),
               ],
             ],
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.navVertical,
+          caption: ExamplesStrings.navVerticalCaption,
+          child: AppCard(
+            child: AppVerticalStepper(
+              steps: [
+                for (final (title, meta) in ExamplesStrings.navVerticalSteps)
+                  AppTimelineEvent(title: title, meta: meta),
+              ],
+              current: 2,
+            ),
+          ),
+        ),
+        DemoSection(
+          title: ExamplesStrings.navReorder,
+          caption: ExamplesStrings.navReorderCaption,
+          child: BlocProvider(
+            create: (_) => DemoTagsBloc(ExamplesStrings.navReorderItems),
+            child: BlocBuilder<DemoTagsBloc, List<String>>(
+              builder: (context, items) => AppCard(
+                padding: EdgeInsets.zero,
+                child: ReorderableListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  buildDefaultDragHandles: false,
+                  onReorder: (from, to) =>
+                      context.read<DemoTagsBloc>().add(DemoTagMoved(from, to)),
+                  children: [
+                    for (final (i, item) in items.indexed)
+                      Material(
+                        key: ValueKey(item),
+                        color: c.card,
+                        child: AppListTile(
+                          title: item,
+                          leading: Text(
+                            (i + 1).toString().padLeft(2, '0'),
+                            style: AppTypography.caption.copyWith(
+                              color: c.textMuted,
+                            ),
+                          ),
+                          subtitle: i.isEven
+                              ? ExamplesStrings.navReorderRequired
+                              : ExamplesStrings.navReorderAttachment,
+                          trailing: ReorderableDragStartListener(
+                            index: i,
+                            child: const AppDragHandle(),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
         DemoSection(

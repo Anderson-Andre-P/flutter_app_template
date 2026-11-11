@@ -450,6 +450,72 @@ abstract final class ExamplesStrings {
   static const navMenuItem = 'OS-2041 · Troca de bomba';
   static const navMenuActions = ['Editar', 'Duplicar', 'Atribuir a...'];
   static const navMenuDelete = 'Excluir';
+  static const chartTimeline = 'Timeline';
+  static const chartTimelineCaption = 'O mais recente primeiro, com halo';
+  static const timelineEvents = [
+    ('Execução iniciada', 'Hoje, 09:15 · Rafael Souza'),
+    ('Atribuído a Rafael Souza', '9 ago, 16:30 · Admin'),
+    ('Registro criado', '9 ago, 16:22 · Admin'),
+  ];
+  static const chartSegmented = 'Barra segmentada';
+  static const chartSegmentedCaption = 'Partes de um todo numa barra só';
+  static const chartSegments = [
+    ('Concluídas', 62.0),
+    ('Em atraso', 28.0),
+    ('Bloqueadas', 10.0),
+  ];
+  static const navVertical = 'Stepper vertical';
+  static const navVerticalCaption = 'O que já aconteceu, sem interação';
+  static const navVerticalSteps = [
+    ('Registro criado', '9 ago, 16:22 · Ana Duarte'),
+    ('Atribuído a Rafael Souza', '9 ago, 16:30 · Ana Duarte'),
+    ('Execução iniciada', 'Aguardando o responsável'),
+  ];
+  static const navReorder = 'Itens reordenáveis';
+  static const navReorderCaption = 'Segure a alça e arraste';
+  static const navReorderItems = [
+    'Verificar pressão',
+    'Trocar filtro',
+    'Registrar leitura',
+    'Fotografar painel',
+  ];
+  static const navReorderRequired = 'Obrigatório';
+  static const navReorderAttachment = 'Anexo exigido';
+
+  // Conversa e mídia
+  static const chatTitle = 'Conversa e mídia';
+  static const chatThread = 'Comentários';
+  static const chatThreadCaption = 'Presos ao registro; não dá para apagar';
+  static const chatToday = 'Hoje';
+  static const chatAna = 'Ana Duarte';
+  static const chatAnaInitials = 'AD';
+  static const chatRafael = 'Rafael Souza';
+  static const chatRafaelInitials = 'RS';
+  static const chatMessages = [
+    'Rafael, o valor registrado na semana passada ficou fora da faixa esperada. Consegue conferir hoje?',
+    'Confirmado. Vou verificar antes de seguir e registro no item 2.',
+    'Valor em 3,4 — dentro da faixa agora.',
+    'Segue o anexo de comprovação.',
+  ];
+  static const chatTimes = ['08:42', '08:47', '09:30', '09:31'];
+  static const chatNow = 'Agora';
+  static const chatHint = 'Escrever comentário...';
+  static const chatFiles = 'Anexo em mensagem';
+  static const chatFilesCaption =
+      'Enviado, enviando, falha e aguardando conexão';
+  static const chatFileList = [
+    ('Manual_referencia_v3.1.pdf', '4,2 MB · 48 páginas'),
+    ('Anexo_comprovacao.jpg', 'Enviando · 64% · 1,8 MB de 2,8 MB'),
+    ('Inventario_2025.xlsx', 'Aguardando conexão para sincronizar'),
+    ('Diagrama_nivel3.dwg', 'Falha no envio · formato não suportado'),
+  ];
+  static const mediaTitle = 'Placeholders de mídia';
+  static const mediaCaption = 'Quando a mídia ainda não chegou';
+  static const mediaLabels = ['imagem', 'diagrama', 'anexo'];
+  static const mediaFileTypes = ['laudo.pdf', 'leituras.xlsx', 'painel.png'];
+  static const viewerTitle = 'Visualizador';
+  static const viewerOpen = 'Abrir visualizador';
+  static const viewerPages = ['Página 1', 'Página 2', 'Página 3', 'Página 4'];
   static const modalIcon = 'Modal com ícone';
   static const modalIconHint = 'Ícone ao lado do título e botão de fechar';
   static const modalIconTitle = 'Aplicar modelo?';

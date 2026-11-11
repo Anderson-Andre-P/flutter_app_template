@@ -23,12 +23,31 @@ final class DemoTagRemoved extends DemoTagsEvent {
   List<Object?> get props => [index];
 }
 
-/// Screen-local list of tags for the tag field demo.
+final class DemoTagMoved extends DemoTagsEvent {
+  const DemoTagMoved(this.from, this.to);
+
+  /// Indices as `ReorderableListView.onReorder` gives them: [to] counts the
+  /// item still at [from].
+  final int from;
+  final int to;
+
+  @override
+  List<Object?> get props => [from, to];
+}
+
+/// Screen-local list of strings for the demos: the tags of the tag field,
+/// the order of a reorderable list, the messages of a conversation.
 class DemoTagsBloc extends Bloc<DemoTagsEvent, List<String>> {
   DemoTagsBloc(List<String> initial) : super(List.unmodifiable(initial)) {
     on<DemoTagAdded>((e, emit) {
       if (state.contains(e.tag)) return;
       emit(List.unmodifiable([...state, e.tag]));
+    });
+    on<DemoTagMoved>((e, emit) {
+      final list = [...state];
+      final item = list.removeAt(e.from);
+      list.insert(e.to > e.from ? e.to - 1 : e.to, item);
+      emit(List.unmodifiable(list));
     });
     on<DemoTagRemoved>(
       (e, emit) => emit(List.unmodifiable([...state]..removeAt(e.index))),

@@ -20,4 +20,15 @@ void main() {
     act: (b) => b.add(const DemoTagAdded('Marina Alves')),
     expect: () => <List<String>>[],
   );
+
+  blocTest<DemoTagsBloc, List<String>>(
+    'moves an item as a reorderable list reports it',
+    build: () => DemoTagsBloc(const ['a', 'b', 'c']),
+    // ReorderableListView gives the index before removal: moving 'a' to
+    // the end arrives as (0, 3).
+    act: (b) => b.add(const DemoTagMoved(0, 3)),
+    expect: () => [
+      ['b', 'c', 'a'],
+    ],
+  );
 }
