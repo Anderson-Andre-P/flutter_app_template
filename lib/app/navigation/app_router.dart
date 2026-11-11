@@ -22,6 +22,7 @@ import '../../features/examples/presentation/pages/bottom_nav_demo_page.dart';
 import '../../features/examples/presentation/pages/charts_demo_page.dart';
 import '../../features/examples/presentation/pages/controls_demo_page.dart';
 import '../../features/examples/presentation/pages/forms_demo_page.dart';
+import '../../features/examples/presentation/pages/navigation_demo_page.dart';
 import '../../features/examples/presentation/pages/modals_demo_page.dart';
 import '../../features/examples/presentation/pages/sheets_demo_page.dart';
 import '../../features/examples/presentation/pages/states_demo_page.dart';
@@ -141,6 +142,7 @@ void _openDemo(BuildContext context, HomeDemo demo) => switch (demo) {
   HomeDemo.charts => context.push(AppRoutes.charts),
   HomeDemo.controls => context.push(AppRoutes.controls),
   HomeDemo.forms => context.push(AppRoutes.forms),
+  HomeDemo.navigation => context.push(AppRoutes.navigation),
 };
 
 /// Example screens, nested under the home tab so the bottom navigation
@@ -207,6 +209,13 @@ final _exampleRoutes = <RouteBase>[
   GoRoute(
     path: 'graficos',
     builder: (context, state) => const ChartsDemoPage(),
+  ),
+  GoRoute(
+    path: 'navegacao',
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<DemoSelectionBloc>(),
+      child: const NavigationDemoPage(),
+    ),
   ),
   GoRoute(
     path: 'formularios',

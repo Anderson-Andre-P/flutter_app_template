@@ -14,6 +14,7 @@ import 'package:flutter_app_template/features/examples/presentation/pages/bottom
 import 'package:flutter_app_template/features/examples/presentation/pages/charts_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/controls_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/forms_demo_page.dart';
+import 'package:flutter_app_template/features/examples/presentation/pages/navigation_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/modals_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/sheets_demo_page.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/states_demo_page.dart';
@@ -61,6 +62,12 @@ Future<void> _settle(WidgetTester tester) async {
 
 Future<void> _open(WidgetTester tester, HomeDemo demo) async {
   await tester.scrollUntilVisible(find.text(demo.title), 100);
+  // Centre the card, clear of the top bar and of the bottom bar.
+  await Scrollable.ensureVisible(
+    tester.element(find.text(demo.title)),
+    alignment: .5,
+  );
+  await _settle(tester);
   // Lift the card clear of the bottom bar, which overlaps the list's end.
   final barTop = tester.getRect(find.byType(AppBottomNav)).top;
   final cardBottom = tester.getBottomLeft(find.text(demo.title)).dy;
@@ -95,6 +102,7 @@ void main() {
       HomeDemo.charts: ChartsDemoPage,
       HomeDemo.controls: ControlsDemoPage,
       HomeDemo.forms: FormsDemoPage,
+      HomeDemo.navigation: NavigationDemoPage,
     };
     expect(screens.keys, unorderedEquals(HomeDemo.values));
     for (final MapEntry(key: demo, value: page) in screens.entries) {

@@ -42,4 +42,6 @@ abstract final class HomeStrings {
   static const controlsHint = 'Switch, checkbox, radio e FAB';
   static const forms = 'Formulários';
   static const formsHint = 'Select, data, hora e slider';
+  static const navigation = 'Navegação';
+  static const navigationHint = 'Abas, accordion, stepper e menu';
 }

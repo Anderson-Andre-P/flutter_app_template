@@ -80,6 +80,12 @@ enum HomeDemo {
     HomeStrings.forms,
     HomeStrings.formsHint,
   ),
+  navigation(
+    HomeDemoGroup.components,
+    Icons.tab_outlined,
+    HomeStrings.navigation,
+    HomeStrings.navigationHint,
+  ),
   controls(
     HomeDemoGroup.components,
     Icons.toggle_on_outlined,
