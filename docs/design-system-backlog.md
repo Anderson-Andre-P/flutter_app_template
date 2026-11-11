@@ -134,11 +134,11 @@ padding interno nunca fica abaixo de 14px.
 
 - [x] P1 · Menu de contexto ancorado num botão ("Mais ações"): até 6 itens,
   ação destrutiva por último, separada por divisor e em vermelho
-- [ ] P2 · Modal com ícone e botão de fechar (largura máxima de 340px no
+- [x] P2 · Modal com ícone e botão de fechar (largura máxima de 340px no
   celular)
-- [ ] P2 · Tooltip ("Bloqueado após iniciar")
-- [ ] P2 · Coach mark (dica de primeira execução, dispensada com um toque)
-- [ ] P2 · Cabeçalho de bottom sheet com a ação "Limpar" (seção 19)
+- [x] P2 · Tooltip ("Bloqueado após iniciar")
+- [x] P2 · Coach mark (dica de primeira execução, dispensada com um toque)
+- [x] P2 · Cabeçalho de bottom sheet com a ação "Limpar" (seção 19)
 - [ ] Web · Drawer lateral (no celular, usar o bottom sheet)
 
 ## Navegação e estrutura (Padrões, seções 17, 18 e 20)
@@ -153,10 +153,10 @@ padding interno nunca fica abaixo de 14px.
 - [x] P2 · Progresso por etapas compacto ("2 de 5" com barra e pontos)
 - [x] P1 · "Carregar mais" no fim de listas (no celular, substitui a
   paginação)
-- [ ] P2 · Barra de topo com marca, sino com contador e avatar
-- [ ] P2 · Variações da barra de topo: voltar com título e ação; menu com
+- [x] P2 · Barra de topo com marca, sino com contador e avatar
+- [x] P2 · Variações da barra de topo: voltar com título e ação; menu com
   marca e selo "Novo"; barra escura de visualizador ("× Visualizador 2 de 4")
-- [ ] P2 · Busca com botão de limpar, botão de filtros com contador e botão
+- [x] P2 · Busca com botão de limpar, botão de filtros com contador e botão
   de ordenar
 - [ ] P2 · Item reordenável com alça de arrastar e selos
 - [ ] Web · Breadcrumb (a partir do terceiro nível; no celular, "← Voltar
