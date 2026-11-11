@@ -42,14 +42,16 @@ criar componentes novos.
   checkbox seguem o mesmo padrão quando forem criados (seção Controles).
 - [x] **P2 · Rosca** (Padrões, seção 18): anel de 26px (hoje são 18px), no
   mínimo 3 arcos e rótulo central sempre presente.
-- [ ] **Decisão · Contraste da paleta** (Padrões, seção 23): o teste
+- [x] **Decisão · Contraste da paleta** (Padrões, seção 23): o teste
   `test/core/theme/contrast_test.dart` mostra pares abaixo do AA, listados
   em `knownLow`. Texto (4,5:1): `textMuted` sobre `screen` (claro, 4,35),
   sobre `field` (claro 4,47, escuro 4,27) e sobre `primarySubtle` (4,1 nos
   dois); `success` sobre `successSubtle` (claro, 4,07). Ícones e bordas
   (3:1): `alert` sólido sobre `card` (claro, 2,28) e `borderStrong` sobre
-  `card` (1,28 claro, 1,68 escuro), que é a borda dos campos. Ajustar a
-  paleta e tirar o par da lista.
+  `card` (1,28 claro, 1,68 escuro), que é a borda dos campos.
+  **Decidido em 11/11/2026:** por enquanto a paleta fica igual ao design,
+  sem exigir AA em tudo. Os pares seguem em `knownLow`, e o teste continua
+  barrando qualquer par novo abaixo do AA.
 - [ ] **Decisão · Botão primário** (Componentes, seção 09): o DS diz 52px; o
   `AppSizes.buttonLg` está em 48px, que é a altura das telas de exemplo.
 
