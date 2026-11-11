@@ -48,9 +48,9 @@ void main() {
 
     blocTest<ActivityListBloc, ActivityListState>(
       'start loads the items',
-      setUp: () => when(
-        () => get(any()),
-      ).thenAnswer((_) async => Success([_market, _salary, _cafe])),
+      setUp: () =>
+          when(() => get(any()))
+              .thenAnswer((_) async => Success([_market, _salary, _cafe])),
       build: () => ActivityListBloc(get),
       act: (b) => b.add(const ActivityListStarted()),
       expect: () => [
@@ -64,9 +64,9 @@ void main() {
 
     blocTest<ActivityListBloc, ActivityListState>(
       'a failure keeps its message',
-      setUp: () => when(
-        () => get(any()),
-      ).thenAnswer((_) async => const ResultFailure(NetworkFailure())),
+      setUp: () =>
+          when(() => get(any()))
+              .thenAnswer((_) async => const ResultFailure(NetworkFailure())),
       build: () => ActivityListBloc(get),
       act: (b) => b.add(const ActivityListStarted()),
       skip: 1,
@@ -212,9 +212,9 @@ void main() {
 
     blocTest<TransferBloc, TransferState>(
       'a send failure keeps the message',
-      setUp: () => when(
-        () => send(any()),
-      ).thenAnswer((_) async => const ResultFailure(NetworkFailure())),
+      setUp: () =>
+          when(() => send(any()))
+              .thenAnswer((_) async => const ResultFailure(NetworkFailure())),
       build: () => TransferBloc(send),
       seed: () => const TransferState(amountCents: 100, recipient: 'Ana'),
       act: (b) => b.add(const TransferSubmitted()),

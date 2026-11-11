@@ -26,8 +26,8 @@ final class DemoTagRemoved extends DemoTagsEvent {
 final class DemoTagMoved extends DemoTagsEvent {
   const DemoTagMoved(this.from, this.to);
 
-  /// Indices as `ReorderableListView.onReorder` gives them: [to] counts the
-  /// item still at [from].
+  /// Indices as `ReorderableListView.onReorderItem` gives them: [to] is
+  /// the item's final position.
   final int from;
   final int to;
 
@@ -46,7 +46,7 @@ class DemoTagsBloc extends Bloc<DemoTagsEvent, List<String>> {
     on<DemoTagMoved>((e, emit) {
       final list = [...state];
       final item = list.removeAt(e.from);
-      list.insert(e.to > e.from ? e.to - 1 : e.to, item);
+      list.insert(e.to, item);
       emit(List.unmodifiable(list));
     });
     on<DemoTagRemoved>(

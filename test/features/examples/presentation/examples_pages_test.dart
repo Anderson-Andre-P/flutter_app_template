@@ -157,9 +157,8 @@ void main() {
       await tester.enterText(find.byType(TextField), 'café');
       verify(() => bloc.add(const ActivityQueryChanged('café'))).called(1);
       await tester.tap(find.text(ExamplesStrings.filterIncome));
-      verify(
-        () => bloc.add(const ActivityFilterChanged(ActivityFilter.income)),
-      ).called(1);
+      verify(() => bloc.add(const ActivityFilterChanged(ActivityFilter.income)))
+          .called(1);
       await tester.tap(find.text('Mercado Bela'));
       expect(opened, 'm');
     });

@@ -60,9 +60,8 @@ final class ActivityListState extends Equatable {
       for (final a in items)
         if (filter.matches(a) &&
             (q.isEmpty ||
-                normalizeForSearch(
-                  '${a.title} ${a.method} ${a.category}',
-                ).contains(q)))
+                normalizeForSearch('${a.title} ${a.method} ${a.category}')
+                    .contains(q)))
           a,
     ];
   }

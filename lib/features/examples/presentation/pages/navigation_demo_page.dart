@@ -289,7 +289,7 @@ class NavigationDemoPage extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   buildDefaultDragHandles: false,
-                  onReorder: (from, to) =>
+                  onReorderItem: (from, to) =>
                       context.read<DemoTagsBloc>().add(DemoTagMoved(from, to)),
                   children: [
                     for (final (i, item) in items.indexed)
