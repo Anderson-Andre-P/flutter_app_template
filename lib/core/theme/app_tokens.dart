@@ -60,6 +60,20 @@ abstract final class AppSizes {
   /// instead of stacking on top of it.
   static const double bottomNavContent = 48;
   static const double chip = 32;
+
+  /// Switch track and knob; checkbox and radio box.
+  static const double switchWidth = 46;
+  static const double switchHeight = 26;
+  static const double switchKnob = 20;
+  static const double switchInset = (switchHeight - switchKnob) / 2;
+  static const double checkbox = 22;
+
+  /// Round FAB side and extended FAB height.
+  static const double fab = 58;
+  static const double fabExtended = 52;
+
+  /// Icon box at the start of an attention band.
+  static const double bandIcon = 24;
   static const double progressBar = 8;
   static const double iconBox = 40;
   static const double heroIcon = 80;
