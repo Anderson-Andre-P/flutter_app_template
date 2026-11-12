@@ -374,9 +374,8 @@ String _groupOf(String path) {
   final area = RegExp(r'(?:^|/)integration_test/([^/]+)/').firstMatch(path);
   if (area != null) return area.group(1)!;
 
-  final flow = RegExp(
-    r'(?:^|/)integration_test/([^/]+)_flow_test\.dart$',
-  ).firstMatch(path);
+  final flow = RegExp(r'(?:^|/)integration_test/([^/]+)_flow_test\.dart$')
+      .firstMatch(path);
   if (flow != null) return flow.group(1)!;
 
   final testSub = RegExp(r'(?:^|/)test/([^/]+)/').firstMatch(path);
