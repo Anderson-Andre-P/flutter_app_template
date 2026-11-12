@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/features/examples/application/activity_detail_bloc.dart';
 import 'package:flutter_app_template/features/examples/application/activity_list_bloc.dart';

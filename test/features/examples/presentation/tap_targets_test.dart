@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_app_template/core/theme/app_theme.dart';
 import 'package:flutter_app_template/features/examples/application/demo_selection_bloc.dart';
 import 'package:flutter_app_template/features/examples/presentation/pages/bottom_nav_demo_page.dart';
