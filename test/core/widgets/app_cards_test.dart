@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_app_template/core/constants/strings/common_strings.dart';
 import 'package:flutter_app_template/core/theme/app_colors.dart';
 import 'package:flutter_app_template/core/widgets/app_cards.dart';

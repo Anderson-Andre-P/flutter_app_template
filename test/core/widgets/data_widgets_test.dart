@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_app_template/core/theme/app_tokens.dart';
 import 'package:flutter_app_template/core/widgets/app_bar_chart.dart';
 import 'package:flutter_app_template/core/widgets/app_icon_box.dart';

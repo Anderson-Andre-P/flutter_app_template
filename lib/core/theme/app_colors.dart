@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Semantic colour tokens of the design system, one instance per theme
 /// mode. Names describe the role, never the hue: widgets read
